@@ -1,0 +1,21 @@
+@import './variables.scss';
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.main-box-shadow {
+  box-shadow: $main-box-shadow;
+}
+
+.main-transition {
+  transition: $main-transition;
+}
+
+.w-fit-content {
+  width: fit-content;
+}
