@@ -8,7 +8,7 @@ import { IFormsField } from '../../models/shared';
   styleUrls: ['./shared-auth.component.scss']
 })
 export class SharedAuthComponent {
-  @Input() AuthHeader: string = 'Continue your learning journey with QuizWiz!';
+  @Input() AuthHeader: string = '';
   @Input() toggleSignupSignInVisibility: boolean = false;
   @Input() authForm: FormGroup = new FormGroup({});
   @Input() formFields: IFormsField[] = [];
