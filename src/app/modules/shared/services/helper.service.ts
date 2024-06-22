@@ -15,4 +15,8 @@ export class HelperService {
   success(successMessage: string): void {
     this._ToastrService.success(successMessage, 'Success');
   }
+
+  info(infoMessage: string): void {
+    this._ToastrService.info(infoMessage, 'Heads up');
+  }
 }

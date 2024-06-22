@@ -11,9 +11,11 @@ import { SharedAuthComponent } from './components/shared-auth/shared-auth.compon
     HttpClientModule,
     FormsModule,
     RouterModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
-  declarations: [SharedAuthComponent],
-  exports: [SharedAuthComponent],
+  declarations: [
+    SharedAuthComponent
+  ],
+  exports: [SharedAuthComponent]
 })
-export class SharedModule {}
+export class SharedModule { }
