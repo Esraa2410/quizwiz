@@ -1,7 +1,7 @@
 <section>
   <div class="row">
     <div class="col-md-6 col-12 col-sm-12 p-5">
-      <h2 class="d-flex align-items-center gap-2">
+      <h2 class="d-flex align-items-center gap-2" #logo>
         <div class="d-flex align-items-center">
           <span> <i class="fa-solid fa-xmark"></i> </span>
           <span> <i class="fa-solid fa-check"></i> </span>
@@ -9,8 +9,8 @@
         <i>|</i> Quizwiz
       </h2>
       <div class="auth-content my-5">
-        <h3 class="auth-header">{{AuthHeader}}</h3>
-        <div class="toggle-auth-button">
+        <h3 class="auth-header my-5" #header>{{authHeader}}</h3>
+        <div class="toggle-auth-button" *ngIf="toggleSignupSignInVisibility" #authButtons>
           <ul class="d-flex">
             <li role="button" class="main-transition" [routerLink]="'/auth/login'"
               [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active-link">
@@ -24,7 +24,7 @@
             </li>
           </ul>
         </div>
-        <form class="row g-3" (ngSubmit)="onSubmit(authForm)" [formGroup]="authForm">
+        <form class="row g-5" (ngSubmit)="onSubmit(authForm)" [formGroup]="authForm" #formData>
           <div *ngFor="let formField of formFields" [ngClass]="
             {
               'col-md-6 col-12': (formField.controlName === 'first_name' || formField.controlName === 'last_name'),
@@ -40,13 +40,13 @@
                 <option value="admin">Admin</option>
               </select>
               <div class="input-group main-input-group d-flex justify-content-between">
-                <div class="d-flex">
+                <div class="d-flex flex-grow-1">
                   <span class="input-group-text">
                     <i [class]="formField.iconClass"></i>
                   </span>
                   <input *ngIf="formField.controlName !== 'role'"
                     [type]="(formField.controlName === 'password' && hidePassword) || (formField.controlName === 'confirmPassword' && hideConfirmPassword) ? 'password' : 'text'"
-                    class="" [formControlName]="formField.controlName" [id]="formField.controlName"
+                    [formControlName]="formField.controlName" [id]="formField.controlName" class="w-100"
                     [name]="formField.controlName" [placeholder]="formField.placeholder" />
                 </div>
                 <span class="input-group-text" *ngIf="formField.controlName === 'password'" role="button"
@@ -100,9 +100,9 @@
               </div>
             </div>
           </div>
-          <div class="actions d-flex justify-content-between align-items-center">
-            <button type="submit" class="d-flex align-items-center gap-2" [disabled]="authForm.invalid"> {{ btnText }} <i
-                class="fa-solid fa-check-circle"></i> </button>
+          <div class="actions d-flex justify-content-between align-items-center" #actions>
+            <button type="submit" class="d-flex align-items-center gap-2" [disabled]="authForm.invalid"> {{ btnText }}
+              <i class="fa-solid fa-check-circle"></i> </button>
             <div>
               <p class="mb-0"> {{ navigationText }} <a [routerLink]="navigationLink">click here</a> </p>
             </div>
@@ -111,9 +111,10 @@
       </div>
     </div>
     <div class="col-md-6 col-12 col-sm-12 p-5">
-      <div class="imgBx w-100 p-5">
+      <div class="imgBx w-100 p-5" #imgBx>
         <figure class="w-100">
-          <img class="w-100 object-fit-cover" src="../../../../../assets/images/auth/auth-img.png" alt="auth img">
+          <img class="w-100 object-fit-cover" src="../../../../../assets/images/auth/auth-img.png" alt="auth img"
+            title="auth img">
         </figure>
       </div>
     </div>
