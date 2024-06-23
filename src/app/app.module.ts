@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GlobalInterceptor } from './core/interceptors/global/global.interceptor';
+import { LoadingInterceptor } from './core/interceptors/loading/loading.interceptor';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -16,14 +18,16 @@ import { GlobalInterceptor } from './core/interceptors/global/global.interceptor
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxSpinnerModule.forRoot({ type: 'ball-zig-zag' })
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: GlobalInterceptor,
       multi: true
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
