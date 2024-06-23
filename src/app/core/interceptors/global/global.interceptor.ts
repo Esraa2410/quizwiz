@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class GlobalInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor() { }
 
   intercept(
     request: HttpRequest<unknown>,
@@ -19,7 +19,7 @@ export class GlobalInterceptor implements HttpInterceptor {
     const token: string = localStorage.getItem('userToken') ?? '';
     const modifiedReq = request.clone({
       url: baseUrl + request.url,
-      setHeaders: { Authorization: `${token}` },
+      setHeaders: { Authorization: `Bearer ${token}` },
     });
     return next.handle(modifiedReq);
   }
