@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { IForgetRes } from '../../models/auth';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forget-password',
@@ -15,6 +16,7 @@ export class ForgetPasswordComponent {
 
   private _AuthService = inject(AuthService);
   private _HelperService = inject(HelperService);
+  private _Router  = inject(Router) ;
 
   forgetForm: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email])
@@ -34,7 +36,13 @@ export class ForgetPasswordComponent {
     this._AuthService.forgetPassword(forgetForm.value).subscribe({
       next: (res: IForgetRes) => {  },
       error: (error: HttpErrorResponse) => this._HelperService.error(error),
-      complete: () => this._HelperService.info('Check out your email')
+      complete: () => {
+        this._HelperService.info('Check out your email');
+        this._Router.navigate(['/auth/reset']);
+        
+      }
+  
+
     })
   }
 }

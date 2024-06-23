@@ -14,10 +14,10 @@ export interface IChangeReq {
 }
 export interface IChangeRes {
   message: string
-  data: IChangeResData
+  data: IData
 }
 
-export interface IChangeResData {
+export interface IData {
   _id: string
   first_name: string
   last_name: string
@@ -29,4 +29,8 @@ export interface IResetPasswordRequest{
   otp:string,
   email:string,
   password:string
+}
+export interface IResetPasswordResponse{
+  data:IData
+  message: string;
 }
