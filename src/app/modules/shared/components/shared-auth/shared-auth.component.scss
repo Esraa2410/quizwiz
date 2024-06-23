@@ -1,0 +1,119 @@
+@import "../../../../../assets/styles/layout.scss";
+
+section {
+  background-color: $dark-blue-color;
+  height: 100vh;
+  padding: 50px;
+  h2 {
+    color: $main-white-color;
+    font-family: "Courier New", Courier, monospace;
+
+    span {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 5px solid $main-white-color;
+      padding: 10px;
+      border-radius: 50%;
+      color: $main-white-color;
+    }
+  }
+
+  .auth-content {
+    .auth-header {
+      color: $light-yellow-color;
+    }
+
+    .toggle-auth-button {
+      margin: 20px 0;
+      ul {
+        gap: 20px;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        li {
+          padding: 20px 60px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 20px;
+          background-color: $dark-grey-color;
+          border-radius: 15px;
+          border: 5px solid transparent;
+
+          i {
+            font-size: 3rem;
+            color: $main-white-color;
+            margin: 0;
+          }
+
+          p {
+            color: $main-white-color;
+            font-size: 1.2rem;
+          }
+
+          &.active-link {
+            border: 5px solid $light-yellow-color;
+            i {
+              color: $light-yellow-color;
+            }
+          }
+        }
+      }
+    }
+
+    form {
+
+      label {
+        color: $main-white-color;
+        font-size: 20px;
+      }
+
+      .input-group,
+      .input-group-text {
+        background-color: transparent;
+      }
+      .input-group {
+        input {
+          background-color: transparent;
+          outline: none;
+          border: none;
+        }
+      }
+
+      .input-group-text {
+        outline: none;
+        border: none;
+      }
+
+      .main-input-group {
+        border: 2px solid $main-white-color;
+        border-radius: 10px !important;
+        padding: 10px;
+        input,
+        input::placeholder,
+        span {
+          color: $main-white-color;
+        }
+      }
+    }
+
+    .actions {
+      p {
+        color: $main-white-color;
+        a {
+          color: $light-yellow-color;
+        }
+      }
+    }
+  }
+
+  .imgBx {
+    background-color: $light-pink-color;
+    border-radius: 20px;
+  }
+}

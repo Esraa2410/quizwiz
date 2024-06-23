@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { ChangePasswordComponent } from './components/change-password/change-password.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,11 +19,9 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     RegisterComponent,
     ForgetPasswordComponent,
     ResetPasswordComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
   ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule
-  ]
+  imports: [CommonModule, AuthRoutingModule, HttpClientModule, SharedModule],
+  providers: [AuthService],
 })
-export class AuthModule { }
+export class AuthModule {}
