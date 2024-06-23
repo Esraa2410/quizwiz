@@ -25,3 +25,8 @@ export interface IChangeResData {
   status: string
   role: string
 }
+export interface IResetPasswordRequest{
+  otp:string,
+  email:string,
+  password:string
+}
