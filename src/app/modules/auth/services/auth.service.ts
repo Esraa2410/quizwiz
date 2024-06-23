@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IChangeReq, IChangeRes, IForget, IForgetRes } from '../models/auth';
+import { IChangeReq, IChangeRes, IForget, IForgetRes, IRegisterReq, IRegisterRes } from '../models/auth';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,5 +15,9 @@ export class AuthService {
 
   changePassword(changeData: IChangeReq): Observable<IChangeRes> {
     return this._HttpClient.post<IChangeRes>('auth/change-password', changeData )
+  }
+
+  register(registerData:IRegisterReq): Observable<IRegisterRes>{
+    return this._HttpClient.post<IRegisterRes>('auth/register', registerData)
   }
 }

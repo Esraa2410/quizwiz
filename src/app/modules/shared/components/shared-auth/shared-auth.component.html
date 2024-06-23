@@ -34,16 +34,18 @@
               <label [for]="formField.controlName"> {{ formField.controlName === 'role' ? (userToken ? formField.label :
                 'Admin rights required') :
                 formField.label }} </label>
-              <select *ngIf="formField.controlName === 'role'" class="form-select" [disabled]="!userToken"
-                [id]="formField.controlName">
-                <option value="user">User</option>
-                <option value="admin">Admin</option>
-              </select>
+             
               <div class="input-group main-input-group d-flex justify-content-between">
+                <span class="input-group-text">
+                  <i [class]="formField.iconClass"></i>
+                </span>
+                <select [formControlName]="formField.controlName" *ngIf="formField.controlName === 'role'" class="form-select" [disabled]="!userToken"
+                [id]="formField.controlName">
+                <option value="Instructor">Instructor</option>
+                <option value="Student">Student</option>
+              </select>
                 <div class="d-flex flex-grow-1">
-                  <span class="input-group-text">
-                    <i [class]="formField.iconClass"></i>
-                  </span>
+                 
                   <input *ngIf="formField.controlName !== 'role'"
                     [type]="(formField.controlName === 'password' && hidePassword) || (formField.controlName === 'confirmPassword' && hideConfirmPassword) || (formField.controlName === 'password_new' && hideNewPassword) ? 'password' : 'text'"
                     [formControlName]="formField.controlName" [id]="formField.controlName" class="w-100"
