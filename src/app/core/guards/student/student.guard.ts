@@ -1,5 +1,24 @@
-import { CanActivateFn } from '@angular/router';
+import { inject } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Role } from '../../enums/role.enum';
 
-export const studentGuard: CanActivateFn = (route, state) => {
-  return true;
+export const studentGuard: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+):
+  | Observable<UrlTree | boolean>
+  | Promise<UrlTree | boolean>
+  | UrlTree
+  | boolean => {
+  const _Router = inject(Router);
+  if (
+    localStorage.getItem('userToken') !== null &&
+    localStorage.getItem('role') === Role.student
+  ) {
+    return true;
+  } else {
+    _Router.navigate(['/auth']);
+    return false;
+  }
 };

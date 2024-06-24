@@ -61,3 +61,28 @@ export interface IResetPasswordResponse{
   message: string;
 
 }
+
+export interface ILogin {
+  email: string;
+  password: string;
+}
+
+export interface ILoginReq {
+  message: string,
+  data: ILoginData;
+}
+
+export interface ILoginData {
+  accessToken: string;
+  refreshToken: string;
+  profile: ILoginProfile;
+}
+
+export interface ILoginProfile {
+  _id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  status: string;
+  role: string;
+}

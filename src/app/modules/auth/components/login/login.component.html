@@ -1,0 +1,11 @@
+<app-shared-auth
+  [authForm]="loginForm"
+  [authHeader]="'Continue your learning journey with QuizWiz!'"
+  [toggleSignupSignInVisibility]="true"
+  [formFields]="formList"
+  [btnText]="'Sign in'"
+  [IfnavigationLink]="true"
+  [navigationText]="'Forget Password ?'"
+  [navigationLink]="'/auth/forget-password'"
+  (formSubmission)="onLogin($event)"
+></app-shared-auth>

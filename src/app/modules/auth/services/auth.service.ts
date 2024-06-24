@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IChangeReq, IChangeRes, IForget, IForgetRes, IResetPasswordRequest, IResetPasswordResponse ,IRegisterReq,IRegisterRes} from '../models/auth';
+import { IChangeReq, IChangeRes, IForget, IForgetRes, IResetPasswordRequest, IResetPasswordResponse ,IRegisterReq,IRegisterRes, ILogin, ILoginReq} from '../models/auth';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -24,6 +24,16 @@ export class AuthService {
   resetPassword(resetPasswordData: IResetPasswordRequest): Observable<IResetPasswordResponse> {
     return this._HttpClient.post<IResetPasswordResponse>('auth/reset-password', resetPasswordData)
 
+  }
+
+  login(loginData: ILogin): Observable<ILoginReq> {
+    return this._HttpClient.post<ILoginReq>('auth/login', loginData)
+  }
+
+  welcomeVoice(message: string): void {
+    const sp = new SpeechSynthesisUtterance(message);
+    [sp.voice] = speechSynthesis.getVoices();
+    speechSynthesis.speak(sp);
   }
 
 }
