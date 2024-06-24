@@ -20,8 +20,8 @@ export class ChangePasswordComponent {
   private _Router = inject(Router);
 
   changePassForm: FormGroup = new FormGroup({
-    password: new FormControl(null, [Validators.required]),
-    password_new: new FormControl(null, [Validators.required])
+    password: new FormControl(null, [Validators.required ,Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/)]),
+    password_new: new FormControl(null, [Validators.required ,Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/)])
   })
 
   formList: IFormsField[] = [
@@ -30,7 +30,7 @@ export class ChangePasswordComponent {
       placeholder: 'type your old password',
       iconClass: 'fa-solid fa-key',
       controlName: 'password',
-      type: 'password hidePassword'
+      type: 'password'
     },
     {
       label: 'New Password',

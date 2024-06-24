@@ -47,17 +47,13 @@
                 <div class="d-flex flex-grow-1">
                  
                   <input *ngIf="formField.controlName !== 'role'"
-                    [type]="(formField.controlName === 'password' && hidePassword) || (formField.controlName === 'confirmPassword' && hideConfirmPassword) || (formField.controlName === 'password_new' && hideNewPassword) ? 'password' : 'text'"
+                    [type]="(formField.controlName === 'password' && hidePassword) || (formField.controlName === 'password_new' && hideNewPassword) ? 'password' : 'text'"
                     [formControlName]="formField.controlName" [id]="formField.controlName" class="w-100"
                     [name]="formField.controlName" [placeholder]="formField.placeholder" />
                 </div>
                 <span class="input-group-text" *ngIf="formField.controlName === 'password'" role="button"
                   (click)="hidePassword = !hidePassword">
                   <i [class]="!hidePassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"></i>
-                </span>
-                <span class="input-group-text" *ngIf="formField.controlName === 'confirmPassword'" role="button"
-                  (click)="hideConfirmPassword = !hideConfirmPassword">
-                  <i [class]="!hideConfirmPassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"></i>
                 </span>
                 <span class="input-group-text" *ngIf="formField.controlName === 'password_new'" role="button"
                   (click)="hideNewPassword = !hideNewPassword">

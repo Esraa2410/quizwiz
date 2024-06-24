@@ -30,7 +30,6 @@ export class SharedAuthComponent implements AfterViewInit {
   @Output() formSubmission: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
   hidePassword: boolean = true;
-  hideConfirmPassword: boolean = true;
   hideNewPassword: boolean = true;
 
   userToken: string = localStorage.getItem('userToken') ?? '';
