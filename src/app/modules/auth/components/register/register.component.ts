@@ -5,6 +5,7 @@ import { IFormsField } from 'src/app/modules/shared/models/shared';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
 import { AuthService } from '../../services/auth.service';
 import { IRegisterRes } from '../../models/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +16,7 @@ export class RegisterComponent {
 
   private _AuthService = inject(AuthService);
   private _HelperService = inject(HelperService);
+  private _Router = inject(Router);
 
   registerForm: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required,Validators.email]),
@@ -67,7 +69,11 @@ export class RegisterComponent {
     this._AuthService.register(registerForm.value).subscribe({
       next: (res:IRegisterRes) => { },
       error: (error: HttpErrorResponse) => this._HelperService.error(error),
-      complete: () => this._HelperService.success('Record created successfully')
+      complete: () =>{
+         this._HelperService.success('Record created successfully');
+         this._Router.navigate(['/auth/login'])
+
+        }
     })
   }
 
