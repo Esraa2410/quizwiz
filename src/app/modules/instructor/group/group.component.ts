@@ -16,6 +16,8 @@ export interface IDialogData {
   styleUrls: ['./group.component.scss']
 })
 export class GroupComponent implements OnInit {
+  btnText :string = 'Add Group' ;
+  btnIcon :string ="fa fa-plus-circle"
   totalRecords: number = 10;
   IGroupsListRes2: IGroupsListRes2 = {
     _id: '',
