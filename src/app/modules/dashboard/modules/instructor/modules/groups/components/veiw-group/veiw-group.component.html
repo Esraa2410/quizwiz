@@ -1,0 +1,24 @@
+<div class="container  h-100 w-100 p-0">
+    <div class="header d-flex
+     justify-content-between align-items-center border-bottom   ">
+        <div class="p-3 ">
+            <h5 class="m-0 p-0">Group Details</h5>
+        </div>
+        <div (click)="onNoClick()" class="p-3 close  border-start d-flex justify-content-center align-items-center ">
+            <span class="mx-1 "> <i class="fa-solid fa-xmark"></i> </span>
+        </div>
+    </div>
+    <div class="row p-3 ">
+        <div class="input-group col-12 my-1">
+            <span class="input-group-text" id="basic-addon1">Group Name</span>
+            <input disabled type="text" [value]="groupDetails.name" class="form-control" aria-label="Username"
+                aria-describedby="basic-addon1">
+        </div>
+        <!-- <div class="col-12 my-1 ">
+            <div class="card flex justify-content-center bg-primary ">
+                <p-multiSelect [options]="groupDetails.students" [(ngModel)]="selectedCities"
+                    optionLabel="name"></p-multiSelect>
+            </div>
+        </div> -->
+    </div>
+</div>

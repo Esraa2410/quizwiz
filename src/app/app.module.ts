@@ -11,6 +11,9 @@ import { LoadingInterceptor } from './core/interceptors/loading/loading.intercep
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AuthService } from './modules/auth/services/auth.service';
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent

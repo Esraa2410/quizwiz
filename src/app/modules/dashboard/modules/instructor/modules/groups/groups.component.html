@@ -1,0 +1,54 @@
+<!--header-->
+<app-shared-header [btnIcon]="btnIcon" [btnText]="btnText"></app-shared-header>
+<div class="container parent-card p-4 my-3 " *ngIf="groupList.length>0">
+    <h2 class="mb-4">Groups list</h2>
+    <div class="row">
+        <div class="col-md-6  p-2 " *ngFor="let group of groupList">
+            <div class="d-flex justify-content-between align-items-center child-card p-3">
+                <div class="">
+                    <h5 class=" mb-1 p-0">Group: {{group.name}}</h5>
+                    <p class="m-0 p-0 ">No.of students: {{group.students.length}}</p>
+                </div>
+                <!-- <div class="d-flex justify-content-center align-items-center">
+                    <i class="mx-2 fa-regular fa-pen-to-square   "></i>
+                    <i class="mx-2 fa-solid fa-trash  "></i>
+                </div> -->
+                <div>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button (click)="openVeiwDailog('1000ms','1000ms', group._id)" mat-menu-item>
+                            <mat-icon>visibility_off</mat-icon>
+                            <span>Veiw</span>
+                        </button>
+                        <button mat-menu-item (click)="openEditDailog(group._id)">
+                            <mat-icon>edit_square</mat-icon>
+                            <span>Edit</span>
+                        </button>
+                        <button mat-menu-item (click)="openDeleteDailog(group._id)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Delete</span>
+                        </button>
+                    </mat-menu>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+<!--     
+    <app-shared-pagnation [rowsPerPage]="[5,10,20,25]" [totalRecords]="groupList.length"
+        (pageNumberChanged)="onPageNumberChanged($event)" (pageSizeChanged)="onPageSizeChanged($event)">
+    </app-shared-pagnation> -->
+</div>
+
+
+<div class="container p-5 d-flex justify-content-center align-items-center" *ngIf="groupList.length==0">
+    <div class="w-50">
+        <img class="w-100 h-100 " src="../../../../assets/images/auth/auth-img.png" alt="">
+    </div>
+
+</div>

@@ -1,0 +1,29 @@
+
+@import '../../../../../../../assets/styles/abstracts/variables.scss';
+
+.parent-card {
+    border: 1px solid $main-border-color;
+    border-radius: 10px;
+
+
+    .child-card {
+        border: 1px solid $main-border-color;
+        border-radius: 10px;
+        cursor: pointer;
+
+        i,
+        h5 {
+            color: $dark-blue-color;
+            font-size: 1.1rem;
+        }
+
+        p {
+            font-size: 13px;
+            color: $dark-grey-color;
+        }
+
+        i {
+            cursor: pointer;
+        }
+    }
+}
