@@ -17,29 +17,36 @@ nav {
       padding-left: 0;
     }
 
-    .menu-burger {
-      span {
-        width: 20px;
-        height: 3px;
-        background-color: #000;
-      }
-
-      &.active-menu-burger {
-        span:nth-child(1) {
-
+    &.logo {
+      flex-grow: 1;
+      .menu-burger {
+        overflow: hidden;
+        transition: $main-transition;
+        span {
+          width: 20px;
+          height: 3px;
+          background-color: #000;
+          transition: $main-transition;
         }
-        
-        span:nth-child(1) {
 
-        }
-        
-        span:nth-child(1) {
+        &.active-menu-burger {
+          span:nth-child(1) {
+            transform: rotate(45deg) translate(3px, 5px);
+          }
 
+          span:nth-child(2) {
+            transform: translateX(20px)
+          }
+
+          span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -7px);
+          }
         }
       }
     }
 
     &.route-content {
+      flex-grow: 18;
       .new-action {
         color: #000;
         border-radius: 20px;
@@ -49,6 +56,7 @@ nav {
     }
 
     &.user-details {
+      flex-grow: 1;
       .user-role {
         color: $light-yellow-color
       }

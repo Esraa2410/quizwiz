@@ -5,8 +5,6 @@
   width: 80px;
   overflow: hidden;
   transition: 0.5s linear;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
   height: calc(100vh - 98.59px)
 }
 
@@ -76,6 +74,8 @@
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
   border-bottom: 1px solid $main-border-color;
+  display: flex;
+  gap: 10px;
 
   &:first-child {
     justify-self: start;
@@ -92,7 +92,8 @@
   background: none;
 }
 
-.navigation ul li:not(:first-child):hover::before {
+.navigation ul li:not(:first-child):hover::before,
+.navigation ul li.active-li::before {
   content: "";
   position: absolute;
   top: -20px;
@@ -104,7 +105,8 @@
   box-shadow: 7.5px 7.5px 0 7.5px #000;
 }
 
-.navigation ul li:not(:first-child):hover::after {
+.navigation ul li:not(:first-child):hover::after,
+.navigation ul li.active-li::after {
   content: "";
   position: absolute;
   bottom: -20px;
@@ -150,4 +152,11 @@
   line-height: 50px;
   text-align: start;
   white-space: nowrap;
+}
+
+.active-li {
+  background-color: #000 !important;
+  > * {
+    color: #fff !important
+  }
 }

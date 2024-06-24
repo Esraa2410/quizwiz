@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { Role } from 'src/app/core/enums/role.enum';
 import { gsap } from 'gsap';
 
@@ -14,9 +14,10 @@ interface IList {
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements AfterViewInit {
-  activeMenu: boolean = false;
+  @Input() activeMenu: boolean = false;
   instructorRole: string = '';
   studentRole: string = localStorage.getItem('role') ?? '';
+  @Output() sidebarCollapsing: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   dashboardMenu: IList[] = [
     {
@@ -61,18 +62,19 @@ export class SidebarComponent implements AfterViewInit {
   }
 
   animateNavigation(): void {
-    if (this.navigation) {
-      gsap.from(this.navigation, {
-        delay: 0.3,
-        duration: 0.4,
-        opacity: 0,
-        y: -20,
-        stagger: 0.1,
-      });
-    }
+    // if (this.navigation) {
+    //   gsap.from(this.navigation, {
+    //     delay: 0.3,
+    //     duration: 0.4,
+    //     opacity: 0,
+    //     y: -20,
+    //     stagger: 0.1,
+    //   });
+    // }
   }
 
   toggleMenu() {
     this.activeMenu = !this.activeMenu;
+    this.sidebarCollapsing.emit(this.activeMenu);
   }
 }

@@ -1,5 +1,5 @@
 <div class="navigation main-box-shadow" [class.active]="activeMenu" #navigation>
-  <ul class="m-0" >
+  <ul class="m-0 ps-3" >
       <div>
         <li>
           <a routerLink="/dashboard" class="d-flex align-items-center">
@@ -10,9 +10,9 @@
           </a>
       </li>
       </div>
-      <div class="d-flex flex-column gap-2 justify-content-center h-75">
-        <li *ngFor="let list of dashboardMenu; let last = last" class="align-self-end">
-          <a [routerLink]="list.routeLink" class="d-flex align-items-center">
+      <div class="d-flex flex-column gap-3 justify-content-center h-75">
+        <li *ngFor="let list of dashboardMenu;" role="button" [routerLink]="list.routeLink" [routerLinkActive]="'active-li'" [routerLinkActiveOptions]="{exact: true}">
+          <a  class="d-flex align-items-center gap-3"  >
               <span class="icon m-0">
                 <i [class]="list.routeIcon" class="m-0"></i>
               </span>

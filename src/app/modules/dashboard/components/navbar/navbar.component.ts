@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { ILoginReq } from 'src/app/modules/auth/models/auth';
@@ -10,7 +10,6 @@ import { AuthService } from 'src/app/modules/auth/services/auth.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  activeMenu: boolean = false;
   routePath: string = '';
   loggedInRole: string = localStorage.getItem('role') ?? '';
   userName: string = localStorage.getItem('userName') ?? '';
@@ -30,9 +29,10 @@ export class NavbarComponent implements OnInit {
     message: '',
   };
 
-  constructor(private _Router: Router, private _AuthService: AuthService) {
+  @Input() sidebarCollapsed: boolean = false;
+  @Output() closeSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  }
+  constructor(private _Router: Router, private _AuthService: AuthService) {  }
 
   ngOnInit(): void {
     this.handleRouteEvents();
@@ -72,5 +72,10 @@ export class NavbarComponent implements OnInit {
       .subscribe(() => {
         this.handleRouteChange();
       });
+  }
+
+  onCloseSidebar(): void {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
+    this.closeSidebar.emit(this.sidebarCollapsed)
   }
 }
