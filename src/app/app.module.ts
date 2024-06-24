@@ -19,7 +19,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgxSpinnerModule.forRoot({ type: 'ball-zig-zag' })
+    NgxSpinnerModule
   ],
   providers: [
     {
