@@ -20,6 +20,7 @@ const routes: Routes = [
         (m) => m.InstructorModule
       ),
   },
+  { path: 'group', loadChildren: () => import('./modules/instructor/group/group.module').then(m => m.GroupModule) },
 ];
 
 @NgModule({

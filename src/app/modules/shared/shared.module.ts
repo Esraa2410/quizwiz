@@ -4,18 +4,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedAuthComponent } from './components/shared-auth/shared-auth.component';
-
+import { SharedPagnationComponent } from './components/shared-pagnation/shared-pagnation.component';
+import { PaginatorModule } from 'primeng/paginator';
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
     FormsModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PaginatorModule
   ],
   declarations: [
-    SharedAuthComponent
+    SharedAuthComponent,
+    SharedPagnationComponent
   ],
-  exports: [SharedAuthComponent]
+  exports: [SharedAuthComponent ,SharedPagnationComponent]
 })
 export class SharedModule { }
