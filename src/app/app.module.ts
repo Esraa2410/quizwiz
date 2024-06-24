@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GlobalInterceptor } from './core/interceptors/global/global.interceptor';
 import { LoadingInterceptor } from './core/interceptors/loading/loading.interceptor';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { AuthService } from './modules/auth/services/auth.service';
 
 
 
@@ -30,7 +31,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
       useClass: GlobalInterceptor,
       multi: true
     },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
