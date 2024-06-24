@@ -1,13 +1,41 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IChangeReq, IChangeRes, IForget, IForgetRes, IResetPasswordRequest, IResetPasswordResponse ,IRegisterReq,IRegisterRes, ILogin, ILoginReq} from '../models/auth';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private _HttpClient: HttpClient) { }
+
+  private loggedInUserSubject = new BehaviorSubject<ILoginReq>({
+    data: {
+      accessToken: '',
+      profile: {
+        _id: '',
+        first_name: '',
+        last_name: '',
+        email: '',
+        role: '',
+        status: '',
+      },
+      refreshToken: '',
+    },
+    message: '',
+  });
+  
+  loggedInUser$ = this.loggedInUserSubject.asObservable();
+
+  constructor(private _HttpClient: HttpClient) {
+    console.log('Initialized loggedInUserSubject with default value:', this.loggedInUserSubject.value);
+  }
+
+  getLoggedInUser(userData: ILoginReq): void {
+    console.log('Emitting loggedInUser data:', userData);
+    this.loggedInUserSubject.next(userData);
+    console.log('Current loggedInUserSubject value:', this.loggedInUserSubject.value);
+
+  }
 
   forgetPassword(forgetData: IForget): Observable<IForgetRes> {
     return this._HttpClient.post<IForgetRes>('auth/forgot-password', forgetData)

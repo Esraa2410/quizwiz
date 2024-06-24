@@ -5,17 +5,13 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-
+import { AuthService } from '../auth/services/auth.service';
+import { SharedModule } from '../shared/shared.module';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    SidebarComponent,
-    NavbarComponent
-  ],
-  imports: [
-    CommonModule,
-    DashboardRoutingModule
-  ]
+  declarations: [DashboardComponent, SidebarComponent, NavbarComponent, HomeComponent],
+  imports: [CommonModule, DashboardRoutingModule, SharedModule],
+  providers: [AuthService],
 })
-export class DashboardModule { }
+export class DashboardModule {}

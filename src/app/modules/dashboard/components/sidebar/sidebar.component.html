@@ -1,1 +1,25 @@
-<p>sidebar works!</p>
+<div class="navigation main-box-shadow" [class.active]="activeMenu" #navigation>
+  <ul class="m-0" >
+      <div>
+        <li>
+          <a routerLink="/dashboard" class="d-flex align-items-center">
+              <span class="icon m-0">
+                <i class="fa-solid fa-person-chalkboard"></i>
+              </span>
+              <span class="title m-0">QuizWiz</span>
+          </a>
+      </li>
+      </div>
+      <div class="d-flex flex-column gap-2 justify-content-center h-75">
+        <li *ngFor="let list of dashboardMenu; let last = last" class="align-self-end">
+          <a [routerLink]="list.routeLink" class="d-flex align-items-center">
+              <span class="icon m-0">
+                <i [class]="list.routeIcon" class="m-0"></i>
+              </span>
+              <span [class]="list.routeName" class="m-0">{{ list.routeName }}</span>
+          </a>
+      </li>
+      </div>
+  </ul>
+  <div class="toggle" (click)="toggleMenu()"></div>
+</div>

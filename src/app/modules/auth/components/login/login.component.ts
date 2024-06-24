@@ -14,7 +14,21 @@ import { Role } from 'src/app/core/enums/role.enum';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  private userData!: ILoginReq;
+  private userData: ILoginReq = {
+    data: {
+      accessToken: '',
+      profile: {
+        _id: '',
+        first_name: '',
+        last_name: '',
+        email: '',
+        role: '',
+        status: '',
+      },
+      refreshToken: '',
+    },
+    message: '',
+  };
   private _AuthService = inject(AuthService);
   private _HelperService = inject(HelperService);
   private _Router = inject(Router)
@@ -52,24 +66,22 @@ export class LoginComponent {
     this._AuthService.login(loginForm.value).subscribe({
       next: (res: ILoginReq) => {
         this.userData = res;
+        console.log('Login response data:', this.userData);
       },
       error: (error: HttpErrorResponse) => this._HelperService.error(error),
       complete: () => {
         this._HelperService.success('Welcome Back');
         this._AuthService.welcomeVoice(
-          `Welcome Back ${
-            this.userData.data.profile.first_name +
-            this.userData.data.profile.last_name
-          }`
+          `Welcome Back ${this.userData.data.profile.first_name} ${this.userData.data.profile.last_name}`
         );
         localStorage.setItem('role', this.userData.data.profile.role);
         localStorage.setItem('userToken', this.userData.data.accessToken);
-        if (localStorage.getItem('role') === Role.student) {
-          this._Router.navigate(['/dashboard/student'])
-        } else {
-          this._Router.navigate(['/dashboard/instructor'])
-        }
+        localStorage.setItem('userName', `${this.userData.data.profile.first_name} ${this.userData.data.profile.last_name}`)
+        console.log('Emitting loggedInUser data from onLogin:', this.userData);
+        this._AuthService.getLoggedInUser(this.userData);
+        this._Router.navigate(['/dashboard']);
       },
     });
   }
+
 }
