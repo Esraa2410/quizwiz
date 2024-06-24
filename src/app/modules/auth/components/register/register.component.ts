@@ -17,7 +17,7 @@ export class RegisterComponent {
   private _HelperService = inject(HelperService);
 
   registerForm: FormGroup = new FormGroup({
-    email: new FormControl(null, [Validators.required, Validators.email]),
+    email: new FormControl(null, [Validators.required,Validators.email]),
     first_name: new FormControl(null, [Validators.required]),
     last_name: new FormControl(null, [Validators.required]),
     role: new FormControl(null, [Validators.required]),
@@ -65,10 +65,7 @@ export class RegisterComponent {
 
   onRegister(registerForm: FormGroup) {
     this._AuthService.register(registerForm.value).subscribe({
-      next: (res:IRegisterRes) => { 
-        console.log(res);
-        
-       },
+      next: (res:IRegisterRes) => { },
       error: (error: HttpErrorResponse) => this._HelperService.error(error),
       complete: () => this._HelperService.success('Record created successfully')
     })
