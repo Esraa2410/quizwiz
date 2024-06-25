@@ -40,6 +40,7 @@ export class GroupsComponent implements OnInit {
     this._GroupsService.getAllGroups().subscribe({
       next: (res: IGroupsListRes) => {
         this.groupList = res;
+      //  console.log(res)
       }, error: (err: HttpErrorResponse) => {
       }
     })
@@ -48,7 +49,7 @@ export class GroupsComponent implements OnInit {
   openVeiwDailog(enterAnimationDuration: string, exitAnimationDuration: string, id: string): void {
     this.dialog.open(VeiwGroupComponent, {
       width: '550px',
-      height: '200px',
+      height: '300px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: {
