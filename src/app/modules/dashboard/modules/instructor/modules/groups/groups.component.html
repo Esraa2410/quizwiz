@@ -1,15 +1,10 @@
 <!--header-->
-<app-shared-header 
-[btnIcon]="btnIcon"
- [btnText]="btnText"
- 
- ></app-shared-header>
-<div class="container parent-card p-4 my-3 " *ngIf="groupList">
+<app-shared-header [btnIcon]="btnIcon" [btnText]="btnText"></app-shared-header>
+<div class="container parent-card p-4 my-3 " *ngIf="groupList.length>0">
     <h2 class="mb-4">Groups list</h2>
     <div class="row">
         <div class="col-md-6  p-2 " *ngFor="let group of groupList">
-            <div 
-                class="d-flex justify-content-between align-items-center child-card p-3">
+            <div class="d-flex justify-content-between align-items-center child-card p-3">
                 <div class="">
                     <h5 class=" mb-1 p-0">Group: {{group.name}}</h5>
                     <p class="m-0 p-0 ">No.of students: {{group.students.length}}</p>
@@ -27,7 +22,7 @@
                             <mat-icon>visibility_off</mat-icon>
                             <span>Veiw</span>
                         </button>
-                        <button mat-menu-item (click)="openEditDailog(group._id)" >
+                        <button mat-menu-item (click)="openEditDailog(group._id)">
                             <mat-icon>edit_square</mat-icon>
                             <span>Edit</span>
                         </button>
@@ -44,15 +39,15 @@
         </div>
     </div>
 
-    <!-- 
-    <app-shared-pagnation [rowsPerPage]="[10,20,25]" [totalRecords]="totalRecords"
+<!--     
+    <app-shared-pagnation [rowsPerPage]="[5,10,20,25]" [totalRecords]="groupList.length"
         (pageNumberChanged)="onPageNumberChanged($event)" (pageSizeChanged)="onPageSizeChanged($event)">
     </app-shared-pagnation> -->
 </div>
 
 
-<div class="container p-5 d-flex justify-content-center align-items-center" *ngIf="!groupList">
-    <div class="w-25 h-25">
+<div class="container p-5 d-flex justify-content-center align-items-center" *ngIf="groupList.length==0">
+    <div class="w-50">
         <img class="w-100 h-100 " src="../../../../assets/images/auth/auth-img.png" alt="">
     </div>
 
