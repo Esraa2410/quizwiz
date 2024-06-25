@@ -4,7 +4,6 @@ import { GroupsRoutingModule } from './groups-routing.module';
 import { GroupsComponent } from './groups.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GroupsService } from './services/groups.service';
-import { VeiwGroupComponent } from './components/veiw-group/veiw-group.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { MatSelectModule } from '@angular/material/select';
@@ -15,11 +14,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { GroupItemComponent } from './components/group-item/group-item.component';
 
 @NgModule({
   declarations: [
     GroupsComponent,
-    VeiwGroupComponent
+    GroupItemComponent
   ],
   imports: [
     FormsModule,

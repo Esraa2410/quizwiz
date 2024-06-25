@@ -24,3 +24,14 @@ export interface IStudent {
   last_name: string
   email: string
 }
+
+export interface IUpdateGroup{
+  name: string
+  students: string[]
+}
+
+export interface IUdateGroupRes {
+  data: IGroupDetailsRes
+  message: string
+}
+
