@@ -1,4 +1,4 @@
-import { IGroupsListRes, IGroupsListRes2 } from './../models/group';
+import { IGroupsListRes2 ,IGroupsListRes} from './../models/groups';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class GroupService {
+export class GroupsService {
   constructor(private _HttpClient: HttpClient) { }
 
   getAllGroups(): Observable<IGroupsListRes> {

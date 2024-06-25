@@ -1,6 +1,6 @@
-import { IGroupsListRes, IGroupsListRes2 } from './models/group';
+import { IGroupsListRes, IGroupsListRes2 } from './models/groups';
 import { Component, OnInit } from '@angular/core';
-import { GroupService } from './services/group.service';
+import { GroupsService } from './services/groups.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { VeiwGroupComponent } from './components/veiw-group/veiw-group.component';
@@ -11,11 +11,11 @@ export interface IDialogData {
 
 
 @Component({
-  selector: 'app-group',
-  templateUrl: './group.component.html',
-  styleUrls: ['./group.component.scss']
+  selector: 'app-groups',
+  templateUrl: './groups.component.html',
+  styleUrls: ['./groups.component.scss']
 })
-export class GroupComponent implements OnInit {
+export class GroupsComponent implements OnInit {
   totalRecords: number = 10;
   IGroupsListRes2: IGroupsListRes2 = {
     _id: '',
@@ -27,7 +27,7 @@ export class GroupComponent implements OnInit {
   }
   groupList: IGroupsListRes2[] = [this.IGroupsListRes2];
 
-  constructor(private _GroupService: GroupService, public dialog: MatDialog) { }
+  constructor(private _GroupsService: GroupsService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.onAllGroups();
@@ -35,7 +35,7 @@ export class GroupComponent implements OnInit {
   }
 
   onAllGroups() {
-    this._GroupService.getAllGroups().subscribe({
+    this._GroupsService.getAllGroups().subscribe({
       next: (res: IGroupsListRes) => {
         this.groupList = res;
       }, error: (err: HttpErrorResponse) => {

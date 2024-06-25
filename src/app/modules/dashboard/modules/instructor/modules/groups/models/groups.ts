@@ -8,4 +8,3 @@ export interface IGroupsListRes2 {
   students: string[];
   max_students: number;
 }
-

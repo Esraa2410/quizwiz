@@ -16,8 +16,7 @@ const routes: Routes = [
       import('./modules/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
       ),
-  },
-  { path: 'group', loadChildren: () => import('./modules/instructor/group/group.module').then(m => m.GroupModule) },
+  }
 ];
 
 @NgModule({

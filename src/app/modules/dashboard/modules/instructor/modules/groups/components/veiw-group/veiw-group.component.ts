@@ -1,8 +1,8 @@
-import { IGroupsListRes2 } from './../../models/group';
+import { IGroupsListRes2 } from './../../models/groups';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { IDialogData } from '../../group.component';
-import { GroupService } from '../../services/group.service';
+import { IDialogData } from '../../groups.component';
+import { GroupsService } from '../../services/groups.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 
@@ -29,7 +29,7 @@ export class VeiwGroupComponent implements OnInit {
     max_students: 0
   }
 
-  constructor(private _GroupService: GroupService,
+  constructor(private _GroupsService: GroupsService,
     public dialogRef: MatDialogRef<VeiwGroupComponent>
     , @Inject(MAT_DIALOG_DATA) public data: IDialogData) { }
 
@@ -47,7 +47,7 @@ export class VeiwGroupComponent implements OnInit {
 
 
   onVeiwGroup(id: string) {
-    this._GroupService.getGroupById(id).subscribe({
+    this._GroupsService.getGroupById(id).subscribe({
       next: (res: IGroupsListRes2) => {
         console.log(res);
         this.groupDetails = res;
