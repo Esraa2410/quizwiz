@@ -2,12 +2,12 @@
 @import '../../../../../../../assets/styles/abstracts/variables.scss';
 
 .parent-card {
-    border: 1px solid gainsboro;
+    border: 1px solid $main-border-color;
     border-radius: 10px;
 
 
     .child-card {
-        border: 1px solid gainsboro;
+        border: 1px solid $main-border-color;
         border-radius: 10px;
         cursor: pointer;
 
