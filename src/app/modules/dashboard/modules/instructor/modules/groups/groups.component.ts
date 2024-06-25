@@ -97,7 +97,15 @@ export class GroupsComponent implements OnInit {
      this._GroupsService.editGroup(id,data).subscribe({
       next:(res)=>{
    console.log(res)
+      },
+      error:(error)=>{
+        this._HelperService.error(error)
+      },
+      complete:()=>{
+        this.onAllGroups();
+        this._HelperService.success('Group Updated sucessfully')
       }
+      
      })
   }
   //handle add 

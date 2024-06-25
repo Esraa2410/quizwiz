@@ -21,7 +21,7 @@ export class GroupsService {
   }
   
   editGroup(id:string, editData:IUpdateOrAddGroup):Observable<IUdateGroupRes>{
-    return this._HttpClient.post<IUdateGroupRes>(`group/${id}`,editData)
+    return this._HttpClient.put<IUdateGroupRes>(`group/${id}`,editData)
   }
   AddNewGreoup(addNewGroup:IUpdateOrAddGroup):Observable<any>{
     return this._HttpClient.post<IUdateGroupRes>(`group`,addNewGroup)
