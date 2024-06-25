@@ -27,10 +27,12 @@
                 [disabled]="addEditGroupForm.invalid">
                 <span class="mx-1 "> <i class="fa-solid fa-check"></i> </span>
               </button>
-                <span class="mx-1 " 
-                *ngIf="data.remove"
-                 [mat-dialog-close]="data.id">
+              <button  *ngIf="data.remove"  class="btn"
+               [mat-dialog-close]="data.id" >
+                <span class="mx-1 " >
                   <i class="fa-solid fa-check"></i> </span>
+              </button>
+               
              
                
             </div>
