@@ -5,3 +5,8 @@ export interface IFormsField {
   placeholder: string;
   iconClass: string;
 }
+
+export interface IBreadCrumb {
+  label: string;
+  url?: string;
+}

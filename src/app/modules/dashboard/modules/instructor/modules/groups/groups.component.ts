@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { GroupItemComponent } from './components/group-item/group-item.component';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
+import { IBreadCrumb } from 'src/app/modules/shared/models/shared';
 
 export interface IDialogData {
   id: string
@@ -17,6 +18,10 @@ export interface IDialogData {
   styleUrls: ['./groups.component.scss']
 })
 export class GroupsComponent implements OnInit {
+  navigationList: IBreadCrumb[] = [
+    { label: 'dashboard', url: '/dashboard' },
+    { label: 'Groups' }
+  ]
   btnText :string = 'Add Group' ;
   btnIcon :string ="fa fa-plus-circle"
   totalRecords: number = 10;
@@ -36,7 +41,7 @@ export class GroupsComponent implements OnInit {
 
   ngOnInit(): void {
     this.onAllGroups();
-  
+
 
   }
 
@@ -52,7 +57,7 @@ export class GroupsComponent implements OnInit {
 
   openVeiwDailog(enterAnimationDuration: string,
      exitAnimationDuration: string, id: string ,view:boolean  ): void {
-      
+
     this.dialog.open(GroupItemComponent, {
       width: '550px',
       height: '300px',
@@ -61,16 +66,16 @@ export class GroupsComponent implements OnInit {
       data: {
         id: id ,
         view:view,
-        
-       
+
+
       }
     });
-   
+
   }
 
 
   //handle edit here
-  openEditDailog(enterAnimationDuration: string, 
+  openEditDailog(enterAnimationDuration: string,
     exitAnimationDuration: string, id: string ,edit:boolean): void {
       const dialogRef = this.dialog.open(GroupItemComponent, {
       width: '550px',
@@ -105,10 +110,10 @@ export class GroupsComponent implements OnInit {
         this.onAllGroups();
         this._HelperService.success('Group Updated sucessfully')
       }
-      
+
      })
   }
-  //handle add 
+  //handle add
   openAddDailog(enterAnimationDuration: string, exitAnimationDuration: string,add:boolean): void {
    const dialogRef= this.dialog.open(GroupItemComponent, {
       width: '550px',
@@ -125,7 +130,7 @@ export class GroupsComponent implements OnInit {
       console.log(result);
       if (result) {
         this.addnewGroup(result)
-       
+
       }
 
 
@@ -146,9 +151,9 @@ export class GroupsComponent implements OnInit {
       }
 
     })
-  }  
+  }
   //handle delete here
-  openDeleteDailog(enterAnimationDuration: string, exitAnimationDuration: string, 
+  openDeleteDailog(enterAnimationDuration: string, exitAnimationDuration: string,
     id: string ,remove:boolean): void {
 
    const dialogRef = this.dialog.open(GroupItemComponent, {
@@ -166,7 +171,7 @@ export class GroupsComponent implements OnInit {
       console.log(result);
       if (result) {
         this.deleteGroup(result)
-       
+
       }
 
 

@@ -1,6 +1,6 @@
 <!--header-->
 
-<app-shared-header [btnIcon]="btnIcon" [btnText]="btnText"
+<app-shared-header [breadCrumbs]="navigationList" [btnIcon]="btnIcon" [btnText]="btnText"
     (btnEvent)="openAddDailog('1000ms','1000ms',true)"></app-shared-header>
 <!--end of header-->
 <div class="px-5">
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <!--     
+        <!--
     <app-shared-pagnation [rowsPerPage]="[5,10,20,25]" [totalRecords]="groupList.length"
         (pageNumberChanged)="onPageNumberChanged($event)" (pageSizeChanged)="onPageSizeChanged($event)">
     </app-shared-pagnation> -->
