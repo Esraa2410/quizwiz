@@ -5,15 +5,15 @@
 
     h5,
     i {
-        color: $dark-blue-color;
+        color: $btn-color;
         font-size: 1.2rem;
         font-weight: 700;
     }
 
     .close:hover {
-        background-color: rgb(187, 14, 14);
+        background-color:$red-color;
         i {
-            color: white;
+            color: $main-white-color;
         }
 
       
@@ -34,7 +34,7 @@
 }
 
 .form-control {
-    background-color: #fff;
+    background-color:$main-white-color;
 }
 .btn{
     border: none;
@@ -47,6 +47,6 @@
     background-color: rgb(83, 233, 83);
     cursor: pointer;
     i {
-        color: white;
+        color: $main-white-color;
     }
     }
