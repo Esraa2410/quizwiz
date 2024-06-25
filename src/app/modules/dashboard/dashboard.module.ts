@@ -8,10 +8,13 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthService } from '../auth/services/auth.service';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './components/home/home.component';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { MessageService } from 'primeng/api';
+
 
 @NgModule({
   declarations: [DashboardComponent, SidebarComponent, NavbarComponent, HomeComponent],
-  imports: [CommonModule, DashboardRoutingModule, SharedModule],
-  providers: [AuthService],
+  imports: [CommonModule, DashboardRoutingModule, SharedModule, SpeedDialModule],
+  providers: [AuthService, MessageService],
 })
 export class DashboardModule {}

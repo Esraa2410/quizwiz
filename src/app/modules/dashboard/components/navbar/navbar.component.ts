@@ -12,6 +12,7 @@ import { filter } from 'rxjs/operators';
 import { ILoginReq } from 'src/app/modules/auth/models/auth';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { gsap } from 'gsap';
+import { MenuItem, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-navbar',
@@ -38,16 +39,22 @@ export class NavbarComponent implements OnInit {
     },
     message: '',
   };
+  items: MenuItem[] = [];
 
   @Input() sidebarCollapsed: boolean = false;
   @Output() closeSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(private _Router: Router, private _AuthService: AuthService) {}
+  constructor(
+    private _Router: Router,
+    private _AuthService: AuthService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
     this.handleRouteEvents();
     this.handleRouteChange();
     this.getLoggedInUserData();
+    this.initializeMenuItems();
   }
 
   getLoggedInUserData(): void {
@@ -91,7 +98,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.initAnimation()
+    this.initAnimation();
   }
 
   initAnimation(): void {
@@ -100,7 +107,39 @@ export class NavbarComponent implements OnInit {
       duration: 0.4,
       opacity: 0,
       y: -60,
-      stagger: 0.20,
+      stagger: 0.2,
     });
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this._Router.navigate(['/auth/login']);
+  }
+
+  initializeMenuItems(): void {
+    this.items = [
+      {
+        label: 'Logout',
+        icon: 'pi pi-sign-out',
+        tooltipOptions: {
+          tooltipLabel: "SignOut",
+          positionLeft: -140,
+        },
+        command: () => {
+          this.logout();
+        },
+      },
+      {
+        label: 'Update',
+        icon: 'pi pi-pencil',
+        tooltipOptions: {
+          tooltipLabel: "Update Profile",
+          positionLeft: -185,
+        },
+        command: () => {
+
+        },
+      },
+    ];
   }
 }
