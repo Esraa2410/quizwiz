@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, ElementRef, Output, EventEmitter, Input } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ElementRef, Output, EventEmitter, Input, HostListener } from '@angular/core';
 import { Role } from 'src/app/core/enums/role.enum';
 import { gsap } from 'gsap';
 
@@ -47,7 +47,8 @@ export class SidebarComponent implements AfterViewInit {
     }
   ];
 
-  @ViewChild('navigation', { static: true }) navigation!: ElementRef<HTMLDivElement>;
+  @ViewChild('aside', { static: true }) aside!: ElementRef;
+  @ViewChild('navList', { static: true }) navList!: ElementRef<HTMLUListElement>;
 
   loggedInRole(): void {
     if (localStorage.getItem('role') == Role.instructor) {
@@ -62,19 +63,24 @@ export class SidebarComponent implements AfterViewInit {
   }
 
   animateNavigation(): void {
-    // if (this.navigation) {
-    //   gsap.from(this.navigation, {
-    //     delay: 0.3,
-    //     duration: 0.4,
-    //     opacity: 0,
-    //     y: -20,
-    //     stagger: 0.1,
-    //   });
-    // }
+    gsap.from(this.navList.nativeElement.children, {
+      delay: 0.6,
+      duration: 0.4,
+      opacity: 0,
+      x: -60,
+      stagger: 0.20,
+    });
   }
 
   toggleMenu() {
     this.activeMenu = !this.activeMenu;
     this.sidebarCollapsing.emit(this.activeMenu);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    // this.asideWidth = this.asideElement.nativeElement.offsetWidth;
+    // this.textLinkVisibility = this.asideWidth <= 182;
+    // this.arrowVisibility = window.innerWidth <= 991;
   }
 }

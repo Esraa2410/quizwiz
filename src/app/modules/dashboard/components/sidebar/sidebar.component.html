@@ -1,5 +1,7 @@
-<div class="navigation main-box-shadow" [class.active]="activeMenu" #navigation>
-  <ul class="m-0 ps-3" >
+<aside class="navigation main-box-shadow" [class.active-navigation]="activeMenu" #aside>
+  <span></span>
+  <span></span>
+  <ul class="m-0 ps-3 overflow-hidden bg-white" #navList>
       <div>
         <li>
           <a routerLink="/dashboard" class="d-flex align-items-center">
@@ -22,4 +24,4 @@
       </div>
   </ul>
   <div class="toggle" (click)="toggleMenu()"></div>
-</div>
+</aside>
