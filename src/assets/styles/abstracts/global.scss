@@ -19,3 +19,15 @@ a {
 .w-fit-content {
   width: fit-content;
 }
+
+.pink-background {
+  background-color: $light-pink-color;
+}
+
+.main-border {
+  border: 1px solid $main-border-color;
+}
+
+.main-border-radius {
+  border-radius: 5px;
+}
