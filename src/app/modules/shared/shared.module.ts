@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { SharedAuthComponent } from './components/shared-auth/shared-auth.component';
 import { SharedPagnationComponent } from './components/shared-pagnation/shared-pagnation.component';
 import { PaginatorModule } from 'primeng/paginator';
+import { SharedHeaderComponent } from './components/shared-header/shared-header.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -17,8 +18,11 @@ import { PaginatorModule } from 'primeng/paginator';
   ],
   declarations: [
     SharedAuthComponent,
-    SharedPagnationComponent
+    SharedPagnationComponent,
+    SharedHeaderComponent
   ],
-  exports: [SharedAuthComponent ,SharedPagnationComponent]
+  exports: [SharedAuthComponent ,SharedPagnationComponent,
+    SharedHeaderComponent
+  ]
 })
 export class SharedModule { }
