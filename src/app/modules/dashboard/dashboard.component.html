@@ -2,7 +2,7 @@
   <div class="col-12 p-0">
     <app-navbar [sidebarCollapsed]="toggleSidebar" (closeSidebar)="isCollapsed($event)"></app-navbar>
   </div>
-  <div class="row g-0">
+  <div class="row g-0  padd">
 
     <div class="p-0 toggle-sidebar" [class.col-2]="toggleSidebar" [class.col-1]="!toggleSidebar">
       <app-sidebar (sidebarCollapsing)="isCollapsed($event)" [activeMenu]="toggleSidebar"></app-sidebar>
