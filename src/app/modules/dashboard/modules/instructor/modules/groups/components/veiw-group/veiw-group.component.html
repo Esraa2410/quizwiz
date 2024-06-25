@@ -15,7 +15,7 @@
                 aria-describedby="basic-addon1">
         </div>
         <div class="col-12 my-2 ">
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>List Students</mat-label>
                 <mat-select  [(ngModel)]="groupDetails.students" name="food">
                     <mat-option [disabled]="true" *ngFor="let topping of groupDetails.students">
