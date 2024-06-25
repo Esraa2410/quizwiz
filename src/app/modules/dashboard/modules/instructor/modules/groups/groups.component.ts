@@ -1,4 +1,4 @@
-import { IGroupDetailsRes, IGroupsListRes, IGroupsListRes2, IStudent, IUpdateGroup } from './models/groups';
+import { IGroupDetailsRes, IGroupsListRes, IGroupsListRes2, IStudent, IUpdateOrAddGroup } from './models/groups';
 import { Component, OnInit } from '@angular/core';
 import { GroupsService } from './services/groups.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -86,14 +86,14 @@ export class GroupsComponent implements OnInit {
       console.log('The update  was closed');
       console.log(result);
       if (result) {
-         this.editGroup(id,result)
+         this.editGroup(id , result)
         // this.toastr.success('your category deleted');
       }
     }
     )
 
   }
-  editGroup(id:string, data:IUpdateGroup){
+  editGroup(id:string, data:IUpdateOrAddGroup){
      this._GroupsService.editGroup(id,data).subscribe({
       next:(res)=>{
    console.log(res)
@@ -102,7 +102,7 @@ export class GroupsComponent implements OnInit {
   }
   //handle add 
   openAddDailog(enterAnimationDuration: string, exitAnimationDuration: string,add:boolean): void {
-    this.dialog.open(GroupItemComponent, {
+   const dialogRef= this.dialog.open(GroupItemComponent, {
       width: '550px',
       height: '300px',
       enterAnimationDuration,
@@ -112,10 +112,34 @@ export class GroupsComponent implements OnInit {
       }
     });
 
-  }
-  
-  //handle delete here
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('recored added');
+      console.log(result);
+      if (result) {
+        this.addnewGroup(result)
+       
+      }
 
+
+    });
+
+  }
+  addnewGroup(addNewGroup:IUpdateOrAddGroup){
+    this._GroupsService.AddNewGreoup(addNewGroup).subscribe({
+      next:(res)=>{
+        console.log(res)
+      },
+      error:(error)=>{
+        this._HelperService.error(error)
+      },
+      complete:()=>{
+        this.onAllGroups();
+        this._HelperService.success('Group added sucessfully')
+      }
+
+    })
+  }  
+  //handle delete here
   openDeleteDailog(enterAnimationDuration: string, exitAnimationDuration: string, 
     id: string ,remove:boolean): void {
 

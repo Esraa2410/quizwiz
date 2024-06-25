@@ -5,7 +5,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IDialogData } from '../../groups.component';
 import { GroupsService } from '../../services/groups.service';
-import { VeiwGroupComponent } from '../veiw-group/veiw-group.component';
+
 
 
 @Component({
@@ -33,7 +33,7 @@ export class GroupItemComponent {
  
 
   constructor(private _GroupsService: GroupsService,private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<VeiwGroupComponent>
+    public dialogRef: MatDialogRef<GroupItemComponent>
     , @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
@@ -72,7 +72,7 @@ export class GroupItemComponent {
     this.dialogRef.close();
   }
 
-
+//will be edited 
   getAllStudents(){
     this._GroupsService.getAllStudentsForAddGroup().subscribe({
       next:(res)=>{

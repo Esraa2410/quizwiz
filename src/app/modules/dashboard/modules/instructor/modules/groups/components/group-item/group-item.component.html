@@ -22,12 +22,15 @@
             <div 
              class="d-inline check p-4
               border-start d-flex justify-content-center align-items-center ">
-              <button type="submit" class="btn" *ngIf="data.add||data.edit">
+              <button type="submit" class="btn"
+               *ngIf="data.add || data.edit"
+                [disabled]="addEditGroupForm.invalid">
                 <span class="mx-1 "> <i class="fa-solid fa-check"></i> </span>
               </button>
-
-              
-                <span class="mx-1 " *ngIf="data.remove" [mat-dialog-close]="data.id"> <i class="fa-solid fa-check"></i> </span>
+                <span class="mx-1 " 
+                *ngIf="data.remove"
+                 [mat-dialog-close]="data.id">
+                  <i class="fa-solid fa-check"></i> </span>
              
                
             </div>
@@ -70,7 +73,7 @@
                   <mat-select *ngIf="data.edit" multiple
                    formControlName="students"   class="form-control">
                  
-                    <mat-option  ng-selected 
+                    <mat-option  
                      [value]="topping._id"
                     *ngFor="let topping of groupDetails.students">
                      {{topping.first_name}} {{topping.last_name}}</mat-option>

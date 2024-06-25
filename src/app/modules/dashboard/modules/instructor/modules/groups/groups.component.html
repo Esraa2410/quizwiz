@@ -1,6 +1,9 @@
 <!--header-->
 <app-shared-header [btnIcon]="btnIcon" 
-[btnText]="btnText" (click)="openAddDailog('1000ms','1000ms',true)"></app-shared-header>
+[btnText]="btnText" 
+(btnEvent)="openAddDailog('1000ms','1000ms',true)"
+></app-shared-header>
+<!--end of header-->
 <div class="container parent-card p-4 my-3 " *ngIf="groupList.length>0">
     <h2 class="mb-4">Groups list</h2>
     <div class="row">

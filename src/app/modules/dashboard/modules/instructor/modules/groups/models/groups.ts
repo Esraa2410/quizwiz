@@ -25,7 +25,7 @@ export interface IStudent {
   email: string
 }
 
-export interface IUpdateGroup{
+export interface IUpdateOrAddGroup{
   name: string
   students: string[]
 }
