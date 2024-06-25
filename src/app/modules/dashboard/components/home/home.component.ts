@@ -1,5 +1,3 @@
-// src/app/home/home.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { IQuiz, IStudent } from './models/home';
 import { HomeService } from './service/home.service';
