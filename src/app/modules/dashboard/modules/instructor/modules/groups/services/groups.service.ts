@@ -1,4 +1,4 @@
-import { IGroupsListRes2 ,IGroupsListRes} from './../models/groups';
+import { IGroupDetailsRes ,IGroupsListRes} from './../models/groups';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -13,7 +13,7 @@ export class GroupsService {
     return this._HttpClient.get<IGroupsListRes>(`group`)
   }
 
-  getGroupById(id:string):Observable<IGroupsListRes2>{
-    return this._HttpClient.get<IGroupsListRes2>(`group/${id}`)
+  getGroupById(id:string):Observable<IGroupDetailsRes>{
+    return this._HttpClient.get<IGroupDetailsRes>(`group/${id}`)
   }
 }

@@ -1,15 +1,11 @@
-import { IGroupsListRes2 } from './../../models/groups';
+import { IGroupDetailsRes, IStudent } from './../../models/groups';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IDialogData } from '../../groups.component';
 import { GroupsService } from '../../services/groups.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormControl } from '@angular/forms';
 
-
-interface City {
-  name: string,
-  code: string
-}
 
 @Component({
   selector: 'app-veiw-group',
@@ -17,42 +13,35 @@ interface City {
   styleUrls: ['./veiw-group.component.scss']
 })
 export class VeiwGroupComponent implements OnInit {
-  cities!: City[];
-  selectedCities!: City[];
-
-  groupDetails: IGroupsListRes2 = {
+  selectedStudents: string[]=[];
+  students: IStudent[] = [];
+  groupDetails: IGroupDetailsRes = {
     _id: '',
     name: '',
     status: '',
     instructor: '',
-    students: [],
+    students: this.students,
     max_students: 0
   }
 
+  toppings = new FormControl('');
   constructor(private _GroupsService: GroupsService,
     public dialogRef: MatDialogRef<VeiwGroupComponent>
     , @Inject(MAT_DIALOG_DATA) public data: IDialogData) { }
 
   ngOnInit(): void {
     this.onVeiwGroup(this.data.id);
-  //   this.cities = [
-  //     {name: 'New York', code: 'NY'},
-  //     {name: 'Rome', code: 'RM'},
-  //     {name: 'London', code: 'LDN'},
-  //     {name: 'Istanbul', code: 'IST'},
-  //     {name: 'Paris', code: 'PRS'}
-  // ];
+    this.selectedStudents = this.students.map(student => student.first_name);
+
   }
-
-
 
   onVeiwGroup(id: string) {
     this._GroupsService.getGroupById(id).subscribe({
-      next: (res: IGroupsListRes2) => {
-        console.log(res);
+      next: (res: IGroupDetailsRes) => {
+        // console.log(res);
         this.groupDetails = res;
       }, error: (err: HttpErrorResponse) => {
-        console.log(err)
+         //console.log(err)
       }
     })
   }
