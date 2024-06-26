@@ -10,10 +10,11 @@ export class SharedCardComponent<T extends { [key: string]: any }> {
   @Input() mainHeader!: (item: T) => string;
   @Input() cardDetailsFContent!: (item: T, index?: number) => string;
   @Input() cardDetailsSContent!: (item: T) => string;
-  @Input() numOfStudents!: (item: T) => number;
+  @Input() numOfStudents!: (item: T) => number | string;
   @Input() studentsVisibility: boolean = false;
   @Input() addPinkBackground: boolean = false;
   @Input() mainIconVisibility: boolean = false;
+  @Input() activeGridSystem: boolean = false;
 
   @Input() cardContent: T[] = [];
 }

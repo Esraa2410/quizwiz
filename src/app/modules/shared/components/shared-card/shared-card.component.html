@@ -1,6 +1,6 @@
-<div class="d-flex flex-column gap-2">
-  <div *ngFor="let item of cardContent; let i = index;" class="w-100">
-    <article class="d-flex align-items-center gap-3  overflow-hidden w-100">
+<div [class.flex-row]="activeGridSystem" class="d-flex flex-column gap-2">
+  <div *ngFor="let item of cardContent; let i = index;" [class.row]="activeGridSystem" class="w-100">
+    <article class="d-flex align-items-center gap-3 overflow-hidden w-100" [class.col-md-6]="activeGridSystem">
       <figure class="h-100 m-0  rounded-2" [class.pink-background]="addPinkBackground" [class.p-5]="addPinkBackground">
         <img [src]="imgSrc" class="w-100 " alt="">
       </figure>

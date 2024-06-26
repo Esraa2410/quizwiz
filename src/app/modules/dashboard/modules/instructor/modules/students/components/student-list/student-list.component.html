@@ -1,0 +1,15 @@
+<div class="my-5">
+    <article class="main-border rounded-3 p-4">
+        <h3>Students List</h3>
+        <app-shared-card
+          [activeGridSystem]="true"
+          [mainHeader]="getStudentName"
+          [cardDetailsFContent]="getStudentRank"
+          [cardDetailsSContent]="getStudentDetails"
+          [studentsVisibility]="false"
+          [addPinkBackground]="false"
+          [mainIconVisibility]="true"
+          [cardContent]="studentData"
+        ></app-shared-card>
+      </article>
+</div>
