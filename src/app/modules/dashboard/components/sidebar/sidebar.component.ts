@@ -28,23 +28,29 @@ export class SidebarComponent implements AfterViewInit {
     {
       routeName: 'Groups',
       routeLink: '/dashboard/instructor/groups',
-      routeIcon: 'bi bi-people'
+      routeIcon: 'fa-solid fa-users-rectangle'
+    },
+    {
+      routeName: 'Students',
+      routeLink: '/dashboard/instructor/students',
+      routeIcon: 'fa-solid fa-users'
     },
     {
       routeName: 'Quizzes',
       routeLink: '/dashboard/instructor/quizzes',
-      routeIcon: 'fa-solid fa-person-chalkboard'
+      routeIcon: 'fa-solid fa-business-time'
     },
+    
     {
-      routeName: 'Result',
-      routeLink: '/dashboard/instructor/result',
+      routeName: 'Questions',
+      routeLink: '/dashboard/instructor/questions',
       routeIcon: 'fas fa-list-alt'
-    },
-    {
-      routeName: 'Help',
-      routeLink: '/dashboard/contact-us',
-      routeIcon: 'fa-solid fa-question'
     }
+    // {
+    //   routeName: 'Help',
+    //   routeLink: '/dashboard/contact-us',
+    //   routeIcon: 'fa-solid fa-question'
+    // }
   ];
 
   @ViewChild('aside', { static: true }) aside!: ElementRef;
