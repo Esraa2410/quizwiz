@@ -28,6 +28,6 @@ export class GroupsService {
   }
   //will be edited after making student service 
   getAllStudentsForAddGroup():Observable<any>{
-   return this._HttpClient.get('student')
+   return this._HttpClient.get('student/without-group')
   }
 }
