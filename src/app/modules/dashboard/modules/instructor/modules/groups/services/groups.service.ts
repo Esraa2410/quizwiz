@@ -1,4 +1,4 @@
-import { IGroupDetailsRes ,IGroupsListRes} from './../models/groups';
+import { IGroupDetailsRes ,IGroupsListRes, IUdateGroupRes, IUpdateOrAddGroup} from './../models/groups';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -15,5 +15,19 @@ export class GroupsService {
 
   getGroupById(id:string):Observable<IGroupDetailsRes>{
     return this._HttpClient.get<IGroupDetailsRes>(`group/${id}`)
+  }
+  deleteGroup(id:string):Observable<IGroupDetailsRes>{
+    return this._HttpClient.delete<IGroupDetailsRes>(`group/${id}`)
+  }
+  
+  editGroup(id:string, editData:IUpdateOrAddGroup):Observable<IUdateGroupRes>{
+    return this._HttpClient.put<IUdateGroupRes>(`group/${id}`,editData)
+  }
+  AddNewGreoup(addNewGroup:IUpdateOrAddGroup):Observable<any>{
+    return this._HttpClient.post<IUdateGroupRes>(`group`,addNewGroup)
+  }
+  //will be edited after making student service 
+  getAllStudentsForAddGroup():Observable<any>{
+   return this._HttpClient.get('student')
   }
 }

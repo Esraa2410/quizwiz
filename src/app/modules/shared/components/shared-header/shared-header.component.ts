@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-shared-header',
@@ -8,5 +8,10 @@ import { Component, Input } from '@angular/core';
 export class SharedHeaderComponent {
  @Input() btnText:string ='';
  @Input() btnIcon:string =''
- //@Input() Link:string='' ;
+@Output() btnEvent :EventEmitter<any>= new EventEmitter<any>();
+
+openAddDialog(){
+  this.btnEvent.emit();
+}
+
 }

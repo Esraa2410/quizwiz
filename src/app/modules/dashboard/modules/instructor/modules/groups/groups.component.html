@@ -1,5 +1,9 @@
 <!--header-->
-<app-shared-header [btnIcon]="btnIcon" [btnText]="btnText"></app-shared-header>
+<app-shared-header [btnIcon]="btnIcon" 
+[btnText]="btnText" 
+(btnEvent)="openAddDailog('1000ms','1000ms',true)"
+></app-shared-header>
+<!--end of header-->
 <div class="container parent-card p-4 my-3 " *ngIf="groupList.length>0">
     <h2 class="mb-4">Groups list</h2>
     <div class="row">
@@ -18,15 +22,15 @@
                         <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button (click)="openVeiwDailog('1000ms','1000ms', group._id)" mat-menu-item>
+                        <button (click)="openVeiwDailog('1000ms','1000ms', group._id,true )" mat-menu-item>
                             <mat-icon>visibility</mat-icon>
                             <span>Veiw</span>
                         </button>
-                        <button mat-menu-item (click)="openEditDailog(group._id)">
+                        <button mat-menu-item (click)="openEditDailog('1000ms','1000ms', group._id,true)">
                             <mat-icon>edit_square</mat-icon>
                             <span>Edit</span>
                         </button>
-                        <button mat-menu-item (click)="openDeleteDailog(group._id)">
+                        <button mat-menu-item (click)="openDeleteDailog('1000ms','1000ms', group._id,true)">
                             <mat-icon>delete</mat-icon>
                             <span>Delete</span>
                         </button>

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VeiwGroupComponent } from './veiw-group.component';
+import { GroupItemComponent } from './group-item.component';
 
-describe('VeiwGroupComponent', () => {
-  let component: VeiwGroupComponent;
-  let fixture: ComponentFixture<VeiwGroupComponent>;
+describe('GroupItemComponent', () => {
+  let component: GroupItemComponent;
+  let fixture: ComponentFixture<GroupItemComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [VeiwGroupComponent]
+      declarations: [GroupItemComponent]
     });
-    fixture = TestBed.createComponent(VeiwGroupComponent);
+    fixture = TestBed.createComponent(GroupItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
