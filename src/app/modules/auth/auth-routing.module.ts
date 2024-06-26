@@ -6,6 +6,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
 
 const routes: Routes = [
   { path: '', component: AuthComponent,
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent, title: 'Sign up' },
       { path: 'change-password', component: ChangePasswordComponent, title: 'Change Password' },
       { path: 'forget-password', component: ForgetPasswordComponent, title: 'Forget Password' },
+      { path: 'update-profile', component: UpdateProfileComponent, title: 'Update Profile' },
       { path: 'reset', component: ResetPasswordComponent, title: 'Reset Password' },
     ]
   }

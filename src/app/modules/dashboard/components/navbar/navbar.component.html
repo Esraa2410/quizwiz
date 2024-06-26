@@ -1,4 +1,4 @@
-<nav class="d-flex fixed-top align-items-center justify-content-between gap-5 " >
+<nav class="d-flex fixed-top align-items-center justify-content-between gap-5 ">
   <div class="main-div logo d-flex align-items-center gap-3">
     <div class="menu-burger d-flex flex-column gap-1" [class.active-menu-burger]="sidebarCollapsed"
       (click)="onCloseSidebar()" role="button">
@@ -19,11 +19,15 @@
     <div class="d-flex align-items-center gap-3">
       <h3 class="m-0">{{ userName }}</h3>
       <!-- <i class="fa-solid fa-chevron-down"></i> -->
-      <div >
+      <div>
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>settings</mat-icon>
         </button>
-        <mat-menu #menu="matMenu" >
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onUpdateProfile()">
+            <mat-icon >account_circle</mat-icon>
+            <span class="fw-medium ">Update Profile</span>
+          </button>
           <button mat-menu-item (click)="openChangePass()">
             <mat-icon>sync</mat-icon>
             <span class="fw-medium">Change Password</span>

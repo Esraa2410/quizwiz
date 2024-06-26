@@ -66,7 +66,7 @@ export class LoginComponent {
     this._AuthService.login(loginForm.value).subscribe({
       next: (res: ILoginReq) => {
         this.userData = res;
-        console.log('Login response data:', this.userData);
+       // console.log('Login response data:', this.userData);
       },
       error: (error: HttpErrorResponse) => this._HelperService.error(error),
       complete: () => {
@@ -76,8 +76,11 @@ export class LoginComponent {
         );
         localStorage.setItem('role', this.userData.data.profile.role);
         localStorage.setItem('userToken', this.userData.data.accessToken);
+        localStorage.setItem('email', this.userData.data.profile.email);
+        localStorage.setItem('firstName', this.userData.data.profile.first_name);
+        localStorage.setItem('lastName', this.userData.data.profile.last_name);
         localStorage.setItem('userName', `${this.userData.data.profile.first_name} ${this.userData.data.profile.last_name}`)
-        console.log('Emitting loggedInUser data from onLogin:', this.userData);
+       // console.log('Emitting loggedInUser data from onLogin:', this.userData);
         this._AuthService.getLoggedInUser(this.userData);
         this._Router.navigate(['/dashboard']);
       },

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IChangeReq, IChangeRes, IForget, IForgetRes, IResetPasswordRequest, IResetPasswordResponse, IRegisterReq, IRegisterRes, ILogin, ILoginReq ,ILogoutRes} from '../models/auth';
+import { IChangeReq, IChangeRes, IForget, IForgetRes, IResetPasswordRequest, IResetPasswordResponse, IRegisterReq,
+   IRegisterRes, ILogin, ILoginReq ,ILogoutRes ,IUpdateProfileRes,IUpdateProfileReq} from '../models/auth';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -27,13 +28,13 @@ export class AuthService {
   loggedInUser$ = this.loggedInUserSubject.asObservable();
 
   constructor(private _HttpClient: HttpClient) {
-    console.log('Initialized loggedInUserSubject with default value:', this.loggedInUserSubject.value);
+   // console.log('Initialized loggedInUserSubject with default value:', this.loggedInUserSubject.value);
   }
 
   getLoggedInUser(userData: ILoginReq): void {
-    console.log('Emitting loggedInUser data:', userData);
+  //  console.log('Emitting loggedInUser data:', userData);
     this.loggedInUserSubject.next(userData);
-    console.log('Current loggedInUserSubject value:', this.loggedInUserSubject.value);
+    //console.log('Current loggedInUserSubject value:', this.loggedInUserSubject.value);
 
   }
 
@@ -49,9 +50,9 @@ export class AuthService {
   register(registerData: IRegisterReq): Observable<IRegisterRes> {
     return this._HttpClient.post<IRegisterRes>('auth/register', registerData)
   }
+
   resetPassword(resetPasswordData: IResetPasswordRequest): Observable<IResetPasswordResponse> {
     return this._HttpClient.post<IResetPasswordResponse>('auth/reset-password', resetPasswordData)
-
   }
 
   login(loginData: ILogin): Observable<ILoginReq> {
@@ -60,6 +61,11 @@ export class AuthService {
 
   logout(): Observable<ILogoutRes> {
     return this._HttpClient.get<ILogoutRes>('auth/logout')
+  }
+
+  
+  updateProfile(data: IUpdateProfileReq): Observable<IUpdateProfileRes> {
+    return this._HttpClient.put<IUpdateProfileRes>('instructor', data)
   }
 
   welcomeVoice(message: string): void {

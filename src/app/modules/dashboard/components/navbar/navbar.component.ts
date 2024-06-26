@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { ILoginReq ,ILogoutRes } from 'src/app/modules/auth/models/auth';
+import { ILoginReq ,ILogoutRes, IUpdateProfileReq, IUpdateProfileRes } from 'src/app/modules/auth/models/auth';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
 
@@ -80,6 +80,11 @@ export class NavbarComponent implements OnInit {
   onCloseSidebar(): void {
     this.sidebarCollapsed = !this.sidebarCollapsed;
     this.closeSidebar.emit(this.sidebarCollapsed)
+  }
+
+
+  onUpdateProfile(){
+    this._Router.navigate(['/auth/update-profile'])
   }
 
   onLogout(){

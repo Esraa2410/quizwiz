@@ -91,3 +91,25 @@ export interface ILoginProfile {
 export interface ILogoutRes {
   message: string;
 }
+
+export interface IUpdateProfileReq {
+  first_name: string;
+  last_name: string;
+  email: string;
+
+}
+
+
+export interface IUpdateProfileRes {
+  data: IUpdateProfileResData;
+  message: string;
+}
+
+export interface IUpdateProfileResData {
+  _id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  status: string;
+  role: string;
+}

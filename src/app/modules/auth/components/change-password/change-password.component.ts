@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent {
-
   private _AuthService = inject(AuthService);
   private _HelperService = inject(HelperService);
   private _Router = inject(Router);
