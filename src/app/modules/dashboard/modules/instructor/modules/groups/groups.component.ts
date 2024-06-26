@@ -1,11 +1,13 @@
 import { IGroupDetailsRes, IGroupsListRes, IGroupsListRes2, IStudent, IUpdateOrAddGroup } from './models/groups';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GroupsService } from './services/groups.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { GroupItemComponent } from './components/group-item/group-item.component';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
 import { IBreadCrumb } from 'src/app/modules/shared/models/shared';
+
+import { gsap } from 'gsap';
 
 export interface IDialogData {
   id: string
@@ -18,6 +20,7 @@ export interface IDialogData {
   styleUrls: ['./groups.component.scss']
 })
 export class GroupsComponent implements OnInit {
+  @ViewChild('groups', { static: true }) groups!: ElementRef<HTMLDivElement>
   navigationList: IBreadCrumb[] = [
     { label: 'dashboard', url: '/dashboard' },
     { label: 'Groups' }
@@ -45,11 +48,16 @@ export class GroupsComponent implements OnInit {
 
   }
 
+  ngAfterViewInit(): void {
+    this.initAnimation();
+  }
+
   onAllGroups() {
     this._GroupsService.getAllGroups().subscribe({
       next: (res: IGroupsListRes) => {
         this.groupList = res;
-       console.log(res)
+        console.log(res)
+        this.initAnimation();
       }, error: (err: HttpErrorResponse) => {
       }
     })
@@ -199,6 +207,16 @@ export class GroupsComponent implements OnInit {
     // console.log(data)
   }
 
-
-
+  initAnimation(): void {
+    if (this.groups) {
+      const groups = this.groups.nativeElement.querySelectorAll('.group-item');
+      gsap.from(groups, {
+        delay: 0.5,
+        duration: 0.5,
+        opacity: 0,
+        y: 20,
+        stagger: 0.2,
+      });
+    }
+  }
 }

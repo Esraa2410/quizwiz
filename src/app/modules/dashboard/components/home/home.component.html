@@ -1,1 +1,25 @@
-<p>home works!</p>
+<div class="py-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="p-3 main-border rounded-3">
+        <h2 class='mb-3'>Upcoming 5 Quizzes</h2>
+        <app-shared-card [imgSrc]="'/path/to/quiz/image.jpg'" [cardContent]="upcomingQuizzes"
+          [mainHeader]="getQuizTitle" [cardDetailsFContent]="getQuizDate" [cardDetailsSContent]="getQuizTime"
+          [numOfStudents]="getNumOfStudents" [studentsVisibility]="true">
+        </app-shared-card>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="p-3 main-border rounded-3">
+        <h2 class='mb-3'>Top 5 Students</h2>
+        <app-shared-card [imgSrc]="'/path/to/student/image.jpg'" [cardContent]="topFiveStudents"
+          [mainHeader]="getStudentName" [cardDetailsFContent]="getStudentRank"
+          [cardDetailsSContent]="getStudentAvgScore" [studentsVisibility]="false" [mainIconVisibility]="true">
+        </app-shared-card>
+      </div>
+    </div>
+  </div>
+
+
+</div>

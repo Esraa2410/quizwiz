@@ -7,6 +7,7 @@ import { SharedAuthComponent } from './components/shared-auth/shared-auth.compon
 import { SharedPagnationComponent } from './components/shared-pagnation/shared-pagnation.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { SharedHeaderComponent } from './components/shared-header/shared-header.component';
+import { SharedCardComponent } from './components/shared-card/shared-card.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,10 +20,14 @@ import { SharedHeaderComponent } from './components/shared-header/shared-header.
   declarations: [
     SharedAuthComponent,
     SharedPagnationComponent,
-    SharedHeaderComponent
+    SharedHeaderComponent,
+    SharedCardComponent,
   ],
-  exports: [SharedAuthComponent ,SharedPagnationComponent,
-    SharedHeaderComponent
-  ]
+  exports: [
+    SharedAuthComponent,
+    SharedPagnationComponent,
+    SharedHeaderComponent,
+    SharedCardComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
