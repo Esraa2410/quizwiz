@@ -22,8 +22,8 @@ export class GroupsComponent implements OnInit {
     { label: 'dashboard', url: '/dashboard' },
     { label: 'Groups' }
   ]
-  btnText :string = 'Add Group' ;
-  btnIcon :string ="fa fa-plus-circle"
+  btnText: string = 'Add Group';
+  btnIcon: string = "fa fa-plus-circle"
   totalRecords: number = 10;
   IGroupsListRes2: IGroupsListRes2 = {
     _id: '',
@@ -36,7 +36,7 @@ export class GroupsComponent implements OnInit {
   groupList: IGroupsListRes2[] = [this.IGroupsListRes2];
 
   constructor(private _GroupsService: GroupsService, public dialog: MatDialog,
-    private _HelperService:HelperService
+    private _HelperService: HelperService
   ) { }
 
   ngOnInit(): void {
@@ -49,14 +49,14 @@ export class GroupsComponent implements OnInit {
     this._GroupsService.getAllGroups().subscribe({
       next: (res: IGroupsListRes) => {
         this.groupList = res;
-       console.log(res)
+        // console.log(res)
       }, error: (err: HttpErrorResponse) => {
       }
     })
   }
 
   openVeiwDailog(enterAnimationDuration: string,
-     exitAnimationDuration: string, id: string ,view:boolean  ): void {
+    exitAnimationDuration: string, id: string, view: boolean): void {
 
     this.dialog.open(GroupItemComponent, {
       width: '550px',
@@ -64,8 +64,8 @@ export class GroupsComponent implements OnInit {
       enterAnimationDuration,
       exitAnimationDuration,
       data: {
-        id: id ,
-        view:view,
+        id: id,
+        view: view,
 
 
       }
@@ -76,58 +76,58 @@ export class GroupsComponent implements OnInit {
 
   //handle edit here
   openEditDailog(enterAnimationDuration: string,
-    exitAnimationDuration: string, id: string ,edit:boolean): void {
-      const dialogRef = this.dialog.open(GroupItemComponent, {
+    exitAnimationDuration: string, id: string, edit: boolean): void {
+    const dialogRef = this.dialog.open(GroupItemComponent, {
       width: '550px',
       height: '300px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: {
         id: id,
-        edit:edit
+        edit: edit
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The update  was closed');
-      console.log(result);
+      // console.log('The update  was closed');
+      //console.log(result);
       if (result) {
-         this.editGroup(id , result)
+        this.editGroup(id, result)
         // this.toastr.success('your category deleted');
       }
     }
     )
 
   }
-  editGroup(id:string, data:IUpdateOrAddGroup){
-     this._GroupsService.editGroup(id,data).subscribe({
-      next:(res)=>{
-   console.log(res)
+  editGroup(id: string, data: IUpdateOrAddGroup) {
+    this._GroupsService.editGroup(id, data).subscribe({
+      next: (res) => {
+        // console.log(res)
       },
-      error:(error)=>{
+      error: (error) => {
         this._HelperService.error(error)
       },
-      complete:()=>{
+      complete: () => {
         this.onAllGroups();
         this._HelperService.success('Group Updated sucessfully')
       }
 
-     })
+    })
   }
   //handle add
-  openAddDailog(enterAnimationDuration: string, exitAnimationDuration: string,add:boolean): void {
-   const dialogRef= this.dialog.open(GroupItemComponent, {
+  openAddDailog(enterAnimationDuration: string, exitAnimationDuration: string, add: boolean): void {
+    const dialogRef = this.dialog.open(GroupItemComponent, {
       width: '550px',
       height: '300px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: {
-       add:add
+        add: add
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('recored added');
-      console.log(result);
+      // console.log('recored added');
+      //console.log(result);
       if (result) {
         this.addnewGroup(result)
 
@@ -137,15 +137,15 @@ export class GroupsComponent implements OnInit {
     });
 
   }
-  addnewGroup(addNewGroup:IUpdateOrAddGroup){
+  addnewGroup(addNewGroup: IUpdateOrAddGroup) {
     this._GroupsService.AddNewGreoup(addNewGroup).subscribe({
-      next:(res)=>{
-        console.log(res)
+      next: (res) => {
+        // console.log(res)
       },
-      error:(error)=>{
+      error: (error) => {
         this._HelperService.error(error)
       },
-      complete:()=>{
+      complete: () => {
         this.onAllGroups();
         this._HelperService.success('Group added sucessfully')
       }
@@ -154,21 +154,21 @@ export class GroupsComponent implements OnInit {
   }
   //handle delete here
   openDeleteDailog(enterAnimationDuration: string, exitAnimationDuration: string,
-    id: string ,remove:boolean): void {
+    id: string, remove: boolean): void {
 
-   const dialogRef = this.dialog.open(GroupItemComponent, {
+    const dialogRef = this.dialog.open(GroupItemComponent, {
       width: '550px',
       height: '300px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: {
         id: id,
-        remove:remove
+        remove: remove
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The delete  was closed');
-      console.log(result);
+      // console.log('The delete  was closed');
+      //console.log(result);
       if (result) {
         this.deleteGroup(result)
 
@@ -177,20 +177,22 @@ export class GroupsComponent implements OnInit {
 
     });
   }
-  deleteGroup(id:string){
+  deleteGroup(id: string) {
     this._GroupsService.deleteGroup(id).subscribe({
-      next:(res)=>{
-        console.log(res);
+      next: (res) => {
+        // console.log(res);
       },
-      error:(error)=>{
+      error: (error) => {
         //
       },
-      complete:()=>{
+      complete: () => {
         this.onAllGroups();
         this._HelperService.success('Group deleted sucessfully')
       }
     })
   }
+
+
   onPageSizeChanged(data: number) {
     // console.log(data)
   }

@@ -51,26 +51,26 @@ export class NavbarComponent implements OnInit {
   getLoggedInUserData(): void {
     this._AuthService.loggedInUser$.subscribe((loggedInUser: ILoginReq) => {
       this.loggedInUser = loggedInUser;
-      console.log(
-        'Received loggedInUser data in NavbarComponent:',
-        this.loggedInUser
-      );
+      // console.log(
+      //   'Received loggedInUser data in NavbarComponent:',
+      //   this.loggedInUser
+      // );
     });
   }
 
   private handleRouteChange(): void {
     const fullPath = this._Router.url;
     // full path ya gda3an
-    console.log('Full path:', fullPath);
+  //  console.log('Full path:', fullPath);
 
     // full path bs array
     const segments = fullPath.split('/');
-    console.log('URL Segments:', segments);
+   // console.log('URL Segments:', segments);
 
     // a5er 7aga f el path
     if (segments.length > 0) {
       const specificSegment = segments[segments.length - 1];
-      console.log('Specific segment:', specificSegment);
+     // console.log('Specific segment:', specificSegment);
       this.routePath = specificSegment;
     }
   }
