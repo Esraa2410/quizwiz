@@ -8,20 +8,13 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthService } from '../auth/services/auth.service';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './components/home/home.component';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { MessageService } from 'primeng/api';
+
+
 @NgModule({
   declarations: [DashboardComponent, SidebarComponent, NavbarComponent, HomeComponent],
-  imports: [
-    CommonModule,
-     DashboardRoutingModule, 
-     SharedModule,
-     MatIconModule,
-     MatMenuModule,
-     MatButtonModule
-
-    ],
-  providers: [AuthService],
+  imports: [CommonModule, DashboardRoutingModule, SharedModule, SpeedDialModule],
+  providers: [AuthService, MessageService],
 })
 export class DashboardModule {}

@@ -1,10 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { ILoginReq ,ILogoutRes, IUpdateProfileReq, IUpdateProfileRes } from 'src/app/modules/auth/models/auth';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
+import { gsap } from 'gsap';
+import { MenuItem, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +14,7 @@ import { HelperService } from 'src/app/modules/shared/services/helper.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  @ViewChild('mainNav', { static: true }) mainNav!: ElementRef<HTMLDivElement>;
   routePath: string = '';
   loggedInRole: string = localStorage.getItem('role') ?? '';
   userName: string = localStorage.getItem('userName') ?? '';
@@ -30,6 +33,7 @@ export class NavbarComponent implements OnInit {
     },
     message: '',
   };
+  items: MenuItem[] = [];
 
   @Input() sidebarCollapsed: boolean = false;
   @Output() closeSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -41,16 +45,18 @@ export class NavbarComponent implements OnInit {
     this.handleRouteEvents();
     this.handleRouteChange();
     this.getLoggedInUserData();
+    this.initializeMenuItems();
   }
 
   getLoggedInUserData(): void {
     this._AuthService.loggedInUser$.subscribe((loggedInUser: ILoginReq) => {
       this.loggedInUser = loggedInUser;
-      console.log('Received loggedInUser data in NavbarComponent:', this.loggedInUser);
+      console.log(
+        'Received loggedInUser data in NavbarComponent:',
+        this.loggedInUser
+      );
     });
-
   }
-
 
   private handleRouteChange(): void {
     const fullPath = this._Router.url;
@@ -79,7 +85,66 @@ export class NavbarComponent implements OnInit {
 
   onCloseSidebar(): void {
     this.sidebarCollapsed = !this.sidebarCollapsed;
-    this.closeSidebar.emit(this.sidebarCollapsed)
+    this.closeSidebar.emit(this.sidebarCollapsed);
+  }
+
+  ngAfterViewInit(): void {
+    this.initAnimation();
+  }
+
+  initAnimation(): void {
+    gsap.from(this.mainNav.nativeElement.children, {
+      delay: 0.6,
+      duration: 0.4,
+      opacity: 0,
+      y: -60,
+      stagger: 0.2,
+    });
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this._Router.navigate(['/auth/login']);
+  }
+
+  initializeMenuItems(): void {
+    this.items = [
+      {
+        label: 'Logout',
+        icon: 'pi pi-sign-out',
+        tooltipOptions: {
+          tooltipLabel: "SignOut",
+          positionLeft: -140,
+        },
+        command: () => {
+          this.logout();
+        },
+      },
+      {
+        label: 'Update',
+        icon: 'pi pi-pencil',
+        tooltipOptions: {
+          tooltipLabel: "Update Profile",
+          positionLeft: -185,
+        },
+        command: () => {
+          this.onUpdateProfile();
+
+        },
+      },
+      {
+        label: 'Change',
+        icon: 'pi pi-pencil',
+        tooltipOptions: {
+          tooltipLabel: "Change Password",
+          positionLeft: -210,
+        },
+        command: () => {
+          this.openChangePass()
+
+        },
+      },
+    ];
   }
 
 

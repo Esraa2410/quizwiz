@@ -3,13 +3,36 @@
 .navigation {
   position: fixed;
   width: 80px;
-  overflow: hidden;
   transition: 0.5s linear;
-  height: calc(100vh - 98.59px)
+  height: calc(100vh - 98.59px);
+  transition-delay: 0.5s;
+
+  > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(0);
+    height: 100%;
+    width: 5px;
+    background-color: #000;
+    transition: 1s linear;
+    z-index: -1;
+  }
 }
 
-.navigation.active {
+.navigation.active-navigation {
   width: 300px;
+  transition-delay: 1s linear;
+
+  > span {
+    transform: translateX(330px);
+    z-index: -1;
+
+    &:nth-child(2) {
+      width: 100px;
+      transform: translateX(220px);
+    }
+  }
 }
 
 .toggle {
@@ -25,6 +48,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 99;
 }
 
 .toggle::before {
@@ -49,11 +73,11 @@
   transition: 1s linear;
 }
 
-.navigation.active .toggle::before {
+.navigation.active-navigation .toggle::before {
   transform: translateY(0px) rotate(-405deg);
 }
 
-.navigation.active .toggle::after {
+.navigation.active-navigation .toggle::after {
   transform: translateY(0px) rotate(225deg);
 }
 
@@ -158,5 +182,17 @@
   background-color: #000 !important;
   > * {
     color: #fff !important
+  }
+}
+
+@media (max-width: 767px) {
+  aside.navigation {
+    position: fixed !important;
+    top: unset;
+    bottom: 0 !important;
+    padding: 5px !important;
+    width: 100% !important;
+    height: 5vh !important;
+    z-index: 999999999;
   }
 }

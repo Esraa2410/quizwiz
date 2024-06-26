@@ -7,7 +7,7 @@
     <div class="p-0 toggle-sidebar" [class.col-2]="toggleSidebar" [class.col-1]="!toggleSidebar">
       <app-sidebar (sidebarCollapsing)="isCollapsed($event)" [activeMenu]="toggleSidebar"></app-sidebar>
     </div>
-    <div class="p-0 toggle-sidebar" [class.col-10]="toggleSidebar" [class.col-11]="!toggleSidebar">
+    <div class="px-5 toggle-sidebar" [class.col-10]="toggleSidebar" [class.col-11]="!toggleSidebar">
 
       <router-outlet></router-outlet>
     </div>
