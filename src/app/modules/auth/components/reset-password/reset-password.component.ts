@@ -29,14 +29,14 @@ export class ResetPasswordComponent {
 
   formList: IFormsField[] = [
     {
-      label: 'Your email address',
+      label: 'Email',
       placeholder: 'type your email',
       iconClass: 'fa-solid fa-envelope',
       controlName: 'email',
       type: 'email '
     },
     {
-      label: 'Otp',
+      label: 'OTP',
       placeholder: 'Type your otp',
       iconClass: 'fa-solid fa-envelope',
       controlName: 'otp',

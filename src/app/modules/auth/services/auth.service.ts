@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IChangeReq, IChangeRes, IForget, IForgetRes, IResetPasswordRequest, IResetPasswordResponse ,IRegisterReq,IRegisterRes, ILogin, ILoginReq} from '../models/auth';
+import { IChangeReq, IChangeRes, IForget, IForgetRes, IResetPasswordRequest, IResetPasswordResponse, IRegisterReq, IRegisterRes, ILogin, ILoginReq ,ILogoutRes} from '../models/auth';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class AuthService {
     },
     message: '',
   });
-  
+
   loggedInUser$ = this.loggedInUserSubject.asObservable();
 
   constructor(private _HttpClient: HttpClient) {
@@ -56,6 +56,10 @@ export class AuthService {
 
   login(loginData: ILogin): Observable<ILoginReq> {
     return this._HttpClient.post<ILoginReq>('auth/login', loginData)
+  }
+
+  logout(): Observable<ILogoutRes> {
+    return this._HttpClient.get<ILogoutRes>('auth/logout')
   }
 
   welcomeVoice(message: string): void {

@@ -51,13 +51,13 @@ export interface Data {
   createdAt: string;
   __v: number;
 }
-export interface IResetPasswordRequest{
-  otp:string,
-  email:string,
-  password:string
+export interface IResetPasswordRequest {
+  otp: string,
+  email: string,
+  password: string
 }
-export interface IResetPasswordResponse{
-  data:IData
+export interface IResetPasswordResponse {
+  data: IData
   message: string;
 
 }
@@ -85,4 +85,9 @@ export interface ILoginProfile {
   email: string;
   status: string;
   role: string;
+}
+
+
+export interface ILogoutRes {
+  message: string;
 }

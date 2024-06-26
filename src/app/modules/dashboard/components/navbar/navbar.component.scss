@@ -3,6 +3,7 @@
 nav {
   border-bottom: 1px solid $main-border-color;
   background-color: $main-white-color;
+  z-index: 4;
 
   .main-div {
     padding: 20px 40px;

@@ -49,14 +49,14 @@ export class LoginComponent {
     {
       controlName: 'email',
       iconClass: 'fa-solid fa-envelope',
-      label: 'Registered email address',
+      label: 'Email',
       placeholder: 'Type your email',
       type: 'email',
     },
     {
       controlName: 'password',
       iconClass: 'fa-solid fa-key',
-      label: 'password',
+      label: 'Password',
       placeholder: 'Type your password',
       type: 'password',
     },

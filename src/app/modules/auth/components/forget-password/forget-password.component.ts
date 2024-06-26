@@ -24,7 +24,7 @@ export class ForgetPasswordComponent {
 
   formList: IFormsField[] = [
     {
-      label: 'Email address',
+      label: 'Email',
       placeholder: 'type your email',
       iconClass: 'fa-solid fa-envelope',
       controlName: 'email',

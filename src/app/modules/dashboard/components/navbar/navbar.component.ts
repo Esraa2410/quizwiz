@@ -1,8 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { ILoginReq } from 'src/app/modules/auth/models/auth';
+import { ILoginReq ,ILogoutRes } from 'src/app/modules/auth/models/auth';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
+import { HelperService } from 'src/app/modules/shared/services/helper.service';
 
 @Component({
   selector: 'app-navbar',
@@ -32,7 +34,8 @@ export class NavbarComponent implements OnInit {
   @Input() sidebarCollapsed: boolean = false;
   @Output() closeSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(private _Router: Router, private _AuthService: AuthService) {  }
+  constructor(private _Router: Router, private _AuthService: AuthService,
+    private _HelperService:HelperService) {  }
 
   ngOnInit(): void {
     this.handleRouteEvents();
@@ -77,5 +80,23 @@ export class NavbarComponent implements OnInit {
   onCloseSidebar(): void {
     this.sidebarCollapsed = !this.sidebarCollapsed;
     this.closeSidebar.emit(this.sidebarCollapsed)
+  }
+
+  onLogout(){
+    this._AuthService.logout().subscribe({
+      next:(res:ILogoutRes)=>{
+        this._HelperService.success(res.message);
+        localStorage.removeItem('userToken')
+      },
+      error:(err:HttpErrorResponse)=>{
+        this._HelperService.error(err.error.message)
+      },complete:()=>{
+        this._Router.navigate(['/auth/login'])
+      }
+    })
+  }
+
+  openChangePass(){
+    this._Router.navigate(['/auth/change-password'])
   }
 }

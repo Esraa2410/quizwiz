@@ -29,21 +29,21 @@ export class RegisterComponent {
 
   formList: IFormsField[] = [
     {
-      label: 'Your first name',
+      label: 'First Name',
       placeholder: 'Type your first name',
       iconClass: 'fa-solid fa-user',
       controlName: 'first_name',
       type: 'text'
     },
     {
-      label: 'Your last name',
+      label: 'Last Name',
       placeholder: 'type your last name',
       iconClass: 'fa-solid fa-user',
       controlName: 'last_name',
       type: 'text'
     },
     {
-      label: 'Your email address',
+      label: 'Email',
       placeholder: 'type your email',
       iconClass: 'fa-solid fa-envelope',
       controlName: 'email',
@@ -57,7 +57,7 @@ export class RegisterComponent {
       type: 'password'
     },
     {
-      label: 'Your role',
+      label: 'Role',
       placeholder: 'Choose your role',
       iconClass: 'fa-solid fa-user',
       controlName: 'role',
