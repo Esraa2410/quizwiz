@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
   getStudentName = (student: IStudent): string => `${student.first_name} ${student.last_name}`;
   getStudentRank = (student: IStudent, index?: number): string => `Class rank: ${index !== undefined ? index + 1 : ''}`;
-  getStudentAvgScore = (student: IStudent): string => `Average score: ${student.avg_score.toFixed(2)}`;
+  getStudentAvgScore = (student: IStudent): string => `Average score: ${student.avg_score.toFixed(2)}%`;
 
   upComingExams(): void {
     this.homeService.upComingFive().subscribe((quizzes) => {
