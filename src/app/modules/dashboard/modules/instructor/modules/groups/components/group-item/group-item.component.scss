@@ -1,7 +1,8 @@
 @import '../../../../../../../../../assets/styles/abstracts/variables.scss';
 
+
 p{
-    color : rgb(187, 14, 14);
+    color:$color-red;
 }
 .header {
 
@@ -13,9 +14,9 @@ p{
     }
 
     .close:hover {
-        background-color: rgb(187, 14, 14);
+        background-color:$color-red;
         i {
-            color: white;
+            color: $main-white-color;
         }
 
       
@@ -36,7 +37,7 @@ p{
 }
 
 .form-control {
-    background-color: #fff;
+    background-color: $main-white-color;
 }
 .btn{
     border: none;
@@ -48,17 +49,17 @@ mat-form-field{
 }
 
 .check:hover{
-    background-color: rgb(83, 233, 83);
+    background-color: $color-check;
     cursor: pointer;
     i {
-        color: white;
+        color: $main-white-color;
     }
     }
 
 
     ul li{
         list-style-type: none;
-        border: 1px solid  gainsboro;
+        border: 1px solid  $main-border-color;
         border-radius: 10px;
         
     }
