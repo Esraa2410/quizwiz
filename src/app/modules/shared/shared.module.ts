@@ -8,6 +8,16 @@ import { SharedPagnationComponent } from './components/shared-pagnation/shared-p
 import { PaginatorModule } from 'primeng/paginator';
 import { SharedHeaderComponent } from './components/shared-header/shared-header.component';
 import { SharedCardComponent } from './components/shared-card/shared-card.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +25,16 @@ import { SharedCardComponent } from './components/shared-card/shared-card.compon
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
-    PaginatorModule
+    PaginatorModule,
+    MatDialogModule,
+    MatButtonModule,
+    DropdownModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatMenuModule,
+    MatIconModule,
+    MultiSelectModule,
+   
   ],
   declarations: [
     SharedAuthComponent,
@@ -28,6 +47,14 @@ import { SharedCardComponent } from './components/shared-card/shared-card.compon
     SharedPagnationComponent,
     SharedHeaderComponent,
     SharedCardComponent,
+    MatDialogModule,
+    MatButtonModule,
+    DropdownModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatMenuModule,
+    MatIconModule,
+    MultiSelectModule,
   ],
 })
 export class SharedModule {}
