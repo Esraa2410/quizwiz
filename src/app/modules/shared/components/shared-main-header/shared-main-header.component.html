@@ -1,0 +1,7 @@
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h3> {{ headerText }} </h3>
+    <a class="d-flex gap-2 align-items-center text-decoration-none" *ngIf="navigationVisibility" [routerLink]="navigationLink">
+        <p class="m-0 text-black"> {{ navigationText }} </p>
+        <i class="fa-solid fa-arrow-right yellow-color"></i>
+    </a>
+</div>

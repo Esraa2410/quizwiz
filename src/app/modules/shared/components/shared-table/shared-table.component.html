@@ -1,0 +1,34 @@
+<section class="bg-white main-box-shadow">
+    <table
+        class="table table-striped table-bordered table-hover text-center main-box-shadow rounded-3 overflow-hidden"
+    >
+        <thead>
+            <tr>
+                <th *ngFor="let header of tableHeaders" (click)="onSort(header)">
+                    {{ displayHeaders[header] }}
+                    <span
+                        *ngIf="
+                        sortColumn === header
+                        "
+                    >
+                        {{ sortDirection === "asc" ? "▲" : "▼" }}
+                    </span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of filteredTableBodyContent; trackBy: trackByRowId">
+                <td *ngFor="let key of row.keys">
+                    <ng-template #otherContent>
+                        {{ row.row[key] | dynamicdate : key }}
+                    </ng-template>
+                </td>
+                <td>
+                    <div *ngFor="let button of buttons" [class]="button.class" (click)="button.action()">
+                        <button> {{ button.label }} </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
