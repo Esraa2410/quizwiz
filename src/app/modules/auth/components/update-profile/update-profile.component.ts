@@ -13,27 +13,39 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./update-profile.component.scss']
 })
 export class UpdateProfileComponent implements OnInit {
-  firstName:any;
-  lastName:any;
-  email:any;
-  registerForm:FormGroup=new FormGroup('');
+  private userData: IUpdateProfileRes = {
+    data: {
+      _id: '',
+      first_name: '',
+      last_name: '',
+      email: '',
+      status: '',
+      role: '',
+
+    },
+    message: ''
+  };
+  firstName: any;
+  lastName: any;
+  email: any;
+  registerForm: FormGroup = new FormGroup('');
 
   constructor(private _Router: Router, private _AuthService: AuthService,
-    private _HelperService: HelperService) {  }
+    private _HelperService: HelperService) { }
 
-    ngOnInit(){
-      this.firstName= localStorage.getItem('firstName');
-      this.lastName= localStorage.getItem('lastName');
-      this.email= localStorage.getItem('email');
-      console.log(this.firstName,this.lastName,this.email);
+  ngOnInit() {
+    this.firstName = localStorage.getItem('firstName');
+    this.lastName = localStorage.getItem('lastName');
+    this.email = localStorage.getItem('email');
+    console.log(this.firstName, this.lastName, this.email);
 
-      this.registerForm= new FormGroup({
-        email: new FormControl(this.email, [Validators.required, Validators.email]),
-        first_name: new FormControl(this.firstName, [Validators.required]),
-        last_name: new FormControl(this.lastName, [Validators.required])
-      })
+    this.registerForm = new FormGroup({
+      email: new FormControl(this.email, [Validators.required, Validators.email]),
+      first_name: new FormControl(this.firstName, [Validators.required]),
+      last_name: new FormControl(this.lastName, [Validators.required])
+    })
 
-    }
+  }
 
 
 
@@ -69,14 +81,17 @@ export class UpdateProfileComponent implements OnInit {
   onUpdateProfile(data: FormGroup) {
     this._AuthService.updateProfile(data.value).subscribe({
       next: (res: IUpdateProfileRes) => {
-        console.log(res);
+        this.userData = res;
         this._HelperService.success(res.message);
       },
       error: (err: HttpErrorResponse) => {
         this._HelperService.error(err.error.message);
-        console.log(err);
       }, complete: () => {
-        this._Router.navigate(['/auth/login'])
+        localStorage.setItem('email', this.userData.data.email);
+        localStorage.setItem('firstName', this.userData.data.first_name);
+        localStorage.setItem('lastName', this.userData.data.last_name);
+        localStorage.setItem('userName', `${this.userData.data.first_name} ${this.userData.data.last_name}`);
+        this._Router.navigate(['/dashboard']);
       }
     })
   }
