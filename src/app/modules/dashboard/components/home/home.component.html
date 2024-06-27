@@ -2,23 +2,44 @@
   <div class="row">
     <div class="col-md-6">
       <div class="p-3 main-border rounded-3">
-        <h2 class='mb-3'>Upcoming 5 Quizzes</h2>
-        <app-shared-card [imgSrc]="'../../../../../assets/images/Quiz img.svg'" [cardContent]="upcomingQuizzes"
-          [headerKeys]="['title']" [detailKeys]="['schadule']" [additionalContentKey]="'participants'"
+        <app-shared-main-header
+          [headerText]="'Upcoming 5 quizzes'"
+          [navigationLink]="'/dashboard/instructor/quizzes'"
+          [navigationVisibility]="true"
+          [navigationText]="'Quizzes directory'"
+        ></app-shared-main-header>
+        <app-shared-card
+          [imgSrc]="'../../../../../assets/images/Quiz img.svg'"
+          [cardContent]="upcomingQuizzes"
+          [headerKeys]="['title']"
+          [detailKeys]="['schadule']"
+          [additionalContentKey]="'participants'"
           [wontUseGrid]="true"
           [useGrid]="false"
-          [studentsVisibility]="true">
+          [studentsVisibility]="true"
+        >
         </app-shared-card>
       </div>
     </div>
     <div class="col-md-6">
       <div class="p-3 main-border rounded-3">
-        <h2 class='mb-3'>Top 5 Students</h2>
-        <app-shared-card [imgSrc]="'../../../../../assets/images/Quiz img.svg'" [cardContent]="topFiveStudents"
-          [headerKeys]="['first_name', 'last_name']" [detailKeys]="['avg_score']" [studentsVisibility]="false"
+        <h2 class="mb-3"></h2>
+        <app-shared-main-header
+          [headerText]="'Top 5 Students'"
+          [navigationLink]="'/dashboard/instructor/students'"
+          [navigationVisibility]="true"
+          [navigationText]="'Students directory'"
+        ></app-shared-main-header>
+        <app-shared-card
+          [imgSrc]="'../../../../../assets/images/Quiz img.svg'"
+          [cardContent]="topFiveStudents"
+          [headerKeys]="['first_name', 'last_name']"
+          [detailKeys]="['avg_score']"
+          [studentsVisibility]="false"
           [wontUseGrid]="true"
           [useGrid]="false"
-          [mainIconVisibility]="true">
+          [mainIconVisibility]="true"
+        >
         </app-shared-card>
       </div>
     </div>

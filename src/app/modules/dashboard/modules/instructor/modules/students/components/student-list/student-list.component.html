@@ -1,13 +1,14 @@
+
 <div class="py-5 px-5">
     <div class="row">
             <div class="col-12">
                 <div class="p-3 main-border rounded-3">
-                    <h2 class="mb-3">Student List</h2>
+                    <app-shared-main-header [headerText]="'Students List'" [navigationVisibility]="false"></app-shared-main-header>
                     <app-shared-card
                         [imgSrc]="'../../../../../assets/images/student.png'"
                         [cardContent]="studentData"
                         [headerKeys]="['first_name', 'last_name']"
-                        [detailKeys]="['email', 'status', 'role']"
+                        [detailKeys]="['status', 'role']"
                         [studentsVisibility]="false"
                         [useGrid]="true"
                         [mainIconVisibility]="true"

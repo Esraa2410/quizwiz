@@ -8,6 +8,9 @@ import { SharedPagnationComponent } from './components/shared-pagnation/shared-p
 import { PaginatorModule } from 'primeng/paginator';
 import { SharedHeaderComponent } from './components/shared-header/shared-header.component';
 import { SharedCardComponent } from './components/shared-card/shared-card.component';
+import { SharedTableComponent } from './components/shared-table/shared-table.component';
+import { DynamicdatePipe } from './pipes/date/dynamicdate.pipe';
+import { SharedMainHeaderComponent } from './components/shared-main-header/shared-main-header.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,19 +18,25 @@ import { SharedCardComponent } from './components/shared-card/shared-card.compon
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
-    PaginatorModule
+    PaginatorModule,
   ],
   declarations: [
     SharedAuthComponent,
     SharedPagnationComponent,
     SharedHeaderComponent,
     SharedCardComponent,
+    SharedTableComponent,
+    DynamicdatePipe,
+    SharedMainHeaderComponent
   ],
   exports: [
     SharedAuthComponent,
     SharedPagnationComponent,
     SharedHeaderComponent,
     SharedCardComponent,
+    SharedTableComponent,
+    DynamicdatePipe,
+    SharedMainHeaderComponent,
   ],
 })
 export class SharedModule {}
