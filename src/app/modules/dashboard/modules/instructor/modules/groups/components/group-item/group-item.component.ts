@@ -46,9 +46,9 @@ export class GroupItemComponent {
       name: new FormControl('', [Validators.required]),
       students: new FormControl([], [Validators.required]),
     })
-     if(this.data.id == null){
+   
       this.getAllStudents()
-     }
+    
 
   
   }
@@ -78,6 +78,7 @@ export class GroupItemComponent {
       next:(res)=>{
          console.log(res);
          this.allStudentForAddNewGroup=res
+         console.log(this.allStudentForAddNewGroup)
       }
     });
 
