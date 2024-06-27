@@ -84,13 +84,13 @@
             </div>
             <div class="input-group col-12 my-2" *ngIf="data.edit || data.add">
                 <span class="input-group-text" id="basic-addon1">List Student</span>
-    
+                 
                   <mat-select *ngIf="data.edit" multiple
                    formControlName="students"   class="form-control">
                  
                     <mat-option  
-                     [value]="student._id"
-                    *ngFor="let student of allStudentForAddNewGroup">
+                     [value]="student._id" 
+                    *ngFor="let student of allStudentForUpdatingGroup">
                      {{student.first_name}} {{student.last_name}}</mat-option>
                   </mat-select>
 

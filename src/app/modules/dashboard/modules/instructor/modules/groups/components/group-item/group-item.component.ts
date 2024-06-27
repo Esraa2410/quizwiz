@@ -27,11 +27,9 @@ export class GroupItemComponent {
 
   
   addEditGroupForm!: FormGroup ;
- allStudentForAddNewGroup!:any
-   
-  
- 
-
+  //will be edited
+ allStudentForAddNewGroup!:any ;
+ allStudentForUpdatingGroup:any;
   constructor(private _GroupsService: GroupsService,private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<GroupItemComponent>
     , @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -47,8 +45,9 @@ export class GroupItemComponent {
       students: new FormControl([], [Validators.required]),
     })
    
-      this.getAllStudents()
-    
+      this.getAllStudentsWithoutGroup();
+      this.getAllStudents();
+      
 
   
   }
@@ -73,7 +72,7 @@ export class GroupItemComponent {
   }
 
 //will be edited 
-  getAllStudents(){
+  getAllStudentsWithoutGroup(){
     this._GroupsService.getAllStudentsForAddGroup().subscribe({
       next:(res)=>{
          console.log(res);
@@ -83,5 +82,14 @@ export class GroupItemComponent {
     });
 
 
+   }
+   getAllStudents(){
+     this._GroupsService.getAllStudents().subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.allStudentForUpdatingGroup=res
+        console.log(this.allStudentForUpdatingGroup)
+     }
+     })
    }
 }
