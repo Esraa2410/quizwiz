@@ -47,7 +47,7 @@ export class GroupItemComponent {
    
       this.getAllStudentsWithoutGroup();
       this.getAllStudents();
-      
+    
 
   
   }
