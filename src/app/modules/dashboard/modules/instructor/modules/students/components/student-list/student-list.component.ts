@@ -21,8 +21,7 @@ export class StudentListComponent implements OnInit {
   onGetAllStudents(): void {
     this._StudentsService.getAllStudents().subscribe({
       next: (res: IStudent[]) => this.studentData = res,
-      error: (error: HttpErrorResponse) => this._HelperService.error(error),
-      complete: () => this._HelperService.success('Students List Has Been Retrieved')
+      error: (error: HttpErrorResponse) => this._HelperService.error(error)
     })
   }
 }

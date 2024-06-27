@@ -32,9 +32,6 @@
                 <span class="mx-1 " >
                   <i class="fa-solid fa-check"></i> </span>
               </button>
-               
-             
-               
             </div>
             <div (click)="onNoClick()" class="d-inline p-4
              close  border-start d-flex justify-content-center align-items-center ">
@@ -47,38 +44,51 @@
             Are you sure you want to remove this group ?
           </p>
       
-            <div class="input-group col-12 my-2 ">
+            <div class="input-group col-12 my-2 " *ngIf="data.edit || data.add">
             
                 <span class="input-group-text" id="basic-addon1">Group Name</span>
                 <input 
-                [disabled]="data.view || data.remove"
                 type="text"
-              
                  [value]= "groupDetails.name"
                  formControlName="name"
                  class="form-control p-2" aria-label="Username"
                     aria-describedby="basic-addon1">
             </div>
-            <div class="input-group col-12 my-2">
+
+            <div *ngIf="data.view || data.remove">
+              <h5 class="mb-4">
+                Group Name : {{groupDetails.name}}
+              </h5>
+              <h5>
+                List Of Students :
+              </h5>
+              <ul>
+                <li class="mb-2 pt-2 pb-2 ps-3 "
+                *ngFor="let student of groupDetails.students ">
+                 {{student.first_name}} {{student.last_name}}
+                </li>
+              </ul>
+          <!--
+           <div class="row d-flex justify-content-around" >
+                 <div class="col-md-5 p-2 mb-3 col-boder"  *ngFor="let student of groupDetails.students ">
+                    <span class="">
+                      {{student.first_name}} {{student.last_name}}
+                    </span>
+                 </div>
+              </div>
+            -->
+
+            </div>
+            <div class="input-group col-12 my-2" *ngIf="data.edit || data.add">
                 <span class="input-group-text" id="basic-addon1">List Student</span>
-               
-                <mat-select  *ngIf="data.view || data.remove"
                  
-                  class="form-control " >
-                    <mat-option class="mb-4" [disabled]="data.view || data.remove"  
-                    *ngFor="let topping of groupDetails.students"
-                    >
-                     {{topping.first_name}} {{topping.last_name}}</mat-option>
-                   
-                  </mat-select>
-    
                   <mat-select *ngIf="data.edit" multiple
                    formControlName="students"   class="form-control">
                  
                     <mat-option  
-                     [value]="topping._id"
-                    *ngFor="let topping of groupDetails.students">
-                     {{topping.first_name}} {{topping.last_name}}</mat-option>
+                     [value]="student._id" 
+                    *ngFor="let student of allStudentForUpdatingGroup">
+                     {{student.first_name}} {{student.last_name}}</mat-option>
                   </mat-select>
 
                   <mat-select *ngIf="data.add"
@@ -86,9 +96,9 @@
                 
                    <mat-option  
                    ng-selected
-                   *ngFor="let topping of allStudentForAddNewGroup"
-                   value="{{topping._id}}">
-                    {{topping.first_name}} {{topping.last_name}}</mat-option>
+                   *ngFor="let student of allStudentForAddNewGroup"
+                   value="{{student._id}}">
+                    {{student.first_name}} {{student.last_name}}</mat-option>
                  </mat-select>
                
                

@@ -3,21 +3,39 @@ import { CommonModule } from '@angular/common';
 
 import { StudentsRoutingModule } from './students-routing.module';
 import { StudentsComponent } from './students.component';
-import { StudentsService } from './services/students.service';
-import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { StudentListComponent } from './components/student-list/student-list.component';
-
+import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { StudentsService } from './services/students.service';
+import { AddStudentGroupComponent } from './components/add-student-group/add-student-group.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import { DropdownModule } from 'primeng/dropdown';
+import { MatSelectModule } from '@angular/material/select';
+import { HttpClientModule } from '@angular/common/http';
+import { GroupsService } from '../groups/services/groups.service';
+import { ReactiveFormsModule ,FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     StudentsComponent,
-    StudentListComponent
+    StudentListComponent,
+    AddStudentGroupComponent
   ],
   imports: [
     CommonModule,
     StudentsRoutingModule,
-    SharedModule
+    SharedModule,
+    StudentsRoutingModule,
+    SharedModule,
+    MatDialogModule,
+    MatButtonModule,
+    DropdownModule,
+    MatSelectModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [StudentsService]
+ 
+  providers:[StudentsService , GroupsService]
 })
 export class StudentsModule { }
