@@ -4,22 +4,23 @@
       <div class="p-3 main-border rounded-3">
         <h2 class='mb-3'>Upcoming 5 Quizzes</h2>
         <app-shared-card [imgSrc]="'../../../../../assets/images/Quiz img.svg'" [cardContent]="upcomingQuizzes"
-          [mainHeader]="getQuizTitle" [cardDetailsFContent]="getQuizDate" [cardDetailsSContent]="getQuizTime"
-          [numOfStudents]="getNumOfStudents" [studentsVisibility]="true">
+          [headerKeys]="['title']" [detailKeys]="['schadule']" [additionalContentKey]="'participants'"
+          [wontUseGrid]="true"
+          [useGrid]="false"
+          [studentsVisibility]="true">
         </app-shared-card>
       </div>
     </div>
-
     <div class="col-md-6">
       <div class="p-3 main-border rounded-3">
         <h2 class='mb-3'>Top 5 Students</h2>
         <app-shared-card [imgSrc]="'../../../../../assets/images/Quiz img.svg'" [cardContent]="topFiveStudents"
-          [mainHeader]="getStudentName" [cardDetailsFContent]="getStudentRank"
-          [cardDetailsSContent]="getStudentAvgScore" [studentsVisibility]="false" [mainIconVisibility]="true">
+          [headerKeys]="['first_name', 'last_name']" [detailKeys]="['avg_score']" [studentsVisibility]="false"
+          [wontUseGrid]="true"
+          [useGrid]="false"
+          [mainIconVisibility]="true">
         </app-shared-card>
       </div>
     </div>
   </div>
-
-
 </div>
