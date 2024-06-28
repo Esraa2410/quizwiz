@@ -16,7 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
-
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 @NgModule({
   imports: [
@@ -34,6 +34,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     MatMenuModule,
     MatIconModule,
     MultiSelectModule,
+    ClipboardModule
    
   ],
   declarations: [
@@ -56,7 +57,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     MatIconModule,
     MultiSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClipboardModule
   ],
 })
 export class SharedModule {}

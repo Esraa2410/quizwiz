@@ -14,14 +14,14 @@ import { QuizCreatedComponent } from './components/quiz-created/quiz-created.com
   styleUrls: ['./quizzes.component.scss']
 })
 export class QuizzesComponent implements OnInit{
- 
+ quizId:string='';
   navigationList: IBreadCrumb[] = [
     { label: 'dashboard', url: '/dashboard' },
     { label: 'Quizes' }
   ]
   btnText: string = 'Set up a new quiz';
   btnIcon: string = "fa-regular fa-clock";
-  RouterLinkPath:string ='./view-Quiz'
+  RouterLinkPath:string ='./view-Quiz'+this.quizId
   upcomingQuizzes: IQuiz[] = [];
 
   constructor(public dialog: MatDialog,
@@ -92,6 +92,19 @@ export class QuizzesComponent implements OnInit{
     });
 
   
+
+  }
+  getQuizById(){
+    this._QuizzesService.getQuizByID('').subscribe({
+      next:(res)=>{
+        console.log(res)
+      },
+      error:()=>{
+
+      },complete:()=>{
+
+      },
+    })
 
   }
 

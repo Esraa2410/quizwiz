@@ -26,5 +26,8 @@ export class QuizzesService {
   removeQuiz(id:string):Observable<any>{
     return this._HttpClient.delete(`quiz/${id}` )
   }
+  getQuizByID(id:string):Observable<IQuiz[]>{
+    return this._HttpClient.get<IQuiz[]>(`quiz/${id}` ) 
+  }
 
 }

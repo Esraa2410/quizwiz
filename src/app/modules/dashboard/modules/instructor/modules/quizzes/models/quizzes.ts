@@ -1,5 +1,4 @@
 export interface IQuiz {
-   
         _id: string
         code: string
         title: string
@@ -8,7 +7,7 @@ export interface IQuiz {
         instructor: string
         group: string
         questions_number: number
-        questions: string[]
+        questions: Question[]
         schadule: string
         duration: number
         score_per_question: number
@@ -20,8 +19,21 @@ export interface IQuiz {
         closed_at: string
         participants: number
       }
-
-
+      
+      export interface Question {
+        _id: string
+        title: string
+        options: Options
+        answer: string
+      }
+      
+      export interface Options {
+        A: string
+        B: string
+        C: string
+        D: string
+        _id: string
+      }
 
 
 
