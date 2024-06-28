@@ -4,6 +4,9 @@ import { IBreadCrumb, IButtonConfig } from 'src/app/modules/shared/models/shared
 import { IQuestion } from './models/questions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddStudentGroupComponent } from '../students/components/add-student-group/add-student-group.component';
+import { AddNewQuestionComponent } from './components/add-question/add-new-question/add-new-question.component';
 
 @Component({
   selector: 'app-questions',
@@ -13,9 +16,9 @@ import { HelperService } from 'src/app/modules/shared/services/helper.service';
 export class QuestionsComponent {
   navigationList: IBreadCrumb[] = [
     { label: 'dashboard', url: '/dashboard' },
-    { label: 'Students' },
+    { label: 'Questions' },
   ];
-  btnText: string = 'Add Student';
+  btnText: string = 'Add question';
   btnIcon: string = 'fa fa-plus-circle';
 
   questionList!: IQuestion[];
@@ -57,6 +60,9 @@ export class QuestionsComponent {
   private _QuestionService = inject(QuestionsService);
   private _HelperService = inject(HelperService);
 
+   
+    constructor( public dialog: MatDialog){}
+
   ngOnInit(): void {
     this.getAllQuestions();
   }
@@ -85,6 +91,16 @@ export class QuestionsComponent {
     })
   }
 
+  openAddDailog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    this.dialog.open(AddNewQuestionComponent, {
+      width: '550px',
+      height: '300px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
   updatePaginatedData(): void {
     const start = this.first;
     const end = this.first + this.rows;
