@@ -1,4 +1,4 @@
-<div class="card flex justify-content-center w-50 border-0 mx-auto mt-4">
+<div class="card flex justify-content-center border-0 mx-auto mt-4" [style.width.%]="width">
     <p-paginator
         (onPageChange)="onPageChange($event)"
         [first]="first"

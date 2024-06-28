@@ -2,7 +2,17 @@
   <div class="mb-3">
     <app-shared-header (btnEvent)="openAddDailog('1000ms', '1000ms')" [breadCrumbs]="navigationList" [btnIcon]="btnIcon" [btnText]="btnText"></app-shared-header>
   </div>
-  <app-shared-table [tableHeaders]="tableHeaders" [buttons]="buttons" [tableBodyContent]="questionList"
-    [displayHeaders]="displayHeaders"></app-shared-table>
-
+  <app-shared-table
+    [tableHeaders]="tableHeaders"
+    [buttons]="buttons"
+    [tableBodyContent]="paginatedList"
+    [displayHeaders]="displayHeaders"
+  ></app-shared-table>
+  <app-shared-pagnation
+    [rowsPerPage]="[10, 20, 50]"
+    [totalRecords]="totalRecords"
+    [rows]="rows"
+    (pageSizeChanged)="onPageSizeChange($event)"
+    (pageNumberChanged)="onPageNumberChange($event)"
+  ></app-shared-pagnation>
 </div>

@@ -1,5 +1,5 @@
 <article class="bg-white">
-  <table class="table table-bordered table-group-divider table-responsive table-hover rounded-3 overflow-hidden">
+  <table class="table table-bordered table-responsive table-hover rounded-3 overflow-hidden custom-table">
     <thead>
       <tr>
         <th *ngFor="let header of tableHeaders" (click)="onSort(header)">
@@ -14,10 +14,10 @@
       <tr *ngFor="let row of filteredTableBodyContent; trackBy: trackByRowId">
         <td *ngFor="let key of row.keys">
           <ng-container *ngIf="key !== 'actions'">
-            {{ getNestedValue(row.row, key) }}
+            {{ getNestedValue(row.row, key) | dynamicdate : key }}
           </ng-container>
         </td>
-        <td>
+        <td *ngIf="!actionsVisivilty">
           <div class="d-flex align-items-center justify-content-center gap-3">
             <div *ngFor="let button of buttons" (click)="button.action(row.row)">
               <button class="bg-transparent p-0">

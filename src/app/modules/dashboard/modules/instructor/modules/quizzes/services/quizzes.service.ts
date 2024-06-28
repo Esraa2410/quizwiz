@@ -30,4 +30,7 @@ export class QuizzesService {
     return this._HttpClient.get<IQuiz[]>(`quiz/${id}` ) 
   }
 
+  completedQuizzes(): Observable<IQuiz[]> {
+    return this._HttpClient.get<IQuiz[]>('quiz/completed')
+  }
 }
