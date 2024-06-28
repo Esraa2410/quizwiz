@@ -16,6 +16,9 @@ export class QuizzesService {
   upComingFive(): Observable<IQuiz[]> {
     return this._HttpClient.get<IQuiz[]>('quiz/incomming')
   }
+  getUpcomingQuizes():Observable<IQuiz[]>{
+    return this._HttpClient.get<IQuiz[]>('quiz/completed')
+  }
   //Add new Quiz
   AddNewQuiz(newQuizData:IQuizRequest):Observable<any>{
     return this._HttpClient.post('quiz' , newQuizData)

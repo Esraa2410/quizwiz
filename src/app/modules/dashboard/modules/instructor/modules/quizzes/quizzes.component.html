@@ -14,7 +14,7 @@
             <p>Question Bank</p>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
         <div class="p-3 main-border rounded-3">
           <h2 class='mb-3'>Upcoming {{upcomingQuizzes.length}}
             <span *ngIf="upcomingQuizzes.length >1">
@@ -48,7 +48,11 @@
                 </h2>
                <!--shared table
                this will be edited -->
-            
+               <app-shared-table
+                [tableHeaders]="tableHeaders" 
+                [buttons]="buttons" 
+                [tableBodyContent]="completedQuizes"
+               [displayHeaders]="displayHeaders"></app-shared-table>
           
 
             

@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { QuizItemComponent } from './components/quiz-item/quiz-item.component';
 import { MatDialog } from '@angular/material/dialog';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
-import { IBreadCrumb } from 'src/app/modules/shared/models/shared';
+import { IBreadCrumb, IButtonConfig } from 'src/app/modules/shared/models/shared';
 import { IQuiz, IQuizRequest, IQuizResponse } from './models/quizzes';
 import { QuizzesService } from './services/quizzes.service';
 import { QuizCreatedComponent } from './components/quiz-created/quiz-created.component';
@@ -24,6 +24,30 @@ export class QuizzesComponent implements OnInit{
   btnIcon: string = "fa-regular fa-clock";
   RouterLinkPath:string ='./view-Quiz'+this.quizId
   upcomingQuizzes: IQuiz[] = [];
+  completedQuizes: IQuiz[] = [];
+  tableHeaders: string[] = [
+    'title',
+    'description',
+    'participants',
+    'difficulty',
+    'actions',
+  ];
+  displayHeaders: { [key: string]: string } = {
+    title: 'Title',
+    description: 'Description',
+    participants: 'Participants',
+    difficulty:'Difficulty',
+    actions: 'Actions',
+  };
+  buttons: IButtonConfig[] = [
+  
+    {
+      btnIcon: 'fa-solid fa-eye',
+      action: (row) => this.viewFunction(row),
+      class: 'yellow-color'
+    }
+   
+  ];
 
   constructor(public dialog: MatDialog,
     private _Router:Router,
@@ -31,12 +55,18 @@ export class QuizzesComponent implements OnInit{
   private _QuizzesService:QuizzesService){}
   ngOnInit(): void {
     this.upComingQuizes();
+    this.getCompletedQuizes();
   }
 
 
     upComingQuizes(): void {
       this._QuizzesService.upComingFive().subscribe((quizzes) => {
         this.upcomingQuizzes = quizzes;
+      });
+    }
+    getCompletedQuizes():void{
+      this._QuizzesService.getUpcomingQuizes().subscribe((res) => {
+        this.completedQuizes = res;
       });
     }
 
@@ -102,6 +132,10 @@ export class QuizzesComponent implements OnInit{
   }
   goToBankOfQuestions(){
     this._Router.navigateByUrl('/dashboard/instructor/questions')
+  }
+  viewFunction(row: any): void {
+    console.log('View', row);
+    this._Router.navigateByUrl(`/dashboard/instructor/quizzes/view-Quiz/${row._id}`)
   }
 
 }
