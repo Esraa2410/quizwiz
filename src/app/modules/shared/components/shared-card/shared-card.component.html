@@ -10,7 +10,7 @@
             <h4 class="m-0">{{ getHeaderContent(item) }}</h4>
             <div class="card-details  d-flex align-items-center gap-3">
               <span *ngFor="let detail of getDetailsContent(item, i)">
-                {{ detail }} <span *ngIf="!isLastElement(detail, getDetailsContent(item, i))">|</span>
+                {{ detail }} <span *ngIf="!isLastElement(detail, getDetailsContent(item, i))"> |</span>
               </span>
             </div>
           </div>
