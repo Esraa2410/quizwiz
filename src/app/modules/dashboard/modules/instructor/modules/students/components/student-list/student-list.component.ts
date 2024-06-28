@@ -10,7 +10,12 @@ import { StudentsService } from '../../services/students.service';
   styleUrls: ['./student-list.component.scss']
 })
 export class StudentListComponent implements OnInit {
-  studentData!: IStudent[];
+  studentData: IStudent[] = [];
+  paginatedStudentData: IStudent[] = [];
+  totalRecords: number = 0;
+  rows: number = 10;
+  first: number = 0;
+
   private _StudentsService = inject(StudentsService);
   private _HelperService = inject(HelperService);
 
@@ -20,8 +25,29 @@ export class StudentListComponent implements OnInit {
 
   onGetAllStudents(): void {
     this._StudentsService.getAllStudents().subscribe({
-      next: (res: IStudent[]) => this.studentData = res,
+      next: (res: IStudent[]) => {
+        this.studentData = res;
+        this.totalRecords = res.length;
+        this.updatePaginatedData();
+      },
       error: (error: HttpErrorResponse) => this._HelperService.error(error)
-    })
+    });
+  }
+
+  updatePaginatedData(): void {
+    const start = this.first;
+    const end = this.first + this.rows;
+    this.paginatedStudentData = this.studentData.slice(start, end);
+  }
+
+  onPageSizeChange(size: number): void {
+    this.rows = size;
+    this.first = 0;
+    this.updatePaginatedData();
+  }
+
+  onPageNumberChange(page: number): void {
+    this.first = (page - 1) * this.rows;
+    this.updatePaginatedData();
   }
 }

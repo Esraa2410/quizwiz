@@ -11,6 +11,11 @@ import { SharedCardComponent } from './components/shared-card/shared-card.compon
 import { SharedTableComponent } from './components/shared-table/shared-table.component';
 import { DynamicdatePipe } from './pipes/date/dynamicdate.pipe';
 import { SharedMainHeaderComponent } from './components/shared-main-header/shared-main-header.component';
+import { MenuModule } from 'primeng/menu';
+import { ButtonModule } from 'primeng/button';
+import { SpeedDialModule } from 'primeng/speeddial';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +24,9 @@ import { SharedMainHeaderComponent } from './components/shared-main-header/share
     RouterModule,
     ReactiveFormsModule,
     PaginatorModule,
+    MenuModule,
+    ButtonModule,
+    SpeedDialModule
   ],
   declarations: [
     SharedAuthComponent,
@@ -37,6 +45,9 @@ import { SharedMainHeaderComponent } from './components/shared-main-header/share
     SharedTableComponent,
     DynamicdatePipe,
     SharedMainHeaderComponent,
+    MenuModule,
+    ButtonModule,
+    SpeedDialModule
   ],
 })
 export class SharedModule {}
