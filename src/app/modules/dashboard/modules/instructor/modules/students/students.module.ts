@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { StudentsRoutingModule } from './students-routing.module';
 import { StudentsComponent } from './students.component';
+import { StudentListComponent } from './components/student-list/student-list.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { StudentsService } from './services/students.service';
 import { AddStudentGroupComponent } from './components/add-student-group/add-student-group.component';
@@ -16,10 +17,13 @@ import { GroupsService } from '../groups/services/groups.service';
 @NgModule({
   declarations: [
     StudentsComponent,
+    StudentListComponent,
     AddStudentGroupComponent
   ],
   imports: [
     CommonModule,
+    StudentsRoutingModule,
+    SharedModule,
     StudentsRoutingModule,
     SharedModule,
     MatDialogModule,
@@ -28,6 +32,7 @@ import { GroupsService } from '../groups/services/groups.service';
     MatSelectModule,
     HttpClientModule
   ],
+ 
   providers:[StudentsService , GroupsService]
 })
 export class StudentsModule { }

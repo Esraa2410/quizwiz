@@ -1,0 +1,27 @@
+@import '../../../../../assets/styles/layout.scss';
+
+article {
+  border: 1px solid $main-border-color;
+  border-radius: 10px;
+
+  .card-student, .card-icon {
+    i {
+      width: 20px;
+      height: 20px;
+      background-color: $light-yellow-color;
+      color: $main-white-color;
+      font-size: 12px;
+      padding: 10px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .card-icon {
+    i {
+      background-color: $dark-blue-color;
+    }
+  }
+}
