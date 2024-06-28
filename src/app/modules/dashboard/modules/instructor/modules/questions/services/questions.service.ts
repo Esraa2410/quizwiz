@@ -13,4 +13,10 @@ export class QuestionsService {
   questions(): Observable<IQuestion[]> {
     return this._HttpClient.get<IQuestion[]>('question');
   }
+
+  addStudent(studentData: any) {
+    return this._HttpClient.post<any>('question', studentData);
+  }
+
+
 }
