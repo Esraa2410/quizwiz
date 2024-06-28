@@ -13,6 +13,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { GroupsService } from '../groups/services/groups.service';
+import { ReactiveFormsModule ,FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { GroupsService } from '../groups/services/groups.service';
     MatButtonModule,
     DropdownModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
  
   providers:[StudentsService , GroupsService]
