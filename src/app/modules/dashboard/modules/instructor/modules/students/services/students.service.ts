@@ -1,4 +1,4 @@
-import { IAddStudToGroupReq, IAddStudToGroupRes, Root, IDeleteStudentRes, IStudentWithoutGroupRes } from './../models/students';
+import { IAddStudToGroupReq, IAddStudToGroupRes, IStudentWithoutGroup,IDeleteStudentRes, Root ,IStudentWithoutGroupRes} from './../models/students';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,6 +15,10 @@ export class StudentsService {
 
   getAllStudents(): Observable<IStudent[]> {
     return this._HttpClient.get<IStudent[]>('student')
+  }
+
+  getStudentsWithoutGroup(): Observable<IStudentWithoutGroup[]> {
+    return this._HttpClient.get<IStudentWithoutGroup[]>('student/without-group')
   }
 
 

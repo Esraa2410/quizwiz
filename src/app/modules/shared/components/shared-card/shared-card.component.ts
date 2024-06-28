@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-shared-card',
@@ -16,6 +17,7 @@ export class SharedCardComponent<T extends { [key: string]: any }> {
   @Input() cardContent: T[] = [];
   @Input() useGrid: boolean = false;
   @Input() wontUseGrid: boolean = false;
+  @Input() items!: MenuItem[];
 
   getHeaderContent(item: T): string {
     return this.headerKeys.map(key => item[key]).join(' ');

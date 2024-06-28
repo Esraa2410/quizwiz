@@ -1,0 +1,29 @@
+@import '../../../../../../../assets/styles/layout.scss';
+
+li {
+    padding: 0.5rem 1.5rem;
+    font-size: 1.2rem;
+    transition: 0.3s linear;
+    border-radius: 0.25rem;
+    a {
+        color: #000;
+    }
+
+    &.active-route {
+        background-color: #000;
+        border-radius: 5px;
+        font-weight: 600;
+
+        a {
+            color: #fff;
+        }
+    }
+
+    button {
+        background-color: #000;
+
+        &:hover {
+            background-color: #000;
+        }
+    }
+}

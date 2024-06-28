@@ -1,18 +1,10 @@
-<div class="card flex justify-content-center">
+<div class="card flex justify-content-center w-50 border-0 mx-auto mt-4">
     <p-paginator
-     (onPageChange)="onPageChange($event)" 
-     [first]="first" 
-     [rows]="rows" 
-     [totalRecords]="totalRecords" 
-     [rowsPerPageOptions]="rowsPerPage"
-     >
+        (onPageChange)="onPageChange($event)"
+        [first]="first"
+        [rows]="rows"
+        [totalRecords]="totalRecords"
+        [rowsPerPageOptions]="rowsPerPage"
+    >
     </p-paginator>
 </div>
-
-
-
-<!-- <div class="card flex justify-content-center">
-    <p-paginator (onPageChange)="onPageChange($event)"
-    [first]="first" [rows]="rows" [totalRecords]="120"
-    [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
-</div> -->

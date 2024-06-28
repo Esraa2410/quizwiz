@@ -10,3 +10,9 @@ export interface IBreadCrumb {
   label: string;
   url?: string;
 }
+
+export interface IButtonConfig {
+  label: string;
+  class: string;
+  action: () => void;
+}

@@ -1,12 +1,27 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { ILoginReq ,ILogoutRes, IUpdateProfileReq, IUpdateProfileRes } from 'src/app/modules/auth/models/auth';
+import {
+  ILoginReq,
+  ILogoutRes,
+  IUpdateProfileReq,
+  IUpdateProfileRes,
+} from 'src/app/modules/auth/models/auth';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
 import { gsap } from 'gsap';
 import { MenuItem, MessageService } from 'primeng/api';
+import { GroupsService } from '../../modules/instructor/modules/groups/services/groups.service';
+import { IGroupDetailsRes } from '../../modules/instructor/modules/groups/models/groups';
 
 @Component({
   selector: 'app-navbar',
@@ -38,8 +53,12 @@ export class NavbarComponent implements OnInit {
   @Input() sidebarCollapsed: boolean = false;
   @Output() closeSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(private _Router: Router, private _AuthService: AuthService,
-    private _HelperService:HelperService) {  }
+  constructor(
+    private _Router: Router,
+    private _AuthService: AuthService,
+    private _HelperService: HelperService,
+    private _GroupsService: GroupsService
+  ) {}
 
   ngOnInit(): void {
     this.handleRouteEvents();
@@ -61,18 +80,30 @@ export class NavbarComponent implements OnInit {
   private handleRouteChange(): void {
     const fullPath = this._Router.url;
     // full path ya gda3an
-  //  console.log('Full path:', fullPath);
+    //  console.log('Full path:', fullPath);
 
     // full path bs array
     const segments = fullPath.split('/');
-   // console.log('URL Segments:', segments);
+    // console.log('URL Segments:', segments);
 
     // a5er 7aga f el path
     if (segments.length > 0) {
       const specificSegment = segments[segments.length - 1];
-     // console.log('Specific segment:', specificSegment);
-      this.routePath = specificSegment;
+      if (this.isGroupId(specificSegment)) {
+        this._GroupsService.getGroupById(specificSegment).subscribe({
+          next: (res: IGroupDetailsRes) => this.routePath = res.name,
+          error: (error: HttpErrorResponse) => this.routePath = specificSegment.replaceAll('-', ' '),
+        })
+      } else if (specificSegment.includes('-')) {
+        this.routePath = specificSegment.replaceAll('-', ' ')
+      } else {
+        this.routePath = specificSegment
+      }
     }
+  }
+
+  isGroupId(segment: string): boolean {
+    return /^[0-9a-fA-F]{24}$/.test(segment);
   }
 
   handleRouteEvents(): void {
@@ -113,7 +144,7 @@ export class NavbarComponent implements OnInit {
         label: 'Logout',
         icon: 'pi pi-sign-out',
         tooltipOptions: {
-          tooltipLabel: "SignOut",
+          tooltipLabel: 'SignOut',
           positionLeft: -140,
         },
         command: () => {
@@ -124,49 +155,47 @@ export class NavbarComponent implements OnInit {
         label: 'Update',
         icon: 'pi pi-pencil',
         tooltipOptions: {
-          tooltipLabel: "Update Profile",
+          tooltipLabel: 'Update Profile',
           positionLeft: -185,
         },
         command: () => {
           this.onUpdateProfile();
-
         },
       },
       {
         label: 'Change',
         icon: 'pi pi-pencil',
         tooltipOptions: {
-          tooltipLabel: "Change Password",
+          tooltipLabel: 'Change Password',
           positionLeft: -210,
         },
         command: () => {
-          this.openChangePass()
-
+          this.openChangePass();
         },
       },
     ];
   }
 
-
-  onUpdateProfile(){
-    this._Router.navigate(['/auth/update-profile'])
+  onUpdateProfile() {
+    this._Router.navigate(['/auth/update-profile']);
   }
 
-  onLogout(){
+  onLogout() {
     this._AuthService.logout().subscribe({
-      next:(res:ILogoutRes)=>{
+      next: (res: ILogoutRes) => {
         this._HelperService.success(res.message);
-        localStorage.removeItem('userToken')
+        localStorage.removeItem('userToken');
       },
-      error:(err:HttpErrorResponse)=>{
-        this._HelperService.error(err.error.message)
-      },complete:()=>{
-        this._Router.navigate(['/auth/login'])
-      }
-    })
+      error: (err: HttpErrorResponse) => {
+        this._HelperService.error(err.error.message);
+      },
+      complete: () => {
+        this._Router.navigate(['/auth/login']);
+      },
+    });
   }
 
-  openChangePass(){
-    this._Router.navigate(['/auth/change-password'])
+  openChangePass() {
+    this._Router.navigate(['/auth/change-password']);
   }
 }

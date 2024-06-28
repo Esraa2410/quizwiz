@@ -1,4 +1,4 @@
-import { IGroupDetailsRes ,IGroupsListRes, IUdateGroupRes, IUpdateOrAddGroup} from './../models/groups';
+import { IAllStudents, IGroupDetailsRes ,IGroupsListRes, IGroupsListRes2, IStudentWithoutGroup, IUdateGroupRes, IUpdateOrAddGroup} from './../models/groups';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -11,6 +11,10 @@ export class GroupsService {
 
   getAllGroups(): Observable<IGroupsListRes> {
     return this._HttpClient.get<IGroupsListRes>(`group`)
+  }
+
+  onGetAllGroups(): Observable<IGroupsListRes2[]> {
+    return this._HttpClient.get<IGroupsListRes2[]>('group')
   }
 
   getGroupById(id:string):Observable<IGroupDetailsRes>{
@@ -27,7 +31,10 @@ export class GroupsService {
     return this._HttpClient.post<IUdateGroupRes>(`group`,addNewGroup)
   }
   //will be edited after making student service 
-  getAllStudentsForAddGroup():Observable<any>{
-   return this._HttpClient.get('student/without-group')
+  getAllStudentsForAddGroup():Observable<IStudentWithoutGroup>{
+   return this._HttpClient.get<IStudentWithoutGroup>('student/without-group')
   }
+  getAllStudents():Observable<IAllStudents>{
+    return this._HttpClient.get<IAllStudents>('student')
+   }
 }

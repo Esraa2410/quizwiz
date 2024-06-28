@@ -69,7 +69,7 @@ export class GroupsComponent implements OnInit {
 
     this.dialog.open(GroupItemComponent, {
       width: '550px',
-      height: '300px',
+      height: '450px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: {
@@ -167,7 +167,7 @@ export class GroupsComponent implements OnInit {
 
     const dialogRef = this.dialog.open(GroupItemComponent, {
       width: '550px',
-      height: '300px',
+      height: '450px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: {

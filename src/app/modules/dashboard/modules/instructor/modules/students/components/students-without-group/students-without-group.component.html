@@ -1,0 +1,20 @@
+<app-shared-main-header
+    [headerText]="'Students without a Group'"
+    [navigationVisibility]="false"
+></app-shared-main-header>
+<app-shared-card
+    [imgSrc]="'../../../../../assets/images/student.png'"
+    [cardContent]="paginatedStudentData"
+    [headerKeys]="['first_name', 'last_name']"
+    [detailKeys]="['status', 'role']"
+    [studentsVisibility]="false"
+    [useGrid]="true"
+    [mainIconVisibility]="true"
+></app-shared-card>
+<app-shared-pagnation
+    [rowsPerPage]="[10, 20, 50]"
+    [totalRecords]="totalRecords"
+    [rows]="rows"
+    (pageSizeChanged)="onPageSizeChange($event)"
+    (pageNumberChanged)="onPageNumberChange($event)"
+></app-shared-pagnation>

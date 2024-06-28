@@ -7,12 +7,15 @@ import { StudentListComponent } from './components/student-list/student-list.com
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { StudentsService } from './services/students.service';
 import { AddStudentGroupComponent } from './components/add-student-group/add-student-group.component';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { GroupsService } from '../groups/services/groups.service';
+
+import { StudentsWithoutGroupComponent } from './components/students-without-group/students-without-group.component';
+import { GroupsComponent } from './components/groups/groups.component';
 import { ReactiveFormsModule ,FormsModule } from '@angular/forms';
 import { VeiwDeleteStudentComponent } from './components/veiw-delete-student/veiw-delete-student.component';
 import { VeiwDeleteStudentGroupComponent } from './components/veiw-delete-student-group/veiw-delete-student-group.component';
@@ -24,7 +27,9 @@ import { VeiwDeleteStudentGroupComponent } from './components/veiw-delete-studen
     StudentListComponent,
     AddStudentGroupComponent,
     VeiwDeleteStudentComponent,
-    VeiwDeleteStudentGroupComponent
+    VeiwDeleteStudentGroupComponent,
+    StudentsWithoutGroupComponent,
+    GroupsComponent,
   ],
   imports: [
     CommonModule,
@@ -38,9 +43,11 @@ import { VeiwDeleteStudentGroupComponent } from './components/veiw-delete-studen
     MatSelectModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
+
+  providers: [StudentsService, GroupsService],
  
-  providers:[StudentsService , GroupsService ]
+ 
 })
-export class StudentsModule { }
+export class StudentsModule {}

@@ -1,6 +1,9 @@
 @import '../../../../../../../../../assets/styles/abstracts/variables.scss';
 
 
+p{
+    color:$color-red;
+}
 .header {
 
     h5,
@@ -11,9 +14,9 @@
     }
 
     .close:hover {
-        background-color: rgb(187, 14, 14);
+        background-color:$color-red;
         i {
-            color: white;
+            color: $main-white-color;
         }
 
       
@@ -34,7 +37,7 @@
 }
 
 .form-control {
-    background-color: #fff;
+    background-color: $main-white-color;
 }
 .btn{
     border: none;
@@ -46,9 +49,17 @@ mat-form-field{
 }
 
 .check:hover{
-    background-color: rgb(83, 233, 83);
+    background-color: $color-check;
     cursor: pointer;
     i {
-        color: white;
+        color: $main-white-color;
     }
+    }
+
+
+    ul li{
+        list-style-type: none;
+        border: 1px solid  $main-border-color;
+        border-radius: 10px;
+        
     }
