@@ -22,6 +22,12 @@ import { gsap } from 'gsap';
 import { MenuItem, MessageService } from 'primeng/api';
 import { GroupsService } from '../../modules/instructor/modules/groups/services/groups.service';
 import { IGroupDetailsRes } from '../../modules/instructor/modules/groups/models/groups';
+import { QuizItemComponent } from '../../modules/instructor/modules/quizzes/components/quiz-item/quiz-item.component';
+import { IQuizRequest, IQuizResponse } from '../../modules/instructor/modules/quizzes/models/quizzes';
+import { QuizCreatedComponent } from '../../modules/instructor/modules/quizzes/components/quiz-created/quiz-created.component';
+import { MatDialog } from '@angular/material/dialog';
+import { QuizzesService } from '../../modules/instructor/modules/quizzes/services/quizzes.service';
+import { IQuiz } from '../home/models/home';
 
 @Component({
   selector: 'app-navbar',
@@ -57,7 +63,9 @@ export class NavbarComponent implements OnInit {
     private _Router: Router,
     private _AuthService: AuthService,
     private _HelperService: HelperService,
-    private _GroupsService: GroupsService
+    //private _GroupsService: GroupsService,
+    public dialog: MatDialog,
+  private _QuizzesService:QuizzesService
   ) {}
 
   ngOnInit(): void {
@@ -87,24 +95,45 @@ export class NavbarComponent implements OnInit {
     // console.log('URL Segments:', segments);
 
     // a5er 7aga f el path
-    if (segments.length > 0) {
-      const specificSegment = segments[segments.length - 1];
-      if (this.isGroupId(specificSegment)) {
-        this._GroupsService.getGroupById(specificSegment).subscribe({
-          next: (res: IGroupDetailsRes) => this.routePath = res.name,
-          error: (error: HttpErrorResponse) => this.routePath = specificSegment.replaceAll('-', ' '),
-        })
-      } else if (specificSegment.includes('-')) {
-        this.routePath = specificSegment.replaceAll('-', ' ')
-      } else {
-        this.routePath = specificSegment
-      }
+  //   if (segments.length > 0) {
+  //     const specificSegment = segments[segments.length - 1];
+  //     if (this.isGroupId(specificSegment)) {
+
+  //       this._GroupsService.getGroupById(specificSegment).subscribe({
+  //         next: (res: IGroupDetailsRes) => this.routePath = res.name,
+  //         error: (error: HttpErrorResponse) => this.routePath = specificSegment.replaceAll('-', ' '),
+  //       })
+  //     } else if (specificSegment.includes('-')) {
+  //       this.routePath = specificSegment.replaceAll('-', ' ')
+  //     } else {
+  //       this.routePath = specificSegment
+  //     }
+  //   }
+  // }
+
+  // isGroupId(segment: string): boolean {
+  //   return /^[0-9a-fA-F]{24}$/.test(segment);
+  // 
+  if (segments.length > 0) {
+    const specificSegment = segments[segments.length - 1];
+    if (this.isQuizId(specificSegment)) {
+      
+      this._QuizzesService.getQuizByID(specificSegment).subscribe({
+        next: (res: IQuiz) => this.routePath = res.title,
+        error: (error: HttpErrorResponse) => this.routePath = specificSegment.replaceAll('-', ' '),
+      })
+    } else if (specificSegment.includes('-')) {
+      this.routePath = specificSegment.replaceAll('-', ' ')
+    } else {
+      this.routePath = specificSegment
     }
   }
+}
 
-  isGroupId(segment: string): boolean {
-    return /^[0-9a-fA-F]{24}$/.test(segment);
-  }
+isQuizId(segment: string): boolean {
+  return /^[0-9a-fA-F]{24}$/.test(segment);
+}
+  
 
   handleRouteEvents(): void {
     this._Router.events
@@ -203,5 +232,62 @@ export class NavbarComponent implements OnInit {
     this._AuthService.profileUpdatedData$.subscribe({
       next: (res: IUpdateProfileRes) => this.userName = res.data.first_name + res.data.last_name
     })
+  }
+  //add new quiz button
+   //handle add
+   openAddDailog(enterAnimationDuration: string, exitAnimationDuration: string, add: boolean): void {
+    const dialogRef = this.dialog.open(QuizItemComponent, {
+      width: '850px',
+      height: '450px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {
+        add: add
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+       console.log('recored added');
+      console.log(result);
+      if (result) {
+         this.addnewQuiz(result)
+
+      }
+
+
+    });
+
+  }
+  addnewQuiz(newQuizData:IQuizRequest) {
+    this._QuizzesService.AddNewQuiz(newQuizData).subscribe({
+      next: (res:IQuizResponse) => {
+         console.log(res);
+         this.openCreatedQuizDailog('1000ms','1000ms',res.data.code);
+
+      },
+      error: (error) => {
+        this._HelperService.error(error)
+      },
+      complete: () => {
+        this._HelperService.success('Quiz added sucessfully');
+        this._Router.navigateByUrl('/dashboard/instructor/quizzes')
+      }
+
+     })
+  }
+  openCreatedQuizDailog(enterAnimationDuration: string, 
+    exitAnimationDuration: string, code: string): void {
+    const dialogRef = this.dialog.open(QuizCreatedComponent, {
+      width: '400px',
+      height: '300px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {
+        code: code
+      }
+    });
+
+  
+
   }
 }

@@ -73,7 +73,7 @@ export class QuizzesComponent implements OnInit{
    //handle add
    openAddDailog(enterAnimationDuration: string, exitAnimationDuration: string, add: boolean): void {
     const dialogRef = this.dialog.open(QuizItemComponent, {
-      width: '800px',
+      width: '850px',
       height: '450px',
       enterAnimationDuration,
       exitAnimationDuration,
