@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IQuizRequest } from '../models/quizzes';
+import { IQuiz, IQuizRequest } from '../models/quizzes';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,12 @@ export class QuizzesService {
 
   constructor(private _HttpClient: HttpClient) { }
 
+  getAllQuizes():Observable<IQuiz[]>{
+    return this._HttpClient.get<IQuiz[]>('quiz');
+  }
+  upComingFive(): Observable<IQuiz[]> {
+    return this._HttpClient.get<IQuiz[]>('quiz/incomming')
+  }
   //Add new Quiz
   AddNewQuiz(newQuizData:IQuizRequest):Observable<any>{
     return this._HttpClient.post('quiz' , newQuizData)

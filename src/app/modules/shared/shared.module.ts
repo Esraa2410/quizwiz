@@ -55,6 +55,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     MatMenuModule,
     MatIconModule,
     MultiSelectModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
 })
 export class SharedModule {}

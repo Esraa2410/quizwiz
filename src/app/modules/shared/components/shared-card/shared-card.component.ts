@@ -16,6 +16,7 @@ export class SharedCardComponent<T extends { [key: string]: any }> {
   @Input() cardContent: T[] = [];
   @Input() useGrid: boolean = false;
   @Input() wontUseGrid: boolean = false;
+  @Input() RouterLinkPath:string=''
 
   getHeaderContent(item: T): string {
     return this.headerKeys.map(key => item[key]).join(' ');

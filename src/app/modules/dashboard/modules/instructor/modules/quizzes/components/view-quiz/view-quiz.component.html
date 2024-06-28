@@ -1,1 +1,8 @@
-<p>view-quiz works!</p>
+<!--header-->
+<app-shared-header 
+[breadCrumbs]="navigationList" 
+[btnIcon]="btnIcon" 
+[btnText]="btnText"
+    (btnEvent)="GoToDashBoard()"
+    ></app-shared-header>
+<!--end of header-->

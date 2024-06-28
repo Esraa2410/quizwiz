@@ -16,7 +16,9 @@
           </div>
           <div class="card-student d-flex align-items-center justify-content-between" *ngIf="studentsVisibility">
             <p class="m-0 fw-bold">No. of student’s enrolled: {{ getAdditionalContent(item) }}</p>
-            <div class="d-flex gap-2 align-items-center" role="button">
+            <div class="d-flex gap-2 align-items-center" role="button"
+            [routerLink]="RouterLinkPath"
+            >
               <p class="m-0 fw-semibold">Open</p>
               <i class="fa-solid fa-chevron-right"></i>
             </div>

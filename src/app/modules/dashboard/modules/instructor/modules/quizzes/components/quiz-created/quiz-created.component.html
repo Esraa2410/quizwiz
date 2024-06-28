@@ -1,0 +1,24 @@
+<div class="p-4 text-center">
+   
+        <i class="fa fa-check-circle " aria-hidden="true"></i>
+ 
+   
+    <h5 class="mt-3">
+        Quiz was successfully created
+    </h5>
+    <div class="input-group col-12 mt-4 ">
+                
+        <span class="input-group-text" id="basic-addon1">CODE :</span>
+        <input  
+        type="text"
+         [value]="data.code"
+         [disabled]="true"
+        
+         class="form-control p-2" aria-label="title"
+            aria-describedby="basic-addon1">
+    </div>
+ <div class=" text-end mt-3">
+    <button class="btn closeBtn " (click)="onNoClick()">Close</button>
+ </div>
+   
+</div>

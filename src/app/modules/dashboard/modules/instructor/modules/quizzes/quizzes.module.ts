@@ -7,13 +7,15 @@ import { QuizzesComponent } from './quizzes.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { QuizItemComponent } from './components/quiz-item/quiz-item.component';
 import { ViewQuizComponent } from './components/view-quiz/view-quiz.component';
+import { QuizCreatedComponent } from './components/quiz-created/quiz-created.component';
 
 
 @NgModule({
   declarations: [
     QuizzesComponent,
     QuizItemComponent,
-    ViewQuizComponent
+    ViewQuizComponent,
+    QuizCreatedComponent
   ],
   imports: [
     CommonModule,

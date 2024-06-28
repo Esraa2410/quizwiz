@@ -27,13 +27,13 @@ export class QuizItemComponent implements OnInit {
     this.AddNewQuizForm = this.formBuilder.group({
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
+      group : new FormControl('', [Validators.required]),
       questions_number: new FormControl('', [Validators.required]),
       difficulty: new FormControl('', [Validators.required]),
       type: new FormControl('', [Validators.required]),
       schadule: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
       score_per_question: new FormControl('', [Validators.required]),
-      students: new FormControl('', [Validators.required])
    
     });
 
