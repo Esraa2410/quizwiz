@@ -10,6 +10,7 @@ export class SharedPagnationComponent {
   @Input() rowsPerPage: number[] = [];
   @Input() totalRecords: number = 0;
   @Input() rows: number = 10;
+  @Input() width: number = 50;
   @Output() pageSizeChanged: EventEmitter<number> = new EventEmitter<number>();
   @Output() pageNumberChanged: EventEmitter<number> = new EventEmitter<number>();
 

@@ -19,6 +19,7 @@ export class QuestionsComponent {
   btnIcon: string = 'fa fa-plus-circle';
 
   questionList!: IQuestion[];
+  paginatedList!: IQuestion[];
   tableHeaders: string[] = [
     'title',
     'description',
@@ -49,6 +50,9 @@ export class QuestionsComponent {
       class: 'yellow-color'
     }
   ];
+  totalRecords: number = 0;
+  rows: number = 10;
+  first: number = 0;
 
   private _QuestionService = inject(QuestionsService);
   private _HelperService = inject(HelperService);
@@ -71,9 +75,30 @@ export class QuestionsComponent {
 
   getAllQuestions(): void {
     this._QuestionService.questions().subscribe({
-      next: (res: IQuestion[]) => this.questionList = res,
+      next: (res: IQuestion[]) => {
+        this.questionList = res
+        this.totalRecords = res.length;
+        this.updatePaginatedData();
+      },
       error: (error: HttpErrorResponse) => this._HelperService.error(error),
       complete: () => this._HelperService.success('All Questions Are Retrieved')
     })
+  }
+
+  updatePaginatedData(): void {
+    const start = this.first;
+    const end = this.first + this.rows;
+    this.paginatedList = this.questionList.slice(start, end);
+  }
+
+  onPageSizeChange(size: number): void {
+    this.rows = size;
+    this.first = 0;
+    this.updatePaginatedData();
+  }
+
+  onPageNumberChange(page: number): void {
+    this.first = (page - 1) * this.rows;
+    this.updatePaginatedData();
   }
 }

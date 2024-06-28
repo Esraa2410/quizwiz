@@ -43,7 +43,8 @@ export class StudentListComponent implements OnInit {
         this.totalRecords = res.length;
         this.updatePaginatedData();
       },
-      error: (error: HttpErrorResponse) => this._HelperService.error(error)
+      error: (error: HttpErrorResponse) => this._HelperService.error(error),
+      complete: () => {  }
     });
   }
 

@@ -15,6 +15,7 @@ export class SharedTableComponent<T extends { [key: string]: any }> implements O
   filteredTableBodyContent: { row: T; keys: string[] }[] = [];
   sortColumn: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
+  @Input() actionsVisivilty: boolean = false;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['tableHeaders'] || changes['tableBodyContent']) {
