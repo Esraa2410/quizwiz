@@ -96,19 +96,7 @@ export class QuizzesComponent implements OnInit{
   
 
   }
-  getQuizById(){
-    this._QuizzesService.getQuizByID('').subscribe({
-      next:(res)=>{
-        console.log(res)
-      },
-      error:()=>{
-
-      },complete:()=>{
-
-      },
-    })
-
-  }
+ 
   willBeViewed(event:string){
       this._Router.navigateByUrl(`dashboard/instructor/quizzes/view-Quiz/${event}`)
   }

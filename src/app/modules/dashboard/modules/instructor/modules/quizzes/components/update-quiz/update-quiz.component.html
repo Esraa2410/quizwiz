@@ -1,0 +1,40 @@
+<form [formGroup]="editquizForm" (ngSubmit)="submit(editquizForm)">
+
+<div class="container-fluid   h-100 w-100 p-0 ">
+    <div class="header d-flex 
+     justify-content-between align-items-center border-bottom   ">
+        <div class="p-2 ">
+            <h5 class="m-0 p-0">Update quiz </h5>
+        </div>
+
+        <div
+            class=" d-flex  justify-content-between align-items-center ">
+            <div
+                class="d-inline check p-3
+              border-start d-flex justify-content-center align-items-center ">
+                <button type="submit" class="btn"
+                   >
+                    <span class="mx-1 "> <i class="fa-solid fa-check"></i>
+                    </span>
+                </button>
+            </div>
+            <div (click)="onNoClick()" class="d-inline p-3
+             close  border-start d-flex justify-content-center align-items-center ">
+                <span class="mx-1 "> <i class="fa-solid fa-xmark"></i> </span>
+            </div>
+        </div>
+    </div>
+    
+        <div class="input-group  mt-2 p-3">
+
+            <span class="input-group-text" id="basic-addon1">Title :</span>
+            <input
+                type="text"
+               [value]="quizTitle"
+                formControlName="title"
+                class="form-control p-2" aria-label="title"
+                aria-describedby="basic-addon1">
+        </div>
+    
+</div>
+</form>

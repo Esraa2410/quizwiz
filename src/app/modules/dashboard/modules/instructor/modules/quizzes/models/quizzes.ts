@@ -76,3 +76,6 @@ export interface IQuizResponse{
       }
 
 
+export interface IUpdateQuiz{
+    title:string
+}
