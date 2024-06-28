@@ -4,14 +4,27 @@
     background-color: $light-pink-color;
 }
 .editBtn{
-    border-radius:  20px;
+   
     background-color: $btn-color;
-    padding: 10px 30px;
     color: $main-white-color;
-    font-size: 16px;
+  
     &:hover{
         color: $btn-color;
         background-color: $main-white-color;
         border: 1px solid $main-border-color;
     }
+}
+.deleteBtn{
+    background-color: $color-red;
+    color: $main-white-color;
+    &:hover{
+        color: $color-red;
+        background-color: $main-white-color;
+        border: 1px solid $main-border-color;}
+    
+}
+.mainBtn{
+    font-size: 16px;
+    padding: 10px 30px;
+    border-radius:  20px;
 }
