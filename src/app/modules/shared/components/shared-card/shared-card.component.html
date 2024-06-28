@@ -20,7 +20,7 @@
             [routerLink]="RouterLinkPath"
             >
               <p class="m-0 fw-semibold">Open</p>
-              <i class="fa-solid fa-chevron-right"></i>
+              <i class="fa-solid fa-chevron-right" (click)="view.emit(item['_id'])"></i>
             </div>
           </div>
         </div>

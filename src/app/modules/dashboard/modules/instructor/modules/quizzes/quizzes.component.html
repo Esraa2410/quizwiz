@@ -30,7 +30,7 @@
             [wontUseGrid]="true"
             [useGrid]="false"
             [studentsVisibility]="true"
-            [RouterLinkPath]="RouterLinkPath">
+            (view)="willBeViewed($event)">
           </app-shared-card>
         </div>
 

@@ -6,6 +6,7 @@ import { IBreadCrumb } from 'src/app/modules/shared/models/shared';
 import { IQuiz, IQuizRequest, IQuizResponse } from './models/quizzes';
 import { QuizzesService } from './services/quizzes.service';
 import { QuizCreatedComponent } from './components/quiz-created/quiz-created.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class QuizzesComponent implements OnInit{
   upcomingQuizzes: IQuiz[] = [];
 
   constructor(public dialog: MatDialog,
+    private _Router:Router,
     private _HelperService: HelperService ,
   private _QuizzesService:QuizzesService){}
   ngOnInit(): void {
@@ -106,6 +108,9 @@ export class QuizzesComponent implements OnInit{
       },
     })
 
+  }
+  willBeViewed(event:string){
+      this._Router.navigateByUrl(`dashboard/instructor/quizzes/view-Quiz/${event}`)
   }
 
 }
