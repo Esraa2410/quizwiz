@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GroupsService } from '../groups/services/groups.service';
 import { ReactiveFormsModule ,FormsModule } from '@angular/forms';
 import { VeiwDeleteStudentComponent } from './components/veiw-delete-student/veiw-delete-student.component';
+import { VeiwDeleteStudentGroupComponent } from './components/veiw-delete-student-group/veiw-delete-student-group.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { VeiwDeleteStudentComponent } from './components/veiw-delete-student/vei
     StudentsComponent,
     StudentListComponent,
     AddStudentGroupComponent,
-    VeiwDeleteStudentComponent
+    VeiwDeleteStudentComponent,
+    VeiwDeleteStudentGroupComponent
   ],
   imports: [
     CommonModule,
