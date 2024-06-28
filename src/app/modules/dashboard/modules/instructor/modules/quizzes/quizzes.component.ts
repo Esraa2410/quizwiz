@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { QuizItemComponent } from './quiz-item/quiz-item.component';
+import { QuizItemComponent } from './components/quiz-item/quiz-item.component';
 import { MatDialog } from '@angular/material/dialog';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
 

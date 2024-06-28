@@ -1,10 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { QuizzesService } from '../services/quizzes.service';
-import { GroupsService } from '../../groups/services/groups.service';
-import { IGroupsListRes, IGroupsListRes2 } from '../../groups/models/groups';
+
+
 import { HttpErrorResponse } from '@angular/common/http';
+import { IGroupsListRes2, IGroupsListRes } from '../../../groups/models/groups';
+import { GroupsService } from '../../../groups/services/groups.service';
+import { QuizzesService } from '../../services/quizzes.service';
 
 @Component({
   selector: 'app-quiz-item',
