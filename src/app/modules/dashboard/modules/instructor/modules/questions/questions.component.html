@@ -1,1 +1,8 @@
-<p>questions works!</p>
+<div class="p-5">
+  <div class="mb-3">
+    <app-shared-header [breadCrumbs]="navigationList" [btnIcon]="btnIcon" [btnText]="btnText"></app-shared-header>
+  </div>
+  <app-shared-table [tableHeaders]="tableHeaders" [buttons]="buttons" [tableBodyContent]="questionList"
+    [displayHeaders]="displayHeaders"></app-shared-table>
+
+</div>

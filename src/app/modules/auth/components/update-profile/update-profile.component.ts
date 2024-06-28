@@ -47,11 +47,6 @@ export class UpdateProfileComponent implements OnInit {
 
   }
 
-
-
-
-
-
   formList: IFormsField[] = [
     {
       label: 'First Name',
@@ -91,6 +86,7 @@ export class UpdateProfileComponent implements OnInit {
         localStorage.setItem('firstName', this.userData.data.first_name);
         localStorage.setItem('lastName', this.userData.data.last_name);
         localStorage.setItem('userName', `${this.userData.data.first_name} ${this.userData.data.last_name}`);
+        this._AuthService.profileUpdated(this.userData);
         this._Router.navigate(['/dashboard']);
       }
     })

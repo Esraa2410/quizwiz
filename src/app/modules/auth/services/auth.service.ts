@@ -25,17 +25,30 @@ export class AuthService {
     message: '',
   });
 
+  private updatedProfile = new BehaviorSubject<IUpdateProfileRes>({
+    data: {
+      _id: '',
+      first_name: '',
+      last_name: '',
+      email: '',
+      role: '',
+      status: '',
+    },
+    message: ''
+  })
+
   loggedInUser$ = this.loggedInUserSubject.asObservable();
 
-  constructor(private _HttpClient: HttpClient) {
-   // console.log('Initialized loggedInUserSubject with default value:', this.loggedInUserSubject.value);
-  }
+  profileUpdatedData$ = this.updatedProfile.asObservable();
+
+  constructor(private _HttpClient: HttpClient) {  }
 
   getLoggedInUser(userData: ILoginReq): void {
-  //  console.log('Emitting loggedInUser data:', userData);
     this.loggedInUserSubject.next(userData);
-    //console.log('Current loggedInUserSubject value:', this.loggedInUserSubject.value);
+  }
 
+  profileUpdated(userData: IUpdateProfileRes): void {
+    this.updatedProfile.next(userData);
   }
 
   forgetPassword(forgetData: IForget): Observable<IForgetRes> {
@@ -63,7 +76,7 @@ export class AuthService {
     return this._HttpClient.get<ILogoutRes>('auth/logout')
   }
 
-  
+
   updateProfile(data: IUpdateProfileReq): Observable<IUpdateProfileRes> {
     return this._HttpClient.put<IUpdateProfileRes>('instructor', data)
   }
