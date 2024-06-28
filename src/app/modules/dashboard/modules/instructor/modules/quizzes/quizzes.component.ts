@@ -100,5 +100,8 @@ export class QuizzesComponent implements OnInit{
   willBeViewed(event:string){
       this._Router.navigateByUrl(`dashboard/instructor/quizzes/view-Quiz/${event}`)
   }
+  goToBankOfQuestions(){
+    this._Router.navigateByUrl('/dashboard/instructor/questions')
+  }
 
 }
