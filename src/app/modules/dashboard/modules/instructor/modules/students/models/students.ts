@@ -61,3 +61,18 @@ export interface IStudentWithoutGroupRes {
   status: string
   role: string
 }
+
+export interface IDeleteStudentRes {
+  data: IDeleteData;
+  message: string;
+}
+
+export interface IDeleteData {
+  _id: string
+  first_name: string
+  last_name: string
+  email: string
+  status: string
+  role: string
+  group: string
+}

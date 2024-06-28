@@ -1,0 +1,55 @@
+@import '../../../../../../../../../assets/styles/abstracts/variables.scss';
+
+.header {
+
+    h5,
+    i {
+        color: $dark-blue-color;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    .close:hover {
+        background-color: rgb(187, 14, 14);
+
+        i {
+            color: white;
+        }
+
+        cursor: pointer;
+    }
+
+}
+
+.input-group-text,
+.form-control {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: $dark-blue-color;
+}
+
+.input-group-text {
+    background-color: $light-pink-color;
+}
+
+.form-control {
+    background-color: #fff;
+}
+
+.btn {
+    border: none;
+    padding: 0;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.check:hover {
+    background-color: rgb(83, 233, 83);
+    cursor: pointer;
+
+    i {
+        color: white;
+    }
+}

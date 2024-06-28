@@ -1,0 +1,58 @@
+<div class="container-fluid   h-100 w-100 p-0 ">
+    <div class="header d-flex 
+         justify-content-between align-items-center border-bottom   ">
+        <div class="p-3 ">
+            <h5 class="m-0 p-0">Student Details</h5>
+        </div>
+        <div>
+            <div class=" d-flex  justify-content-between align-items-center ">
+                <div *ngIf="data.btnText=='delete'" (click)="deleteStudent(data.id)" class="d-inline check p-4
+                  border-start d-flex justify-content-center align-items-center ">
+                    <button type="submit" class="btn">
+                        <span class="mx-1 "> <i class="fa-solid fa-check"></i> </span>
+                    </button>
+                </div>
+                <div (click)="onNoClick()" class="d-inline p-4
+                 close  border-start d-flex justify-content-center align-items-center ">
+                    <span class="mx-1 "> <i class="fa-solid fa-xmark"></i> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="data.btnText!=='delete'" class="row p-3 m-0 ">
+        <div class="input-group col-12 my-2 ">
+            <span class="input-group-text w-25" id="basic-addon1">First Name</span>
+            <input disabled type="text" [value]="studentDetails.first_name" class="form-control p-2 w-75"
+                aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group col-12 my-2 ">
+            <span class="input-group-text w-25" id="basic-addon1">Last Name</span>
+            <input disabled type="text" [value]="studentDetails.last_name" class="form-control p-2 w-75"
+                aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group col-12 my-2 ">
+            <span class="input-group-text w-25" id="basic-addon1">Your Email</span>
+            <input disabled type="text" [value]="studentDetails.email" class="form-control p-2 w-75"
+                aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+    </div>
+    <div *ngIf="data.btnText=='delete'" class="row p-3 m-0 ">
+        <h5>Are you Sure you Want to Remove this Student?</h5>
+        <div class="input-group col-12 my-2 ">
+            <span class="input-group-text w-25" id="basic-addon1">First Name</span>
+            <input disabled type="text" [value]="studentDetails.first_name" class="form-control p-2 w-75"
+                aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group col-12 my-2 ">
+            <span class="input-group-text w-25" id="basic-addon1">Last Name</span>
+            <input disabled type="text" [value]="studentDetails.last_name" class="form-control p-2 w-75"
+                aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group col-12 my-2 ">
+            <span class="input-group-text w-25" id="basic-addon1">Your Email</span>
+            <input disabled type="text" [value]="studentDetails.email" class="form-control p-2 w-75"
+                aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+    </div>
+</div>

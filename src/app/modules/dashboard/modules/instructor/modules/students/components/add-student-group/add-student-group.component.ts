@@ -60,17 +60,7 @@ export class AddStudentGroupComponent implements OnInit {
     })
   }
 
-
-
-
-
-
-
-
-
-
-
-
+  
 
 
 

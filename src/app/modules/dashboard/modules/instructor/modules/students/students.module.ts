@@ -14,12 +14,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { GroupsService } from '../groups/services/groups.service';
 import { ReactiveFormsModule ,FormsModule } from '@angular/forms';
+import { VeiwDeleteStudentComponent } from './components/veiw-delete-student/veiw-delete-student.component';
+
 
 @NgModule({
   declarations: [
     StudentsComponent,
     StudentListComponent,
-    AddStudentGroupComponent
+    AddStudentGroupComponent,
+    VeiwDeleteStudentComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +39,6 @@ import { ReactiveFormsModule ,FormsModule } from '@angular/forms';
     FormsModule
   ],
  
-  providers:[StudentsService , GroupsService]
+  providers:[StudentsService , GroupsService ]
 })
 export class StudentsModule { }
