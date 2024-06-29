@@ -11,7 +11,7 @@ import { HomeService } from './service/home.service';
 export class HomeComponent implements OnInit {
   upcomingQuizzes: IQuiz[] = [];
   topFiveStudents: IStudent[] = [];
-
+  RouterLinkPath ='/dashboard/instructor/quizzes/view-Quiz';
   constructor(private homeService: HomeService) {}
 
   ngOnInit(): void {

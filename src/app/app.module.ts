@@ -5,11 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { GlobalInterceptor } from './core/interceptors/global/global.interceptor';
 import { LoadingInterceptor } from './core/interceptors/loading/loading.interceptor';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AuthService } from './modules/auth/services/auth.service';
+
 
 
 
@@ -23,7 +24,8 @@ import { AuthService } from './modules/auth/services/auth.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    HttpClientModule
   ],
   providers: [
     {

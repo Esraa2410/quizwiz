@@ -32,6 +32,7 @@ export class SharedCardComponent<T extends { [key: string]: any }> {
   }
 
 
+  @Input() RouterLinkPath:string=''
 
   getHeaderContent(item: T): string {
     return this.headerKeys.map(key => item[key]).join(' ');

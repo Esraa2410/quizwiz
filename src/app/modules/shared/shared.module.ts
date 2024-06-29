@@ -8,6 +8,15 @@ import { SharedPagnationComponent } from './components/shared-pagnation/shared-p
 import { PaginatorModule } from 'primeng/paginator';
 import { SharedHeaderComponent } from './components/shared-header/shared-header.component';
 import { SharedCardComponent } from './components/shared-card/shared-card.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+import { MatSelectModule } from '@angular/material/select';
+import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
+import {ClipboardModule} from '@angular/cdk/clipboard';
+
 import { SharedTableComponent } from './components/shared-table/shared-table.component';
 import { DynamicdatePipe } from './pipes/date/dynamicdate.pipe';
 import { SharedMainHeaderComponent } from './components/shared-main-header/shared-main-header.component';
@@ -24,6 +33,17 @@ import { MatMenuModule } from '@angular/material/menu';
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
+    PaginatorModule,
+    MatDialogModule,
+    MatButtonModule,
+    DropdownModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatMenuModule,
+    MatIconModule,
+    MultiSelectModule,
+    ClipboardModule,
+   
     PaginatorModule,
     MenuModule,
     ButtonModule,
@@ -45,6 +65,17 @@ import { MatMenuModule } from '@angular/material/menu';
     SharedPagnationComponent,
     SharedHeaderComponent,
     SharedCardComponent,
+    MatDialogModule,
+    MatButtonModule,
+    DropdownModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatMenuModule,
+    MatIconModule,
+    MultiSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ClipboardModule,
     SharedTableComponent,
     DynamicdatePipe,
     SharedMainHeaderComponent,
