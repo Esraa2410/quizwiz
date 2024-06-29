@@ -11,7 +11,10 @@
   </div>
   <div class="main-div route-content d-flex align-items-center justify-content-between gap-3">
     <h3 class="m-0 text-capitalize">{{ routePath }}</h3>
-    <a *ngIf="loggedInRole == 'Instructor'" class="d-flex align-items-center gap-2 new-action" role="button"> <img
+    <a 
+    *ngIf="loggedInRole == 'Instructor'" 
+    class="d-flex align-items-center gap-2 new-action" role="button" 
+    (click)="openAddDailog('1000ms','1000ms',true)"> <img
         src="../../../../../assets/images/navbar/new quiz icon.svg" class="w-25" alt="alarm new quiz">
       <p class="m-0">New quiz</p>
     </a>

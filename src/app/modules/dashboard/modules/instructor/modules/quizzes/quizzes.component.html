@@ -8,30 +8,30 @@
 <!--end of header-->
 
 <div class="row mt-5">
-    <div class="col-md-4">
-        <div class="questionBank p-3 text-center">
-            <i class="fa fa-bank mt-3" aria-hidden="true"></i>
+    <div class="col-md-3">
+        <div class="questionBank p-3 text-center" (click)="goToBankOfQuestions()">
+         <i class="fa fa-bank mt-3" aria-hidden="true"></i>
             <p>Question Bank</p>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
         <div class="p-3 main-border rounded-3">
-            <h2 class='mb-3'>Upcoming {{upcomingQuizzes.length}}
-                <span *ngIf="upcomingQuizzes.length >1">
-                    Quizzes
-                </span>
-                <span *ngIf="upcomingQuizzes.length === 1">
-                    Quizz
-                </span>
-            </h2>
-            <app-shared-card [imgSrc]="'../../../../../assets/images/Quiz img.svg'" [cardContent]="upcomingQuizzes"
-                [headerKeys]="['title']" [detailKeys]="['schadule']" 
-                [additionalContentKey]="'participants'"
-                [wontUseGrid]="true"
-                [useGrid]="false"
-                [studentsVisibility]="true"
-                [RouterLinkPath]="RouterLinkPath">
-            </app-shared-card>
+          <h2 class='mb-3'>Upcoming {{upcomingQuizzes.length}}
+            <span *ngIf="upcomingQuizzes.length >1">
+                Quizzes
+            </span>
+            <span *ngIf="upcomingQuizzes.length === 1">
+                Quizz
+            </span>
+             </h2>
+          <app-shared-card [imgSrc]="'../../../../../assets/images/Quiz img.svg'" [cardContent]="upcomingQuizzes"
+            [headerKeys]="['title']" [detailKeys]="['schadule']" 
+            [additionalContentKey]="'participants'"
+            [wontUseGrid]="true"
+            [useGrid]="false"
+            [studentsVisibility]="true"
+            (view)="willBeViewed($event)">
+          </app-shared-card>
         </div>
 
         <div class="p-3 mt-4 main-border rounded-3">
@@ -42,25 +42,19 @@
                 <span class="resaults">
                         Results
                         <i class="fa fa-arrow-right ms-2" aria-hidden="true"></i>
-                </span>
-            </h2>
-            <app-shared-table
-                [tableHeaders]="tableHeaders"
-                [tableBodyContent]="paginatedQuizzes"
-                [displayHeaders]="displayHeaders"
-                [actionsVisivilty]="true"
-            ></app-shared-table>
+                    </span>
+              
+                </h2>
+               <!--shared table
+               this will be edited -->
+               <app-shared-table
+                [tableHeaders]="tableHeaders" 
+                [buttons]="buttons" 
+                [tableBodyContent]="completedQuizes"
+               [displayHeaders]="displayHeaders"></app-shared-table>
+          
 
-            <div class="w-100">
-                <app-shared-pagnation
-                    [rowsPerPage]="[10, 20, 50]"
-                    [totalRecords]="totalRecords"
-                    [rows]="rows"
-                    (pageSizeChanged)="onPageSizeChange($event)"
-                    (pageNumberChanged)="onPageNumberChange($event)"
-                    [width]="100"
-                ></app-shared-pagnation>
-            </div>
-        </div>
-    </div>
+            
+          </div>
+      </div>
 </div>

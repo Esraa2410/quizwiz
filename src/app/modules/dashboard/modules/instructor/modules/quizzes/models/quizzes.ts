@@ -51,23 +51,30 @@ export interface IQuizResponse {
   data: Data;
   message: string;
 }
+      
+      export interface Data {
+        code: string
+        title: string
+        description: string
+        status: string
+        instructor: string
+        group: string
+        questions_number: number
+        questions: string[]
+        schadule: string
+        duration: number
+        score_per_question: number
+        type: string
+        difficulty: string
+        _id: string
+        updatedAt: string
+        createdAt: string
+        __v: number
+      }
 
-export interface Data {
-  code: string;
-  title: string;
-  description: string;
-  status: string;
-  instructor: string;
-  group: string;
-  questions_number: number;
-  questions: string[];
-  schadule: string;
-  duration: number;
-  score_per_question: number;
-  type: string;
-  difficulty: string;
-  _id: string;
-  updatedAt: string;
-  createdAt: string;
-  __v: number;
+
+export interface IUpdateQuiz{
+    title:string
 }
+
+

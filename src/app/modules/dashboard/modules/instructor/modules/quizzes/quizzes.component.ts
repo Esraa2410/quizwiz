@@ -3,9 +3,12 @@ import { QuizItemComponent } from './components/quiz-item/quiz-item.component';
 import { MatDialog } from '@angular/material/dialog';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
 import { IBreadCrumb, IButtonConfig } from 'src/app/modules/shared/models/shared';
+
 import { IQuiz, IQuizRequest, IQuizResponse } from './models/quizzes';
 import { QuizzesService } from './services/quizzes.service';
 import { QuizCreatedComponent } from './components/quiz-created/quiz-created.component';
+import { Router } from '@angular/router';
+
 import { HttpErrorResponse } from '@angular/common/http';
 import { IGroupsListRes, IGroupsListRes2 } from '../groups/models/groups';
 import { GroupsService } from '../groups/services/groups.service';
@@ -25,68 +28,52 @@ export class QuizzesComponent implements OnInit {
   btnIcon: string = 'fa-regular fa-clock';
   RouterLinkPath: string = './view-Quiz' + this.quizId;
   upcomingQuizzes: IQuiz[] = [];
-  completedQuizzes!: IQuiz[];
-  paginatedQuizzes!: IQuiz[];
-  totalRecords: number = 0;
-  rows: number = 10;
-  first: number = 0;
-  tableHeaders: string[] = ['title', 'group', 'participants', 'schadule'];
+  completedQuizes: IQuiz[] = [];
+  tableHeaders: string[] = [
+    'title',
+    'description',
+    'participants',
+    'difficulty',
+    'actions',
+  ];
   displayHeaders: { [key: string]: string } = {
     title: 'Title',
-    group: 'Group name',
-    participants: 'No. of persons in group',
-    schadule: 'Date'
+    description: 'Description',
+    participants: 'Participants',
+    difficulty:'Difficulty',
+    actions: 'Actions',
   };
-  groupMap: { [key: string]: string } = {};
+  buttons: IButtonConfig[] = [
+  
+    {
+      btnIcon: 'fa-solid fa-eye',
+      action: (row) => this.viewFunction(row),
+      class: 'yellow-color'
+    }
+   
+  ];
 
-
-  constructor(
-    public dialog: MatDialog,
-    private _HelperService: HelperService,
-    private _QuizzesService: QuizzesService,
-    private _GroupsService: GroupsService
-  ) {}
+  constructor(public dialog: MatDialog,
+    private _Router:Router,
+    private _HelperService: HelperService ,
+  private _QuizzesService:QuizzesService){}
   ngOnInit(): void {
-    this.fetchGroups();
-  }
-
-  fetchGroups(): void {
-    this._GroupsService.getAllGroups().subscribe((groups: IGroupsListRes2[]) => {
-      this.groupMap = groups.reduce((acc: { [key: string]: string }, group: IGroupsListRes2) => {
-        acc[group._id] = group.name;
-        return acc;
-      }, {});
-      this.upComingQuizes();
-      this.getCompletedQuizzes();
-    });
+    this.upComingQuizes();
+    this.getCompletedQuizes();
   }
   
 
 
-  upComingQuizes(): void {
-    this._QuizzesService.upComingFive().subscribe((quizzes) => {
-      this.upcomingQuizzes = quizzes.map((quiz) => ({
-        ...quiz,
-        group: this.groupMap[quiz.group] || quiz.group
-      }));
-    });
-  }
-  
-  getCompletedQuizzes(): void {
-    this._QuizzesService.completedQuizzes().subscribe({
-      next: (res: IQuiz[]) => {
-        this.completedQuizzes = res.map((quiz) => ({
-          ...quiz,
-          group: this.groupMap[quiz.group] || quiz.group
-        }));
-        this.totalRecords = res.length;
-        this.updatePaginatedData();
-      },
-      error: (error: HttpErrorResponse) => this._HelperService.error(error),
-      complete: () => {},
-    });
-  }
-  
+    upComingQuizes(): void {
+      this._QuizzesService.upComingFive().subscribe((quizzes) => {
+        this.upcomingQuizzes = quizzes;
+      });
+    }
+    getCompletedQuizes():void{
+      this._QuizzesService.getUpcomingQuizes().subscribe((res) => {
+        this.completedQuizes = res;
+      });
+    }
 
   //handle add
   openAddDailog(
@@ -95,7 +82,7 @@ export class QuizzesComponent implements OnInit {
     add: boolean
   ): void {
     const dialogRef = this.dialog.open(QuizItemComponent, {
-      width: '800px',
+      width: '850px',
       height: '450px',
       enterAnimationDuration,
       exitAnimationDuration,
@@ -138,34 +125,23 @@ export class QuizzesComponent implements OnInit {
       enterAnimationDuration,
       exitAnimationDuration,
       data: {
-        code: code,
-      },
+        code: code
+      }
     });
+
+  
+
   }
-  getQuizById() {
-    this._QuizzesService.getQuizByID('').subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: () => {},
-      complete: () => {},
-    });
+ 
+  willBeViewed(event:string){
+      this._Router.navigateByUrl(`dashboard/instructor/quizzes/view-Quiz/${event}`)
+  }
+  goToBankOfQuestions(){
+    this._Router.navigateByUrl('/dashboard/instructor/questions')
+  }
+  viewFunction(row: any): void {
+    console.log('View', row);
+    this._Router.navigateByUrl(`/dashboard/instructor/quizzes/view-Quiz/${row._id}`)
   }
 
-  updatePaginatedData(): void {
-    const start = this.first;
-    const end = this.first + this.rows;
-    this.paginatedQuizzes = this.completedQuizzes.slice(start, end);
-  }
-
-  onPageSizeChange(size: number): void {
-    this.rows = size;
-    this.first = 0;
-    this.updatePaginatedData();
-  }
-
-  onPageNumberChange(page: number): void {
-    this.first = (page - 1) * this.rows;
-    this.updatePaginatedData();
-  }
 }

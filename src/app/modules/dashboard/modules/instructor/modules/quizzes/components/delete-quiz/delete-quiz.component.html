@@ -1,0 +1,43 @@
+<div class="container-fluid   h-100 w-100 p-0 ">
+    <div class="header d-flex 
+     justify-content-between align-items-center border-bottom   ">
+        <div class="p-3 ">
+            <h5 class="m-0 p-0">Delete Quiz </h5>
+
+        </div>
+        <!--add or edit -->
+        <div class=" d-flex  justify-content-between align-items-center ">
+            <div class="d-inline check p-4
+              border-start d-flex justify-content-center align-items-center ">
+             
+                <button  class="btn"
+                    [mat-dialog-close]="data.id">
+                    <span class="mx-1 ">
+                        <i class="fa-solid fa-check"></i> </span>
+                </button>
+            </div>
+            <div (click)="onNoClick()" class="d-inline p-4
+             close  border-start d-flex justify-content-center align-items-center ">
+                <span class="mx-1 "> <i class="fa-solid fa-xmark"></i> </span>
+            </div>
+        </div>
+    </div>
+    <div class=" p-3 m-0  text-center">
+       
+            <i class="fa fa-remove p-3" aria-hidden="true"></i>
+        
+       
+        <p class="mt-2 remove">
+            Are you sure you want to remove this Quiz ?
+        </p>
+
+        <p class="text-start mb-2">
+            Quiz name : {{data.title}}
+        </p>
+
+<p class="text-start">
+    Created At :{{data.createdAt |date}}
+</p>
+     
+    </div>
+</div>

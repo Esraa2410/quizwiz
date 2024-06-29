@@ -1,0 +1,19 @@
+@import '../../../../../../../../../assets/styles/abstracts/dialog.scss';
+@import '../../../../../../../../../assets/styles/abstracts/variables.scss';
+
+
+.fa-remove{
+    color:$main-white-color;
+    background-color: $color-red ;
+    font-size: 1.4rem;
+    border-radius: 50%;
+
+    
+}
+.remove
+{
+    color: $color-red ;
+}
+p{
+    color: $dark-grey-color;
+}
