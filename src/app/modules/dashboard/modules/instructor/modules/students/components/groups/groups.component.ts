@@ -83,7 +83,6 @@ export class GroupsComponent {
 
 
   willBeDelete(event: string): any {
-    console.log(event);
     let btnText = 'delete'
     const dialogRef = this.dialog.open(VeiwDeleteStudentComponent, {
       width: '570px',
@@ -120,9 +119,28 @@ export class GroupsComponent {
   }
 
   
-  willBeDeleteFromGoup(event: string): any {
+  willBeDeleteFromGroup(event: string): any {
     let btnText = 'delete'
     const dialogRef = this.dialog.open(VeiwDeleteStudentGroupComponent, {
+      width: '570px',
+      height: '350px',
+      data: {
+        stdId: event,
+        groupId:this.group_id,
+        btnText: btnText
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.onCheckRoute();
+    })
+  }
+
+  willBeUpdateGroup(event: string): any {
+    let btnText = 'update'
+    const dialogRef = this.dialog.open(VeiwDeleteStudentGroupComponent, {
+      width: '570px',
+      height: '350px',
       data: {
         stdId: event,
         groupId:this.group_id,

@@ -32,8 +32,8 @@ export class StudentsService {
   }
 
   //update student group   =>not work
-  updateStudGroup(data: IAddStudToGroupReq , data2:any): Observable<IAddStudToGroupRes> {
-    return this._HttpClient.put<IAddStudToGroupRes>(`student/${data.student_id}/${data.group_id}` , data2);
+  updateStudGroup(student_id:string ,group_id:string): Observable<any> {
+    return this._HttpClient.put<any>(`student/${student_id}/${group_id}` , group_id);
   }
 
   studentsWithoutGroup(): Observable<Root> {

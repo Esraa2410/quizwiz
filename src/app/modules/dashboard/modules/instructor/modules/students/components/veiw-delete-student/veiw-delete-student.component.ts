@@ -1,5 +1,5 @@
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
-import {  IStudentWithoutGroupRes, IDeleteStudentRes, IStudent } from '../../models/students';
+import { IStudentWithoutGroupRes, IDeleteStudentRes, IStudent } from '../../models/students';
 import { Component, Inject, OnInit } from '@angular/core';
 import { GroupsService } from '../../../groups/services/groups.service';
 import { StudentsService } from '../../services/students.service';
@@ -28,7 +28,7 @@ export class VeiwDeleteStudentComponent implements OnInit {
     public dialogRef: MatDialogRef<VeiwDeleteStudentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-    
+
 
 
 
@@ -43,7 +43,6 @@ export class VeiwDeleteStudentComponent implements OnInit {
       next: (res: IDeleteStudentRes) => {
         this._HelperService.success(res.message);
       }, error: (err: HttpErrorResponse) => {
-       // this._HelperService.error(err.error.message);
       }, complete: () => {
         this.onNoClick();
       }
@@ -55,7 +54,7 @@ export class VeiwDeleteStudentComponent implements OnInit {
       next: (res: IStudentWithoutGroupRes) => {
         this.studentDetails = res;
       }, error: (err: HttpErrorResponse) => {
-       this._HelperService.error(err.error.message);
+        this._HelperService.error(err.error.message);
       }
     })
   }

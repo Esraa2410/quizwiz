@@ -15,19 +15,19 @@ import { HelperService } from 'src/app/modules/shared/services/helper.service';
   styleUrls: ['./add-student-group.component.scss']
 })
 export class AddStudentGroupComponent implements OnInit {
-  studentsList:Root=[];
-  groupsList:IGroupsListRes=[];
-  constructor(private _HelperService:HelperService, private _GroupsService:GroupsService,private _StudentsService:StudentsService ,
-     public dialogRef: MatDialogRef<AddStudentGroupComponent>) { }
+  studentsList: Root = [];
+  groupsList: IGroupsListRes = [];
+  constructor(private _HelperService: HelperService, private _GroupsService: GroupsService, private _StudentsService: StudentsService,
+    public dialogRef: MatDialogRef<AddStudentGroupComponent>) { }
 
   ngOnInit(): void {
     this.getAllGroups();
     this.getStudentsWithoutGroup()
   }
 
-  addStudToGroupForm:FormGroup=new FormGroup({
-    student_id:new FormControl(null ,[Validators.required]),
-    group_id:new FormControl(null,[Validators.required])
+  addStudToGroupForm: FormGroup = new FormGroup({
+    student_id: new FormControl(null, [Validators.required]),
+    group_id: new FormControl(null, [Validators.required])
   })
 
   addStudToGroup(data: FormGroup) {
@@ -38,29 +38,40 @@ export class AddStudentGroupComponent implements OnInit {
         this._HelperService.error(err);
       }, complete: () => {
         this.onNoClick();
+        const groupId = data.get('group_id')?.value;
+        this.dialogRef.close(groupId);
+
       }
     })
   }
 
-  getAllGroups(){
+
+  onGetSpecificGroup(id: string): void {
+    this._GroupsService.getGroupById(id).subscribe({
+      next: (res: any) => {
+      }
+    });
+  }
+
+  getAllGroups() {
     this._GroupsService.getAllGroups().subscribe({
-      next:(res:IGroupsListRes)=>{
-        this.groupsList=res;
-      },error:(err:HttpErrorResponse)=>{
+      next: (res: IGroupsListRes) => {
+        this.groupsList = res;
+      }, error: (err: HttpErrorResponse) => {
       }
     })
   }
 
-  getStudentsWithoutGroup(){
+  getStudentsWithoutGroup() {
     this._StudentsService.studentsWithoutGroup().subscribe({
-      next:(res:Root)=>{
-        this.studentsList=res;
-      },error:(err:HttpErrorResponse)=>{
+      next: (res: Root) => {
+        this.studentsList = res;
+      }, error: (err: HttpErrorResponse) => {
       }
     })
   }
 
-  
+
 
 
 

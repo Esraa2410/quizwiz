@@ -27,11 +27,14 @@ export class SharedCardComponent<T extends { [key: string]: any }> {
  
   @Output() updateStudentGroup = new EventEmitter<any>();
   @Output() deleteStudentGroup = new EventEmitter<string>();
-  @Output() groupId = new EventEmitter<string>();
-  @Input() item: any;
+
 
   onDeleteStudentGroup(studenttId: string) {
     this.deleteStudentGroup.emit(studenttId);
+  }
+
+  onUpdateStudentGroup(studenttId: string) {
+    this.updateStudentGroup.emit(studenttId);
   }
 
 

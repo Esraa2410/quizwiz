@@ -39,6 +39,7 @@
                     <span>Delete</span>
                 </button>
                 <button *ngIf="inGoup" 
+                (click)="updateStudentGroup.emit(item['_id'])" 
                 mat-menu-item>
                   <mat-icon>visibility</mat-icon>
                   <span>Update Group</span>
