@@ -14,7 +14,7 @@
       <tr *ngFor="let row of filteredTableBodyContent; trackBy: trackByRowId">
         <td *ngFor="let key of row.keys">
           <ng-container *ngIf="key !== 'actions'">
-            {{ getNestedValue(row.row, key) | dynamicdate : key }}
+            {{ getNestedValue(row.row, key) | floatNumber : key | dynamicdate : key }}
           </ng-container>
         </td>
         <td *ngIf="!actionsVisivilty">

@@ -25,6 +25,7 @@ import { ButtonModule } from 'primeng/button';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { FloatNumberPipe } from './pipes/floatNumber/floatNumber.pipe';
 
 @NgModule({
   imports: [
@@ -58,7 +59,8 @@ import { MatMenuModule } from '@angular/material/menu';
     SharedCardComponent,
     SharedTableComponent,
     DynamicdatePipe,
-    SharedMainHeaderComponent
+    SharedMainHeaderComponent,
+    FloatNumberPipe
   ],
   exports: [
     SharedAuthComponent,
