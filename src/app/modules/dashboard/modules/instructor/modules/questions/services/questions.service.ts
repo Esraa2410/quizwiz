@@ -18,5 +18,9 @@ export class QuestionsService {
     return this._HttpClient.post<any>('question', studentData);
   }
 
+  veiwQuestion(id: string):Observable<IQuestion> {
+    return this._HttpClient.get<IQuestion>(`question/${id}`);
+  }
+
 
 }

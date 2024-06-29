@@ -1,60 +1,49 @@
 <!--header-->
-<app-shared-header 
-[breadCrumbs]="navigationList" 
-[btnIcon]="btnIcon" 
-[btnText]="btnText"
-    (btnEvent)="openAddDailog('1000ms','1000ms',true)"
-    ></app-shared-header>
+<app-shared-header [breadCrumbs]="navigationList" [btnIcon]="btnIcon" [btnText]="btnText"
+    (btnEvent)="openAddDailog('1000ms','1000ms',true)"></app-shared-header>
 <!--end of header-->
 
 <div class="row mt-5">
     <div class="col-md-3">
         <div class="questionBank p-3 text-center" (click)="goToBankOfQuestions()">
-         <i class="fa fa-bank mt-3" aria-hidden="true"></i>
+            <i class="fa fa-bank mt-3" aria-hidden="true"></i>
             <p>Question Bank</p>
         </div>
     </div>
     <div class="col-md-9">
         <div class="p-3 main-border rounded-3">
-          <h2 class='mb-3'>Upcoming {{upcomingQuizzes.length}}
-            <span *ngIf="upcomingQuizzes.length >1">
-                Quizzes
-            </span>
-            <span *ngIf="upcomingQuizzes.length === 1">
-                Quizz
-            </span>
-             </h2>
-          <app-shared-card [imgSrc]="'../../../../../assets/images/Quiz img.svg'" [cardContent]="upcomingQuizzes"
-            [headerKeys]="['title']" [detailKeys]="['schadule']" 
-            [additionalContentKey]="'participants'"
-            [wontUseGrid]="true"
-            [useGrid]="false"
-            [studentsVisibility]="true"
-            (view)="willBeViewed($event)">
-          </app-shared-card>
+            <h2 class='mb-3'>Upcoming {{upcomingQuizzes.length}}
+                <span *ngIf="upcomingQuizzes.length >1">
+                    Quizzes
+                </span>
+                <span *ngIf="upcomingQuizzes.length === 1">
+                    Quizz
+                </span>
+            </h2>
+            <app-shared-card [imgSrc]="'../../../../../assets/images/Quiz img.svg'" [cardContent]="upcomingQuizzes"
+                [headerKeys]="['title']" [detailKeys]="['schadule']" [additionalContentKey]="'participants'"
+                [wontUseGrid]="true" [useGrid]="false" [studentsVisibility]="true" (view)="willBeViewed($event)">
+            </app-shared-card>
         </div>
 
         <div class="p-3 mt-4 main-border rounded-3">
             <h2 class='mb-3 d-flex align-items-center justify-content-between'>
                 <span>
-                        Completed Quizzes 
+                    Completed Quizzes
                 </span>
                 <span class="resaults">
-                        Results
-                        <i class="fa fa-arrow-right ms-2" aria-hidden="true"></i>
-                    </span>
-              
-                </h2>
-               <!--shared table
-               this will be edited -->
-               <app-shared-table
-                [tableHeaders]="tableHeaders" 
-                [buttons]="buttons" 
-                [tableBodyContent]="completedQuizes"
-               [displayHeaders]="displayHeaders"></app-shared-table>
-          
+                    Results
+                    <i class="fa fa-arrow-right ms-2" aria-hidden="true"></i>
+                </span>
 
-            
-          </div>
-      </div>
+            </h2>
+            <!--shared table
+               this will be edited -->
+            <app-shared-table [tableHeaders]="tableHeaders" [buttons]="buttons" [tableBodyContent]="completedQuizes"
+                [displayHeaders]="displayHeaders"></app-shared-table>
+
+
+
+        </div>
+    </div>
 </div>

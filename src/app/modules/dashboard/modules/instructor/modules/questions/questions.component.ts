@@ -95,8 +95,8 @@ export class QuestionsComponent {
     exitAnimationDuration: string
   ): void {
     this.dialog.open(AddNewQuestionComponent, {
-      width: '550px',
-      height: '300px',
+      width: '600px',
+      height: '500px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
