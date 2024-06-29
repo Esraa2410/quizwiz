@@ -25,7 +25,6 @@ export class SharedHeaderComponent {
 
   initAnimation(): void {
     const list = this.orderedList.nativeElement.children;
-    const btn = this.button.nativeElement;
 
     gsap.from(list, {
       delay: 0.6,
@@ -35,12 +34,15 @@ export class SharedHeaderComponent {
       stagger: 0.2,
     });
 
-    gsap.from(btn, {
-      delay: 1.2,
-      duration: 0.4,
-      opacity: 0,
-      y: -60,
-      stagger: 0.2,
-    });
+    if (this.button) {
+      const btn = this.button.nativeElement;
+      gsap.from(btn, {
+        delay: 1.2,
+        duration: 0.4,
+        opacity: 0,
+        y: -60,
+        stagger: 0.2,
+      });
+    }
   }
 }

@@ -1,69 +1,64 @@
-import { HelperService } from './../../../../../../../../shared/services/helper.service';
-import { QuestionsService } from './../../../services/questions.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AddStudentGroupComponent } from '../../../../students/components/add-student-group/add-student-group.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { QuestionsService } from './../../../services/questions.service';
+import { HelperService } from './../../../../../../../../shared/services/helper.service';
 
 @Component({
   selector: 'app-add-new-question',
   templateUrl: './add-new-question.component.html',
-  styleUrls: ['./add-new-question.component.scss']
+  styleUrls: ['./add-new-question.component.scss'],
 })
-export class AddNewQuestionComponent {
-  // formData = {
-  //   title: '',
-  //   description: '',
-  //   options: {
-  //     A: '',
-  //     B: '',
-  //     C: '',
-  //     D: ''
-  //   },
-  //   answer: '',
-  //   difficulty: '',
-  //   type: 'BE' // Default value can be set here
-  // };
+export class AddNewQuestionComponent implements OnInit {
+  questionForm!: FormGroup;
 
-  formData = {
-    title: '',
-    description: '',
-    options: {
-      A: '',
-      B: '',
-      C: '',
-      D: ''
-    } as { [key: string]: string }, // Explicitly define the type of options
-    answer: '',
-    difficulty: '',
-    type: 'BE'
-  };
+  constructor(
+    public dialogRef: MatDialogRef<AddNewQuestionComponent>,
+    private questionsService: QuestionsService,
+    private helperService: HelperService,
+    private fb: FormBuilder
+  ) {}
 
-  // Extract keys for options dynamically
-  get optionKeys() {
-    return Object.keys(this.formData.options);
+  ngOnInit(): void {
+    this.formCreation();
   }
 
-  submitForm() {
-    console.log(this.formData); // Replace with your form submission logic
-    // Example: Call your API service to send this.formData to your API
-    this.QuestionsService.addStudent(this.formData).subscribe({
-      next:(res:any)=>{
-        this.HelperService.success(res.message)
-        
-        
-      },
-      error:(err:any)=>{
-        this.HelperService.error(err)
-      }, complete: () => {
-              this.onNoClick();
-            }
-    })
+  formCreation(): void {
+    this.questionForm = this.fb.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      options: this.fb.group({
+        A: ['', Validators.required],
+        B: ['', Validators.required],
+        C: ['', Validators.required],
+        D: ['', Validators.required],
+      }),
+      answer: ['', Validators.required],
+      difficulty: ['', Validators.required],
+      type: ['BE', Validators.required],
+    });
   }
 
+  submitForm(): void {
+    if (this.questionForm.valid) {
+      console.log('Form Submitted', this.questionForm.value);
+      this.questionsService.addQuestion(this.questionForm.value).subscribe({
+        next: (res: any) => {
+          this.helperService.success(res.message);
+        },
+        error: (err: any) => {
+          this.helperService.error(err);
+        },
+        complete: () => {
+          this.onNoClick();
+        },
+      });
+    } else {
+      console.log('Form is invalid');
+    }
+  }
 
-  constructor( public dialogRef: MatDialogRef<AddNewQuestionComponent>, private QuestionsService:QuestionsService, private HelperService:HelperService){}
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }
