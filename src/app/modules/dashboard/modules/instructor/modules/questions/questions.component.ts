@@ -1,6 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { QuestionsService } from './services/questions.service';
-import { IBreadCrumb, IButtonConfig } from 'src/app/modules/shared/models/shared';
+import {
+  IBreadCrumb,
+  IButtonConfig,
+} from 'src/app/modules/shared/models/shared';
 import { IQuestion } from './models/questions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
@@ -23,12 +26,7 @@ export class QuestionsComponent {
 
   questionList!: IQuestion[];
   paginatedList!: IQuestion[];
-  tableHeaders: string[] = [
-    'title',
-    'description',
-    'difficulty',
-    'actions',
-  ];
+  tableHeaders: string[] = ['title', 'description', 'difficulty', 'actions'];
   displayHeaders: { [key: string]: string } = {
     title: 'Question Title',
     description: 'Question Desc',
@@ -40,18 +38,18 @@ export class QuestionsComponent {
     {
       btnIcon: 'fa-solid fa-pen-to-square',
       action: (row) => this.updateFunction(row),
-      class: 'yellow-color'
+      class: 'yellow-color',
     },
     {
       btnIcon: 'fa-solid fa-trash',
       action: (row) => this.deleteFunction(row),
-      class: 'yellow-color'
+      class: 'yellow-color',
     },
     {
       btnIcon: 'fa-solid fa-eye',
       action: (row) => this.viewFunction(row),
-      class: 'yellow-color'
-    }
+      class: 'yellow-color',
+    },
   ];
   totalRecords: number = 0;
   rows: number = 10;
@@ -60,8 +58,7 @@ export class QuestionsComponent {
   private _QuestionService = inject(QuestionsService);
   private _HelperService = inject(HelperService);
 
-   
-    constructor( public dialog: MatDialog){}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getAllQuestions();
@@ -82,12 +79,12 @@ export class QuestionsComponent {
   getAllQuestions(): void {
     this._QuestionService.questions().subscribe({
       next: (res: IQuestion[]) => {
-        this.questionList = res
+        this.questionList = res;
         this.totalRecords = res.length;
         this.updatePaginatedData();
       },
-      error: (error: HttpErrorResponse) => this._HelperService.error(error)
-    })
+      error: (error: HttpErrorResponse) => this._HelperService.error(error),
+    });
   }
 
   openAddDailog(
@@ -101,6 +98,7 @@ export class QuestionsComponent {
       exitAnimationDuration,
     });
   }
+  
   updatePaginatedData(): void {
     const start = this.first;
     const end = this.first + this.rows;
