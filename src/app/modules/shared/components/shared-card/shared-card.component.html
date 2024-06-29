@@ -1,7 +1,18 @@
-<div class="card-container" [ngClass]="{'d-flex flex-column gap-3': wontUseGrid, 'row g-2': useGrid}">
-  <div *ngFor="let item of cardContent; let i = index" class="card-item" [class.col-md-6]="useGrid">
+<div
+  class="card-container"
+  [ngClass]="{ 'd-flex flex-column gap-3': wontUseGrid, 'row g-2': useGrid }"
+>
+  <div
+    *ngFor="let item of cardContent; let i = index"
+    class="card-item"
+    [class.col-md-6]="useGrid"
+  >
     <article class="d-flex align-items-center gap-3 overflow-hidden w-100">
-      <figure class="h-100 m-0 rounded-2" [class.pink-background]="addPinkBackground" [class.p-5]="addPinkBackground">
+      <figure
+        class="h-100 m-0 rounded-2"
+        [class.pink-background]="addPinkBackground"
+        [class.p-5]="addPinkBackground"
+      >
         <img [src]="imgSrc" class="w-100" alt="" />
       </figure>
       <div class="d-flex align-items-center gap-4 w-100 pe-3">
@@ -10,43 +21,74 @@
             <h4 class="m-0">{{ getHeaderContent(item) }}</h4>
             <div class="card-details d-flex align-items-center gap-3">
               <span *ngFor="let detail of getDetailsContent(item, i)">
-                {{ detail.key === 'avg_score' ? (detail.value | floatNumber : detail.key) : (detail.value | dynamicdate : detail.key) }}
-                <span *ngIf="!isLastElement(detail, getDetailsContent(item, i))">|</span>
+                {{
+                  detail.key === "avg_score"
+                    ? (detail.value | floatNumber : detail.key)
+                    : (detail.value | dynamicdate : detail.key)
+                }}
+                <span *ngIf="!isLastElement(detail, getDetailsContent(item, i))"
+                  >|</span
+                >
               </span>
             </div>
           </div>
-          <div class="card-student d-flex align-items-center justify-content-between" *ngIf="studentsVisibility">
-            <p class="m-0 fw-bold">No. of student’s enrolled: {{ getAdditionalContent(item) }}</p>
-            <div class="d-flex gap-2 align-items-center" role="button" [routerLink]="RouterLinkPath">
+          <div
+            class="card-student d-flex align-items-center justify-content-between"
+            *ngIf="studentsVisibility"
+          >
+            <p class="m-0 fw-bold">
+              No. of student’s enrolled: {{ getAdditionalContent(item) }}
+            </p>
+            <div
+              class="d-flex gap-2 align-items-center"
+              role="button"
+              [routerLink]="RouterLinkPath"
+            >
               <p class="m-0 fw-semibold">Open</p>
-              <i class="fa-solid fa-chevron-right" (click)="view.emit(item['_id'])"></i>
+              <i
+                class="fa-solid fa-chevron-right"
+                (click)="view.emit(item['_id'])"
+              ></i>
             </div>
           </div>
         </div>
         <div class="card-icon" *ngIf="mainIconVisibility">
           <div *ngIf="mainMenue">
-            <button class="btn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                <mat-icon>more_vert</mat-icon>
+            <button
+              class="btn"
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              aria-label="Example icon-button with a menu"
+            >
+              <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-                <button (click)="view.emit(item['_id'])" mat-menu-item>
-                    <mat-icon>visibility</mat-icon>
-                    <span>View</span>
-                </button>
-                <button (click)="delete.emit(item['_id'])" mat-menu-item>
-                    <mat-icon>delete</mat-icon>
-                    <span>Delete</span>
-                </button>
-                <button *ngIf="inGoup" (click)="updateStudentGroup.emit(item['_id'])" mat-menu-item>
-                  <mat-icon>visibility</mat-icon>
-                  <span>Update Group</span>
+              <button (click)="view.emit(item['_id'])" mat-menu-item>
+                <mat-icon>visibility</mat-icon>
+                <span>View</span>
               </button>
-              <button *ngIf="inGoup" (click)="deleteStudentGroup.emit(item['_id'])" mat-menu-item>
-                  <mat-icon>delete</mat-icon>
-                  <span>Delete from Group</span>
+              <button (click)="delete.emit(item['_id'])" mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+              <button
+                *ngIf="inGoup"
+                (click)="updateStudentGroup.emit(item['_id'])"
+                mat-menu-item
+              >
+                <mat-icon>visibility</mat-icon>
+                <span>Update Group</span>
+              </button>
+              <button
+                *ngIf="inGoup"
+                (click)="deleteStudentGroup.emit(item['_id'])"
+                mat-menu-item
+              >
+                <mat-icon>delete</mat-icon>
+                <span>Delete from Group</span>
               </button>
             </mat-menu>
-        </div>
+          </div>
         </div>
       </div>
     </article>

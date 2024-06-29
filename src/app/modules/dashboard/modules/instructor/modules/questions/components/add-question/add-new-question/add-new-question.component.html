@@ -1,84 +1,70 @@
 <form (ngSubmit)="submitForm()" #form="ngForm">
-  <div class="container-fluid   h-100 w-100 p-0 ">
-    <div class="header d-flex 
-         justify-content-between align-items-center border-bottom   ">
-      <div class="p-3 ">
-        <h5 class="m-0 p-0">Add New Question </h5>
+  <div class="container-fluid h-100 w-100 p-0">
+    <div class="header d-flex justify-content-between align-items-center border-bottom">
+      <div class="p-3">
+        <h5 class="m-0 p-0">Add New Question</h5>
       </div>
       <div>
-        <div class=" d-flex  justify-content-between align-items-center ">
-          <div class="d-inline check p-4
-                  border-start d-flex justify-content-center align-items-center ">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-inline check p-4 border-start d-flex justify-content-center align-items-center">
             <button type="submit" class="btn">
-              <span class="mx-1 "> <i class="fa-solid fa-check"></i> </span>
+              <span class="mx-1"><i class="fa-solid fa-check"></i></span>
             </button>
           </div>
-          <div (click)="onNoClick()" class="d-inline p-4
-                 close  border-start d-flex justify-content-center align-items-center ">
-            <span class="mx-1 "> <i class="fa-solid fa-xmark"></i> </span>
+          <div (click)="onNoClick()" class="d-inline p-4 close border-start d-flex justify-content-center align-items-center">
+            <span class="mx-1"><i class="fa-solid fa-xmark"></i></span>
           </div>
         </div>
       </div>
     </div>
+    
     <div class="row p-3 m-0">
       <div class="input-group col-12 my-2">
         <span class="input-group-text" id="basic-addon1">Title:</span>
-        <input type="text" [(ngModel)]="formData.title" name="title"
-          class="form-control p-2" aria-label="title"
-          aria-describedby="basic-addon1" required>
+        <input type="text" [(ngModel)]="formData.title" name="title" class="form-control p-2" aria-label="title" aria-describedby="basic-addon1" required>
       </div>
+      
       <div class="input-group col-12 my-2">
         <span class="input-group-text" id="basic-addon1">Description:</span>
-        <textarea [(ngModel)]="formData.description" name="description"
-          class="form-control" aria-label="With textarea"
-          required></textarea>
+        <textarea [(ngModel)]="formData.description" name="description" class="form-control" aria-label="With textarea" required></textarea>
       </div>
+      
       <div class="row">
-        <div class="col-md-6 mb-3"
-          *ngFor="let option of optionKeys; let i = index">
+        <div class="col-md-6 mb-3" *ngFor="let option of optionKeys; let i = index">
           <div class="input-group">
             <span class="input-group-text" id="basic-addon1">{{ option }}</span>
-            <input type="text" [(ngModel)]="formData.options[option]"
-              name="options-{{option}}" class="form-control"
-              aria-describedby="basic-addon1" required>
+            <input type="text" [(ngModel)]="formData.options[option]" name="options-{{option}}" class="form-control" aria-describedby="basic-addon1" required>
           </div>
         </div>
       </div>
-      <div class="row">
+      
+      <div class="row my-2">
         <div class="col-md-6">
           <div class="input-group">
-            <span class="input-group-text" id="basic-addon1">Difficulty
-              level</span>
-            <mat-select [(ngModel)]="formData.difficulty" name="difficulty"
-              class="form-control" required>
+            <span class="input-group-text" id="basic-addon1">Difficulty level</span>
+            <mat-select [(ngModel)]="formData.difficulty" name="difficulty" class="form-control" required>
               <mat-option value="easy">Easy</mat-option>
               <mat-option value="entry">Entry</mat-option>
               <mat-option value="hard">Hard</mat-option>
             </mat-select>
           </div>
-
         </div>
+        
         <div class="col-md-6">
           <div class="input-group">
-            <span class="input-group-text" id="basic-addon1">Category
-              type</span>
-            <mat-select [(ngModel)]="formData.type" name="type"
-              class="form-control" required>
+            <span class="input-group-text" id="basic-addon1">Category type</span>
+            <mat-select [(ngModel)]="formData.type" name="type" class="form-control" required>
               <mat-option value="FE">FE</mat-option>
               <mat-option value="BE">BE</mat-option>
             </mat-select>
           </div>
         </div>
       </div>
-
+      
       <div class="input-group col-12 my-2">
         <span class="input-group-text" id="basic-addon1">Right Answer</span>
-        <input type="text" [(ngModel)]="formData.answer" name="answer"
-          class="form-control p-2" aria-label="answer"
-          aria-describedby="basic-addon1" required>
+        <input type="text" [(ngModel)]="formData.answer" name="answer" class="form-control p-2" aria-label="answer" aria-describedby="basic-addon1" required>
       </div>
     </div>
-
   </div>
-
 </form>
