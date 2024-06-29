@@ -101,6 +101,7 @@ export class QuestionsComponent {
       enterAnimationDuration,
       exitAnimationDuration,
     });
+  }
   updatePaginatedData(): void {
     const start = this.first;
     const end = this.first + this.rows;
