@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   upcomingQuizzes: IQuiz[] = [];
   topFiveStudents: IStudent[] = [];
   RouterLinkPath ='/dashboard/instructor/quizzes/view-Quiz';
+  RouterLinkPath2 ='/dashboard/instructor/students/view-Quiz';
   constructor(private homeService: HomeService ,private _Router:Router,private dialog :MatDialog) {}
 
 
