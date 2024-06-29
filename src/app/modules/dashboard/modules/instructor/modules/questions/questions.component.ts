@@ -86,8 +86,7 @@ export class QuestionsComponent {
         this.totalRecords = res.length;
         this.updatePaginatedData();
       },
-      error: (error: HttpErrorResponse) => this._HelperService.error(error),
-      complete: () => this._HelperService.success('All Questions Are Retrieved')
+      error: (error: HttpErrorResponse) => this._HelperService.error(error)
     })
   }
 
