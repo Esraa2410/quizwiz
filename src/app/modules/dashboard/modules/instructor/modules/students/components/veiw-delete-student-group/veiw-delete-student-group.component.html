@@ -41,27 +41,29 @@
 </form> -->
 
 
-
-<div class="header d-flex 
-justify-content-between align-items-center border-bottom   ">
-   <div class="p-3 ">
-       <h5 class="m-0 p-0">Delete Student From Group </h5>
-   </div>
-   <div>
-       <div class=" d-flex  justify-content-between align-items-center ">
-           <div class="d-inline check p-4
+<div class="container-fluid   h-100 w-100 p-0 ">
+    <div class="header d-flex justify-content-between align-items-center border-bottom   ">
+        <div class="p-3 ">
+            <h5 class="m-0 p-0">Delete Student From Group </h5>
+        </div>
+        <div>
+            <div class=" d-flex  justify-content-between align-items-center ">
+                <div class="d-inline check p-4
          border-start d-flex justify-content-center align-items-center ">
-               <button (click)="deletStudentFromGroup(data.stdId,data.groupId)" class="btn">
-                   <span class="mx-1 "> <i class="fa-solid fa-check"></i> </span>
-               </button>
-           </div>
-           <div (click)="onNoClick()" class="d-inline p-4
+                    <button (click)="deletStudentFromGroup(data.stdId,data.groupId)" class="btn">
+                        <span class="mx-1 "> <i class="fa-solid fa-check"></i> </span>
+                    </button>
+                </div>
+                <div (click)="onNoClick()" class="d-inline p-4
         close  border-start d-flex justify-content-center align-items-center ">
-               <span class="mx-1 "> <i class="fa-solid fa-xmark"></i> </span>
-           </div>
-       </div>
-   </div>
-   <div>
-    Are You Sure You Want To Delete This Student?
-   </div>
+                    <span class="mx-1 "> <i class="fa-solid fa-xmark"></i> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-5">
+        <h3>
+            Are You Sure You Want To Delete This Student?
+        </h3>
+    </div>
 </div>
