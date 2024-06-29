@@ -27,8 +27,8 @@ export class StudentsService {
   }
 
   //delete student from group
-  deleteStudGroup(data: IAddStudToGroupReq): Observable<IAddStudToGroupRes> {
-    return this._HttpClient.delete<IAddStudToGroupRes>(`student/${data.student_id}/${data.group_id}`);
+  deleteStudGroup(stId:string,groupId:string): Observable<IDeleteStudentRes> {
+    return this._HttpClient.delete<IDeleteStudentRes>(`student/${stId}/${groupId}`);
   }
 
   //update student group   =>not work

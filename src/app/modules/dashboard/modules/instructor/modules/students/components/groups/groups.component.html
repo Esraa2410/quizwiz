@@ -1,7 +1,25 @@
+<div class="d-flex justify-content-between align-items-center">
 <app-shared-main-header
   [headerText]="'Students List'"
   [navigationVisibility]="false"
 ></app-shared-main-header>
+<!-- <div class="mb-3">
+  <button class="btn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+      <button (click)="openUpdateDailog('1000ms', '1000ms','667d5d6ec85f1ecdbc26f5fa' ,'update')"  mat-menu-item>
+        <mat-icon>visibility</mat-icon>
+        <span>Update Student Group</span>
+    </button>
+    <button (click)="openUpdateDailog('1000ms', '1000ms','667d5d6ec85f1ecdbc26f5fa','delete')"  mat-menu-item >
+        <mat-icon>delete</mat-icon>
+        <span>Delete Student from Group</span>
+    </button>
+  </mat-menu>
+</div> -->
+</div>
+
 <app-shared-card
   [imgSrc]="'../../../../../assets/images/student.png'"
   [cardContent]="studentsDetails"
@@ -10,6 +28,11 @@
   [studentsVisibility]="false"
   [useGrid]="true"
   [mainIconVisibility]="true"
+  [mainMenue]="true"
+  (view)="willBeViewed($event)"
+  (delete)="willBeDelete($event)"
+  (deleteStudentGroup)="willBeDeleteFromGoup($event)"
+  [inGoup]="true"
   
  
 ></app-shared-card>
