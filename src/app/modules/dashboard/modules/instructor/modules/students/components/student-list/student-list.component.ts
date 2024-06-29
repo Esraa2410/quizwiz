@@ -20,17 +20,17 @@ export class StudentListComponent implements OnInit {
   first: number = 0;
 
 
-  studentDetails:IStudentWithoutGroupRes={
-    _id:'',
-    email:'',
-    first_name:'',
-    last_name:'',
-    role:'',
-    status:''
+  studentDetails: IStudentWithoutGroupRes = {
+    _id: '',
+    email: '',
+    first_name: '',
+    last_name: '',
+    role: '',
+    status: ''
   };
   private _StudentsService = inject(StudentsService);
   private _HelperService = inject(HelperService);
-  public dialog=inject(MatDialog);
+  public dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.onGetAllStudents();
@@ -65,27 +65,41 @@ export class StudentListComponent implements OnInit {
   }
 
 
-  openDailog(enterAnimationDuration: string, exitAnimationDuration: string ,id:string ,btnText:string): void {
-    const dialogRef =    this.dialog.open(VeiwDeleteStudentComponent, {
+  willBeViewed(event: string): any {
+    console.log(event)
+    let btnText = 'veiw'
+    const dialogRef = this.dialog.open(VeiwDeleteStudentComponent, {
       width: '570px',
       height: '350px',
-      enterAnimationDuration,
-      exitAnimationDuration,
       data: {
-        id:id,
-        btnText:btnText
+        id: event,
+        btnText: btnText
       }
     });
 
-    if(btnText=='delete'){
+  }
+
+
+  willBeDelete(event: string): any {
+    console.log(event);
+    let btnText = 'delete'
+    const dialogRef = this.dialog.open(VeiwDeleteStudentComponent, {
+      width: '570px',
+      height: '350px',
+      data: {
+        id: event,
+        btnText: btnText
+      }
+    });
+
     dialogRef.afterClosed().subscribe(() => {
       this.onGetAllStudents();
-    });
+    })
   }
-  }
-
-
 }
+
+
+
 
 
 

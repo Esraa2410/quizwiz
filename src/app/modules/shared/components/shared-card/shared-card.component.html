@@ -8,7 +8,7 @@
         <div class="d-flex flex-column gap-3 p-3 w-100">
           <div class="card-main-header">
             <h4 class="m-0">{{ getHeaderContent(item) }}</h4>
-            <div class="card-details d-flex align-items-center gap-3">
+            <div class="card-details  d-flex align-items-center gap-3">
               <span *ngFor="let detail of getDetailsContent(item, i)">
                 {{ detail }} <span *ngIf="!isLastElement(detail, getDetailsContent(item, i))">|</span>
               </span>
@@ -23,7 +23,31 @@
           </div>
         </div>
         <div class="card-icon" *ngIf="mainIconVisibility">
-          <i class="fa-solid fa-chevron-right"></i>
+          <div>
+            <button class="btn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button (click)="view.emit(item['_id'])"   mat-menu-item>
+                    <mat-icon>visibility</mat-icon>
+                    <span>Veiw</span>
+                </button>
+                <button (click)="delete.emit(item['_id'])"   mat-menu-item >
+                    <mat-icon>delete</mat-icon>
+                    <span>Delete</span>
+                </button>
+                <!-- <button  mat-menu-item>
+                  <mat-icon>visibility</mat-icon>
+                  <span>Update Group</span>
+              </button>
+              <button mat-menu-item >
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete from Group</span>
+              </button> -->
+            </mat-menu>
+           
+
+        </div>
         </div>
       </div>
     </article>

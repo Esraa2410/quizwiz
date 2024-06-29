@@ -31,7 +31,7 @@ export class StudentsWithoutGroupComponent {
         this.updatePaginatedData();
       },
       error: (error: HttpErrorResponse) => this._HelperService.error(error),
-      complete: () => this._HelperService.success('Students Without group retrieved')
+      // complete: () => this._HelperService.success('Students Without group retrieved')
     });
   }
 

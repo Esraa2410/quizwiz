@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IGroupDetailsRes, IStudent } from '../../../groups/models/groups';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
+import { StudentsService } from '../../services/students.service';
 
 @Component({
   selector: 'app-groups',
@@ -14,11 +15,13 @@ export class GroupsComponent {
   private _GroupsService = inject(GroupsService);
   private _ActivatedRoute = inject(ActivatedRoute);
   private _HelperService = inject(HelperService);
+  private _StudentsService = inject(StudentsService);
   studentsDetails!: IStudent[];
   paginatedStudentData!: IStudent[];
   totalRecords: number = 0;
   rows: number = 10;
   first: number = 0;
+  studentDetails:any;
 
   ngOnInit(): void {
     this.onCheckRoute();
@@ -57,4 +60,8 @@ export class GroupsComponent {
     this.first = (page - 1) * this.rows;
     this.updatePaginatedData();
   }
+
+
+
+
 }

@@ -19,6 +19,8 @@ import { GroupsComponent } from './components/groups/groups.component';
 import { ReactiveFormsModule ,FormsModule } from '@angular/forms';
 import { VeiwDeleteStudentComponent } from './components/veiw-delete-student/veiw-delete-student.component';
 import { VeiwDeleteStudentGroupComponent } from './components/veiw-delete-student-group/veiw-delete-student-group.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { VeiwDeleteStudentGroupComponent } from './components/veiw-delete-studen
     GroupsComponent,
   ],
   imports: [
+    MatIconModule,
+    MatMenuModule,
     CommonModule,
     StudentsRoutingModule,
     SharedModule,

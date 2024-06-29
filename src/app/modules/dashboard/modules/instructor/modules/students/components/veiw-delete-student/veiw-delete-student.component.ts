@@ -43,7 +43,7 @@ export class VeiwDeleteStudentComponent implements OnInit {
       next: (res: IDeleteStudentRes) => {
         this._HelperService.success(res.message);
       }, error: (err: HttpErrorResponse) => {
-        this._HelperService.error(err.error.message);
+       // this._HelperService.error(err.error.message);
       }, complete: () => {
         this.onNoClick();
       }
@@ -55,7 +55,7 @@ export class VeiwDeleteStudentComponent implements OnInit {
       next: (res: IStudentWithoutGroupRes) => {
         this.studentDetails = res;
       }, error: (err: HttpErrorResponse) => {
-        this._HelperService.error(err.error.message);
+       this._HelperService.error(err.error.message);
       }
     })
   }

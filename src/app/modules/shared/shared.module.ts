@@ -14,7 +14,8 @@ import { SharedMainHeaderComponent } from './components/shared-main-header/share
 import { MenuModule } from 'primeng/menu';
 import { ButtonModule } from 'primeng/button';
 import { SpeedDialModule } from 'primeng/speeddial';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   imports: [
@@ -26,7 +27,9 @@ import { SpeedDialModule } from 'primeng/speeddial';
     PaginatorModule,
     MenuModule,
     ButtonModule,
-    SpeedDialModule
+    SpeedDialModule,
+    MatIconModule,
+    MatMenuModule
   ],
   declarations: [
     SharedAuthComponent,

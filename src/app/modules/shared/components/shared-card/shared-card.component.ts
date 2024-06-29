@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -18,6 +18,20 @@ export class SharedCardComponent<T extends { [key: string]: any }> {
   @Input() useGrid: boolean = false;
   @Input() wontUseGrid: boolean = false;
   @Input() items!: MenuItem[];
+  @Output() view = new EventEmitter<string>();
+  @Output() delete = new EventEmitter<string>();
+ 
+
+
+  viewItem(studenttId: string) {
+    this.view.emit(studenttId);
+  }
+
+  deleteItem(studenttId: string) {
+    this.delete.emit(studenttId);
+  }
+
+
 
   getHeaderContent(item: T): string {
     return this.headerKeys.map(key => item[key]).join(' ');
@@ -34,4 +48,5 @@ export class SharedCardComponent<T extends { [key: string]: any }> {
   isLastElement(element: any, array: any[]): boolean {
     return array.indexOf(element) === array.length - 1;
   }
+
 }
