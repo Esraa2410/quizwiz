@@ -13,7 +13,7 @@
           </li>
         </ol>
       </nav>
-      <div class="content text-end" #button>
+      <div class="content text-end" #button *ngIf="btnVisibility">
           <button class="btn headerBtn " (click)="openAddDialog()">
               <i [class]="btnIcon" aria-hidden="true"></i>
               {{btnText}}
