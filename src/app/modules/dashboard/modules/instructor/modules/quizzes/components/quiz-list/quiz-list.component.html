@@ -1,0 +1,15 @@
+<app-shared-table 
+[tableHeaders]="tableHeaders"
+ [buttons]="buttons" 
+ [tableBodyContent]="allQuizzes"
+[displayHeaders]="displayHeaders"
+></app-shared-table>
+
+<!--pagination-->
+<app-shared-pagnation
+    [rowsPerPage]="[5, 10, 20]"
+    [totalRecords]="totalRecords"
+    [rows]="rows"
+    (pageSizeChanged)="onPageSizeChange($event)"
+    (pageNumberChanged)="onPageNumberChange($event)"
+  ></app-shared-pagnation>

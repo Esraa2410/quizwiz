@@ -10,6 +10,7 @@ import { ViewQuizComponent } from './components/view-quiz/view-quiz.component';
 import { QuizCreatedComponent } from './components/quiz-created/quiz-created.component';
 import { DeleteQuizComponent } from './components/delete-quiz/delete-quiz.component';
 import { UpdateQuizComponent } from './components/update-quiz/update-quiz.component';
+import { QuizListComponent } from './components/quiz-list/quiz-list.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { UpdateQuizComponent } from './components/update-quiz/update-quiz.compon
     ViewQuizComponent,
     QuizCreatedComponent,
     DeleteQuizComponent,
-    UpdateQuizComponent
+    UpdateQuizComponent,
+    QuizListComponent
   ],
   imports: [
     CommonModule,

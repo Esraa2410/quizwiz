@@ -144,4 +144,7 @@ export class QuizzesComponent implements OnInit {
     this._Router.navigateByUrl(`/dashboard/instructor/quizzes/view-Quiz/${row._id}`)
   }
 
+  goToBankOfQuizTable(){
+    this._Router.navigateByUrl(`/dashboard/instructor/quizzes/allQuizes`)
+  }
 }
