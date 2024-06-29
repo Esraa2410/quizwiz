@@ -14,6 +14,8 @@ export class SharedCardComponent<T extends { [key: string]: any }> {
   @Input() studentsVisibility: boolean = false;
   @Input() addPinkBackground: boolean = false;
   @Input() mainIconVisibility: boolean = false;
+  @Input() mainMenue: boolean = false;
+
   @Input() cardContent: T[] = [];
   @Input() useGrid: boolean = false;
   @Input() wontUseGrid: boolean = false;

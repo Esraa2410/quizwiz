@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="card-icon" *ngIf="mainIconVisibility">
-          <div>
+          <div *ngIf="mainMenue">
             <button class="btn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>more_vert</mat-icon>
             </button>

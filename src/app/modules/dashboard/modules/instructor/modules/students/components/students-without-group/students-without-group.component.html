@@ -9,7 +9,10 @@
     [detailKeys]="['status', 'role']"
     [studentsVisibility]="false"
     [useGrid]="true"
+    [mainMenue]="true"
     [mainIconVisibility]="true"
+    (view)="willBeViewed($event)"
+  (delete)="willBeDelete($event)"
 ></app-shared-card>
 <app-shared-pagnation
     [rowsPerPage]="[10, 20, 50]"

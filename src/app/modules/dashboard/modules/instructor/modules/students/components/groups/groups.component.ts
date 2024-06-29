@@ -5,6 +5,8 @@ import { IGroupDetailsRes, IStudent } from '../../../groups/models/groups';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
 import { StudentsService } from '../../services/students.service';
+import { VeiwDeleteStudentComponent } from '../veiw-delete-student/veiw-delete-student.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-groups',
@@ -16,6 +18,7 @@ export class GroupsComponent {
   private _ActivatedRoute = inject(ActivatedRoute);
   private _HelperService = inject(HelperService);
   private _StudentsService = inject(StudentsService);
+  public dialog = inject(MatDialog);
   studentsDetails!: IStudent[];
   paginatedStudentData!: IStudent[];
   totalRecords: number = 0;
@@ -61,6 +64,37 @@ export class GroupsComponent {
     this.updatePaginatedData();
   }
 
+  willBeViewed(event: string): any {
+    console.log(event)
+    let btnText = 'veiw'
+    const dialogRef = this.dialog.open(VeiwDeleteStudentComponent, {
+      width: '570px',
+      height: '350px',
+      data: {
+        id: event,
+        btnText: btnText
+      }
+    });
+
+  }
+
+
+  willBeDelete(event: string): any {
+    console.log(event);
+    let btnText = 'delete'
+    const dialogRef = this.dialog.open(VeiwDeleteStudentComponent, {
+      width: '570px',
+      height: '350px',
+      data: {
+        id: event,
+        btnText: btnText
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.onCheckRoute();
+    })
+  }
 
 
 
