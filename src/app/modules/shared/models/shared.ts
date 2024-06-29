@@ -12,7 +12,9 @@ export interface IBreadCrumb {
 }
 
 export interface IButtonConfig {
-  label: string;
+  label?: string;
+  btnIcon: string;
   class: string;
-  action: () => void;
+  action: (row: any) => void;
 }
+

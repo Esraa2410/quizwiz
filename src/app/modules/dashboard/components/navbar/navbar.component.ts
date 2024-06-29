@@ -198,4 +198,10 @@ export class NavbarComponent implements OnInit {
   openChangePass() {
     this._Router.navigate(['/auth/change-password']);
   }
+
+  getUpdatedProfileData(): void {
+    this._AuthService.profileUpdatedData$.subscribe({
+      next: (res: IUpdateProfileRes) => this.userName = res.data.first_name + res.data.last_name
+    })
+  }
 }
