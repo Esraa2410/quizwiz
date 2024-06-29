@@ -13,6 +13,7 @@ export class SharedHeaderComponent {
   @Input() btnText: string = '';
   @Input() btnIcon: string = '';
   @Output() btnEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Input() btnVisibility: boolean = true;
 
   openAddDialog() {
     this.btnEvent.emit();
