@@ -14,23 +14,23 @@
     transform: translateX(0);
     height: 100%;
     width: 5px;
-    background-color: #000;
+    background-color: $light-yellow-color;
     transition: 1s linear;
     z-index: -1;
   }
 }
 
 .navigation.active-navigation {
-  width: 300px;
+  width: 200px;
   transition-delay: 1s linear;
 
   > span {
-    transform: translateX(330px);
+    transform: translateX(265px);
     z-index: -1;
 
     &:nth-child(2) {
-      width: 100px;
-      transform: translateX(220px);
+      width: 120px;
+      transform: translateX(120px);
     }
   }
 }
@@ -41,7 +41,7 @@
   right: 15px;
   width: 50px;
   height: 50px;
-  background: #000;
+  background: $light-yellow-color;
   border-radius: 50%;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
   cursor: pointer;
@@ -57,7 +57,7 @@
   width: 26px;
   height: 3px;
   border-radius: 3px;
-  background: #fff;
+  background: #000;
   transform: translateY(-5px);
   transition: 1s linear;
 }
@@ -68,7 +68,7 @@
   width: 26px;
   height: 3px;
   border-radius: 3px;
-  background: #fff;
+  background: #000;
   transform: translateY(5px);
   transition: 1s linear;
 }
@@ -107,7 +107,7 @@
 }
 
 .navigation ul li:hover {
-  background: #000;
+  background: $light-yellow-color;
 }
 
 .navigation ul li:nth-child(1) {
@@ -126,7 +126,7 @@
   height: 20px;
   background: transparent;
   border-bottom-right-radius: 20px;
-  box-shadow: 7.5px 7.5px 0 7.5px #000;
+  box-shadow: 7.5px 7.5px 0 7.5px $light-yellow-color;
 }
 
 .navigation ul li:not(:first-child):hover::after,
@@ -139,7 +139,7 @@
   height: 20px;
   background: transparent;
   border-top-right-radius: 20px;
-  box-shadow: 7.5px -7.5px 0 7.5px #000;
+  box-shadow: 7.5px -7.5px 0 7.5px $light-yellow-color;
 }
 
 .navigation ul li a {
@@ -152,7 +152,7 @@
 }
 
 .navigation ul li:hover:not(:first-child) a {
-  color: #fff;
+  color: #000;
 }
 
 .navigation ul li a .icon {
@@ -179,9 +179,9 @@
 }
 
 .active-li {
-  background-color: #000 !important;
+  background-color: $light-yellow-color !important;
   > * {
-    color: #fff !important
+    color: #000 !important
   }
 }
 
