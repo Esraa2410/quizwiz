@@ -14,9 +14,9 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   upcomingQuizzes: IQuiz[] = [];
   topFiveStudents: IStudent[] = [];
-  RouterLinkPath ='/dashboard/instructor/quizzes/view-Quiz';
-  RouterLinkPath2 ='/dashboard/instructor/students/view-Quiz';
-  constructor(private homeService: HomeService ,private _Router:Router,private dialog :MatDialog) {}
+  RouterLinkPath = '/dashboard/instructor/quizzes/view-Quiz';
+  RouterLinkPath2 = '/dashboard/instructor/students/view-Quiz';
+  constructor(private homeService: HomeService, private _Router: Router, private dialog: MatDialog) { }
 
 
   ngOnInit(): void {
@@ -35,10 +35,43 @@ export class HomeComponent implements OnInit {
       this.topFiveStudents = students;
     });
   }
-  willBeViewed(event:string){
+  willBeViewed(event: string) {
     this._Router.navigateByUrl(`dashboard/instructor/quizzes/view-Quiz/${event}`)
-}
   }
+
+
+  willBeViewedStudent(event: string): any {
+    console.log(event)
+    let btnText = 'veiw'
+    const dialogRef = this.dialog.open(VeiwDeleteStudentComponent, {
+      width: '570px',
+      height: '350px',
+      data: {
+        id: event,
+        btnText: btnText
+      }
+    });
+
+  }
+
+
+  willBeDeleteStudent(event: string): any {
+    console.log(event);
+    let btnText = 'delete'
+    const dialogRef = this.dialog.open(VeiwDeleteStudentComponent, {
+      width: '570px',
+      height: '350px',
+      data: {
+        id: event,
+        btnText: btnText
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.topStudents();
+    })
+  }
+}
 
 
 
