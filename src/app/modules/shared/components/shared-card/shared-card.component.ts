@@ -15,6 +15,8 @@ export class SharedCardComponent<T extends { [key: string]: any }> {
   @Input() addPinkBackground: boolean = false;
   @Input() mainIconVisibility: boolean = false;
   @Input() mainMenue: boolean = false;
+  @Input() inGoup: boolean = false;
+  
 
   @Input() cardContent: T[] = [];
   @Input() useGrid: boolean = false;
@@ -23,6 +25,16 @@ export class SharedCardComponent<T extends { [key: string]: any }> {
   @Output() view = new EventEmitter<string>();
   @Output() delete = new EventEmitter<string>();
  
+  @Output() updateStudentGroup = new EventEmitter<any>();
+  @Output() deleteStudentGroup = new EventEmitter<string>();
+  @Output() groupId = new EventEmitter<string>();
+  @Input() item: any;
+
+  onDeleteStudentGroup(studenttId: string) {
+    this.deleteStudentGroup.emit(studenttId);
+  }
+
+
 
 
   viewItem(studenttId: string) {

@@ -38,14 +38,16 @@
                     <mat-icon>delete</mat-icon>
                     <span>Delete</span>
                 </button>
-                <!-- <button  mat-menu-item>
+                <button *ngIf="inGoup" 
+                mat-menu-item>
                   <mat-icon>visibility</mat-icon>
                   <span>Update Group</span>
               </button>
-              <button mat-menu-item >
+              <button *ngIf="inGoup" 
+              (click)="deleteStudentGroup.emit(item['_id'])"  mat-menu-item >
                   <mat-icon>delete</mat-icon>
                   <span>Delete from Group</span>
-              </button> -->
+              </button>
             </mat-menu>
            
 
