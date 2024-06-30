@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { RestulsRoutingModule } from './restuls-routing.module';
 import { RestulsComponent } from './restuls.component';
+import { ResultsViewComponent } from './components/results-view/results-view.component';
 
 
 @NgModule({
   declarations: [
-    RestulsComponent
+    RestulsComponent,
+    ResultsViewComponent
   ],
   imports: [
     CommonModule,
