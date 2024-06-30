@@ -1,6 +1,6 @@
-<section>
-  <div class="row">
-    <div class="col-md-6 col-12 col-sm-12 p-5">
+<section class="">
+  <div class="row h-100 g-2">
+    <div class="col-md-6 col-12 col-sm-12 p-3 m-0 h-100" #contentBx>
       <h2 class="d-flex align-items-center gap-2" #logo>
         <div class="d-flex align-items-center">
           <span> <i class="fa-solid fa-xmark"></i> </span>
@@ -8,115 +8,234 @@
         </div>
         <i>|</i> Quizwiz
       </h2>
-      <div class="auth-content my-5">
-        <h3 class="auth-header my-5" #header>{{authHeader}}</h3>
-        <div class="toggle-auth-button" *ngIf="toggleSignupSignInVisibility" #authButtons>
-          <ul class="d-flex">
-            <li role="button" class="main-transition" [routerLink]="'/auth/login'"
-              [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active-link">
+      <div class="auth-content my-2">
+        <h3 class="auth-header my-2" #header>{{ authHeader }}</h3>
+        <div
+          class="toggle-auth-button"
+          *ngIf="toggleSignupSignInVisibility"
+          #authButtons
+        >
+          <ul class="d-flex" #toggleAuthBtn>
+            <li
+              role="button"
+              class="main-transition"
+              [routerLink]="'/auth/login'"
+              [routerLinkActiveOptions]="{ exact: true }"
+              routerLinkActive="active-link"
+            >
               <i class="fa-solid fa-user"></i>
               <p>Sign in</p>
             </li>
-            <li role="button" class="main-transition" [routerLink]="'/auth/register'"
-              [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active-link">
+            <li
+              role="button"
+              class="main-transition"
+              [routerLink]="'/auth/register'"
+              [routerLinkActiveOptions]="{ exact: true }"
+              routerLinkActive="active-link"
+            >
               <i class="fa-solid fa-user-plus"></i>
               <p>Sign up</p>
             </li>
           </ul>
         </div>
-        <form class="row g-5" (ngSubmit)="onSubmit(authForm)" [formGroup]="authForm" #formData>
-          <div *ngFor="let formField of formFields" [ngClass]="
-            {
-              'col-md-6 col-12': (formField.controlName === 'first_name' || formField.controlName === 'last_name'),
-              'col-12': !(formField.controlName === 'first_name' || formField.controlName === 'last_name')
-            }">
+        <form
+          class="row g-3"
+          (ngSubmit)="onSubmit(authForm)"
+          [formGroup]="authForm"
+          #formData
+        >
+          <div
+            *ngFor="let formField of formFields"
+            [ngClass]="{
+              'col-md-6 col-12':
+                formField.controlName === 'first_name' ||
+                formField.controlName === 'last_name',
+              'col-12': !(
+                formField.controlName === 'first_name' ||
+                formField.controlName === 'last_name'
+              )
+            }"
+          >
             <div class="input-group d-flex flex-column gap-2">
-              <label [for]="formField.controlName"> {{ formField.controlName === 'role' ? (userToken ? formField.label :
-                'Admin rights required') :
-                formField.label }} </label>
-             
-              <div class="input-group main-input-group d-flex justify-content-between">
+              <label [for]="formField.controlName">
+                {{
+                  formField.controlName === "role"
+                    ? userToken
+                      ? formField.label
+                      : "Admin rights required"
+                    : formField.label
+                }}
+              </label>
+
+              <div
+                class="input-group main-input-group d-flex justify-content-between"
+              >
                 <span class="input-group-text">
                   <i [class]="formField.iconClass"></i>
                 </span>
-                <select [formControlName]="formField.controlName" *ngIf="formField.controlName === 'role'" class="form-select" [disabled]="!userToken"
-                [id]="formField.controlName">
-                <option value="Instructor">Instructor</option>
-                <option value="Student">Student</option>
-              </select>
                 <div class="d-flex flex-grow-1">
-                 
-                  <input *ngIf="formField.controlName !== 'role'"
-                    [type]="(formField.controlName === 'password' && hidePassword) || (formField.controlName === 'password_new' && hideNewPassword) ? 'password' : 'text'"
-                    [formControlName]="formField.controlName" [id]="formField.controlName" class="w-100"
-                    [name]="formField.controlName" [placeholder]="formField.placeholder" />
+                  <select
+                  [formControlName]="formField.controlName"
+                  *ngIf="formField.controlName === 'role'"
+                  class="form-select"
+                  [disabled]="!userToken"
+                  [id]="formField.controlName"
+                >
+                  <option value="" [defaultSelected]="true">Select Role</option>
+                  <option value="Instructor">Instructor</option>
+                  <option value="Student">Student</option>
+                </select>
+                  <input
+                    *ngIf="formField.controlName !== 'role'"
+                    [type]="
+                      (formField.controlName === 'password' && hidePassword) ||
+                      (formField.controlName === 'password_new' &&
+                        hideNewPassword)
+                        ? 'password'
+                        : 'text'
+                    "
+                    [formControlName]="formField.controlName"
+                    [id]="formField.controlName"
+                    class="w-100"
+                    [name]="formField.controlName"
+                    [placeholder]="formField.placeholder"
+                  />
                 </div>
-                <span class="input-group-text" *ngIf="formField.controlName === 'password'" role="button"
-                  (click)="hidePassword = !hidePassword">
-                  <i [class]="!hidePassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"></i>
+                <span
+                  class="input-group-text"
+                  *ngIf="formField.controlName === 'password'"
+                  role="button"
+                  (click)="hidePassword = !hidePassword"
+                >
+                  <i
+                    [class]="
+                      !hidePassword
+                        ? 'fa-solid fa-eye'
+                        : 'fa-solid fa-eye-slash'
+                    "
+                  ></i>
                 </span>
-                <span class="input-group-text" *ngIf="formField.controlName === 'password_new'" role="button"
-                  (click)="hideNewPassword = !hideNewPassword">
-                  <i [class]="!hideNewPassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"></i>
+                <span
+                  class="input-group-text"
+                  *ngIf="formField.controlName === 'password_new'"
+                  role="button"
+                  (click)="hideNewPassword = !hideNewPassword"
+                >
+                  <i
+                    [class]="
+                      !hideNewPassword
+                        ? 'fa-solid fa-eye'
+                        : 'fa-solid fa-eye-slash'
+                    "
+                  ></i>
                 </span>
               </div>
             </div>
-            <div *ngIf="
-            authForm.get(formField.controlName)?.invalid &&
-            (authForm.get(formField.controlName)?.dirty ||
-            authForm.get(formField.controlName)?.touched)" class="error"
-              [ngClass]="{'controlName-invalid': authForm.get(formField.controlName)?.invalid}">
-
-              <div *ngIf="authForm.get(formField.controlName)?.errors?.['required']" class="text-danger">
-                <p class="text-danger mb-0">{{ formField.label }} is <strong>required.</strong></p>
+            <div
+              *ngIf="
+                authForm.get(formField.controlName)?.invalid &&
+                (authForm.get(formField.controlName)?.dirty ||
+                  authForm.get(formField.controlName)?.touched)
+              "
+              class="error"
+              [ngClass]="{
+                'controlName-invalid': authForm.get(formField.controlName)
+                  ?.invalid
+              }"
+            >
+              <div
+                *ngIf="authForm.get(formField.controlName)?.errors?.['required']"
+                class="text-danger"
+              >
+                <p class="text-danger mb-0">
+                  {{ formField.label }} is <strong>required.</strong>
+                </p>
               </div>
 
-              <div *ngIf="authForm.get(formField.controlName)?.errors?.['email']" class="text-danger">
-                <p class="text-danger mb-0">Please enter a valid email address.</p>
+              <div
+                *ngIf="authForm.get(formField.controlName)?.errors?.['email']"
+                class="text-danger"
+              >
+                <p class="text-danger mb-0">
+                  Please enter a valid email address.
+                </p>
               </div>
 
-              <div *ngIf="authForm.get(formField.controlName)?.errors?.['minlength']" class="text-danger">
-                <p class="mb-0">{{ formField.label }} must be at least
+              <div
+                *ngIf="authForm.get(formField.controlName)?.errors?.['minlength']"
+                class="text-danger"
+              >
+                <p class="mb-0">
+                  {{ formField.label }} must be at least
                   <strong>{{
                     authForm.get(formField.controlName)?.errors?.['minlength']?.requiredLength }}</strong>
                   characters long.
                 </p>
               </div>
 
-              <div *ngIf="authForm.get(formField.controlName)?.errors?.['maxlength']" class="text-danger">
-                <p class="mb-0">{{ formField.label }} cannot be more than
+              <div
+                *ngIf="authForm.get(formField.controlName)?.errors?.['maxlength']"
+                class="text-danger"
+              >
+                <p class="mb-0">
+                  {{ formField.label }} cannot be more than
                   <strong>{{
                     authForm.get(formField.controlName)?.errors?.['maxlength']?.requiredLength }}</strong>
                   characters long.
                 </p>
               </div>
 
-              <div *ngIf="authForm.get(formField.controlName)?.errors?.['pattern']" class="text-danger">
-                <p class="mb-0">{{ formField.label }} must include uppercase, lowercase, number, and special
-                  character.</p>
+              <div
+                *ngIf="authForm.get(formField.controlName)?.errors?.['pattern']"
+                class="text-danger"
+              >
+                <p class="mb-0">
+                  {{ formField.label }} must include uppercase, lowercase,
+                  number, and special character.
+                </p>
               </div>
 
-              <div *ngIf="formField.controlName === 'confirmPassword' && authForm.errors?.['mismatch']"
-                class="text-danger">
+              <div
+                *ngIf="formField.controlName === 'confirmPassword' && authForm.errors?.['mismatch']"
+                class="text-danger"
+              >
                 <p class="mb-0">Passwords must match.</p>
               </div>
             </div>
           </div>
-          <div class="actions d-flex justify-content-between align-items-center" #actions>
-            <button type="submit" class="d-flex align-items-center gap-2" [disabled]="authForm.invalid"> {{ btnText }}
-              <i class="fa-solid fa-check-circle"></i> </button>
-            <div [ngClass]="IfnavigationLink? 'opacity-100' : 'opacity-0'">
-              <p class="mb-0"> {{ navigationText }} <a [routerLink]="navigationLink">click here</a> </p>
+          <div
+            class="actions d-flex justify-content-between align-items-center"
+            #actions
+          >
+            <button
+              type="submit"
+              class="d-flex align-items-center gap-2"
+              [disabled]="authForm.invalid"
+            >
+              {{ btnText }} <i class="fa-solid fa-check-circle"></i>
+              <div class="spin-loading" *ngIf="authForm.valid">
+                <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+              </div>
+            </button>
+            <div [ngClass]="IfnavigationLink ? 'opacity-100' : 'opacity-0'">
+              <p class="mb-0">
+                {{ navigationText }}
+                <a [routerLink]="navigationLink">click here</a>
+              </p>
             </div>
           </div>
         </form>
       </div>
     </div>
-    <div class="col-md-6 col-12 col-sm-12 p-5">
-      <div class="imgBx w-100 p-5" #imgBx>
-        <figure class="w-100">
-          <img class="w-100 object-fit-cover" src="../../../../../assets/images/auth/auth-img.png" alt="auth img"
-            title="auth img">
+    <div class="col-md-6 col-12 col-sm-12 p-4 d-md-block d-none m-0 h-100" #imgBxContent>
+      <div class="imgBx w-100 py-3" #imgBx>
+        <figure class="w-100 m-0 h-100 d-flex align-items-center justify-content-center">
+          <img
+            class="w-100 object-fit-cover"
+            src="../../../../../assets/images/auth/auth-img.png"
+            alt="auth img"
+            title="auth img"
+          />
         </figure>
       </div>
     </div>

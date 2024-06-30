@@ -20,4 +20,12 @@ export class QuestionsService {
   veiwQuestion(id: string): Observable<IQuestion> {
     return this._HttpClient.get<IQuestion>(`question/${id}`);
   }
+
+  updateQuestion(id: string, questionData: IQuestionBase): Observable<IQuestion> {
+    return this._HttpClient.put<IQuestion>(`question/${id}`, questionData);
+  }
+
+  deleteQuestion(id: string): Observable<IQuestion> {
+    return this._HttpClient.delete<IQuestion>(`question/${id}`);
+  }
 }

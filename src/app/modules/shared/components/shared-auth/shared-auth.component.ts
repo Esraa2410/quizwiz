@@ -1,4 +1,14 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IFormsField } from '../../models/shared';
 import { gsap } from 'gsap';
@@ -6,16 +16,20 @@ import { gsap } from 'gsap';
 @Component({
   selector: 'app-shared-auth',
   templateUrl: './shared-auth.component.html',
-  styleUrls: ['./shared-auth.component.scss']
+  styleUrls: ['./shared-auth.component.scss'],
 })
 export class SharedAuthComponent implements AfterViewInit {
   @ViewChild('logo', { static: true }) logo!: ElementRef<HTMLHeadingElement>;
-  @ViewChild('authButtons', { static: true }) authButtons!: ElementRef<HTMLDivElement>;
-  @ViewChild('formData', { static: true }) formData!: ElementRef<HTMLFormElement>;
-  @ViewChild('header', { static: true }) header!: ElementRef<HTMLHeadingElement>;
+  @ViewChild('authButtons', { static: true })
+  authButtons!: ElementRef<HTMLDivElement>;
+  @ViewChild('formData', { static: true })
+  formData!: ElementRef<HTMLFormElement>;
+  @ViewChild('header', { static: true })
+  header!: ElementRef<HTMLHeadingElement>;
   @ViewChild('actions', { static: true }) actions!: ElementRef<HTMLDivElement>;
   @ViewChild('imgBx', { static: true }) imgBx!: ElementRef<HTMLDivElement>;
   @ViewChild('authBx', { static: true }) authBx!: ElementRef<HTMLDivElement>;
+  @ViewChild('toggleAuthBtn', { static: false }) toggleAuthBtn!: ElementRef<HTMLDivElement>;
 
   private _ChangeDetectorRef = inject(ChangeDetectorRef);
 
@@ -27,7 +41,8 @@ export class SharedAuthComponent implements AfterViewInit {
   @Input() btnText: string = '';
   @Input() navigationLink: string = '';
   @Input() IfnavigationLink: boolean = false;
-  @Output() formSubmission: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output() formSubmission: EventEmitter<FormGroup> =
+    new EventEmitter<FormGroup>();
 
   hidePassword: boolean = true;
   hideNewPassword: boolean = true;
@@ -40,69 +55,52 @@ export class SharedAuthComponent implements AfterViewInit {
 
   initAnimations(): void {
     if (this.logo) {
-      gsap.from(this.logo.nativeElement, {
-        delay: 0.3,
-        duration: 0.4,
-        opacity: 0,
-        y: -20,
-      });
+      gsap.fromTo(this.logo.nativeElement, 
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, delay: 0.3, duration: 0.4 }
+      );
     }
 
     if (this.header) {
-      gsap.from(this.header.nativeElement, {
-        delay: 0.4,
-        duration: 0.4,
-        opacity: 0,
-        y: -20,
-      });
-    }
-
-    if (this.authButtons) {
-      gsap.from(Array.from(this.authButtons.nativeElement.children), {
-        delay: 0.5,
-        duration: 0.4,
-        opacity: 0,
-        y: -20,
-        stagger: 0.15,
-      });
+      gsap.fromTo(this.header.nativeElement,
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, delay: 0.4, duration: 0.4 }
+      );
     }
 
     if (this.formData) {
-      gsap.from(Array.from(this.formData.nativeElement.children), {
-        delay: 0.6,
-        duration: 0.4,
-        opacity: 0,
-        y: -20,
-        stagger: 0.15,
-      });
+      gsap.fromTo(Array.from(this.formData.nativeElement.children),
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, delay: 0.6, duration: 0.4, stagger: 0.15 }
+      );
     }
 
     if (this.actions) {
-      gsap.from(Array.from(this.actions.nativeElement.children), {
-        delay: 0.7,
-        duration: 0.4,
-        opacity: 0,
-        y: -20,
-        stagger: 0.15,
-      });
+      gsap.fromTo(Array.from(this.actions.nativeElement.children),
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, delay: 0.7, duration: 0.4, stagger: 0.15 }
+      );
+    }
+
+    if (this.toggleAuthBtn && this.toggleAuthBtn.nativeElement) {
+      gsap.fromTo(Array.from(this.toggleAuthBtn.nativeElement.children),
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, delay: 0.7, duration: 0.4, stagger: 0.15 }
+      );
     }
 
     if (this.imgBx) {
-      gsap.from(this.imgBx.nativeElement, {
-        delay: 0.8,
-        duration: 0.4,
-        opacity: 0,
-        y: -20,
-      });
+      gsap.fromTo(this.imgBx.nativeElement,
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, delay: 0.8, duration: 0.4 }
+      );
     }
 
     if (this.authBx) {
-      gsap.from(this.imgBx.nativeElement, {
-        delay: 0.8,
-        duration: 0.4,
-        opacity: 0,
-        y: -20,
-      });
+      gsap.fromTo(this.authBx.nativeElement,
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, delay: 0.8, duration: 0.4 }
+      );
     }
   }
 

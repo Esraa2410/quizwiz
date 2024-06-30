@@ -1,71 +1,127 @@
-<form [formGroup]="questionForm" (ngSubmit)="submitForm()">
+<form
+  [formGroup]="questionForm"
+  (ngSubmit)="submitForm()"
+  [ngClass]="{
+    disabledForm:
+      questionForm.disabled && (data.mode == 'view' || data.mode == 'delete')
+  }"
+>
   <div class="container-fluid h-100 w-100 p-0">
-    <div class="header d-flex justify-content-between align-items-center border-bottom">
+    <div
+      class="header d-flex justify-content-between align-items-center border-bottom"
+    >
       <div class="p-3">
-        <h5 class="m-0 p-0">Add New Question</h5>
+        <h5 class="m-0 p-0">
+          {{
+            data.mode == "add"
+              ? "Add New Question"
+              : data.mode == "view"
+              ? "View Question"
+              : data.mode == "delete"
+              ? "Delete Question"
+              : "Edit Question"
+          }}
+        </h5>
       </div>
       <div>
         <div class="d-flex justify-content-between align-items-center">
-          <div class="d-inline check p-4 border-start d-flex justify-content-center align-items-center">
+          <div *ngIf="data.mode !== 'view'"
+            class="d-inline check p-4 border-start d-flex justify-content-center align-items-center"
+          >
             <button type="submit" class="btn">
               <span class="mx-1"><i class="fa-solid fa-check"></i></span>
             </button>
           </div>
-          <div (click)="onNoClick()" class="d-inline p-4 close border-start d-flex justify-content-center align-items-center">
+          <div
+            (click)="onNoClick()"
+            class="d-inline p-4 close border-start d-flex justify-content-center align-items-center"
+          >
             <span class="mx-1"><i class="fa-solid fa-xmark"></i></span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row p-3 m-0">
-      <div class="input-group col-12 my-2">
+    <div class="row p-3 m-0 g-2">
+      <div class="input-group col-12 p-0">
         <span class="input-group-text" id="basic-addon1">Title:</span>
-        <input type="text" formControlName="title" class="form-control p-2" aria-label="title" aria-describedby="basic-addon1" required>
+        <input
+          type="text"
+          formControlName="title"
+          class="form-control p-2"
+          aria-label="title"
+          aria-describedby="basic-addon1"
+          required
+        />
       </div>
 
-      <div class="input-group col-12 my-2">
-        <span class="input-group-text" id="basic-addon1">Description:</span>
-        <textarea formControlName="description" class="form-control" aria-label="With textarea" required></textarea>
+      <div class="input-group col-12 p-0">
+        <span
+          class="input-group-text d-flex align-items-start"
+          id="basic-addon1"
+          >Description:</span
+        >
+        <textarea
+          formControlName="description"
+          class="form-control"
+          aria-label="With textarea"
+          required
+        ></textarea>
       </div>
 
-      <div formGroupName="options">
-        <div class="row">
-          <div class="col-md-6 mb-3" *ngFor="let key of ['A', 'B', 'C', 'D']">
-            <div class="input-group">
-              <span class="input-group-text" id="basic-addon1">{{ key }}</span>
-              <input type="text" formControlName="{{ key }}" class="form-control" aria-describedby="basic-addon1" required>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row my-2">
-        <div class="col-md-6">
+      <div formGroupName="options" class="row p-0 g-2">
+        <div class="col-md-6" *ngFor="let key of ['A', 'B', 'C', 'D']">
           <div class="input-group">
-            <span class="input-group-text" id="basic-addon1">Difficulty level</span>
-            <mat-select formControlName="difficulty" class="form-control" required>
-              <mat-option value="easy">Easy</mat-option>
-              <mat-option value="entry">Entry</mat-option>
-              <mat-option value="hard">Hard</mat-option>
-            </mat-select>
+            <span class="input-group-text" id="basic-addon1">{{ key }}</span>
+            <input
+              type="text"
+              formControlName="{{ key }}"
+              class="form-control"
+              aria-describedby="basic-addon1"
+              required
+            />
           </div>
         </div>
+        <div class=""></div>
+      </div>
 
-        <div class="col-md-6">
-          <div class="input-group">
-            <span class="input-group-text" id="basic-addon1">Category type</span>
-            <mat-select formControlName="type" class="form-control" required>
-              <mat-option value="FE">FE</mat-option>
-              <mat-option value="BE">BE</mat-option>
-            </mat-select>
-          </div>
+      <div class="col-md-6 ps-0">
+        <div class="input-group">
+          <span class="input-group-text" id="basic-addon1"
+            >Difficulty level</span
+          >
+          <mat-select
+            formControlName="difficulty"
+            class="form-control"
+            required
+          >
+            <mat-option value="easy">Easy</mat-option>
+            <mat-option value="entry">Entry</mat-option>
+            <mat-option value="hard">Hard</mat-option>
+          </mat-select>
         </div>
       </div>
 
-      <div class="input-group col-12 my-2">
+      <div class="col-md-6 pe-0">
+        <div class="input-group">
+          <span class="input-group-text" id="basic-addon1">Category type</span>
+          <mat-select formControlName="type" class="form-control" required>
+            <mat-option value="FE">FE</mat-option>
+            <mat-option value="BE">BE</mat-option>
+          </mat-select>
+        </div>
+      </div>
+
+      <div class="input-group col-12 p-0">
         <span class="input-group-text" id="basic-addon1">Right Answer</span>
-        <input type="text" formControlName="answer" class="form-control p-2" aria-label="answer" aria-describedby="basic-addon1" required>
+        <input
+          type="text"
+          formControlName="answer"
+          class="form-control p-2"
+          aria-label="answer"
+          aria-describedby="basic-addon1"
+          required
+        />
       </div>
     </div>
   </div>
