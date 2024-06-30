@@ -19,6 +19,25 @@ export interface IQuiz {
   closed_at: string;
   participants: number;
 }
+export interface IQuizResponseByID {
+  _id: string
+  code: string
+  title: string
+  description: string
+  status: string
+  instructor: string
+  group: string
+  questions_number: number
+  questions: Question[]
+  schadule: string
+  duration: number
+  score_per_question: number
+  type: string
+  difficulty: string
+  updatedAt: string
+  createdAt: string
+  __v: number
+}
 
 export interface Question {
   _id: string;
@@ -74,7 +93,12 @@ export interface IQuizResponse {
 
 
 export interface IUpdateQuiz{
-    title:string
+  title:string,
+  description:string,
+  group:string,
+  schadule:string,
+  duration:string,
+  score_per_question:string
 }
 
 
