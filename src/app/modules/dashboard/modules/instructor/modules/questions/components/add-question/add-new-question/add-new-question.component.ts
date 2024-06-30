@@ -45,46 +45,57 @@ export class AddNewQuestionComponent implements OnInit {
   submitForm(): void {
     if (this.questionForm.valid) {
       if (this.data.mode == 'add') {
-        console.log('Form Submitted', this.questionForm.value);
-        this.questionsService.addQuestion(this.questionForm.value).subscribe({
-          next: (res: any) => {
-            this.helperService.success(res.message);
-          },
-          error: (err: any) => {
-            this.helperService.error(err);
-          },
-          complete: () => {
-            this.onNoClick();
-          },
-        });
+        this.onAddQuestion();
       } else if (this.data.mode == 'edit') {
-        this.questionsService
-          .updateQuestion(this.data._id, this.questionForm.value)
-          .subscribe({
-            next: (res: any) => {
-              this.helperService.success(res.message);
-            },
-            error: (err: any) => {
-              this.helperService.error(err);
-            },
-            complete: () => {
-              this.onNoClick();
-            },
-          });
-      } else if (this.data.mode == 'delete') {
-        this.questionsService.deleteQuestion(this.data._id).subscribe({
-          next: (res: any) => {
-            this.helperService.success(res.message);
-          },
-          error: (err: any) => {
-            this.helperService.error(err);
-          },
-          complete: () => {
-            this.onNoClick();
-          },
-        });
+        this.onEditQuestion()
       }
+    } else if (this.data.mode == 'delete') {
+      this.onDeleteQuestion();
     }
+  }
+
+  onAddQuestion(): void {
+    this.questionsService.addQuestion(this.questionForm.value).subscribe({
+      next: (res: any) => {
+        this.helperService.success(res.message);
+      },
+      error: (err: any) => {
+        this.helperService.error(err);
+      },
+      complete: () => {
+        this.onNoClick();
+      },
+    });
+  }
+
+  onEditQuestion(): void {
+    this.questionsService
+      .updateQuestion(this.data._id, this.questionForm.value)
+      .subscribe({
+        next: (res: any) => {
+          this.helperService.success(res.message);
+        },
+        error: (err: any) => {
+          this.helperService.error(err);
+        },
+        complete: () => {
+          this.onNoClick();
+        },
+      });
+  }
+
+  onDeleteQuestion(): void {
+    this.questionsService.deleteQuestion(this.data._id).subscribe({
+      next: (res: any) => {
+        this.helperService.success(res.message);
+      },
+      error: (err: any) => {
+        this.helperService.error(err);
+      },
+      complete: () => {
+        this.onNoClick();
+      },
+    });
   }
 
   onNoClick(): void {
