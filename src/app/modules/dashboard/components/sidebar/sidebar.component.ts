@@ -40,11 +40,15 @@ export class SidebarComponent implements AfterViewInit {
       routeLink: '/dashboard/instructor/quizzes',
       routeIcon: 'fa-solid fa-business-time'
     },
-    
     {
       routeName: 'Questions',
       routeLink: '/dashboard/instructor/questions',
       routeIcon: 'fas fa-list-alt'
+    },
+    {
+      routeName: 'Results',
+      routeLink: '/dashboard/instructor/results',
+      routeIcon: 'fa-solid fa-square-poll-horizontal'
     }
     // {
     //   routeName: 'Help',

@@ -1,12 +1,22 @@
 @import "../../../../../assets/styles/layout.scss";
 
+@keyframes fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 section {
   background-color: $dark-blue-color;
-  height: auto;
-  padding: 50px;
+  min-height: 100vh;
+  padding: 20px;
+
   h2 {
     color: $main-white-color;
-    font-family: "Courier New", Courier, monospace;
+    font-family: cursive;
 
     span {
       width: 50px;
@@ -30,17 +40,17 @@ section {
     .toggle-auth-button {
       margin: 20px 0;
       ul {
-        gap: 20px;
+        gap: 40px;
         align-items: center;
         padding: 0;
         margin: 0;
         li {
-          padding: 20px 60px;
+          padding: 10px 60px;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          gap: 20px;
+          gap: 10px;
           background-color: $dark-grey-color;
           border-radius: 15px;
           border: 5px solid transparent;
@@ -54,6 +64,7 @@ section {
           p {
             color: $main-white-color;
             font-size: 1.2rem;
+            margin-bottom: 0;
           }
 
           &.active-link {
@@ -67,7 +78,6 @@ section {
     }
 
     form {
-
       label {
         color: $main-white-color;
         font-size: 20px;
@@ -82,6 +92,13 @@ section {
           background-color: transparent;
           outline: none;
           border: none;
+          box-shadow: none !important;
+        }
+        select {
+          color: #fff;
+          option {
+            color: #000;
+          }
         }
       }
 
@@ -115,5 +132,34 @@ section {
   .imgBx {
     background-color: $light-pink-color;
     border-radius: 20px;
+  }
+
+  button {
+    position: relative;
+    overflow: hidden;
+
+    .spin-loading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $light-yellow-color;
+      transition: $main-transition;
+      transform: translate(-90px, 90px) rotate(90deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: inherit;
+      i {
+        color: #fff
+      }
+    }
+
+    &:hover {
+      .spin-loading {
+        transform: translate(0) rotate(0);
+      }
+    }
   }
 }

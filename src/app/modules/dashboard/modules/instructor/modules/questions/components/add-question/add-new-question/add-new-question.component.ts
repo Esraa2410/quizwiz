@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { QuestionsService } from './../../../services/questions.service';
 import { HelperService } from './../../../../../../../../shared/services/helper.service';
+import { IQuestion } from '../../../models/questions';
 
 @Component({
   selector: 'app-add-new-question',
@@ -16,11 +17,13 @@ export class AddNewQuestionComponent implements OnInit {
     public dialogRef: MatDialogRef<AddNewQuestionComponent>,
     private questionsService: QuestionsService,
     private helperService: HelperService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
     this.formCreation();
+    this.handleData();
   }
 
   formCreation(): void {
@@ -40,25 +43,75 @@ export class AddNewQuestionComponent implements OnInit {
   }
 
   submitForm(): void {
-    if (this.questionForm.valid) {
-      console.log('Form Submitted', this.questionForm.value);
-      this.questionsService.addQuestion(this.questionForm.value).subscribe({
-        next: (res: any) => {
-          this.helperService.success(res.message);
-        },
-        error: (err: any) => {
-          this.helperService.error(err);
-        },
-        complete: () => {
-          this.onNoClick();
-        },
-      });
-    } else {
-      console.log('Form is invalid');
+    if (this.questionForm.valid && this.data.mode === 'add') {
+      if (this.data.mode == 'add') {
+        console.log('Form Submitted', this.questionForm.value);
+        this.questionsService.addQuestion(this.questionForm.value).subscribe({
+          next: (res: any) => {
+            this.helperService.success(res.message);
+          },
+          error: (err: any) => {
+            this.helperService.error(err);
+          },
+          complete: () => {
+            this.onNoClick();
+          },
+        });
+      } else if (this.data.mode == 'edit') {
+        this.questionsService
+          .updateQuestion(this.data._id, this.questionForm.value)
+          .subscribe({
+            next: (res: any) => {
+              this.helperService.success(res.message);
+            },
+            error: (err: any) => {
+              this.helperService.error(err);
+            },
+            complete: () => {
+              this.onNoClick();
+            },
+          });
+      } else if (this.data.mode == 'delete') {
+        this.questionsService.deleteQuestion(this.data._id).subscribe({
+          next: (res: any) => {
+            this.helperService.success(res.message);
+          },
+          error: (err: any) => {
+            this.helperService.error(err);
+          },
+          complete: () => {
+            this.onNoClick();
+          },
+        });
+      }
     }
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  handleData(): void {
+    if (this.data) {
+      if (this.data) {
+        this.questionForm.setValue({
+          title: this.data.title,
+          description: this.data.description,
+          options: {
+            A: this.data.options.A,
+            B: this.data.options.B,
+            C: this.data.options.C,
+            D: this.data.options.D,
+          },
+          answer: this.data.answer,
+          difficulty: this.data.difficulty,
+          type: this.data.type,
+        });
+
+        if (this.data.mode == 'view' || this.data.mode == 'delete') {
+          this.questionForm.disable();
+        }
+      }
+    }
   }
 }

@@ -65,15 +65,15 @@ export class QuestionsComponent {
   }
 
   updateFunction(row: IQuestion): void {
-    console.log('Update', row);
+    this.openEditDeleteViewDialog('1000ms', '1000ms', row, 'edit');
   }
-
+  
   deleteFunction(row: IQuestion): void {
-    console.log('Delete', row);
+    this.openEditDeleteViewDialog('1000ms', '1000ms', row, 'delete');
   }
 
   viewFunction(row: IQuestion): void {
-    console.log('View', row);
+    this.openEditDeleteViewDialog('1000ms', '1000ms', row, 'view');
   }
 
   getAllQuestions(): void {
@@ -89,16 +89,33 @@ export class QuestionsComponent {
 
   openAddDailog(
     enterAnimationDuration: string,
-    exitAnimationDuration: string
+    exitAnimationDuration: string,
+    mode: string
   ): void {
     this.dialog.open(AddNewQuestionComponent, {
       width: '850px',
       height: '500px',
       enterAnimationDuration,
       exitAnimationDuration,
+      data: { mode }
     });
   }
-  
+
+  openEditDeleteViewDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string,
+    data: IQuestion,
+    mode: string
+  ): void {
+    this.dialog.open(AddNewQuestionComponent, {
+      width: '850px',
+      height: '500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {...data, mode}
+    });
+  }
+
   updatePaginatedData(): void {
     const start = this.first;
     const end = this.first + this.rows;
