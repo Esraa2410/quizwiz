@@ -43,7 +43,7 @@ export class AddNewQuestionComponent implements OnInit {
   }
 
   submitForm(): void {
-    if (this.questionForm.valid && this.data.mode === 'add') {
+    if (this.questionForm.valid) {
       if (this.data.mode == 'add') {
         console.log('Form Submitted', this.questionForm.value);
         this.questionsService.addQuestion(this.questionForm.value).subscribe({
