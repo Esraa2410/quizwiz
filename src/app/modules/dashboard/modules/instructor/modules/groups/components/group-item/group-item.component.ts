@@ -16,6 +16,7 @@ import { GroupsService } from '../../services/groups.service';
 export class GroupItemComponent {
   selectedStudents: string[]=[];
   studentsGroup: IStudent[] = [];
+  studentIDS:string[]=[];
   groupDetails: IGroupDetailsRes = {
     _id: '',
     name: '',
@@ -35,14 +36,14 @@ export class GroupItemComponent {
     , @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-    if(this.data.id != null){
+   
       this.veiwGroup(this.data.id);
-    }
+    
  
     this.selectedStudents = this.studentsGroup.map(student => student.first_name);
     this.addEditGroupForm= this.formBuilder.group({
-      name: new FormControl('', [Validators.required]),
-      students: new FormControl([], [Validators.required]),
+      name: ['', [Validators.required]],
+      students: [[], [Validators.required]],
     })
    
       this.getAllStudentsWithoutGroup();
@@ -57,6 +58,11 @@ export class GroupItemComponent {
       next: (res: IGroupDetailsRes) => {
          console.log(res);
         this.groupDetails = res;
+       
+        this.studentIDS = this.groupDetails.students.map(item => item._id);
+
+        console.log(this.studentIDS)
+       
 
       }, error: (err: HttpErrorResponse) => {
          //console.log(err)
