@@ -12,67 +12,81 @@ import { GroupsService } from '../../../groups/services/groups.service';
   templateUrl: './update-quiz.component.html',
   styleUrls: ['./update-quiz.component.scss']
 })
-export class UpdateQuizComponent  implements OnInit{
-  editquizForm!: FormGroup ;
-  quizData!:IQuizResponseByID;
+export class UpdateQuizComponent implements OnInit {
+  editquizForm!: FormGroup;
+  quizData: IQuizResponseByID = {
+    _id: "",
+    code: "",
+    title: "",
+    description: "",
+    status: "",
+    instructor: "",
+    group: "",
+    questions_number: 0,
+    questions: [],
+    schadule: "",
+    duration: 0,
+    score_per_question: 0,
+    type: "",
+    difficulty: "",
+    updatedAt: "",
+    createdAt: "",
+    __v: 0
+  };
   /**/
-  title!: string
+  title: string = ''
   description!: string
   schadule!: string
   duration!: number
   score_per_question!: number;
-  group!:string;
+  group!: string;
 
- 
+
   groupList: IGroupsListRes2[] = [];
-  constructor( private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
     private _GroupService: GroupsService,
-    private _QuizzesService:QuizzesService,
+    private _QuizzesService: QuizzesService,
     public dialogRef: MatDialogRef<UpdateQuizComponent>
-    , @Inject(MAT_DIALOG_DATA) public data: any){
+    , @Inject(MAT_DIALOG_DATA) public data: any) {
 
-    }
-  ngOnInit(){
+  }
+  ngOnInit() {
+    console.log(this.data)
     this.editquizForm = this.formBuilder.group({
-     title: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      group : new FormControl('', [Validators.required]),
-      schadule: new FormControl('', [Validators.required]),
-      duration: new FormControl('', [Validators.required]),
-      score_per_question: new FormControl('', [Validators.required]),
-   
+      title: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      group: ['', [Validators.required]],
+      schadule: ['', [Validators.required]],
+      duration: ['', [Validators.required]],
+      score_per_question: ['', [Validators.required]],
+
     });
-    if(this.data.id){
+    if (this.data.id) {
       console.log(this.data.id)
       this.getQuizById(this.data.id);
     }
- 
+
     this.getAllGroups();
   }
   onNoClick(): void {
     this.dialogRef.close();
   }
-  submit(editquizForm:FormGroup) { 
+  submit(editquizForm: FormGroup) {
     this.dialogRef.close(editquizForm.value);
     console.log(editquizForm.value)
   }
-  getQuizById(id:string){
+  getQuizById(id: string) {
     this._QuizzesService.getQuizByID(id).subscribe({
-      next:(res:IQuizResponseByID)=>{
+      next: (res: IQuizResponseByID) => {
         //console.log(res);
-        this.quizData= res;
+        this.quizData = res;
+
         console.log(this.quizData)
-        this.title= this.quizData.title;
-        this.description= this.quizData.description;
-        this.schadule= this.quizData.schadule;
-        this.duration = this.quizData.duration
-        this.score_per_question= this.quizData.score_per_question
-        this.group= this.quizData.group
+
       },
-      error:()=>{
+      error: () => {
 
-      },complete:()=>{
-
+      }, complete: () => {
       },
     })
 
@@ -82,7 +96,7 @@ export class UpdateQuizComponent  implements OnInit{
     this._GroupService.getAllGroups().subscribe({
       next: (res: IGroupsListRes) => {
         this.groupList = res;
-     
+
 
         // console.log(res)
       }, error: (err: HttpErrorResponse) => {

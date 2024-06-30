@@ -16,7 +16,7 @@ import { GroupsService } from '../../services/groups.service';
 export class GroupItemComponent {
   selectedStudents: string[]=[];
   studentsGroup: IStudent[] = [];
-  studentID!:any[];
+  studentIDS:string[]=[];
   groupDetails: IGroupDetailsRes = {
     _id: '',
     name: '',
@@ -42,8 +42,8 @@ export class GroupItemComponent {
  
     this.selectedStudents = this.studentsGroup.map(student => student.first_name);
     this.addEditGroupForm= this.formBuilder.group({
-      name: new FormControl('', [Validators.required]),
-      students: new FormControl([], [Validators.required]),
+      name: ['', [Validators.required]],
+      students: [[], [Validators.required]],
     })
    
       this.getAllStudentsWithoutGroup();
@@ -58,12 +58,10 @@ export class GroupItemComponent {
       next: (res: IGroupDetailsRes) => {
          console.log(res);
         this.groupDetails = res;
-        // for(let i=0 ;i<this.groupDetails.students.length ;i++){
-        //    this.studentID.push(this.groupDetails.students[i]._id);
-        // }
-        this.studentID = this.groupDetails.students.map(item => item._id);
+       
+        this.studentIDS = this.groupDetails.students.map(item => item._id);
 
-        console.log(this.studentID)
+        console.log(this.studentIDS)
        
 
       }, error: (err: HttpErrorResponse) => {

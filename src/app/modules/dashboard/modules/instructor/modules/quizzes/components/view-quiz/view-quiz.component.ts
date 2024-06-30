@@ -32,11 +32,12 @@ export class ViewQuizComponent implements OnInit{
   private _HelperService:HelperService ,
   public dialog: MatDialog,){
 
-    this.viewID = this._ActivatedRoute.snapshot.params['id'];
+   
     console.log(this.viewID)
 
   }
   ngOnInit(): void {
+    this.viewID = this._ActivatedRoute.snapshot.params['id'];
     this.getQuizById();
   }
 
@@ -108,7 +109,7 @@ createdAt:string): void {
   //handle delete here
   openUpdateDailog(enterAnimationDuration: string, 
     exitAnimationDuration: string,
-    id: string 
+    id: string ,title:string, description:string
 ): void {
 
     const dialogRef = this.dialog.open(UpdateQuizComponent, {
@@ -118,7 +119,9 @@ createdAt:string): void {
       exitAnimationDuration,
       data: {
         id: id,
-        
+        title:title,
+        description:description
+
        
       }
     });
