@@ -16,6 +16,7 @@ import { GroupsService } from '../../services/groups.service';
 export class GroupItemComponent {
   selectedStudents: string[]=[];
   studentsGroup: IStudent[] = [];
+  studentID!:any[];
   groupDetails: IGroupDetailsRes = {
     _id: '',
     name: '',
@@ -35,9 +36,9 @@ export class GroupItemComponent {
     , @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-    if(this.data.id != null){
+   
       this.veiwGroup(this.data.id);
-    }
+    
  
     this.selectedStudents = this.studentsGroup.map(student => student.first_name);
     this.addEditGroupForm= this.formBuilder.group({
@@ -57,6 +58,13 @@ export class GroupItemComponent {
       next: (res: IGroupDetailsRes) => {
          console.log(res);
         this.groupDetails = res;
+        // for(let i=0 ;i<this.groupDetails.students.length ;i++){
+        //    this.studentID.push(this.groupDetails.students[i]._id);
+        // }
+        this.studentID = this.groupDetails.students.map(item => item._id);
+
+        console.log(this.studentID)
+       
 
       }, error: (err: HttpErrorResponse) => {
          //console.log(err)

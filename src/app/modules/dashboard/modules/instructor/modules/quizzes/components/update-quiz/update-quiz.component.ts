@@ -43,6 +43,7 @@ export class UpdateQuizComponent  implements OnInit{
    
     });
     if(this.data.id){
+      console.log(this.data.id)
       this.getQuizById(this.data.id);
     }
  
@@ -60,6 +61,7 @@ export class UpdateQuizComponent  implements OnInit{
       next:(res:IQuizResponseByID)=>{
         //console.log(res);
         this.quizData= res;
+        console.log(this.quizData)
         this.title= this.quizData.title;
         this.description= this.quizData.description;
         this.schadule= this.quizData.schadule;

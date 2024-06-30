@@ -81,18 +81,23 @@
               </div>
             -->
       </div>
+   
       <div class="input-group col-12 my-2" *ngIf="data.edit || data.add">
         <span class="input-group-text" id="basic-addon1">List Student</span>
 
         <mat-select
           *ngIf="data.edit"
           multiple
+        [value]="studentID"
           formControlName="students"
           class="form-control"
         >
+        <mat-option  [value]="student._id"   *ngFor="let student of groupDetails.students">
+          {{ student.first_name }} {{ student.last_name }}
+        </mat-option>
           <mat-option
             [value]="student._id"
-            *ngFor="let student of allStudentForUpdatingGroup"
+            *ngFor="let student of allStudentForAddNewGroup"
           >
             {{ student.first_name }} {{ student.last_name }}</mat-option
           >
@@ -113,6 +118,7 @@
           >
         </mat-select>
       </div>
+   
     </div>
   </div>
 </form>
