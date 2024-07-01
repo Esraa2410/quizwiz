@@ -1,0 +1,43 @@
+@import '../layout.scss';
+@import '../abstracts/variables.scss';
+.input-group-text {
+    background-color: $light-pink-color;
+}
+.editBtn{
+   
+    background-color: $btn-color;
+    color: $main-white-color;
+  
+    &:hover{
+        color: $btn-color;
+        background-color: $main-white-color;
+        border: 1px solid $main-border-color;
+    }
+}
+.deleteBtn{
+    background-color: $color-red;
+    color: $main-white-color;
+    &:hover{
+        color: $color-red;
+        background-color: $main-white-color;
+        border: 1px solid $main-border-color;}
+    
+}
+.mainBtn{
+    font-size: 16px;
+    padding: 10px 30px;
+    border-radius:  20px;
+}
+
+.fa{
+    font-size: 1.2rem;
+    //color: $light-yellow-color;
+
+}
+
+.hidden{
+    display: none;
+}
+.display{
+    display: inline;
+}

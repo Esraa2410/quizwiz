@@ -1,1 +1,10 @@
-<p>results works!</p>
+<!--header-->
+<app-shared-header [breadCrumbs]="navigationList" 
+[btnVisibility]="false"
+  ></app-shared-header>
+<!--end of header-->
+<app-shared-table 
+[tableHeaders]="tableHeaders" 
+[buttons]="buttons"
+ [tableBodyContent]="completedQuizReasults"
+[displayHeaders]="displayHeaders"></app-shared-table>

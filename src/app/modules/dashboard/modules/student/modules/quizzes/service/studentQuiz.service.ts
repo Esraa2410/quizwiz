@@ -26,4 +26,14 @@ export class StudentQuizService {
       quizData
     );
   }
+  //will be edited as it return empty []
+  getIcomingQuizes():Observable<any>{
+  return  this._HttpClient.get('quiz/incomming');
+  }
+  getCompletedQuizes():Observable<any>{
+    return this._HttpClient.get('quiz/completed')
+  }
+  getAllResaults():Observable<any>{
+    return this._HttpClient.get('quiz/result')
+  }
 }

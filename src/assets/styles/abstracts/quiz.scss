@@ -1,0 +1,19 @@
+@import '../abstracts/variables.scss';
+
+@import '../layout.scss';
+.mainBtn 
+{
+    border-radius: 0.9rem;
+    border: 1px solid  $main-border-color ;
+    font-size: 1.4rem;
+    cursor: pointer;
+    .fa-bank{
+        font-size: 1.8rem;
+    }
+}
+.resaults{
+    font-size: 1rem;
+    .fa{
+        color: $light-yellow-color;
+    }
+}

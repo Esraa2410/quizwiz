@@ -18,6 +18,14 @@
         src="../../../../../assets/images/navbar/new quiz icon.svg" class="w-25" alt="alarm new quiz">
       <p class="m-0">New quiz</p>
     </a>
+    <!--student-->
+    <a 
+    *ngIf="loggedInRole == 'Student'" 
+    class="d-flex align-items-center gap-2 new-action" role="button" >
+     <img
+        src="../../../../../assets/images/navbar/new quiz icon.svg" class="w-25" alt="alarm new quiz">
+      <p class="m-0">Join quiz</p>
+    </a>
   </div>
   <div class="main-div user-details d-flex flex-column align-items-start">
     <div class="d-flex align-items-center gap-3">
