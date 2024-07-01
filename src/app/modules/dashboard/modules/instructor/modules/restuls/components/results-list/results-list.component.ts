@@ -18,11 +18,13 @@ export class ResultsListComponent {
     { label: 'Results' },
   ];
 
-  tableHeaders: string[] = ['quiz.title', 'quiz.description', 'quiz.difficulty', 'actions'];
+  tableHeaders: string[] = ['quiz.title', 'quiz.group', 'participants','participants.length','quiz.schadule', 'actions'];
   displayHeaders: { [key: string]: string } = {
-    title: 'Quiz Title',
-    description: 'Quiz Desc',
-    difficulty: 'Quiz Difficulty',
+    'quiz.title': 'Title',
+    'quiz.group': 'Group Name',//will change to group name
+    'participants': 'No. of persons in group',//will change to number of students in the group
+    'participants.length':'Participants',
+    'quiz.schadule':'Date',//will change to date pipe
     actions: 'Actions',
   };
 
@@ -46,7 +48,6 @@ export class ResultsListComponent {
     this._ResultsService.allResults().subscribe({
       next: (res: Root2[]) => {
         this.resultsList = res;
-        console.log(this.resultsList)
       }
     })
   }
