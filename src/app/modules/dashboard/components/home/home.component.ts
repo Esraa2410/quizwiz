@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   topFiveStudents: IStudent[] = [];
   RouterLinkPath = '/dashboard/instructor/quizzes/view-Quiz';
   RouterLinkPath2 = '/dashboard/instructor/students/view-Quiz';
+  loggedInRole: string = localStorage.getItem('role') ?? '';
   constructor(private homeService: HomeService, private _Router: Router, private dialog: MatDialog) { }
 
 
