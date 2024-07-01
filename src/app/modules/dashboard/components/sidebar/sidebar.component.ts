@@ -64,7 +64,7 @@ export class SidebarComponent implements AfterViewInit {
     },
     {
       routeName: 'Quizzes',
-      routeLink: '/dashboard/student/Quizzes',
+      routeLink: '/dashboard/student/quizzes',
       routeIcon: 'fa-solid fa-business-time',
       isActive: this.role == Role.student
     },
@@ -78,7 +78,8 @@ export class SidebarComponent implements AfterViewInit {
     // {
     //   routeName: 'Help',
     //   routeLink: '/dashboard/contact-us',
-    //   routeIcon: 'fa-solid fa-question'
+    //   routeIcon: 'fa-solid fa-question',
+    //   isActive: true
     // }
   ];
 
