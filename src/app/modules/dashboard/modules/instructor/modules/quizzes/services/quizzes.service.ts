@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IQuiz, IQuizRequest, IQuizResponse, IUpdateQuiz } from '../models/quizzes';
+import { IQuiz, IQuizRequest, IQuizResponse, IQuizResponseByID, IUpdateQuiz } from '../models/quizzes';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +20,8 @@ export class QuizzesService {
     return this._HttpClient.get<IQuiz[]>('quiz/completed')
   }
   //Add new Quiz
-  AddNewQuiz(newQuizData:IQuizRequest):Observable<any>{
-    return this._HttpClient.post('quiz' , newQuizData)
+  AddNewQuiz(newQuizData:IQuizRequest):Observable<IQuizResponse>{
+    return this._HttpClient.post<IQuizResponse>('quiz' , newQuizData)
   }
   updateQuiz(id:string , updateQuizData:IUpdateQuiz):Observable<IQuizResponse>{
     return this._HttpClient.put<IQuizResponse>(`quiz/${id}` ,updateQuizData)
@@ -29,8 +29,8 @@ export class QuizzesService {
   removeQuiz(id:string):Observable<any>{
     return this._HttpClient.delete(`quiz/${id}` )
   }
-  getQuizByID(id:string):Observable<IQuiz>{
-    return this._HttpClient.get<IQuiz>(`quiz/${id}` ) 
+  getQuizByID(id:string):Observable<IQuizResponseByID>{
+    return this._HttpClient.get<IQuizResponseByID>(`quiz/${id}` ) 
   }
 
   completedQuizzes(): Observable<IQuiz[]> {

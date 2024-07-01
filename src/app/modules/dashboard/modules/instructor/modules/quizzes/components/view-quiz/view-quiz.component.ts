@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IBreadCrumb } from 'src/app/modules/shared/models/shared';
 import { QuizzesService } from '../../services/quizzes.service';
-import { IQuiz, IUpdateQuiz } from '../../models/quizzes';
+import { IQuiz, IQuizResponse, IQuizResponseByID, IUpdateQuiz } from '../../models/quizzes';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
 import { DeleteQuizComponent } from '../delete-quiz/delete-quiz.component';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -24,7 +24,7 @@ export class ViewQuizComponent implements OnInit{
  
   btnText: string = 'Dashboard';
   btnIcon: string = "";
-  quizData!:IQuiz;
+  quizData!:IQuizResponseByID;
   constructor(private _Router:Router ,
     private _QuizzesService:QuizzesService,
     private _ActivatedRoute: ActivatedRoute ,
@@ -32,11 +32,12 @@ export class ViewQuizComponent implements OnInit{
   private _HelperService:HelperService ,
   public dialog: MatDialog,){
 
-    this.viewID = this._ActivatedRoute.snapshot.params['id'];
+   
     console.log(this.viewID)
 
   }
   ngOnInit(): void {
+    this.viewID = this._ActivatedRoute.snapshot.params['id'];
     this.getQuizById();
   }
 
@@ -46,7 +47,7 @@ export class ViewQuizComponent implements OnInit{
 
   getQuizById(){
     this._QuizzesService.getQuizByID(this.viewID).subscribe({
-      next:(res:IQuiz)=>{
+      next:(res:IQuizResponseByID)=>{
         console.log(res);
         this.quizData= res;
       },
@@ -108,17 +109,19 @@ createdAt:string): void {
   //handle delete here
   openUpdateDailog(enterAnimationDuration: string, 
     exitAnimationDuration: string,
-    id: string 
+    id: string ,title:string, description:string
 ): void {
 
     const dialogRef = this.dialog.open(UpdateQuizComponent, {
-      width: '400px',
-      height: '200px',
+      width: '850px',
+      height: '450px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: {
         id: id,
-        
+        title:title,
+        description:description
+
        
       }
     });

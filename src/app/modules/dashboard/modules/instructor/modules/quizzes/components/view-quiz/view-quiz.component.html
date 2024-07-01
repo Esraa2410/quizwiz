@@ -69,9 +69,10 @@
         <span class="input-group-text" id="basic-addon1">Description :</span>
         <textarea
           [disabled]="true"
+          [value]="quizData.description"
           class="form-control"
           aria-label="With textarea"
-          >{{ quizData.description }}</textarea
+          ></textarea
         >
       </div>
       <div class="input-group mt-2">
@@ -100,7 +101,7 @@
         <button
           class="btn editBtn mainBtn"
           [ngClass]="quizData.status === 'closed' ? 'hidden' : 'display'"
-          (click)="openUpdateDailog('1000ms', '1000ms', quizData._id)"
+          (click)="openUpdateDailog('1000ms', '1000ms', quizData._id ,quizData.title,quizData.description)"
         >
           <i class="fa fa-edit" aria-hidden="true"></i>
           Edit

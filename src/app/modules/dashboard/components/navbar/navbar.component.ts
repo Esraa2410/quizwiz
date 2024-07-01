@@ -26,6 +26,7 @@ import { QuizItemComponent } from '../../modules/instructor/modules/quizzes/comp
 import {
   IQuizRequest,
   IQuizResponse,
+  IQuizResponseByID,
 } from '../../modules/instructor/modules/quizzes/models/quizzes';
 import { QuizCreatedComponent } from '../../modules/instructor/modules/quizzes/components/quiz-created/quiz-created.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -95,7 +96,7 @@ export class NavbarComponent implements OnInit {
       const specificSegment = segments[segments.length - 1];
       if (this.isQuizId(specificSegment)) {
         this._QuizzesService.getQuizByID(specificSegment).subscribe({
-          next: (res: IQuiz) => (this.routePath = res.title),
+          next: (res: IQuizResponseByID) => (this.routePath = res.title),
           error: (error: HttpErrorResponse) => {
             this._GroupsService.getGroupById(specificSegment).subscribe({
               next: (res: IGroupDetailsRes) => (this.routePath = res.name),
