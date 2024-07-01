@@ -55,11 +55,13 @@ export class ResultsViewComponent implements OnInit {
     { label: 'Results Veiw' },
   ];
 
-  tableHeaders: string[] = ['title', 'description', 'difficulty'];
+  tableHeaders: string[] = ['title', 'description', 'difficulty' ,'Time submitted'];
   displayHeaders: { [key: string]: string } = {
     title: 'Student Name',
     description: 'Score',
-    difficulty: 'Average'
+    difficulty: 'Average',
+    'Time submitted':'Time submitted'
+
   };
   constructor(private _QuizzesService: QuizzesService, private _ActivatedRoute: ActivatedRoute) { }
   ngOnInit(): void {
