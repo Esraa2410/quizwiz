@@ -40,7 +40,6 @@ export class AddStudentGroupComponent implements OnInit {
         this.onNoClick();
         const groupId = data.get('group_id')?.value;
         this.dialogRef.close(groupId);
-
       }
     })
   }
