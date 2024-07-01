@@ -3,7 +3,7 @@ import { IBreadCrumb } from 'src/app/modules/shared/models/shared';
 import { Component, OnInit } from '@angular/core';
 import { QuizzesService } from '../../../quizzes/services/quizzes.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { IQuiz } from '../../../quizzes/models/quizzes';
+import { IQuizResponseByID } from '../../../quizzes/models/quizzes';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -13,24 +13,24 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./results-view.component.scss']
 })
 export class ResultsViewComponent implements OnInit {
-  quizId:string='';
-  opts:Options={
+  quizId: string = '';
+  opts: Options = {
     A: '',
     B: '',
     C: '',
     D: '',
     _id: '',
   }
-  quests:Question [] = [
+  quests: Question[] = [
     {
-    _id: '',
-    title: '',
-    options:this.opts,
-    answer: '',
+      _id: '',
+      title: '',
+      options: this.opts,
+      answer: '',
     }
 
   ]
-  quizDtails: IQuiz = {
+  quizDtails: IQuizResponseByID = {
     _id: '',
     code: '',
     title: '',
@@ -39,7 +39,7 @@ export class ResultsViewComponent implements OnInit {
     instructor: '',
     group: '',
     questions_number: 0,
-    questions:this.quests,
+    questions: this.quests,
     schadule: '',
     duration: 0,
     score_per_question: 0,
@@ -47,11 +47,9 @@ export class ResultsViewComponent implements OnInit {
     difficulty: '',
     updatedAt: '',
     createdAt: '',
-    __v: 0,
-    closed_at: '',
-    participants: 0,
+    __v: 0
   }
- 
+
   navigationList: IBreadCrumb[] = [
     { label: 'Results', url: '/dashboard/instructor/results' },
     { label: 'Results Veiw' },
@@ -63,21 +61,21 @@ export class ResultsViewComponent implements OnInit {
     description: 'Score',
     difficulty: 'Average'
   };
-  constructor(private _QuizzesService: QuizzesService ,private _ActivatedRoute:ActivatedRoute) { }
+  constructor(private _QuizzesService: QuizzesService, private _ActivatedRoute: ActivatedRoute) { }
   ngOnInit(): void {
     this._ActivatedRoute.params.subscribe(params => {
       this.quizId = params['id'];
     });
 
     this.getQuizDetails(this.quizId);
-   
+
   }
 
   getQuizDetails(id: string) {
     this._QuizzesService.getQuizByID(id).subscribe({
-      next: (res) => {
+      next: (res: IQuizResponseByID) => {
         console.log(res);
-        this.quizDtails=res;
+        this.quizDtails = res;
       }, error: (err: HttpErrorResponse) => {
         console.log(err);
       }
