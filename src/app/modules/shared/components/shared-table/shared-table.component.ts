@@ -9,7 +9,7 @@ import { IButtonConfig } from '../../models/shared';
 })
 export class SharedTableComponent<T extends { [key: string]: any }> implements OnChanges {
   @Input() tableHeaders: string[] = [];
-  @Input() tableBodyContent: T[] = [];
+  @Input() tableBodyContent: T[]  = [] ;
   @Input() displayHeaders: { [key: string]: string } = {};
   @Input() buttons: IButtonConfig[] = [];
   filteredTableBodyContent: { row: T; keys: string[] }[] = [];

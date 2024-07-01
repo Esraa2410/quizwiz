@@ -1,0 +1,21 @@
+<div class="p-5">
+    <div class="mb-3">
+      <app-shared-header
+        [breadCrumbs]="navigationList"
+        [btnVisibility]="false"
+      ></app-shared-header>
+    </div>
+    <app-shared-table
+      [tableHeaders]="tableHeaders"
+      [buttons]="buttons"
+      [tableBodyContent]="resultsList"
+      [displayHeaders]="displayHeaders"
+    ></app-shared-table>
+    <app-shared-pagnation
+      [rowsPerPage]="[10, 20, 50]"
+      [totalRecords]="totalRecords"
+      [rows]="rows"
+      (pageSizeChanged)="onPageSizeChange($event)"
+      (pageNumberChanged)="onPageNumberChange($event)"
+    ></app-shared-pagnation>
+  </div>
