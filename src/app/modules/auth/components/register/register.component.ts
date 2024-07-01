@@ -24,7 +24,6 @@ export class RegisterComponent {
     last_name: new FormControl(null, [Validators.required]),
     role: new FormControl(null, [Validators.required]),
     password: new FormControl(null, [Validators.required ,Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/)]),
-    
   })
 
   formList: IFormsField[] = [
