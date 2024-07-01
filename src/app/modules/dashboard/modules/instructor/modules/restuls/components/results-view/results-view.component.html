@@ -1,17 +1,57 @@
-
-<div class="p-5">
-    <div class="mb-3">
-      <app-shared-header
-        [breadCrumbs]="navigationList"
-        [btnVisibility]="false"
-      ></app-shared-header>
-    </div>
-    <app-shared-table
+<div>
+  <!-- <div class="mb-3">
+    <app-shared-header [breadCrumbs]="navigationList" [btnVisibility]="false"></app-shared-header>
+  </div> -->
+  <!-- <app-shared-table
       [tableHeaders]="tableHeaders"
      
-      
+      [tableBodyContent]="quizDtails"
       [displayHeaders]="displayHeaders"
-    ></app-shared-table>
-    <!-- [tableBodyContent]="quizDtails" -->
+    ></app-shared-table> -->
+  <article>
+    <div class="header d-flex 
+    justify-content-between align-items-center border-bottom   ">
+      <div class="p-3 ">
+        <h5 class="m-0 p-0" >{{data.data.quiz.title}}</h5>
+      </div>
+      <div>
+        <div class=" d-flex  justify-content-between align-items-center ">
+          <div (click)="onNoClick()" class="d-inline p-4
+            close  border-start d-flex justify-content-center align-items-center ">
+            <span class="mx-1 "> <i class="fa-solid fa-xmark"></i> </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="p-3 table table-bordered table-responsive table-hover rounded-3 overflow-hidden custom-table">
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Score</th>
+          <!-- <th>Average</th> -->
+          <th>Started At</th>
+          <th>Finished At </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let key of data.data.participants">
+          <td>
+            {{key.participant.first_name}} {{key.participant.last_name}}
+          </td>
+          <td>
+            {{key.score}}
+          </td>
+          <td>
+            {{key.started_at | date :'short' }}
+          </td>
+          <td>
+            {{key.finished_at |date:'short'}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
 
-  </div>
+
+
+</div>

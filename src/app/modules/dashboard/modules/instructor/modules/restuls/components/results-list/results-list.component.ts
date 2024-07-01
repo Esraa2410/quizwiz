@@ -4,6 +4,10 @@ import { Root2 } from '../../models/results';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ResultsService } from '../../services/results.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ResultsViewComponent } from '../results-view/results-view.component';
+import { GroupsService } from '../../../groups/services/groups.service';
+
 @Component({
   selector: 'app-results-list',
   templateUrl: './results-list.component.html',
@@ -18,27 +22,27 @@ export class ResultsListComponent {
     { label: 'Results' },
   ];
 
-  tableHeaders: string[] = ['quiz.title', 'quiz.group', 'participants','participants.length','quiz.schadule', 'actions'];
+  tableHeaders: string[] = ['quiz.title', 'quiz.group', 'participants', 'participants.length', 'quiz.schadule', 'actions'];
   displayHeaders: { [key: string]: string } = {
     'quiz.title': 'Title',
     'quiz.group': 'Group Name',//will change to group name
     'participants': 'No. of persons in group',//will change to number of students in the group
-    'participants.length':'Participants',
-    'quiz.schadule':'Date',//will change to date pipe
+    'participants.length': 'Participants',
+    'quiz.schadule': 'Date',//will change to date pipe
     actions: 'Actions',
   };
 
   buttons: IButtonConfig[] = [
     {
       btnIcon: 'fa-solid fa-eye',
-      action: (row) => this.viewFunction(row),
+      action: (row) => this.viewFunction('1000ms','1000ms', row),
       class: 'yellow-color',
     },
   ];
   totalRecords: number = 0;
   rows: number = 10;
   first: number = 0;
-  constructor(private _ResultsService: ResultsService ,private _Router:Router) { }
+  constructor(public dialog: MatDialog, private _ResultsService: ResultsService, private _GroupsService: GroupsService, private _Router: Router) { }
   ngOnInit(): void {
     this.getAllResults()
 
@@ -53,9 +57,21 @@ export class ResultsListComponent {
   }
 
 
-  viewFunction(row: Root2): void {
-    this._Router.navigate([`/dashboard/instructor/results/results-view/${row.quiz._id}`]);
-    console.log(row)
+
+  viewFunction(enterAnimationDuration: string,
+    exitAnimationDuration: string, row: Root2): void {
+    // this._Router.navigate([`/dashboard/instructor/results/results-view/${row.quiz._id}`]);
+    // console.log(row)
+
+    const dialogRef = this.dialog.open(ResultsViewComponent, {
+      width: '850px',
+      height: '500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {
+        data: row
+      }
+    });
   }
 
   updatePaginatedData(): void {

@@ -92,13 +92,18 @@ export class QuestionsComponent {
     exitAnimationDuration: string,
     mode: string
   ): void {
-    this.dialog.open(AddNewQuestionComponent, {
+    const dialogRef=  this.dialog.open(AddNewQuestionComponent, {
       width: '850px',
       height: '500px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: { mode }
     });
+    dialogRef.afterClosed().subscribe((result:any) => {
+      if (result) {
+        this.getAllQuestions();
+     }
+     })
   }
 
   openEditDeleteViewDialog(
@@ -107,13 +112,19 @@ export class QuestionsComponent {
     data: IQuestion,
     mode: string
   ): void {
-    this.dialog.open(AddNewQuestionComponent, {
+   const dialogRef= this.dialog.open(AddNewQuestionComponent, {
       width: '850px',
       height: '500px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: {...data, mode}
     });
+    dialogRef.afterClosed().subscribe((result:any) => {
+      if (result) {
+        console.log(result);
+        this.getAllQuestions();
+     }
+     })
   }
 
   updatePaginatedData(): void {

@@ -1,21 +1,54 @@
 <div class="p-5">
-    <div class="mb-3">
-      <app-shared-header
-        [breadCrumbs]="navigationList"
-        [btnVisibility]="false"
-      ></app-shared-header>
-    </div>
-    <app-shared-table
+  <div class="mb-3">
+    <app-shared-header [breadCrumbs]="navigationList" [btnVisibility]="false"></app-shared-header>
+  </div>
+  <!-- <app-shared-table
       [tableHeaders]="tableHeaders"
       [buttons]="buttons"
       [tableBodyContent]="resultsList"
       [displayHeaders]="displayHeaders"
-    ></app-shared-table>
-    <app-shared-pagnation
-      [rowsPerPage]="[10, 20, 50]"
-      [totalRecords]="totalRecords"
-      [rows]="rows"
-      (pageSizeChanged)="onPageSizeChange($event)"
-      (pageNumberChanged)="onPageNumberChange($event)"
-    ></app-shared-pagnation>
-  </div>
+    ></app-shared-table> -->
+  <table class="p-3 table table-bordered table-responsive table-hover rounded-3 overflow-hidden custom-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Group Name</th>
+        <th>No. of persons in group</th>
+        <th>Participants</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let key of resultsList">
+        <td>
+          {{key.quiz.title}}
+        </td>
+        <td>
+          {{key.quiz.group}}
+        </td>
+        <td>
+          {{key.quiz.group}}
+        </td>
+        <td>
+          {{key.participants.length}}
+        </td>
+        <td>
+          {{key.quiz.createdAt| date :'short' }}
+        </td>
+        <td>
+          <div class="d-flex align-items-center justify-content-center gap-3">
+
+            <button (click)="viewFunction('1000ms','1000ms', key)" class="bg-transparent p-0">
+              <i class="fas fa-eye"></i>
+            </button>
+
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <app-shared-pagnation [rowsPerPage]="[10, 20, 50]" [totalRecords]="totalRecords" [rows]="rows"
+    (pageSizeChanged)="onPageSizeChange($event)"
+    (pageNumberChanged)="onPageNumberChange($event)"></app-shared-pagnation>
+</div>

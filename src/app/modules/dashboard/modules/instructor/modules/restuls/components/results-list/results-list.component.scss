@@ -1,0 +1,84 @@
+@import '../../../../../../../../../assets/styles/layout.scss';
+@import '../../../../../../../../../assets/styles/abstracts/variables.scss';
+
+.custom-table {
+  border-spacing: 10px;
+  border-collapse: separate;
+}
+
+th {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+td,
+th {
+  padding: 10px 20px;
+  border: 1px solid $main-border-color !important;
+  border-radius: 5px
+}
+
+td {
+  color: #000;
+}
+
+
+
+
+.header {
+
+  h5,
+  i {
+    color: $dark-blue-color;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .close:hover {
+    background-color: rgb(187, 14, 14);
+
+    i {
+      color: white;
+    }
+
+    cursor: pointer;
+  }
+
+}
+
+.input-group-text,
+.form-control {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: $dark-blue-color;
+}
+
+.input-group-text {
+  background-color: $light-pink-color;
+}
+
+.form-control {
+  background-color: #fff;
+}
+
+.btn {
+  border: none;
+  padding: 0;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.check:hover {
+  background-color: rgb(83, 233, 83);
+  cursor: pointer;
+
+  i {
+    color: white;
+  }
+}
+
+i{
+    color: $light-yellow-color;
+}
