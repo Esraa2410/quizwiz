@@ -1,27 +1,29 @@
-<aside class="navigation main-box-shadow" [class.active-navigation]="activeMenu" #aside>
+<aside
+  class="navigation main-box-shadow"
+  [class.active-navigation]="activeMenu"
+  #aside
+>
   <span></span>
   <span></span>
-  <ul class="m-0 ps-3 overflow-hidden bg-white" #navList>
-      <div>
-        <!-- <li>
-          <a routerLink="/dashboard" class="d-flex align-items-center">
-              <span class="icon m-0">
-                <i class="fa-solid fa-person-chalkboard"></i>
-              </span>
-              <span class="title m-0">QuizWiz</span>
+  <ul class="m-0 ps-3 py-5 overflow-hidden bg-white" #navList>
+    <div class="d-flex flex-column gap-3 justify-content-start h-100 py-5">
+      <ng-container *ngFor="let list of dashboardMenu"> 
+        <li
+          *ngIf="list.isActive"
+          role="button"
+          [routerLink]="list.routeLink"
+          [routerLinkActive]="'active-li'"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="d-flex align-items-center gap-3">
+            <span class="icon m-0">
+              <i [class]="list.routeIcon" class="m-0"></i>
+            </span>
+            <span [class]="list.routeName" class="m-0">{{ list.routeName }}</span>
           </a>
-      </li> -->
-      </div>
-      <div class="d-flex flex-column gap-3 justify-content-center h-75">
-        <li *ngFor="let list of dashboardMenu;" role="button" [routerLink]="list.routeLink" [routerLinkActive]="'active-li'" [routerLinkActiveOptions]="{exact: true}">
-          <a  class="d-flex align-items-center gap-3"  >
-              <span class="icon m-0">
-                <i [class]="list.routeIcon" class="m-0"></i>
-              </span>
-              <span [class]="list.routeName" class="m-0">{{ list.routeName }}</span>
-          </a>
-      </li>
-      </div>
+        </li>
+      </ng-container>
+    </div>
   </ul>
   <div class="toggle" (click)="toggleMenu()"></div>
 </aside>

@@ -6,6 +6,7 @@ interface IList {
   routeLink: string;
   routeName: string;
   routeIcon: string;
+  isActive: boolean;
 }
 
 @Component({
@@ -15,41 +16,65 @@ interface IList {
 })
 export class SidebarComponent implements AfterViewInit {
   @Input() activeMenu: boolean = false;
-  instructorRole: string = '';
-  studentRole: string = localStorage.getItem('role') ?? '';
+  role: string = localStorage.getItem('role') ?? '';
   @Output() sidebarCollapsing: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   dashboardMenu: IList[] = [
     {
       routeName: 'Dashboard',
       routeLink: '/dashboard',
-      routeIcon: 'fa-solid fa-home'
+      routeIcon: 'fa-solid fa-home',
+      isActive: this.role == Role.instructor
     },
     {
       routeName: 'Groups',
       routeLink: '/dashboard/instructor/groups',
-      routeIcon: 'fa-solid fa-users-rectangle'
+      routeIcon: 'fa-solid fa-users-rectangle',
+      isActive: this.role == Role.instructor
     },
     {
       routeName: 'Students',
       routeLink: '/dashboard/instructor/students',
-      routeIcon: 'fa-solid fa-users'
+      routeIcon: 'fa-solid fa-users',
+      isActive: this.role == Role.instructor
     },
     {
       routeName: 'Quizzes',
       routeLink: '/dashboard/instructor/quizzes',
-      routeIcon: 'fa-solid fa-business-time'
+      routeIcon: 'fa-solid fa-business-time',
+      isActive: this.role == Role.instructor
     },
     {
       routeName: 'Questions',
       routeLink: '/dashboard/instructor/questions',
-      routeIcon: 'fas fa-list-alt'
+      routeIcon: 'fas fa-list-alt',
+      isActive: this.role == Role.instructor
     },
     {
       routeName: 'Results',
       routeLink: '/dashboard/instructor/results',
-      routeIcon: 'fa-solid fa-square-poll-horizontal'
-    }
+      routeIcon: 'fa-solid fa-square-poll-horizontal',
+      isActive: this.role == Role.instructor
+    },
+    {
+      routeName: 'dashboard',
+      routeLink: '/dashboard/student-home',
+      routeIcon: 'fa-solid fa-home',
+      isActive: this.role == Role.student
+    },
+    {
+      routeName: 'Quizzes',
+      routeLink: '/dashboard/student/Quizzes',
+      routeIcon: 'fa-solid fa-business-time',
+      isActive: this.role == Role.student
+    },
+    {
+      routeName: 'Results',
+      routeLink: '/dashboard/student/results',
+      routeIcon: 'fa-solid fa-square-poll-horizontal',
+      isActive: this.role == Role.student
+    },
+
     // {
     //   routeName: 'Help',
     //   routeLink: '/dashboard/contact-us',
@@ -61,11 +86,7 @@ export class SidebarComponent implements AfterViewInit {
   @ViewChild('navList', { static: true }) navList!: ElementRef<HTMLUListElement>;
 
   loggedInRole(): void {
-    if (localStorage.getItem('role') == Role.instructor) {
-      this.instructorRole = Role.instructor;
-    } else if (localStorage.getItem('role') == Role.student) {
-      this.studentRole = Role.student;
-    }
+
   }
 
   ngAfterViewInit(): void {
