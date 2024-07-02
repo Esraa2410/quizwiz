@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./quiz-code.component.scss']
 })
 export class QuizCodeComponent {
-
+  
 }

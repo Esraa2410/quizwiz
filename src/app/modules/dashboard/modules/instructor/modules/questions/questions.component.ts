@@ -67,7 +67,7 @@ export class QuestionsComponent {
   updateFunction(row: IQuestion): void {
     this.openEditDeleteViewDialog('1000ms', '1000ms', row, 'edit');
   }
-  
+
   deleteFunction(row: IQuestion): void {
     this.openEditDeleteViewDialog('1000ms', '1000ms', row, 'delete');
   }
@@ -92,18 +92,18 @@ export class QuestionsComponent {
     exitAnimationDuration: string,
     mode: string
   ): void {
-    const dialogRef=  this.dialog.open(AddNewQuestionComponent, {
+    const dialogRef = this.dialog.open(AddNewQuestionComponent, {
       width: '850px',
       height: '500px',
       enterAnimationDuration,
       exitAnimationDuration,
-      data: { mode }
+      data: { mode },
     });
-    dialogRef.afterClosed().subscribe((result:any) => {
+    dialogRef.afterClosed().subscribe((result: any) => {
+      this.getAllQuestions();
       if (result) {
-        this.getAllQuestions();
-     }
-     })
+      }
+    });
   }
 
   openEditDeleteViewDialog(
@@ -112,19 +112,19 @@ export class QuestionsComponent {
     data: IQuestion,
     mode: string
   ): void {
-   const dialogRef= this.dialog.open(AddNewQuestionComponent, {
+    const dialogRef = this.dialog.open(AddNewQuestionComponent, {
       width: '850px',
       height: '500px',
       enterAnimationDuration,
       exitAnimationDuration,
-      data: {...data, mode}
+      data: { ...data, mode },
     });
-    dialogRef.afterClosed().subscribe((result:any) => {
+    dialogRef.afterClosed().subscribe((result: any) => {
+      this.getAllQuestions();
       if (result) {
         console.log(result);
-        this.getAllQuestions();
-     }
-     })
+      }
+    });
   }
 
   updatePaginatedData(): void {

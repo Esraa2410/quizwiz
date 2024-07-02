@@ -4,12 +4,12 @@ import { HomeService } from './service/home.service';
 import { MatDialog } from '@angular/material/dialog';
 import { VeiwDeleteStudentComponent } from '../../modules/instructor/modules/students/components/veiw-delete-student/veiw-delete-student.component';
 import { Router } from '@angular/router';
-
+import { Role } from 'src/app/core/enums/role.enum';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   upcomingQuizzes: IQuiz[] = [];
@@ -17,8 +17,11 @@ export class HomeComponent implements OnInit {
   RouterLinkPath = '/dashboard/instructor/quizzes/view-Quiz';
   RouterLinkPath2 = '/dashboard/instructor/students/view-Quiz';
   loggedInRole: string = localStorage.getItem('role') ?? '';
-  constructor(private homeService: HomeService, private _Router: Router, private dialog: MatDialog) { }
-
+  constructor(
+    private homeService: HomeService,
+    private _Router: Router,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.upComingExams();
@@ -32,48 +35,46 @@ export class HomeComponent implements OnInit {
   }
 
   topStudents(): void {
-    this.homeService.topFiveStudents().subscribe((students) => {
-      this.topFiveStudents = students;
-    });
-  }
-  willBeViewed(event: string) {
-    this._Router.navigateByUrl(`dashboard/instructor/quizzes/view-Quiz/${event}`)
+    if (this.loggedInRole == Role.instructor) {
+      this.homeService.topFiveStudents().subscribe((students) => {
+        this.topFiveStudents = students;
+      });
+    }
   }
 
+  willBeViewed(event: string) {
+    this._Router.navigateByUrl(
+      `dashboard/instructor/quizzes/view-Quiz/${event}`
+    );
+  }
 
   willBeViewedStudent(event: string): any {
-    console.log(event)
-    let btnText = 'veiw'
+    console.log(event);
+    let btnText = 'veiw';
     const dialogRef = this.dialog.open(VeiwDeleteStudentComponent, {
       width: '570px',
       height: '350px',
       data: {
         id: event,
-        btnText: btnText
-      }
+        btnText: btnText,
+      },
     });
-
   }
-
 
   willBeDeleteStudent(event: string): any {
     console.log(event);
-    let btnText = 'delete'
+    let btnText = 'delete';
     const dialogRef = this.dialog.open(VeiwDeleteStudentComponent, {
       width: '570px',
       height: '350px',
       data: {
         id: event,
-        btnText: btnText
-      }
+        btnText: btnText,
+      },
     });
 
     dialogRef.afterClosed().subscribe(() => {
       this.topStudents();
-    })
+    });
   }
 }
-
-
-
-

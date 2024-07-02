@@ -1,4 +1,5 @@
 export interface IStudentQuiz {
+  data: {
     _id: string;
     code: string;
     title: string;
@@ -16,70 +17,71 @@ export interface IStudentQuiz {
     updatedAt: string;
     createdAt: string;
     __v: number;
+  };
 }
 
 export interface IStudentQuizQuestion {
-    _id: string;
-    title: string;
-    options: IStudentQuizOptions;
+  _id: string;
+  title: string;
+  options: IStudentQuizOptions;
 }
 
 export interface IStudentQuizOptions {
-    A: string;
-    B: string;
-    C: string;
-    D: string;
-    _id: string;
+  A: string;
+  B: string;
+  C: string;
+  D: string;
+  _id: string;
 }
 
 export interface IJoinQuizResponse {
-    data: IJoinQuizData;
-    message: string;
+  data: IJoinQuizData;
+  message: string;
 }
 
 export interface IJoinQuizData {
-    quiz: string;
-    participant: string;
-    score: number;
-    started_at: string;
-    _id: string;
-    updatedAt: string;
-    createdAt: string;
-    __v: number;
+  quiz: string;
+  participant: string;
+  score: number;
+  started_at: string;
+  _id: string;
+  updatedAt: string;
+  createdAt: string;
+  __v: number;
 }
 
 export interface IJoinQuizReq {
-    code: string;
+  code: string;
 }
 
 export interface ISubmitQuizReq {
-    answers: ISubmitQuizAnswer[];
+  answers: ISubmitQuizAnswer[];
 }
 
 export interface ISubmitQuizAnswer {
-    question: string;
-    answer: string;
+  question: string;
+  answer: string;
 }
 
 export interface ISubmitQuizResponse {
-    data: ISubmitQuizData;
-    message: string;
+  data: ISubmitQuizData;
+  message: string;
 }
 
 export interface ISubmitQuizData {
-    _id: string;
-    quiz: string;
-    participant: string;
-    score: number;
-    started_at: string;
-    finished_at: string;
-    questions: ISubmitQuizQuestion[];
+  _id: string;
+  quiz: string;
+  participant: string;
+  score: number;
+  started_at: string;
+  finished_at: string;
+  questions: ISubmitQuizQuestion[];
 }
 
 export interface ISubmitQuizQuestion
-    extends Omit<IStudentQuizQuestion, 'options'> {
-    options: ISubmitQuizOptions;
-    answer: string;
+  extends Omit<IStudentQuizQuestion, 'options'> {
+  options: ISubmitQuizOptions;
+  answer: string;
 }
 
 export interface ISubmitQuizOptions extends Omit<IStudentQuizOptions, '_id'> {}

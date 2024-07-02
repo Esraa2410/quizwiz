@@ -1,0 +1,9 @@
+@import '../../../../../../../../../assets/styles/layout.scss';
+@import '../../../../../../../../../assets/styles/abstracts/dialog.scss';
+.check,
+.close {
+    border: 1px solid $main-border-color;
+    border-radius: 5px;
+    width: 70px;
+    height: 70px;
+}

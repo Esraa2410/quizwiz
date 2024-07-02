@@ -9,7 +9,12 @@ export class DynamicdatePipe implements PipeTransform {
       case 'createdAt':
       case 'updatedAt':
       case 'schadule':
-        return new Date(value).toLocaleDateString();
+        const date = new Date(value);
+        if (!isNaN(date.getTime())) {
+          return date.toLocaleString('en-US');
+        } else {
+          return value;
+        }
       default:
         return value;
     }

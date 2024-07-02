@@ -15,7 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
-import {ClipboardModule} from '@angular/cdk/clipboard';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { SharedTableComponent } from './components/shared-table/shared-table.component';
 import { DynamicdatePipe } from './pipes/date/dynamicdate.pipe';
@@ -44,13 +44,13 @@ import { FloatNumberPipe } from './pipes/floatNumber/floatNumber.pipe';
     MatIconModule,
     MultiSelectModule,
     ClipboardModule,
-   
+
     PaginatorModule,
     MenuModule,
     ButtonModule,
     SpeedDialModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   declarations: [
     SharedAuthComponent,
@@ -60,7 +60,7 @@ import { FloatNumberPipe } from './pipes/floatNumber/floatNumber.pipe';
     SharedTableComponent,
     DynamicdatePipe,
     SharedMainHeaderComponent,
-    FloatNumberPipe
+    FloatNumberPipe,
   ],
   exports: [
     SharedAuthComponent,
@@ -83,7 +83,7 @@ import { FloatNumberPipe } from './pipes/floatNumber/floatNumber.pipe';
     SharedMainHeaderComponent,
     MenuModule,
     ButtonModule,
-    SpeedDialModule
+    SpeedDialModule,
   ],
 })
 export class SharedModule {}

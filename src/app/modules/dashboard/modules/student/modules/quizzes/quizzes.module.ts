@@ -5,17 +5,26 @@ import { QuizzesRoutingModule } from './quizzes-routing.module';
 import { QuizzesComponent } from './quizzes.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 
+import { StudentQuizComponent } from './components/student-quiz/student-quiz.component';
+import { QuizCodeComponent } from './components/quiz-code/quiz-code.component';
+import { QuizPopComponent } from './components/quiz-pop/quiz-pop.component';
+import { StudentQuizService } from './service/studentQuiz.service';
+import { QuizzesHomeComponent } from './components/quizzes-home/quizzes-home.component';
 
 
 @NgModule({
   declarations: [
     QuizzesComponent,
-
+    StudentQuizComponent,
+    QuizCodeComponent,
+    QuizPopComponent,
+    QuizzesHomeComponent
   ],
   imports: [
     CommonModule,
     QuizzesRoutingModule,
     SharedModule
-  ]
+  ],
+  providers: [ StudentQuizService ]
 })
 export class QuizzesModule { }
