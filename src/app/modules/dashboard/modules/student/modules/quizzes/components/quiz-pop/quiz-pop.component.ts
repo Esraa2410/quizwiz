@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { StudentQuizService } from '../../service/studentQuiz.service';
 import { IJoinQuizResponse } from '../../models/studentQuiz';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
@@ -13,6 +13,7 @@ import { QuizCodeComponent } from '../quiz-code/quiz-code.component';
   styleUrls: ['./quiz-pop.component.scss'],
 })
 export class QuizPopComponent {
+  joinResponse!: IJoinQuizResponse;
   joinForm: FormGroup = new FormGroup({
     code: new FormControl(null),
   });
@@ -22,6 +23,7 @@ export class QuizPopComponent {
     private _StudentQuizService: StudentQuizService,
     private _HelperSerivce: HelperService,
     public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   onNoClick(): void {
@@ -30,11 +32,11 @@ export class QuizPopComponent {
 
   onSubmit(joinForm: FormGroup): void {
     this._StudentQuizService.joinQuiz(joinForm.value).subscribe({
-      next: (res: IJoinQuizResponse) => { },
+      next: (res: IJoinQuizResponse) => { this.joinResponse = res },
       error: (error: HttpErrorResponse) => this._HelperSerivce.error(error),
       complete: () => {
         this.onNoClick();
-        this.openQuizCode('1000ms', '1000ms');
+        this.openQuizCode('1000ms', '1000ms', this.joinResponse);
       }
     })
   }
@@ -42,12 +44,14 @@ export class QuizPopComponent {
   openQuizCode(
     enterAnimationDuration: string,
     exitAnimationDuration: string,
+    data: any
   ): void {
     const dialogRef = this.dialog.open(QuizCodeComponent, {
       width: '400px',
       height: '206px',
       enterAnimationDuration,
       exitAnimationDuration,
+      data: { data }
     });
     dialogRef.afterClosed().subscribe((result: any) => {  });
   }
