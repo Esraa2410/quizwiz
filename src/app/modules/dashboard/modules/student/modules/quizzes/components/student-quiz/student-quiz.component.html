@@ -1,1 +1,52 @@
-<p>student-quiz works!</p>
+<div class="main" #main>
+  <div class="questionnaire">
+    <div class="question" #questionContainer>
+      <div class="question__heading">Question {{ currentQuestionIndex + 1 }}</div>
+      <div class="question__q">{{ question.title }}</div>
+      <div class="question__answers" #answer>
+        <div
+          class="answer"
+          *ngFor="let option of optionKeys; let i = index"
+          (click)="onSelect(i)"
+          [class.selected]="selectedAnswers[currentQuestionIndex] === i"
+          #elementToAnswer
+        >
+          <p>{{ question.options[option] }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="actions" #actions>
+      <button
+        class="previous"
+        (click)="prev()"
+        [disabled]="currentQuestionIndex === 0"
+        type="button"
+      >
+        <svg class="icon icon-back">
+          <use href="../assets/icons.svg#icon-chevron-left"></use>
+        </svg>
+      </button>
+      <button
+        class="next"
+        (click)="goToNextQuestion()"
+        [disabled]="!isAnswerSelected()"
+        type="button"
+      >
+        Next
+      </button>
+    </div>
+    <div class="progress__bar">
+      <div class="progress__bar--slider" #slider></div>
+    </div>
+    <div class="progress__actions" #progress>
+      <div class="p-actions-left">
+        <span>Step {{ currentQuestionIndex + 1 }}</span>
+        <span>Out Of</span>
+        <span>{{ quiz.data.questions_number }}</span>
+      </div>
+      <div class="p-actions-right">
+        <span>{{ progressValue }}%</span>
+      </div>
+    </div>
+  </div>
+</div>

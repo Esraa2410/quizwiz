@@ -1,0 +1,119 @@
+@import './variables.scss';
+
+@media (max-width: 576px) {
+  span {
+    font-size: $default-span-font-size - 0.2rem;
+  }
+
+  p {
+    font-size: $default-p-font-size - 0.2rem;
+  }
+
+  h1 {
+    font-size: $default-h1-font-size - 0.3rem;
+  }
+
+  h2 {
+    font-size: $default-h2-font-size - 0.3rem;
+  }
+
+  h3 {
+    font-size: $default-h3-font-size - 0.2rem;
+  }
+
+  h4 {
+    font-size: $default-h4-font-size - 0.2rem;
+  }
+
+  h5 {
+    font-size: $default-h5-font-size - 0.2rem;
+  }
+
+  h6 {
+    font-size: $default-h6-font-size - 0.2rem;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  span {
+    font-size: $default-span-font-size - 0.1rem;
+  }
+
+  p {
+    font-size: $default-p-font-size - 0.1rem;
+  }
+
+  h1 {
+    font-size: $default-h1-font-size - 0.2rem;
+  }
+
+  h2 {
+    font-size: $default-h2-font-size - 0.2rem;
+  }
+
+  h3 {
+    font-size: $default-h3-font-size - 0.1rem;
+  }
+
+  h4 {
+    font-size: $default-h4-font-size - 0.1rem;
+  }
+
+  h5 {
+    font-size: $default-h5-font-size - 0.1rem;
+  }
+
+  h6 {
+    font-size: $default-h6-font-size - 0.1rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  span {
+    font-size: $default-span-font-size;
+  }
+
+  p {
+    font-size: $default-p-font-size;
+  }
+
+  h1 {
+    font-size: $default-h1-font-size;
+  }
+
+  h2 {
+    font-size: $default-h2-font-size;
+  }
+
+  h3 {
+    font-size: $default-h3-font-size;
+  }
+
+  h4 {
+    font-size: $default-h4-font-size;
+  }
+
+  h5 {
+    font-size: $default-h5-font-size;
+  }
+
+  h6 {
+    font-size: $default-h6-font-size;
+  }
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+  span,
+  p,
+  h1,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: $default-span-font-size;
+  }
+
+  h2 {
+    font-size: $default-h2-font-size;
+  }
+}

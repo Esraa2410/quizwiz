@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IStudentQuiz, IJoinQuizResponse, ISubmitQuizReq, ISubmitQuizResponse } from '../models/studentQuiz';
+import { IStudentQuiz, IJoinQuizResponse, ISubmitQuizReq, ISubmitQuizResponse, IJoinQuizReq } from '../models/studentQuiz';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +13,8 @@ export class StudentQuizService {
     return this._HttpClient.get<IStudentQuiz>(`quiz/without-answers/${id}`);
   }
 
-  joinQuiz(): Observable<IJoinQuizResponse> {
-    return this._HttpClient.get<IJoinQuizResponse>('quiz/join');
+  joinQuiz(quizData: IJoinQuizReq): Observable<IJoinQuizResponse> {
+    return this._HttpClient.post<IJoinQuizResponse>('quiz/join', quizData);
   }
 
   submitQuiz(

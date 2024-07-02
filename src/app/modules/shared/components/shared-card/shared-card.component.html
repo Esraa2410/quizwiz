@@ -42,12 +42,11 @@
             <div
               class="d-flex gap-2 align-items-center"
               role="button"
-              [routerLink]="RouterLinkPath"
+              (click)="view.emit(item['_id'])"
             >
               <p class="m-0 fw-semibold">Open</p>
               <i
                 class="fa-solid fa-chevron-right"
-                (click)="view.emit(item['_id'])"
               ></i>
             </div>
           </div>
