@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IBreadCrumb, IButtonConfig } from 'src/app/modules/shared/models/shared';
-import { StudentQuizService } from '../quizzes/service/studentQuiz.service';
-import { GroupsService } from '../../../instructor/modules/groups/services/groups.service';
+import { ResultsService } from './services/results.service';
+import { IResultsRes } from './models/results';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-results',
@@ -9,6 +10,7 @@ import { GroupsService } from '../../../instructor/modules/groups/services/group
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent  implements OnInit{
+  resultsLis:IResultsRes[]=[]
   navigationList: IBreadCrumb[] = [
     { label: 'dashboard', url: '/dashboard' },
     { label: 'Resaults' },
@@ -38,7 +40,7 @@ export class ResultsComponent  implements OnInit{
     }
    
   ];
-  constructor(private _StudentQuizService:StudentQuizService ,private _GroupsService:GroupsService){
+  constructor(private _ResultsService:ResultsService ,private _Router:Router ){
 
   }
 
@@ -51,10 +53,20 @@ export class ResultsComponent  implements OnInit{
     
   }
   quizessResaults(): void {
-    this._StudentQuizService.getAllResaults().subscribe((resaults) => {
-      this.completedQuizReasults = resaults;
-      // this._GroupsService.getGroupById(this.completedQuizReasults.map(quiz=>quiz))
+    this._ResultsService.getAllResults().subscribe({
+      next:(res:IResultsRes[])=>{
+        console.log(res);
+        this.resultsLis=res;
+      }
+    
     });
+
+  }
+
+  viewResults( row: IResultsRes): void {
+    console.log('row'+row)
+    this._ResultsService.getResultView(row);
+   this._Router.navigate(['/dashboard/student/results/results-view'])
   }
 
 }

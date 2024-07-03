@@ -1,0 +1,46 @@
+<div>
+    <div class="mb-3">
+      <app-shared-header [breadCrumbs]="navigationList" [btnVisibility]="false"></app-shared-header>
+    </div> 
+    <!-- <app-shared-table
+        [tableHeaders]="tableHeaders"
+        [tableBodyContent]="quizDetails.participants"
+        [displayHeaders]="displayHeaders"
+        [actionsVisivilty]="true"
+      ></app-shared-table> -->
+     <article>
+      <table  class="p-3 table table-bordered table-responsive table-hover rounded-3 overflow-hidden custom-table">
+        <thead>
+          <tr>
+            <th>Duration</th>
+            <th>Score</th>
+            <th>Started At</th>
+            <th>Finished At </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              {{quizDetails.quiz.duration}} 
+            </td>
+            <td>
+              {{quizDetails.result.score}}
+            </td>
+            <td>
+              {{quizDetails.result.started_at | date :'short' }}
+            </td>
+            <td>
+              {{quizDetails.result.finished_at |date:'short'}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+  <!-- <div *ngIf="quizDetails.quiz.">
+    <div class="d-flex justify-content-center align-items-center">
+      <img class="w-50 " src="../../../../../../../../../assets/images/auth/auth-img.png" alt="">
+    </div>
+  
+  </div> -->
+    </article> 
+  </div> 

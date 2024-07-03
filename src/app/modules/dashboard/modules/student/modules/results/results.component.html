@@ -3,8 +3,52 @@
 [btnVisibility]="false"
   ></app-shared-header>
 <!--end of header-->
-<app-shared-table 
+<!-- <app-shared-table 
 [tableHeaders]="tableHeaders" 
 [buttons]="buttons"
- [tableBodyContent]="completedQuizReasults"
-[displayHeaders]="displayHeaders"></app-shared-table>
+ [tableBodyContent]="resultsLis"
+[displayHeaders]="displayHeaders">
+</app-shared-table> -->
+
+<div class="d-flex">
+  <table class="p-3 pe-0  table table-bordered table-responsive table-hover rounded-3 overflow-hidden custom-table">
+    <thead>
+      <tr>
+        <th>Quiz Title</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Created At</th>
+        <th>Closed At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let key of resultsLis">
+        <td>
+          {{key.quiz.title}}
+        </td>
+        <td>
+          {{key.quiz.description}}
+        </td>
+        <td>
+          {{key.quiz.type}}
+        </td>
+        <td>
+          {{key.quiz.closed_at| date :'short' }}
+        </td>
+        <td>
+          {{key.quiz.createdAt| date :'short' }}
+        </td>
+        <td>
+          <div class="d-flex align-items-center justify-content-center gap-3">
+
+            <button (click)="viewResults(key)" class="bg-transparent p-0">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
