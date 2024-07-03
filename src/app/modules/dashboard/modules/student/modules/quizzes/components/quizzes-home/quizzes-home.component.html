@@ -1,0 +1,63 @@
+<!--header-->
+<app-shared-header
+  [breadCrumbs]="navigationList"
+  [btnVisibility]="false"
+></app-shared-header>
+<!--end of header-->
+
+<div class="row mt-5">
+  <div class="col-md-3">
+    <div class="mainBtn p-2 text-center" role="button" (click)="openJoinDialog('1000ms', '1000ms')">
+      <img
+        class="mt-1"
+        src="../../../../../../../assets/images/new quiz icon.svg"
+        alt
+      />
+      <p class="mt-3">Join Quiz</p>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="p-3 main-border rounded-3">
+      <h2 class="mb-3">Upcoming Quizzes</h2>
+      <ng-container *ngIf="upcomingQuizzes.length === 0">
+        <p>You don't have any upcoming quizess</p>
+      </ng-container>
+      <ng-container *ngIf="upcomingQuizzes.length > 0">
+        <app-shared-card
+          [imgSrc]="'../../../../../assets/images/Quiz img.svg'"
+          [cardContent]="upcomingQuizzes"
+          [headerKeys]="['title']"
+          [detailKeys]="['schadule']"
+          [additionalContentKey]="'participants'"
+          [wontUseGrid]="true"
+          [useGrid]="false"
+          (view)="willBeViewed($event)"
+          [studentsVisibility]="true"
+        >
+        </app-shared-card
+      ></ng-container>
+    </div>
+
+    <div class="p-3 mt-4 main-border rounded-3">
+      <h2 class="mb-3 d-flex align-items-center justify-content-between">
+        <span> Completed Quizzes </span>
+        <span class="resaults">
+          Results
+          <i class="fa fa-arrow-right ms-2" aria-hidden="true"></i>
+        </span>
+      </h2>
+      <ng-container *ngIf="upcomingQuizzes.length === 0">
+        You don't have any completed quizess
+      </ng-container>
+      <!--shared table this will be edited -->
+      <ng-container *ngIf="upcomingQuizzes.length > 0">
+        <app-shared-table
+          [tableHeaders]="tableHeaders"
+          [tableBodyContent]="completedQuizes"
+          [displayHeaders]="displayHeaders"
+          [actionsVisivilty]="true"
+        ></app-shared-table>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -5,9 +5,9 @@
 >
   <span></span>
   <span></span>
-  <ul class="m-0 ps-3  overflow-hidden bg-white" #navList>
+  <ul class="m-0 ps-3 py-2 overflow-hidden bg-white" #navList>
     <div class="d-flex flex-column gap-3 justify-content-start h-100 ">
-      <ng-container *ngFor="let list of dashboardMenu"> 
+      <ng-container *ngFor="let list of dashboardMenu">
         <li
           *ngIf="list.isActive"
           role="button"

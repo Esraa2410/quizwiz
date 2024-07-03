@@ -1,41 +1,65 @@
-
-<nav class="d-flex fixed-top align-items-center justify-content-between gap-5" #mainNav>
+<nav
+  class="d-flex fixed-top align-items-center justify-content-between gap-5"
+  #mainNav
+>
   <div class="main-div logo d-flex align-items-center gap-3">
-    <div class="menu-burger d-flex flex-column gap-1" [class.active-menu-burger]="sidebarCollapsed"
-      (click)="onCloseSidebar()" role="button">
+    <div
+      class="menu-burger d-flex flex-column gap-1"
+      [class.active-menu-burger]="sidebarCollapsed"
+      (click)="onCloseSidebar()"
+      role="button"
+    >
       <span></span>
       <span></span>
       <span></span>
     </div>
     <h3 class="m-0">QuizWiz</h3>
   </div>
-  <div class="main-div route-content d-flex align-items-center justify-content-between gap-3">
+  <div
+    class="main-div route-content d-flex align-items-center justify-content-between gap-3"
+  >
     <h3 class="m-0 text-capitalize">{{ routePath }}</h3>
-    <a 
-    *ngIf="loggedInRole == 'Instructor'" 
-    class="d-flex align-items-center gap-2 new-action" role="button" 
-    (click)="openAddDailog('1000ms','1000ms',true)"> <img
-        src="../../../../../assets/images/navbar/new quiz icon.svg" class="w-25" alt="alarm new quiz">
+    <a
+      *ngIf="loggedInRole == 'Instructor'"
+      class="d-flex align-items-center gap-2 new-action"
+      role="button"
+      (click)="openAddDailog('1000ms', '1000ms', true)"
+    >
+      <img
+        src="../../../../../assets/images/navbar/new quiz icon.svg"
+        class="w-25"
+        alt="alarm new quiz"
+      />
       <p class="m-0">New quiz</p>
     </a>
     <!--student-->
-    <a 
-    *ngIf="loggedInRole == 'Student'" 
-    class="d-flex align-items-center gap-2 new-action" role="button" >
-     <img
-        src="../../../../../assets/images/navbar/new quiz icon.svg" class="w-25" alt="alarm new quiz">
+    <a
+      *ngIf="loggedInRole == 'Student'"
+      class="d-flex align-items-center gap-2 new-action"
+      role="button"
+      (click)="openJoinDialog('1000ms', '1000ms')"
+    >
+      <img
+        src="../../../../../assets/images/navbar/new quiz icon.svg"
+        class="w-25"
+        alt="alarm new quiz"
+      />
       <p class="m-0">Join quiz</p>
     </a>
   </div>
   <div class="main-div user-details d-flex flex-column align-items-start">
     <div class="d-flex align-items-center gap-3">
       <h3 class="m-0">{{ userName }}</h3>
-     
+
       <div class="speed-dial">
-        <p-speedDial [model]="items" direction="down" [showIcon]="'pi pi-angle-down'" [hideIcon]="'pi pi-angle-up'"></p-speedDial>
+        <p-speedDial
+          [model]="items"
+          direction="down"
+          [showIcon]="'pi pi-angle-down'"
+          [hideIcon]="'pi pi-angle-up'"
+        ></p-speedDial>
       </div>
     </div>
     <span class="m-0 user-role">{{ loggedInRole }}</span>
   </div>
-
 </nav>
