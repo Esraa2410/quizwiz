@@ -1,11 +1,10 @@
+import { IGroupDetailsRes, IStudent } from './../../../groups/models/groups';
 import { IButtonConfig, IBreadCrumb } from 'src/app/modules/shared/models/shared';
 import { Component, OnInit } from '@angular/core';
 import { Root2 } from '../../models/results';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ResultsService } from '../../services/results.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ResultsViewComponent } from '../results-view/results-view.component';
 import { GroupsService } from '../../../groups/services/groups.service';
 
 @Component({
@@ -14,6 +13,7 @@ import { GroupsService } from '../../../groups/services/groups.service';
   styleUrls: ['./results-list.component.scss']
 })
 export class ResultsListComponent {
+  groupsIds: string[] = [];
 
   resultsList!: Root2[];
   paginatedList!: Root2[];
@@ -22,20 +22,20 @@ export class ResultsListComponent {
     { label: 'Results' },
   ];
 
-  tableHeaders: string[] = ['quiz.title', 'quiz.group', 'participants', 'participants.length', 'quiz.schadule', 'actions'];
-  displayHeaders: { [key: string]: string } = {
-    'quiz.title': 'Title',
-    'quiz.group': 'Group Name',//will change to group name
-    'participants': 'No. of persons in group',//will change to number of students in the group
-    'participants.length': 'Participants',
-    'quiz.schadule': 'Date',//will change to date pipe
-    actions: 'Actions',
-  };
+  // tableHeaders: string[] = ['quiz.title', 'quiz.group', 'participants', 'participants.length', 'quiz.schadule', 'actions'];
+  // displayHeaders: { [key: string]: string } = {
+  //   'quiz.title': 'Title',
+  //   'quiz.group': 'Group Name',//will change to group name
+  //   'participants': 'No. of persons in group',//will change to number of students in the group
+  //   'participants.length': 'Participants',
+  //   'quiz.schadule': 'Date',//will change to date pipe
+  //   actions: 'Actions',
+  // };
 
   buttons: IButtonConfig[] = [
     {
       btnIcon: 'fa-solid fa-eye',
-      action: (row) => this.viewFunction('1000ms','1000ms', row),
+      action: (row) => this.viewFunction('1000ms', '1000ms', row),
       class: 'yellow-color',
     },
   ];
@@ -48,10 +48,37 @@ export class ResultsListComponent {
 
   }
 
+  studentsGroup: IStudent[] = [];
+  groupDetails: IGroupDetailsRes[] = [{
+    _id: '',
+    name: '',
+    status: '',
+    instructor: '',
+    students: this.studentsGroup,
+    max_students: 0
+  }]
+
   getAllResults() {
     this._ResultsService.allResults().subscribe({
       next: (res: Root2[]) => {
         this.resultsList = res;
+        this.groupsIds = res.map((x) => x.quiz.group);
+        for (let i = 0; i < this.groupsIds.length; i++) {
+          this._GroupsService.getGroupById(this.groupsIds[i]).subscribe({
+            next: (res: IGroupDetailsRes) => {
+              this.groupDetails.push(res);
+            }, error: (err) => {
+              this.groupDetails.push({
+                _id: '',
+                name: 'Group Deleted',
+                status: '',
+                instructor: '',
+                students: this.studentsGroup,
+                max_students: 0
+              })
+            }
+          })
+        }
       }
     })
   }
@@ -60,18 +87,8 @@ export class ResultsListComponent {
 
   viewFunction(enterAnimationDuration: string,
     exitAnimationDuration: string, row: Root2): void {
-    // this._Router.navigate([`/dashboard/instructor/results/results-view/${row.quiz._id}`]);
-    // console.log(row)
-
-    const dialogRef = this.dialog.open(ResultsViewComponent, {
-      width: '850px',
-      height: '500px',
-      enterAnimationDuration,
-      exitAnimationDuration,
-      data: {
-        data: row
-      }
-    });
+    this._ResultsService.getResultView(row);
+    this._Router.navigate(['/dashboard/instructor/results/results-view'])
   }
 
   updatePaginatedData(): void {

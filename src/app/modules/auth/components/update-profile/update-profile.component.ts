@@ -74,21 +74,41 @@ export class UpdateProfileComponent implements OnInit {
 
 
   onUpdateProfile(data: FormGroup) {
-    this._AuthService.updateProfile(data.value).subscribe({
-      next: (res: IUpdateProfileRes) => {
-        this.userData = res;
-        this._HelperService.success(res.message);
-      },
-      error: (err: HttpErrorResponse) => {
-        this._HelperService.error(err.error.message);
-      }, complete: () => {
-        localStorage.setItem('email', this.userData.data.email);
-        localStorage.setItem('firstName', this.userData.data.first_name);
-        localStorage.setItem('lastName', this.userData.data.last_name);
-        localStorage.setItem('userName', `${this.userData.data.first_name} ${this.userData.data.last_name}`);
-        this._AuthService.profileUpdated(this.userData);
-        this._Router.navigate(['/dashboard']);
-      }
-    })
+    if (localStorage.getItem('role') === 'Instructor') {
+      this._AuthService.updateProfile(data.value).subscribe({
+        next: (res: IUpdateProfileRes) => {
+          this.userData = res;
+          this._HelperService.success(res.message);
+        },
+        error: (err: HttpErrorResponse) => {
+          this._HelperService.error(err.error.message);
+        }, complete: () => {
+          localStorage.setItem('email', this.userData.data.email);
+          localStorage.setItem('firstName', this.userData.data.first_name);
+          localStorage.setItem('lastName', this.userData.data.last_name);
+          localStorage.setItem('userName', `${this.userData.data.first_name} ${this.userData.data.last_name}`);
+          this._AuthService.profileUpdated(this.userData);
+          this._Router.navigate(['/dashboard']);
+        }
+      })
+    } else if (localStorage.getItem('role') === 'Student') {
+      this._AuthService.updateProfileStudent(data.value).subscribe({
+        next: (res: IUpdateProfileRes) => {
+          this.userData = res;
+          this._HelperService.success(res.message);
+        },
+        error: (err: HttpErrorResponse) => {
+          this._HelperService.error(err.error.message);
+        }, complete: () => {
+          localStorage.setItem('email', this.userData.data.email);
+          localStorage.setItem('firstName', this.userData.data.first_name);
+          localStorage.setItem('lastName', this.userData.data.last_name);
+          localStorage.setItem('userName', `${this.userData.data.first_name} ${this.userData.data.last_name}`);
+          this._AuthService.profileUpdated(this.userData);
+          this._Router.navigate(['/dashboard']);
+        }
+      })
+
+    }
   }
 }

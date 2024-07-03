@@ -80,6 +80,9 @@ export class AuthService {
   updateProfile(data: IUpdateProfileReq): Observable<IUpdateProfileRes> {
     return this._HttpClient.put<IUpdateProfileRes>('instructor', data)
   }
+  updateProfileStudent(data: IUpdateProfileReq): Observable<IUpdateProfileRes> {
+    return this._HttpClient.put<IUpdateProfileRes>('student', data)
+  }
 
   welcomeVoice(message: string): void {
     const sp = new SpeechSynthesisUtterance(message);

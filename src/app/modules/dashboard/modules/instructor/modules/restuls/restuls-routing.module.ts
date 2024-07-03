@@ -7,7 +7,7 @@ import { ResultsListComponent } from './components/results-list/results-list.com
 const routes: Routes = [
   {path: '', redirectTo: 'results', pathMatch: 'full' },
   { path: 'results', component: ResultsListComponent, title: 'Results' },
-  { path: 'results-view/:id', component: ResultsViewComponent, title: 'Results View' }
+  { path: 'results-view', component: ResultsViewComponent, title: 'Results View' }
 ]
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IBreadCrumb, IButtonConfig } from 'src/app/modules/shared/models/shared';
 import { StudentQuizService } from '../quizzes/service/studentQuiz.service';
+import { GroupsService } from '../../../instructor/modules/groups/services/groups.service';
 
 @Component({
   selector: 'app-results',
@@ -37,7 +38,7 @@ export class ResultsComponent  implements OnInit{
     }
    
   ];
-  constructor(private _StudentQuizService:StudentQuizService){
+  constructor(private _StudentQuizService:StudentQuizService ,private _GroupsService:GroupsService){
 
   }
 
@@ -52,6 +53,7 @@ export class ResultsComponent  implements OnInit{
   quizessResaults(): void {
     this._StudentQuizService.getAllResaults().subscribe((resaults) => {
       this.completedQuizReasults = resaults;
+      // this._GroupsService.getGroupById(this.completedQuizReasults.map(quiz=>quiz))
     });
   }
 

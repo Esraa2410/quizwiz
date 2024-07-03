@@ -100,9 +100,9 @@ export class QuestionsComponent {
       data: { mode }
     });
     dialogRef.afterClosed().subscribe((result:any) => {
-      if (result) {
+    
         this.getAllQuestions();
-     }
+     
      })
   }
 
@@ -120,10 +120,10 @@ export class QuestionsComponent {
       data: {...data, mode}
     });
     dialogRef.afterClosed().subscribe((result:any) => {
-      if (result) {
+     
         console.log(result);
         this.getAllQuestions();
-     }
+     
      })
   }
 
