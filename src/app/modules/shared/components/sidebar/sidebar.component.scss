@@ -1,0 +1,12 @@
+@import '../../../../../assets/styles/abstracts/variables.scss';
+.logo{
+    border-bottom:  1px solid rgba(0, 0, 0, 0.2);
+}
+.sidebar{
+    border-right: 1px solid rgba(0, 0, 0, 0.2); ;
+}
+.fa-bars{
+    font-size: 1.7rem;
+    color: $black-color;
+    cursor: pointer;
+}

@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-
+isShown:boolean=true
   private _AuthService = inject(AuthService);
   private _HelperService = inject(HelperService);
   private _Router = inject(Router);
@@ -27,43 +27,7 @@ export class RegisterComponent {
     
   })
 
-  formList: IFormsField[] = [
-    {
-      label: 'First Name',
-      placeholder: 'Type your first name',
-      iconClass: 'fa-solid fa-user',
-      controlName: 'first_name',
-      type: 'text'
-    },
-    {
-      label: 'Last Name',
-      placeholder: 'type your last name',
-      iconClass: 'fa-solid fa-user',
-      controlName: 'last_name',
-      type: 'text'
-    },
-    {
-      label: 'Email',
-      placeholder: 'type your email',
-      iconClass: 'fa-solid fa-envelope',
-      controlName: 'email',
-      type: 'email'
-    },
-    {
-      label: 'Password',
-      placeholder: 'Type your password',
-      iconClass: 'fa-solid fa-lock',
-      controlName: 'password',
-      type: 'password'
-    },
-    {
-      label: 'Role',
-      placeholder: 'Choose your role',
-      iconClass: 'fa-solid fa-user',
-      controlName: 'role',
-      type: 'text'
-    },
-  ]
+
 
   onRegister(registerForm: FormGroup) {
     this._AuthService.register(registerForm.value).subscribe({

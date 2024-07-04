@@ -8,6 +8,7 @@ import { SharedPagnationComponent } from './components/shared-pagnation/shared-p
 import { PaginatorModule } from 'primeng/paginator';
 import { SharedHeaderComponent } from './components/shared-header/shared-header.component';
 import { SharedCardComponent } from './components/shared-card/shared-card.component';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +16,7 @@ import { SharedCardComponent } from './components/shared-card/shared-card.compon
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
-    PaginatorModule
+    PaginatorModule,MatSelectModule
   ],
   declarations: [
     SharedAuthComponent,
@@ -28,6 +29,10 @@ import { SharedCardComponent } from './components/shared-card/shared-card.compon
     SharedPagnationComponent,
     SharedHeaderComponent,
     SharedCardComponent,
+    MatSelectModule,
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
   ],
 })
 export class SharedModule {}

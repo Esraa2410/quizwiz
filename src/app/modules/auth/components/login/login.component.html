@@ -1,11 +1,145 @@
-<app-shared-auth
-  [authForm]="loginForm"
-  [authHeader]="'Continue your Learning Journey with QuizWiz!'"
-  [toggleSignupSignInVisibility]="true"
-  [formFields]="formList"
-  [btnText]="'Sign in'"
-  [IfnavigationLink]="true"
-  [navigationText]="'Forget Password ?'"
-  [navigationLink]="'/auth/forget-password'"
-  (formSubmission)="onLogin($event)"
-></app-shared-auth>
+<section class="auth p-3">
+    <div class="container-fluid  ">
+        <div class="row">
+            <div class="col-md-6 p-5">
+                <div class="logo mb-4">
+                    <h2 class="d-flex align-items-center">
+                        <div class="d-flex align-items-center me-3">
+                            <span>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </span>
+                            <span>
+                                <i class="fa fa-remove" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        | Quizzwizz
+                    </h2>
+
+                </div>
+                <h2 class="mb-3">
+                    Create your account and start using QuizWiz!
+                </h2>
+                <div class="d-flex align-items-center mb-3">
+                    <span class="signSpan me-3  active">
+                        <i class="fa-solid fa-user mb-3" aria-hidden="true"></i>
+                        <p>
+                            Sign in
+                        </p>
+                    </span>
+                    <span class="signSpan ">
+                        <i class="fa fa-user-plus mb-3" aria-hidden="true"></i>
+                        <p>Sign up</p>
+                    </span>
+                </div>
+
+                <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm)">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group d-flex flex-column  gab-2">
+                                <label class="mb-2" for="email">Your email
+                                    address</label>
+                                <div
+                                    class="input-group mb-3 main-input-group p-2">
+                                    <div
+                                        class="input-group d-flex justify-content-between ">
+                                        <span class="input-group-text"
+                                            id="basic-addon1">
+                                            <i class="fa fa-envelope"
+                                                aria-hidden="true"></i>
+                                        </span>
+                                        <div class="d-flex flex-grow-1">
+                                            <input type="text"
+                                                class="form-control"
+                                                formControlName="email"
+                                                placeholder="Type your email"
+                                                aria-label="Username"
+                                                aria-describedby="basic-addon1">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="errors"
+                            *ngIf="loginForm.get('email')?.touched &&
+                      loginForm.get('email')?.invalid">
+                            <span
+                                *ngIf="loginForm.get('email')?.errors?.['required']">
+                                Email is required
+                            </span>
+                            <span
+                                *ngIf="loginForm.get('email')?.errors?.['email']">
+                                Please enter valid email
+                            </span>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group  d-flex flex-column  gab-2">
+                                <label class="mb-2" for="email">Password</label>
+                                <div
+                                    class="input-group mb-3 main-input-group  p-2">
+                                    <div
+                                        class="input-group d-flex justify-content-between ">
+                                        <span class="input-group-text"
+                                            id="basic-addon1">
+                                            <i class="fa fa-key"
+                                                aria-hidden="true"></i>
+                                        </span>
+                                        <div
+                                            class="d-flex flex-grow-1 align-items-center">
+                                            <input
+                                                [type]="isShown? 'text':'password'"
+                                                class="form-control"
+                                                formControlName="password"
+                                                placeholder="Type your password"
+                                                aria-label="Username"
+                                                aria-describedby="basic-addon1">
+                                            <button class="btn" type="button"
+                                                (click)="isShown = !isShown">
+                                                <i
+                                                    [class]="isShown? 'fa fa-eye':'fa fa-eye-slash'"
+                                                    aria-hidden="true"></i>
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="errors"
+                                *ngIf="loginForm.get('password')?.touched &&
+                          loginForm.get('password')?.invalid">
+                                <span
+                                    *ngIf="loginForm.get('password')?.errors?.['required']">
+                                    Password is required
+                                </span>
+                                <span
+                                    *ngIf="loginForm.get('password')?.errors?.['pattern']">
+                                    Password should contain 1 capital letter , small letters, number , and special chars
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn signBtn" [disabled]="loginForm.invalid">
+                            Sign in
+                            <i class="fa fa-check" aria-hidden="true"></i>
+
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="col-md-6 auth-img mt-2 ">
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,125 @@
+@import '../abstracts/variables.scss';
+
+.auth {
+    background-color: $dark-blue-color;
+    color: $main-white-color;
+    h2{
+        color:  $light-yellow-color;
+        font-size: 1.7rem;
+    }
+   
+    .logo{
+        h2{
+            color: $main-white-color;
+            font-weight: 200;
+        }
+        span{
+            padding: 8px;
+            border-radius: 50%;
+            border: 3px solid $main-white-color;
+            color: $main-white-color;
+        }
+    }
+    .active{
+        border: 2px solid $light-yellow-color !important;
+    }
+    .signSpan{
+      padding: 20px 40px;
+        text-align: center;
+        border: 2px solid $main-white-color;
+        color: $main-white-color;
+        border-radius: 10px;
+        .fa ,.fa-solid{
+            font-size: 2rem;
+        }
+        font-size: 1rem;
+        &:hover{
+            color: $light-yellow-color;
+            border:2px solid $main-white-color !important ;
+            cursor: pointer;
+        }
+      
+    }
+    .auth-img {
+        background-image: url(../../../assets/images/auth/auth-img.png);
+        display: flex;
+        align-content: stretch;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 10px;
+    }
+
+    .main-input-group {
+        border: 2px solid $main-white-color;
+        border-radius: 10px !important;
+        padding: 10px;
+        input,
+        input::placeholder,
+        span {
+          color: $main-white-color;
+        }
+      }
+   
+     
+      mat-select, ::ng-deep .mat-mdc-select-placeholder , ::ng-deep .mat-mdc-select-arrow{
+        color: $main-white-color !important;
+      }
+    .input-group,
+      .input-group-text {
+        background-color: transparent;
+      
+      }
+      .input-group-text{
+       border: none;
+      }
+      .input-group {
+        input, select {
+          background-color: transparent;
+          outline: none;
+          border: none;
+        }
+        input:focus{
+          border-color: inherit;
+          box-shadow: none;
+        }
+      }
+
+      label{
+        font-size: 1.2rem;
+      }
+      .signBtn{
+        color: $btn-color;
+        padding:10px 30px;
+        background-color: $main-white-color;
+        border-radius: 20px;
+        font-weight: 500;
+        .fa{
+            padding: 8px;
+            border-radius: 50%;
+            background-color: $btn-color;
+            color:$main-white-color;
+           
+        }
+        &:hover{
+            background-color: $light-yellow-color;
+            color: $main-white-color;
+            .fa{
+                
+                background-color: $main-white-color;
+                color:$btn-color;
+               
+            }
+        }
+      }
+      .btn{
+        border: none !important;
+        
+      }
+      .fa-eye ,.fa-eye-slash{
+   color:$main-white-color;
+      }
+.errors{
+  color: $red-color;
+}
+
+}

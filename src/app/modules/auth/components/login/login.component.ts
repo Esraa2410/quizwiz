@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IFormsField } from 'src/app/modules/shared/models/shared';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
 import { ILoginReq } from '../../models/auth';
 import { AuthService } from '../../services/auth.service';
@@ -14,6 +13,7 @@ import { Role } from 'src/app/core/enums/role.enum';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  isShown:boolean=true;
   private userData: ILoginReq = {
     data: {
       accessToken: '',
@@ -44,24 +44,6 @@ export class LoginComponent {
       Validators.maxLength(16),
     ]),
   });
-
-  formList: IFormsField[] = [
-    {
-      controlName: 'email',
-      iconClass: 'fa-solid fa-envelope',
-      label: 'Email',
-      placeholder: 'Type your email',
-      type: 'email',
-    },
-    {
-      controlName: 'password',
-      iconClass: 'fa-solid fa-key',
-      label: 'Password',
-      placeholder: 'Type your password',
-      type: 'password',
-    },
-  ];
-
   onLogin(loginForm: FormGroup) {
     this._AuthService.login(loginForm.value).subscribe({
       next: (res: ILoginReq) => {
@@ -71,16 +53,12 @@ export class LoginComponent {
       error: (error: HttpErrorResponse) => this._HelperService.error(error),
       complete: () => {
         this._HelperService.success('Welcome Back');
-        this._AuthService.welcomeVoice(
-          `Welcome Back ${this.userData.data.profile.first_name} ${this.userData.data.profile.last_name}`
-        );
         localStorage.setItem('role', this.userData.data.profile.role);
         localStorage.setItem('userToken', this.userData.data.accessToken);
         localStorage.setItem('email', this.userData.data.profile.email);
         localStorage.setItem('firstName', this.userData.data.profile.first_name);
         localStorage.setItem('lastName', this.userData.data.profile.last_name);
         localStorage.setItem('userName', `${this.userData.data.profile.first_name} ${this.userData.data.profile.last_name}`)
-       // console.log('Emitting loggedInUser data from onLogin:', this.userData);
         this._AuthService.getLoggedInUser(this.userData);
         this._Router.navigate(['/dashboard']);
       },
