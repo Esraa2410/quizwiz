@@ -6,14 +6,17 @@ import {
   ViewChild,
   AfterViewInit,
 } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { StudentQuizService } from '../../service/studentQuiz.service';
 import {
   IStudentQuiz,
   IStudentQuizQuestion,
   IStudentQuizOptions,
+  ISubmitQuizReq,
 } from '../../models/studentQuiz';
 import gsap from 'gsap';
+import { HelperService } from 'src/app/modules/shared/services/helper.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-quiz',
@@ -35,9 +38,11 @@ export class StudentQuizComponent implements AfterViewInit {
   @ViewChild('elementToAnswer', { static: true })
   elementToAnswer!: QueryList<ElementRef<HTMLDivElement>>;
 
-  quizId: string = '';
   currentQuestionIndex = 0;
   progressValue: number = 0;
+  timer: number = 30;
+  intervalId: any;
+  quizCompleted: boolean = false;
 
   quiz: IStudentQuiz = {
     data: {
@@ -68,12 +73,20 @@ export class StudentQuizComponent implements AfterViewInit {
   constructor(
     private _ChangeDetectorRef: ChangeDetectorRef,
     private _ActivatedRoute: ActivatedRoute,
-    private _StudentQuizService: StudentQuizService
+    private _StudentQuizService: StudentQuizService,
+    private _HelperService: HelperService,
+    private _Router: Router
   ) {}
 
   ngOnInit(): void {
+    this._ActivatedRoute.params.subscribe((params: Params) => {
+      this.getStudentQuizWithoutAnswers(params['id']);
+    });
     this.initAnimations();
-    this.routeCheck();
+  }
+
+  ngAfterViewInit(): void {
+    this.startTimer();
   }
 
   initAnimations(): void {
@@ -126,10 +139,6 @@ export class StudentQuizComponent implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    this.hello();
-  }
-
   get question(): IStudentQuizQuestion {
     return (
       this.quiz?.data.questions[this.currentQuestionIndex] || {
@@ -138,12 +147,6 @@ export class StudentQuizComponent implements AfterViewInit {
         options: { A: '', B: '', C: '', D: '', _id: '' },
       }
     );
-  }
-
-  hello() {
-    this.elementToAnswer.forEach((item) => {
-      console.log(item);
-    });
   }
 
   increaseProgressValue(): void {
@@ -165,8 +168,10 @@ export class StudentQuizComponent implements AfterViewInit {
   }
 
   onSelect(answerIndex: number): void {
-    this.selectedAnswers[this.currentQuestionIndex] = answerIndex;
-    this.updateSelectedAnswer();
+    if (this.timer > 0 && !this.quizCompleted) {
+      this.selectedAnswers[this.currentQuestionIndex] = answerIndex;
+      this.updateSelectedAnswer();
+    }
   }
 
   isAnswerSelected(): boolean {
@@ -186,7 +191,7 @@ export class StudentQuizComponent implements AfterViewInit {
   }
 
   prev(): void {
-    if (this.currentQuestionIndex > 0) {
+    if (this.currentQuestionIndex > 0 && !this.quizCompleted) {
       gsap.to(this.questionContainer.nativeElement.childNodes, {
         duration: 0.4,
         opacity: 0,
@@ -197,6 +202,7 @@ export class StudentQuizComponent implements AfterViewInit {
           this.increaseProgressValue();
           this._ChangeDetectorRef.detectChanges();
           this.updateSelectedAnswer();
+          this.resetTimer();
           gsap.to(this.questionContainer.nativeElement.childNodes, {
             duration: 0.4,
             opacity: 1,
@@ -211,7 +217,8 @@ export class StudentQuizComponent implements AfterViewInit {
   goToNextQuestion(): void {
     if (
       this.currentQuestionIndex <
-      (this.quiz?.data.questions.length || 0) - 1
+        (this.quiz?.data.questions.length || 0) - 1 &&
+      !this.quizCompleted
     ) {
       gsap.to(this.questionContainer.nativeElement.childNodes, {
         duration: 0.4,
@@ -223,6 +230,7 @@ export class StudentQuizComponent implements AfterViewInit {
           this.increaseProgressValue();
           this._ChangeDetectorRef.detectChanges();
           this.updateSelectedAnswer();
+          this.resetTimer();
           gsap.to(this.questionContainer.nativeElement.childNodes, {
             duration: 0.4,
             opacity: 1,
@@ -231,24 +239,68 @@ export class StudentQuizComponent implements AfterViewInit {
           });
         },
       });
+    } else if (!this.quizCompleted) {
+      this.submitQuiz();
     }
-  }
-
-  routeCheck(): void {
-    this._ActivatedRoute.params.subscribe((params: Params) => {
-      this.quizId = params['id'];
-      this.getStudentQuizWithoutAnswers(this.quizId);
-    });
   }
 
   getStudentQuizWithoutAnswers(id: string): void {
     this._StudentQuizService.quizWithoutAnswer(id).subscribe({
       next: (res: IStudentQuiz) => {
         this.quiz = res;
-        console.log(this.quiz)
         this.increaseProgressValue();
         this._ChangeDetectorRef.detectChanges();
       },
+      error: (error: HttpErrorResponse) => {
+        this._HelperService.error(error);
+        if (error.status === 403) {
+          this.quizCompleted = true;
+          this._Router.navigate(['/'])
+        }
+      },
+      complete: () => {
+        this._HelperService.success('Quiz Submitted');
+        this._Router.navigate(['/'])
+      }
     });
+  }
+
+  submitQuiz(): void {
+    if (this.quizCompleted) {
+      return;
+    }
+
+    const answers = this.selectedAnswers.map((answer, index) => ({
+      question: this.quiz.data.questions[index]._id,
+      answer: this.optionKeys[answer],
+    }));
+    const quizData: ISubmitQuizReq = { answers };
+    this._StudentQuizService.submitQuiz(quizData, this.quiz.data._id).subscribe({
+      next: (res: any) => {
+        this._Router.navigate(['/']);
+        this.quizCompleted = true;
+        this._HelperService.success(res.message);
+      },
+      error: (error: HttpErrorResponse) => {
+        this._HelperService.error(error);
+        if (error.status === 403) {
+          this.quizCompleted = true;
+        }
+      },
+    });
+  }
+
+  startTimer(): void {
+    this.intervalId = setInterval(() => {
+      if (this.timer > 0) {
+        this.timer--;
+      } else {
+        this.goToNextQuestion();
+      }
+    }, 1000);
+  }
+
+  resetTimer(): void {
+    this.timer = 30;
   }
 }
