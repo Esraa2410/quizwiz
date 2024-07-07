@@ -1,4 +1,5 @@
 import { Component, ViewChild, AfterViewInit, ElementRef, Output, EventEmitter, Input, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { Role } from 'src/app/core/enums/role.enum';
 import { gsap } from 'gsap';
 
@@ -18,6 +19,7 @@ export class SidebarComponent implements AfterViewInit {
   @Input() activeMenu: boolean = false;
   role: string = localStorage.getItem('role') ?? '';
   @Output() sidebarCollapsing: EventEmitter<boolean> = new EventEmitter<boolean>();
+  currentRoute: string = '';
 
   dashboardMenu: IList[] = [
     {
@@ -74,20 +76,13 @@ export class SidebarComponent implements AfterViewInit {
       routeIcon: 'fa-solid fa-square-poll-horizontal',
       isActive: this.role == Role.student
     },
-
-    // {
-    //   routeName: 'Help',
-    //   routeLink: '/dashboard/contact-us',
-    //   routeIcon: 'fa-solid fa-question',
-    //   isActive: true
-    // }
   ];
 
   @ViewChild('aside', { static: true }) aside!: ElementRef;
   @ViewChild('navList', { static: true }) navList!: ElementRef<HTMLUListElement>;
 
-  loggedInRole(): void {
-
+  constructor(private router: Router) {
+    this.currentRoute = this.router.url;
   }
 
   ngAfterViewInit(): void {
@@ -107,12 +102,5 @@ export class SidebarComponent implements AfterViewInit {
   toggleMenu() {
     this.activeMenu = !this.activeMenu;
     this.sidebarCollapsing.emit(this.activeMenu);
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    // this.asideWidth = this.asideElement.nativeElement.offsetWidth;
-    // this.textLinkVisibility = this.asideWidth <= 182;
-    // this.arrowVisibility = window.innerWidth <= 991;
   }
 }

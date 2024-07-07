@@ -18,3 +18,11 @@ export interface IButtonConfig {
   action: (row: any) => void;
 }
 
+export interface IDialogForm {
+  controlName: string;
+  label: string;
+  placholder: string;
+  class: string;
+  elementType: string;
+}
+

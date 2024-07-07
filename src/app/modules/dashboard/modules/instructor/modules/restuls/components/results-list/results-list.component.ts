@@ -1,36 +1,45 @@
-import { IGroupDetailsRes, IStudent } from './../../../groups/models/groups';
-import { IButtonConfig, IBreadCrumb } from 'src/app/modules/shared/models/shared';
+import {
+  IGroupDetailsRes,
+  IStudent,
+  IGroupsListRes,
+  IGroupsListRes2,
+} from './../../../groups/models/groups';
+import {
+  IButtonConfig,
+  IBreadCrumb,
+} from 'src/app/modules/shared/models/shared';
 import { Component, OnInit } from '@angular/core';
 import { Root2 } from '../../models/results';
 import { Router } from '@angular/router';
 import { ResultsService } from '../../services/results.service';
 import { MatDialog } from '@angular/material/dialog';
 import { GroupsService } from '../../../groups/services/groups.service';
+import { forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+interface IResults {
+  title: string;
+  participants: number;
+  createdAt: string;
+  groupName: string;
+  personsInGroup: number;
+  actions: () => void;
+}
 
 @Component({
   selector: 'app-results-list',
   templateUrl: './results-list.component.html',
-  styleUrls: ['./results-list.component.scss']
+  styleUrls: ['./results-list.component.scss'],
 })
-export class ResultsListComponent {
+export class ResultsListComponent implements OnInit {
   groupsIds: string[] = [];
-
+  resultsData: IResults[] = [];
+  paginatedResultsData!: IResults[];
   resultsList!: Root2[];
-  paginatedList!: Root2[];
   navigationList: IBreadCrumb[] = [
     { label: 'dashboard', url: '/dashboard' },
     { label: 'Results' },
   ];
-
-  // tableHeaders: string[] = ['quiz.title', 'quiz.group', 'participants', 'participants.length', 'quiz.schadule', 'actions'];
-  // displayHeaders: { [key: string]: string } = {
-  //   'quiz.title': 'Title',
-  //   'quiz.group': 'Group Name',//will change to group name
-  //   'participants': 'No. of persons in group',//will change to number of students in the group
-  //   'participants.length': 'Participants',
-  //   'quiz.schadule': 'Date',//will change to date pipe
-  //   actions: 'Actions',
-  // };
 
   buttons: IButtonConfig[] = [
     {
@@ -39,62 +48,75 @@ export class ResultsListComponent {
       class: 'yellow-color',
     },
   ];
+
   totalRecords: number = 0;
   rows: number = 10;
   first: number = 0;
-  constructor(public dialog: MatDialog, private _ResultsService: ResultsService, private _GroupsService: GroupsService, private _Router: Router) { }
-  ngOnInit(): void {
-    this.getAllResults()
 
-  }
+  constructor(
+    public dialog: MatDialog,
+    private _ResultsService: ResultsService,
+    private _GroupsService: GroupsService,
+    private _Router: Router
+  ) {}
 
   studentsGroup: IStudent[] = [];
-  groupDetails: IGroupDetailsRes[] = [{
-    _id: '',
-    name: '',
-    status: '',
-    instructor: '',
-    students: this.studentsGroup,
-    max_students: 0
-  }]
+  groupDetails: IGroupDetailsRes[] = [
+    {
+      _id: '',
+      name: '',
+      status: '',
+      instructor: '',
+      students: this.studentsGroup,
+      max_students: 0,
+    },
+  ];
 
-  getAllResults() {
-    this._ResultsService.allResults().subscribe({
-      next: (res: Root2[]) => {
-        this.resultsList = res;
-        this.groupsIds = res.map((x) => x.quiz.group);
-        for (let i = 0; i < this.groupsIds.length; i++) {
-          this._GroupsService.getGroupById(this.groupsIds[i]).subscribe({
-            next: (res: IGroupDetailsRes) => {
-              this.groupDetails.push(res);
-            }, error: (err) => {
-              this.groupDetails.push({
-                _id: '',
-                name: 'Group Deleted',
-                status: '',
-                instructor: '',
-                students: this.studentsGroup,
-                max_students: 0
-              })
-            }
-          })
-        }
-      }
-    })
+  ngOnInit(): void {
+    this.getAllResults();
   }
 
+  getAllResults() {
+    forkJoin({
+      groups: this._GroupsService.getAllGroups(),
+      results: this._ResultsService.allResults(),
+    })
+      .pipe(
+        map(({ groups, results }) => {
+          this.resultsList = results;
+          return results.map((result) => {
+            const group = groups.find((g) => g._id === result.quiz.group);
+            return {
+              groupName: group?.name ?? 'Group Deleted',
+              createdAt: result.quiz.createdAt,
+              participants: result.participants.length ?? 0,
+              personsInGroup: group?.students.length ?? 0,
+              title: result.quiz.title ?? '',
+              actions: () => this.viewFunction('1000ms', '1000ms', result)
+            } as IResults;
+          });
+        })
+      )
+      .subscribe((combinedResults) => {
+        this.resultsData = combinedResults;
+        this.totalRecords = combinedResults.length;
+        this.updatePaginatedData();
+      });
+  }
 
-
-  viewFunction(enterAnimationDuration: string,
-    exitAnimationDuration: string, row: Root2): void {
+  viewFunction(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string,
+    row: Root2
+  ): void {
     this._ResultsService.getResultView(row);
-    this._Router.navigate(['/dashboard/instructor/results/results-view'])
+    this._Router.navigate(['/dashboard/instructor/results/results-view']);
   }
 
   updatePaginatedData(): void {
     const start = this.first;
     const end = this.first + this.rows;
-    this.paginatedList = this.resultsList.slice(start, end);
+    this.paginatedResultsData = this.resultsData.slice(start, end);
   }
 
   onPageSizeChange(size: number): void {

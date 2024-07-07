@@ -58,3 +58,9 @@ ul li {
   border: 1px solid $main-border-color;
   border-radius: 10px;
 }
+
+.form-control:focus,
+.form-select:focus {
+  border-color: $light-pink-color;
+  box-shadow: 0 0 0 .15rem $light-pink-color;
+}

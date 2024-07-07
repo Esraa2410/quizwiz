@@ -94,14 +94,14 @@ export class QuestionsComponent {
   ): void {
     const dialogRef = this.dialog.open(AddNewQuestionComponent, {
       width: '850px',
-      height: '500px',
+      height: '430px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: { mode },
     });
     dialogRef.afterClosed().subscribe((result: any) => {
       this.getAllQuestions();
-    
+
     });
   }
 
@@ -113,14 +113,14 @@ export class QuestionsComponent {
   ): void {
     const dialogRef = this.dialog.open(AddNewQuestionComponent, {
       width: '850px',
-      height: '500px',
+      height: '430px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: { ...data, mode },
     });
     dialogRef.afterClosed().subscribe((result: any) => {
       this.getAllQuestions();
-     
+
     });
   }
 

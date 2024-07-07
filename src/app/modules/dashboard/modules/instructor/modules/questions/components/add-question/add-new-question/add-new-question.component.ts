@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { QuestionsService } from './../../../services/questions.service';
 import { HelperService } from './../../../../../../../../shared/services/helper.service';
 import { IQuestion } from '../../../models/questions';
+import { fromEvent, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-new-question',
@@ -12,6 +13,7 @@ import { IQuestion } from '../../../models/questions';
 })
 export class AddNewQuestionComponent implements OnInit {
   questionForm!: FormGroup;
+
 
   constructor(
     public dialogRef: MatDialogRef<AddNewQuestionComponent>,
@@ -104,24 +106,22 @@ export class AddNewQuestionComponent implements OnInit {
 
   handleData(): void {
     if (this.data) {
-      if (this.data) {
-        this.questionForm.setValue({
-          title: this.data.title,
-          description: this.data.description,
-          options: {
-            A: this.data.options.A,
-            B: this.data.options.B,
-            C: this.data.options.C,
-            D: this.data.options.D,
-          },
-          answer: this.data.answer,
-          difficulty: this.data.difficulty,
-          type: this.data.type,
-        });
+      this.questionForm.setValue({
+        title: this.data?.title ?? '',
+        description: this.data?.description ?? '',
+        options: {
+          A: this.data?.options?.A ?? '',
+          B: this.data?.options?.B ?? '',
+          C: this.data?.options?.C ?? '',
+          D: this.data?.options?.D ?? '',
+        },
+        answer: this.data?.answer ?? '',
+        difficulty: this.data?.difficulty ?? '',
+        type: this.data?.type ?? '',
+      });
 
-        if (this.data.mode == 'view' || this.data.mode == 'delete') {
-          this.questionForm.disable();
-        }
+      if (this.data.mode == 'view' || this.data.mode == 'delete') {
+        this.questionForm.disable();
       }
     }
   }

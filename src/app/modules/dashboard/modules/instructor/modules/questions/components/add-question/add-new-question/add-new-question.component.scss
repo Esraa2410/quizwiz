@@ -1,13 +1,15 @@
-@import '../../../../../../../../../../assets/styles/abstracts/dialog.scss';
+@import "../../../../../../../../../../assets/styles/abstracts/dialog.scss";
 .disabledForm {
-    .form-control, .form-select, textarea {
-        background-color: #dddddd !important;
-        color: #000;
-        cursor: no-drop;
-    }
+  .form-control,
+  .form-select,
+  textarea {
+    background-color: #dddddd !important;
+    color: #000;
+    cursor: no-drop;
+  }
 }
 
 textarea {
-    height: 88px;
-    resize: none
+  height: 88px;
+  resize: none;
 }

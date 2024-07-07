@@ -25,7 +25,8 @@
       </div>
       <div>
         <div class="d-flex justify-content-between align-items-center">
-          <div *ngIf="data.mode !== 'view'"
+          <div
+            *ngIf="data.mode !== 'view'"
             class="d-inline check p-4 border-start d-flex justify-content-center align-items-center"
           >
             <button type="submit" class="btn">
@@ -69,7 +70,7 @@
         ></textarea>
       </div>
 
-      <div formGroupName="options" class="row p-0 g-2">
+      <div formGroupName="options" class="row px-0 g-2">
         <div class="col-md-6" *ngFor="let key of ['A', 'B', 'C', 'D']">
           <div class="input-group">
             <span class="input-group-text" id="basic-addon1">{{ key }}</span>
@@ -85,7 +86,7 @@
         <div class=""></div>
       </div>
 
-      <div class="col-md-6 ps-0">
+      <div class="col-md-4">
         <div class="input-group">
           <span class="input-group-text" id="basic-addon1"
             >Difficulty level</span
@@ -102,7 +103,7 @@
         </div>
       </div>
 
-      <div class="col-md-6 pe-0">
+      <div class="col-md-4">
         <div class="input-group">
           <span class="input-group-text" id="basic-addon1">Category type</span>
           <mat-select formControlName="type" class="form-control" required>
@@ -112,16 +113,16 @@
         </div>
       </div>
 
-      <div class="input-group col-12 p-0">
-        <span class="input-group-text" id="basic-addon1">Right Answer</span>
-        <input
-          type="text"
-          formControlName="answer"
-          class="form-control p-2"
-          aria-label="answer"
-          aria-describedby="basic-addon1"
-          required
-        />
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-text" id="basic-addon1">Right Answer</span>
+          <mat-select formControlName="answer" class="form-control" required>
+            <mat-option value="A">A</mat-option>
+            <mat-option value="B">B</mat-option>
+            <mat-option value="C">C</mat-option>
+            <mat-option value="D">D</mat-option>
+          </mat-select>
+        </div>
       </div>
     </div>
   </div>

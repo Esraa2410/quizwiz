@@ -39,3 +39,9 @@ a {
 .yellow-background {
   background-color: $light-yellow-color;
 }
+
+.form-control:focus,
+.form-select:focus {
+  border-color: $light-pink-color;
+  box-shadow: 0 0 0 .25rem $light-pink-color;
+}

@@ -8,34 +8,30 @@ import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { GlobalInterceptor } from './core/interceptors/global/global.interceptor';
 import { LoadingInterceptor } from './core/interceptors/loading/loading.interceptor';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthService } from './modules/auth/services/auth.service';
-
-
-
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: GlobalInterceptor,
-      multi: true
+      multi: true,
     },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-    AuthService
+    AuthService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

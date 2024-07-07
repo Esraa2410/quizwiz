@@ -2,58 +2,31 @@
   <div class="mb-3">
     <app-shared-header [breadCrumbs]="navigationList" [btnVisibility]="false"></app-shared-header>
   </div>
-  <!-- <app-shared-table
-      [tableHeaders]="tableHeaders"
-      [buttons]="buttons"
-      [tableBodyContent]="resultsList"
-      [displayHeaders]="displayHeaders"
-    ></app-shared-table> -->
   <div class="d-flex">
-    <table class="p-3 pe-0  table table-bordered table-responsive table-hover rounded-3 overflow-hidden custom-table">
+    <table class="pe-0 table table-bordered table-responsive table-hover rounded-3 overflow-hidden custom-table">
       <thead>
         <tr>
           <th>Title</th>
+          <th>Group name</th>
+          <th>Persons in group</th>
           <th>Participants</th>
           <th>Created At</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let key of resultsList">
-          <td>
-            {{key.quiz.title}}
-          </td>
-          <td>
-            {{key.participants.length}}
-          </td>
-          <td>
-            {{key.quiz.createdAt| date :'short' }}
-          </td>
+        <tr *ngFor="let key of paginatedResultsData">
+          <td>{{key.title}}</td>
+          <td>{{key.groupName}}</td>
+          <td>{{key.personsInGroup}}</td>
+          <td>{{key.participants}}</td>
+          <td>{{key.createdAt | date: 'short'}}</td>
           <td>
             <div class="d-flex align-items-center justify-content-center gap-3">
-
-              <button (click)="viewFunction('1000ms','1000ms', key)" class="bg-transparent p-0">
+              <button (click)="key.actions()" class="bg-transparent p-0">
                 <i class="fas fa-eye"></i>
               </button>
             </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="p-3 ps-0  table table-bordered table-responsive table-hover rounded-3 overflow-hidden custom-table">
-      <thead>
-        <tr>
-          <th>Group Name</th>
-          <th>No. of persons in group</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let group of groupDetails">
-          <td>
-            {{group.name}}
-          </td>
-          <td>
-            {{group.students.length}}
           </td>
         </tr>
       </tbody>
