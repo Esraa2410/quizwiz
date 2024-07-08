@@ -6,11 +6,11 @@
           <div class="question__heading">Question {{ currentQuestionIndex + 1 }}</div>
           <div class="question__q">{{ question.title }}</div>
         </div>
-        <div class="question__timer">
-          <span [ngClass]="{'red': timer <= 5}">{{ timer }}</span>
+        <div class="question__timer" #timerElement>
+          <span [ngClass]="{'red': timer <= 60}">{{ timer }}</span>
         </div>
       </div>
-      <div class="question__answers" #answer>
+      <div class="question__answers">
         <div
           class="answer"
           *ngFor="let option of optionKeys; let i = index"
@@ -39,7 +39,15 @@
         [disabled]="!isAnswerSelected()"
         type="button"
       >
-        Next
+        {{ currentQuestionIndex === quiz.data.questions.length - 1 ? 'Submit' : 'Next' }}
+      </button>
+      <button
+        class="reset"
+        (click)="resetQuiz()"
+        [disabled]="!isAnyQuestionSelected()"
+        type="button"
+      >
+        Reset
       </button>
     </div>
     <div class="progress__bar">
@@ -57,5 +65,3 @@
     </div>
   </div>
 </div>
-
-

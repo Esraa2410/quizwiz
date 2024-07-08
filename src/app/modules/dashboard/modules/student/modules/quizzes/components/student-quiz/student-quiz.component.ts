@@ -28,19 +28,18 @@ export class StudentQuizComponent implements AfterViewInit {
   @ViewChild('answer', { static: true }) answer!: ElementRef<HTMLDivElement>;
   @ViewChild('questionContainer', { static: true })
   questionContainer!: ElementRef<HTMLDivElement>;
-  @ViewChild('logo', { static: true }) logo!: ElementRef<HTMLDivElement>;
-  @ViewChild('search', { static: true }) search!: ElementRef<HTMLDivElement>;
   @ViewChild('main', { static: true }) main!: ElementRef<HTMLDivElement>;
-  @ViewChild('actions', { static: true }) actions!: ElementRef<HTMLDivElement>;
   @ViewChild('progress', { static: true })
   progress!: ElementRef<HTMLDivElement>;
-  @ViewChild('menu', { static: true }) menu!: ElementRef<HTMLUListElement>;
   @ViewChild('elementToAnswer', { static: true })
   elementToAnswer!: QueryList<ElementRef<HTMLDivElement>>;
+  @ViewChild('timerElement', { static: true }) timerElement!: ElementRef<HTMLDivElement>;
+
 
   currentQuestionIndex = 0;
   progressValue: number = 0;
-  timer: number = 30;
+  timer: any = 0;
+  totalQuizTime: number = 0;
   intervalId: any;
   quizCompleted: boolean = false;
 
@@ -103,33 +102,6 @@ export class StudentQuizComponent implements AfterViewInit {
       y: -20,
       stagger: 0.15,
     });
-    gsap.from(this.menu.nativeElement.childNodes, {
-      delay: 0.4,
-      duration: 0.4,
-      opacity: 0,
-      y: -20,
-      stagger: 0.15,
-    });
-    gsap.from(this.search.nativeElement.childNodes, {
-      delay: 0.8,
-      duration: 0.4,
-      opacity: 0,
-      y: -20,
-      stagger: 0.15,
-    });
-    gsap.from(this.logo.nativeElement, {
-      delay: 0.3,
-      duration: 0.4,
-      opacity: 0,
-      y: -20,
-    });
-    gsap.from(this.actions.nativeElement.childNodes, {
-      delay: 0.6,
-      duration: 0.4,
-      opacity: 0,
-      y: -20,
-      stagger: 0.15,
-    });
     gsap.from(this.progress.nativeElement.childNodes, {
       delay: 0.7,
       duration: 0.4,
@@ -168,9 +140,15 @@ export class StudentQuizComponent implements AfterViewInit {
   }
 
   onSelect(answerIndex: number): void {
+    console.log('onSelect called', answerIndex);
     if (this.timer > 0 && !this.quizCompleted) {
+      console.log('Timer is valid and quiz not completed');
       this.selectedAnswers[this.currentQuestionIndex] = answerIndex;
+      console.log('Selected answers:', this.selectedAnswers);
       this.updateSelectedAnswer();
+      this._ChangeDetectorRef.detectChanges(); // Manually trigger change detection
+    } else {
+      console.log('Timer expired or quiz completed');
     }
   }
 
@@ -179,11 +157,14 @@ export class StudentQuizComponent implements AfterViewInit {
   }
 
   updateSelectedAnswer(): void {
+    console.log('updateSelectedAnswer called');
     this.answer.nativeElement.childNodes.forEach((node: any, index: number) => {
       if (node.classList && node.classList.contains('answer')) {
         if (this.selectedAnswers[this.currentQuestionIndex] === index) {
+          console.log(`Adding selected class to node index: ${index}`);
           node.classList.add('selected');
         } else {
+          console.log(`Removing selected class from node index: ${index}`);
           node.classList.remove('selected');
         }
       }
@@ -202,7 +183,6 @@ export class StudentQuizComponent implements AfterViewInit {
           this.increaseProgressValue();
           this._ChangeDetectorRef.detectChanges();
           this.updateSelectedAnswer();
-          this.resetTimer();
           gsap.to(this.questionContainer.nativeElement.childNodes, {
             duration: 0.4,
             opacity: 1,
@@ -230,7 +210,6 @@ export class StudentQuizComponent implements AfterViewInit {
           this.increaseProgressValue();
           this._ChangeDetectorRef.detectChanges();
           this.updateSelectedAnswer();
-          this.resetTimer();
           gsap.to(this.questionContainer.nativeElement.childNodes, {
             duration: 0.4,
             opacity: 1,
@@ -248,19 +227,19 @@ export class StudentQuizComponent implements AfterViewInit {
     this._StudentQuizService.quizWithoutAnswer(id).subscribe({
       next: (res: IStudentQuiz) => {
         this.quiz = res;
-        this.increaseProgressValue();
-        this._ChangeDetectorRef.detectChanges();
+        this.totalQuizTime = this.quiz.data.duration * 60;
+        this.startTimer();
       },
       error: (error: HttpErrorResponse) => {
         this._HelperService.error(error);
-        if (error.status === 403) {
+        if (error.status === 403 || error.status === 409) {
           this.quizCompleted = true;
-          this._Router.navigate(['/'])
+          this._Router.navigate(['/dashboard/student/quizzes']);
         }
       },
       complete: () => {
-        this._HelperService.success('Quiz Submitted');
-        this._Router.navigate(['/'])
+        this.increaseProgressValue();
+        this._ChangeDetectorRef.detectChanges();
       }
     });
   }
@@ -275,32 +254,63 @@ export class StudentQuizComponent implements AfterViewInit {
       answer: this.optionKeys[answer],
     }));
     const quizData: ISubmitQuizReq = { answers };
+
+    this.quizCompleted = true;
+
     this._StudentQuizService.submitQuiz(quizData, this.quiz.data._id).subscribe({
       next: (res: any) => {
-        this._Router.navigate(['/']);
-        this.quizCompleted = true;
+        this._Router.navigate(['/dashboard/student/quizzes']);
         this._HelperService.success(res.message);
       },
       error: (error: HttpErrorResponse) => {
         this._HelperService.error(error);
         if (error.status === 403) {
           this.quizCompleted = true;
+        } else {
+          this.quizCompleted = false;
         }
       },
     });
   }
 
   startTimer(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
     this.intervalId = setInterval(() => {
-      if (this.timer > 0) {
-        this.timer--;
+      if (this.totalQuizTime > 0) {
+        this.totalQuizTime--;
+        this.updateTimerVisuals();
       } else {
-        this.goToNextQuestion();
+        this.submitQuiz();
       }
     }, 1000);
   }
 
-  resetTimer(): void {
-    this.timer = 30;
+  updateTimerVisuals(): void {
+    const minutes = Math.floor(this.totalQuizTime / 60);
+    const seconds = this.totalQuizTime % 60;
+    this.timer = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+    if (this.totalQuizTime <= 60) {
+      this.changeBackgroundToRed();
+    }
+  }
+
+  changeBackgroundToRed(): void {
+    this.timerElement.nativeElement.style.backgroundColor = 'red';
+  }
+
+  isAnyQuestionSelected(): boolean {
+    return this.selectedAnswers.some((answer) => answer !== undefined);
+  }
+
+  resetQuiz(): void {
+    this.selectedAnswers = [];
+    this.currentQuestionIndex = 0;
+    this.progressValue = 0;
+    this.quizCompleted = false;
+    this.increaseProgressValue();
+    this.startTimer();
   }
 }

@@ -13,11 +13,11 @@ export class HelperService {
   show(): void {
     this.loadginSubject.next(true);
   }
-  
+
   hide(): void {
     this.loadginSubject.next(true);
   }
-  
+
   constructor(private _ToastrService: ToastrService) {}
 
   error(error: HttpErrorResponse): void {

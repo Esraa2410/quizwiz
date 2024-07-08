@@ -10,6 +10,7 @@ import { QuizCodeComponent } from './components/quiz-code/quiz-code.component';
 import { QuizPopComponent } from './components/quiz-pop/quiz-pop.component';
 import { StudentQuizService } from './service/studentQuiz.service';
 import { QuizzesHomeComponent } from './components/quizzes-home/quizzes-home.component';
+import { QuizTimesUpComponent } from './components/quiz-times-up/quiz-times-up.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { QuizzesHomeComponent } from './components/quizzes-home/quizzes-home.com
     StudentQuizComponent,
     QuizCodeComponent,
     QuizPopComponent,
-    QuizzesHomeComponent
+    QuizzesHomeComponent,
+    QuizTimesUpComponent
   ],
   imports: [
     CommonModule,
