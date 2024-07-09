@@ -18,6 +18,8 @@ import {
 import gsap from 'gsap';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { QuizTimesUpComponent } from '../quiz-times-up/quiz-times-up.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-student-quiz',
@@ -73,7 +75,8 @@ export class StudentQuizComponent implements AfterViewInit {
     private _ActivatedRoute: ActivatedRoute,
     private _StudentQuizService: StudentQuizService,
     private _HelperService: HelperService,
-    private _Router: Router
+    private _Router: Router,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -271,6 +274,9 @@ export class StudentQuizComponent implements AfterViewInit {
         this.updateTimerVisuals();
       } else {
         this.submitQuiz();
+        clearInterval(this.totalQuizTime)
+        //console.log(this.totalQuizTime)
+       this.openTimesUpDialog('500ms','500ms')
       }
     }, 1000);
   }
@@ -300,5 +306,17 @@ export class StudentQuizComponent implements AfterViewInit {
     this.quizCompleted = false;
     this.increaseProgressValue();
     this.startTimer();
+  }
+  openTimesUpDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string,
+  ): void {
+    const dialogRef = this.dialog.open(QuizTimesUpComponent, {
+      width: '400px',
+      height: '200px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {  });
   }
 }
