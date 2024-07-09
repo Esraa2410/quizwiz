@@ -10,8 +10,8 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
     children: [
-      { path: '', redirectTo: '', pathMatch: 'full' },
-      { path: '', component: HomeComponent, title: 'Dashboard' },
+      { path: '', redirectTo: 'home', pathMatch: 'full', data: { animation: 'HomePage' } },
+      { path: 'home', component: HomeComponent, title: 'Dashboard', data: { animation: 'HomePage' } },
       {
         path: 'student',
         canActivate: [studentGuard],
@@ -19,6 +19,7 @@ const routes: Routes = [
           import('./modules/student/student.module').then(
             (m) => m.StudentModule
           ),
+        data: { animation: 'StudentPage' }
       },
       {
         path: 'instructor',
@@ -27,6 +28,7 @@ const routes: Routes = [
           import('./modules/instructor/instructor.module').then(
             (m) => m.InstructorModule
           ),
+        data: { animation: 'InstructorPage' }
       },
     ],
   },

@@ -9,9 +9,9 @@ const routes: Routes = [
     path: '',
     component: QuizzesComponent,
     children: [
-      { path: '', redirectTo: 'quizzes-home', pathMatch: 'full' },
-      { path: 'quizzes-home', component: QuizzesHomeComponent, title: 'Quizzes' },
-      { path: 'student-quiz/:id', component: StudentQuizComponent, title: 'Quiz' },
+      { path: '', redirectTo: 'quizzes-home', pathMatch: 'full', data: { animation: 'QuizzesHomePage' } },
+      { path: 'quizzes-home', component: QuizzesHomeComponent, title: 'Quizzes', data: { animation: 'QuizzesHomePage' } },
+      { path: 'student-quiz/:id', component: StudentQuizComponent, title: 'Quiz', data: { animation: 'StudentQuizPage' } },
     ],
   },
 ];

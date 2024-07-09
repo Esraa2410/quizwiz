@@ -10,14 +10,15 @@ const routes: Routes = [
     path: '',
     component: StudentsComponent,
     children: [
-      { path: '', redirectTo: '', pathMatch: 'full' },
-      { path: '', component: StudentListComponent, title: 'Student List' },
+      { path: '', redirectTo: '', pathMatch: 'full', data: { animation: 'InstructorStudentListPage' } },
+      { path: '', component: StudentListComponent, title: 'Student List', data: { animation: 'InstructorStudentListPage' } },
       {
         path: 'students-without-group',
         component: StudentsWithoutGroupComponent,
         title: 'Students without group',
+        data: { animation: 'InstructorStudentsWithoutGroupPage' }
       },
-      { path: 'groups/:id', component: GroupsComponent, title: 'Groups' },
+      { path: 'groups/:id', component: GroupsComponent, title: 'Groups', data: { animation: 'InstructorGroupsPage' } },
     ],
   },
 ];

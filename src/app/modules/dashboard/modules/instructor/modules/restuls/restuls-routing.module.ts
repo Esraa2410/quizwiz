@@ -5,12 +5,10 @@ import { ResultsViewComponent } from './components/results-view/results-view.com
 import { ResultsListComponent } from './components/results-list/results-list.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'results', pathMatch: 'full' },
-  { path: 'results', component: ResultsListComponent, title: 'Results' },
-  { path: 'results-view', component: ResultsViewComponent, title: 'Results View' }
-]
-
-
+  { path: '', redirectTo: 'results', pathMatch: 'full', data: { animation: 'InstructorResultsListPage' } },
+  { path: 'results', component: ResultsListComponent, title: 'Results', data: { animation: 'InstructorResultsListPage' } },
+  { path: 'results-view', component: ResultsViewComponent, title: 'Results View', data: { animation: 'InstructorResultsViewPage' } }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

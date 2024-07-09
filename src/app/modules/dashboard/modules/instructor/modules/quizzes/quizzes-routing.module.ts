@@ -5,12 +5,9 @@ import { ViewQuizComponent } from './components/view-quiz/view-quiz.component';
 import { QuizListComponent } from './components/quiz-list/quiz-list.component';
 
 const routes: Routes = [
-  { path: '', component: QuizzesComponent },
-  { path: 'view-Quiz/:id', component: ViewQuizComponent },
-  { path: 'allQuizes', component: QuizListComponent 
-  }
-
-
+  { path: '', component: QuizzesComponent, data: { animation: 'InstructorQuizzesListPage' } },
+  { path: 'view-quiz/:id', component: ViewQuizComponent, data: { animation: 'InstructorViewQuizPage' } },
+  { path: 'all-quizzes', component: QuizListComponent, data: { animation: 'InstructorAllQuizzesPage' } }
 ];
 
 @NgModule({

@@ -1,26 +1,40 @@
 <div class="py-5 px-5">
-    <app-shared-header [breadCrumbs]="navigationList" [btnIcon]="btnIcon" [btnText]="btnText"
-        (btnEvent)="openAddDailog('1000ms', '1000ms')"></app-shared-header>
-    <div class="row my-3">
-        <div class="col-12 my-2 d-flex justify-content-between align-items-center">
-            <ul class="d-flex gap-2 m-0 align-items-center p-0">
-                <li *ngFor="let routing of studentsRouting; let last = last" routerLinkActive="active-route"
-                    [routerLinkActiveOptions]="{ exact: true }">
-                    <a [routerLink]="routing.url" *ngIf="!last"> {{ routing.label }} </a>
+  <app-shared-header
+    [breadCrumbs]="navigationList"
+    [btnIcon]="btnIcon"
+    [btnText]="btnText"
+    (btnEvent)="openAddDailog('1000ms', '1000ms')"
+  ></app-shared-header>
+  <div class="row my-3">
+    <div class="col-12 my-2 d-flex justify-content-between align-items-center">
+      <ul class="d-flex gap-2 m-0 align-items-center p-0">
+        <li
+          *ngFor="let routing of studentsRouting; let last = last"
+          routerLinkActive="active-route"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a [routerLink]="routing.url" *ngIf="!last"> {{ routing.label }} </a>
 
-                    <a [routerLink]="routing.url" *ngIf="last" >
-                        <p-menu #menu [model]="items" [popup]="true"></p-menu>
-                        <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-angle-down"
-                            [label]="routing.label" [iconPos]="'right'" class="active-route"></button>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="col-12">
-            <div class="p-5 main-border rounded-3 main-box-shadow">
-                <router-outlet></router-outlet>
-            </div>
-        </div>
+          <a [routerLink]="routing.url" *ngIf="last">
+            <p-menu #menu [model]="items" [popup]="true"></p-menu>
+            <button
+              pButton
+              type="button"
+              (click)="menu.toggle($event)"
+              icon="pi pi-angle-down"
+              [label]="routing.label"
+              [iconPos]="'right'"
+              class="active-route"
+            ></button>
+          </a>
+        </li>
+      </ul>
     </div>
+
+    <div class="col-12">
+      <div class="p-5 main-border rounded-3 main-box-shadow">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
 </div>

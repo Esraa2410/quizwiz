@@ -13,6 +13,7 @@ const routes: Routes = [
           import('./modules/results/results.module').then(
             (m) => m.ResultsModule
           ),
+        data: { animation: 'ResultsPage' }
       },
       {
         path: 'quizzes',
@@ -20,6 +21,7 @@ const routes: Routes = [
           import('./modules/quizzes/quizzes.module').then(
             (m) => m.QuizzesModule
           ),
+        data: { animation: 'QuizzesPage' }
       },
     ],
   },

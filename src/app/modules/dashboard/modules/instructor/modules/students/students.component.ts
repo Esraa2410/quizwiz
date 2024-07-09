@@ -22,7 +22,7 @@ interface IStudentsRouting {
   styleUrls: ['./students.component.scss'],
 })
 export class StudentsComponent implements OnInit {
-  group_id:string='';
+  group_id: string = '';
   allGroups: IGroupsListRes2[] = [];
   navigationList: IBreadCrumb[] = [
     { label: 'dashboard', url: '/dashboard' },
@@ -47,14 +47,14 @@ export class StudentsComponent implements OnInit {
   };
 
   constructor(
-    private _ActivatedRoute:ActivatedRoute,
+    private _ActivatedRoute: ActivatedRoute,
     public dialog: MatDialog,
     private _StudentsService: StudentsService,
     private _HelperService: HelperService,
     private _GroupsService: GroupsService,
     private _Router: Router
   ) {}
-  
+
   ngOnInit(): void {
     this.getAllGroups();
   }
@@ -64,63 +64,43 @@ export class StudentsComponent implements OnInit {
       next: (res: IGroupsListRes2[]) => {
         this.allGroups = res;
         this.groupsItem();
-      }
+      },
     });
   }
 
   groupsItem(): void {
-    this.items = this.allGroups.map(group => ({
+    this.items = this.allGroups.map((group) => ({
       label: group.name,
       icon: 'pi pi-users',
       command: () => {
-        this._Router.navigate([`/dashboard/instructor/students/groups/${group._id}`])
-      }
+        this._Router.navigate([
+          `/dashboard/instructor/students/groups/${group._id}`,
+        ]);
+      },
     }));
   }
-
-  // add student to group
-  // addStudToGroup(data: IAddStudToGroupReq) {
-  //   this._StudentsService.addStudToGroup(data).subscribe({
-  //     next: (res: IAddStudToGroupRes) => {
-  //       this._HelperService.success(res.message);
-  //     },
-  //     error: (err: HttpErrorResponse) => {
-  //       this._HelperService.error(err);
-  //     },
-  //     complete: () => {
-  //       // call getallstudents function
-
-  //     },
-  //   });
-  // }
 
   openAddDailog(
     enterAnimationDuration: string,
     exitAnimationDuration: string
   ): void {
-   const dialogRef= this.dialog.open(AddStudentGroupComponent, {
+    const dialogRef = this.dialog.open(AddStudentGroupComponent, {
       width: '550px',
       height: '300px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
-    dialogRef.afterClosed().subscribe((result:any) => {
-     if (result) {
-      this.onGetSpecificGroup(result);
-    }
-    })
-
-
-  }
-
-
-
-  onGetSpecificGroup(id: string): void {
-    this._GroupsService.getGroupById(id).subscribe({
-      next: (res: any) => {
-      },
-      error: (error: HttpErrorResponse) => this._HelperService.error(error),
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        this.onGetSpecificGroup(result);
+      }
     });
   }
 
+  onGetSpecificGroup(id: string): void {
+    this._GroupsService.getGroupById(id).subscribe({
+      next: (res: any) => {},
+      error: (error: HttpErrorResponse) => this._HelperService.error(error),
+    });
+  }
 }
