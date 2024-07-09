@@ -7,7 +7,7 @@ import { IStudentQuiz, IJoinQuizResponse, ISubmitQuizReq, ISubmitQuizResponse, I
   providedIn: 'root',
 })
 export class StudentQuizService {
-  constructor(private _HttpClient: HttpClient) {}
+  constructor(private _HttpClient: HttpClient) { }
 
   quizWithoutAnswer(id: string): Observable<IStudentQuiz> {
     return this._HttpClient.get<IStudentQuiz>(`quiz/without-answers/${id}`);
@@ -17,23 +17,20 @@ export class StudentQuizService {
     return this._HttpClient.post<IJoinQuizResponse>('quiz/join', quizData);
   }
 
-  submitQuiz(
-    quizData: ISubmitQuizReq,
-    questionId: string
-  ): Observable<ISubmitQuizResponse> {
-    return this._HttpClient.post<ISubmitQuizResponse>(
-      `quiz/submit/${questionId}`,
-      quizData
-    );
+  submitQuiz(quizData: ISubmitQuizReq, questionId: string): Observable<ISubmitQuizResponse> {
+    return this._HttpClient.post<ISubmitQuizResponse>(`quiz/submit/${questionId}`, quizData);
   }
-  //will be edited as it return empty []
-  getIcomingQuizes():Observable<any>{
-  return  this._HttpClient.get('quiz/incomming');
+
+ 
+  getIcomingQuizes(): Observable<any> {
+    return this._HttpClient.get('quiz/incomming');
   }
-  getCompletedQuizes():Observable<any>{
+
+  getCompletedQuizes(): Observable<any> {
     return this._HttpClient.get('quiz/completed')
   }
-  getAllResaults():Observable<any>{
+  
+  getAllResaults(): Observable<any> {
     return this._HttpClient.get('quiz/result')
   }
 }

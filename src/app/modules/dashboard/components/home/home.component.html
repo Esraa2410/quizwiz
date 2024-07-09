@@ -1,9 +1,30 @@
+<ng-container *ngIf="loggedInRole == 'Student'">
+  <div class="container-fluid ">
+    <div class="row mt-5 justify-content-center align-items-center home-card ">
+      <div class="col-lg-6">
+        <div>
+          <label for="">Name:</label>
+          <input class="form-control mb-4 " type="text" [value]="userName" disabled>
 
-<ng-container *ngIf="loggedInRole == 'Student'" >
-  Welcome to your dashboard 
+          <label for="">Email:</label>
+          <input class="form-control mb-4" type="text" [value]="email" disabled>
+
+          <label for="">Role:</label>
+          <input class="form-control mb-4 " type="text" [value]="role" disabled>
+          <!-- <div class="w-50">
+            <p-chart type="pie" [data]="data" [options]="options" />
+          </div> -->
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <img class="w-100 bg-image" src="../../../../../assets/images/student-732012_1280.jpg" alt="">
+      </div>
+    </div>
+  </div>
 </ng-container>
-<ng-container  *ngIf="loggedInRole == 'Instructor'">
-  <div class="py-5 px-5"  >
+
+<ng-container *ngIf="loggedInRole == 'Instructor'">
+  <div class="py-5 px-5">
     <div class="row">
       <div class="col-md-6">
         <div class="p-3 main-border rounded-3">
@@ -13,7 +34,7 @@
             [headerKeys]="['title']" [detailKeys]="['schadule']" [additionalContentKey]="'participants'"
             [wontUseGrid]="true" [useGrid]="false" [mainMenue]="false" [studentsVisibility]="true"
             [RouterLinkPath]="RouterLinkPath" (view)="willBeViewed($event)">
-  
+
           </app-shared-card>
         </div>
       </div>
@@ -23,13 +44,13 @@
           <app-shared-main-header [headerText]="'Top 5 Students'" [navigationLink]="'/dashboard/instructor/students'"
             [navigationVisibility]="true" [navigationText]="'Students directory'"></app-shared-main-header>
           <app-shared-card [imgSrc]="'../../../../../assets/images/Quiz img.svg'" [cardContent]="topFiveStudents"
-            [headerKeys]="['first_name', 'last_name']" [detailKeys]="['status', 'avg_score']" [studentsVisibility]="false"
-            [wontUseGrid]="true" [useGrid]="false" [mainIconVisibility]="true" [mainMenue]="true"
-            [RouterLinkPath]="RouterLinkPath2" (view)="willBeViewedStudent($event)" (delete)="willBeDeleteStudent($event)">
+            [headerKeys]="['first_name', 'last_name']" [detailKeys]="['status', 'avg_score']"
+            [studentsVisibility]="false" [wontUseGrid]="true" [useGrid]="false" [mainIconVisibility]="true"
+            [mainMenue]="true" [RouterLinkPath]="RouterLinkPath2" (view)="willBeViewedStudent($event)"
+            (delete)="willBeDeleteStudent($event)">
           </app-shared-card>
         </div>
       </div>
     </div>
   </div>
 </ng-container>
-

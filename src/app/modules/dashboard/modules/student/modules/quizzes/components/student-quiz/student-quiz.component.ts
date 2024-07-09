@@ -1,19 +1,7 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  QueryList,
-  ViewChild,
-  AfterViewInit,
-} from '@angular/core';
+import {ChangeDetectorRef,Component, ElementRef,QueryList,ViewChild, AfterViewInit,} from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { StudentQuizService } from '../../service/studentQuiz.service';
-import {
-  IStudentQuiz,
-  IStudentQuizQuestion,
-  IStudentQuizOptions,
-  ISubmitQuizReq,
-} from '../../models/studentQuiz';
+import {IStudentQuiz, IStudentQuizQuestion, IStudentQuizOptions, ISubmitQuizReq,} from '../../models/studentQuiz';
 import gsap from 'gsap';
 import { HelperService } from 'src/app/modules/shared/services/helper.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -26,15 +14,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class StudentQuizComponent implements AfterViewInit {
   @ViewChild('slider', { static: true }) slider!: ElementRef<HTMLDivElement>;
   @ViewChild('answer', { static: true }) answer!: ElementRef<HTMLDivElement>;
-  @ViewChild('questionContainer', { static: true })
-  questionContainer!: ElementRef<HTMLDivElement>;
+  @ViewChild('questionContainer', { static: true }) questionContainer!: ElementRef<HTMLDivElement>;
   @ViewChild('main', { static: true }) main!: ElementRef<HTMLDivElement>;
-  @ViewChild('progress', { static: true })
-  progress!: ElementRef<HTMLDivElement>;
-  @ViewChild('elementToAnswer', { static: true })
-  elementToAnswer!: QueryList<ElementRef<HTMLDivElement>>;
+  @ViewChild('progress', { static: true }) progress!: ElementRef<HTMLDivElement>;
+  @ViewChild('elementToAnswer', { static: true }) elementToAnswer!: QueryList<ElementRef<HTMLDivElement>>;
   @ViewChild('timerElement', { static: true }) timerElement!: ElementRef<HTMLDivElement>;
-
 
   currentQuestionIndex = 0;
   progressValue: number = 0;
@@ -87,6 +71,9 @@ export class StudentQuizComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.startTimer();
   }
+
+
+
 
   initAnimations(): void {
     gsap.from(this.main.nativeElement, {
@@ -141,7 +128,7 @@ export class StudentQuizComponent implements AfterViewInit {
 
   onSelect(answerIndex: number): void {
     console.log('onSelect called', answerIndex);
-    if (this.timer > 0 && !this.quizCompleted) {
+    if (this.timer > '0:00' && !this.quizCompleted) {
       console.log('Timer is valid and quiz not completed');
       this.selectedAnswers[this.currentQuestionIndex] = answerIndex;
       console.log('Selected answers:', this.selectedAnswers);
@@ -229,6 +216,7 @@ export class StudentQuizComponent implements AfterViewInit {
         this.quiz = res;
         this.totalQuizTime = this.quiz.data.duration * 60;
         this.startTimer();
+
       },
       error: (error: HttpErrorResponse) => {
         this._HelperService.error(error);
@@ -246,31 +234,31 @@ export class StudentQuizComponent implements AfterViewInit {
 
   submitQuiz(): void {
     if (this.quizCompleted) {
-      return;
-    }
-
+    //   return;
+    // }
     const answers = this.selectedAnswers.map((answer, index) => ({
       question: this.quiz.data.questions[index]._id,
       answer: this.optionKeys[answer],
     }));
     const quizData: ISubmitQuizReq = { answers };
-
     this.quizCompleted = true;
-
+    console.log(this.quiz)
     this._StudentQuizService.submitQuiz(quizData, this.quiz.data._id).subscribe({
       next: (res: any) => {
         this._Router.navigate(['/dashboard/student/quizzes']);
         this._HelperService.success(res.message);
+        console.log(res);
       },
       error: (error: HttpErrorResponse) => {
         this._HelperService.error(error);
+        console.log(error)
         if (error.status === 403) {
           this.quizCompleted = true;
         } else {
           this.quizCompleted = false;
         }
       },
-    });
+    });}
   }
 
   startTimer(): void {

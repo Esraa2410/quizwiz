@@ -50,12 +50,11 @@ export class ResultsComponent  implements OnInit{
 
   viewFunction(row: any): void {
     console.log('View', row);
-    
+
   }
   quizessResaults(): void {
     this._ResultsService.getAllResults().subscribe({
       next:(res:IResultsRes[])=>{
-        console.log(res);
         this.resultsLis=res;
       }
     
@@ -64,7 +63,6 @@ export class ResultsComponent  implements OnInit{
   }
 
   viewResults( row: IResultsRes): void {
-    console.log('row'+row)
     this._ResultsService.getResultView(row);
    this._Router.navigate(['/dashboard/student/results/results-view'])
   }

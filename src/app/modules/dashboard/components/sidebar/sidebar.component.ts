@@ -59,7 +59,7 @@ export class SidebarComponent implements AfterViewInit {
       isActive: this.role == Role.instructor
     },
     {
-      routeName: 'dashboard',
+      routeName: 'Dashboard',
       routeLink: '/dashboard',
       routeIcon: 'fa-solid fa-home',
       isActive: this.role == Role.student

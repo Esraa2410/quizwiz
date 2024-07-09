@@ -12,11 +12,11 @@ import { SpeedDialModule } from 'primeng/speeddial';
 import { MessageService } from 'primeng/api';
 import { HomeService } from './components/home/service/home.service';
 import { GroupsService } from './modules/instructor/modules/groups/services/groups.service';
-
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [DashboardComponent, SidebarComponent, NavbarComponent, HomeComponent],
-  imports: [CommonModule, DashboardRoutingModule, SharedModule, SpeedDialModule],
+  imports: [CommonModule, DashboardRoutingModule, SharedModule, SpeedDialModule,ChartModule],
   providers: [AuthService, MessageService, HomeService, GroupsService],
 })
 export class DashboardModule {}
