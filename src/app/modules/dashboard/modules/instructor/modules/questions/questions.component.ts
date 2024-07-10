@@ -29,8 +29,8 @@ export class QuestionsComponent {
   tableHeaders: string[] = ['title', 'description', 'difficulty', 'actions'];
   displayHeaders: { [key: string]: string } = {
     title: 'Question Title',
-    description: 'Question Desc',
-    difficulty: 'Question Difficulty',
+    description: 'Description',
+    difficulty: 'Difficulty',
     actions: 'Actions',
   };
 
