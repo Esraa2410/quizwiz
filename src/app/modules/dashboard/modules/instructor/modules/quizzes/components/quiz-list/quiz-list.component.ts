@@ -51,12 +51,13 @@ export class QuizListComponent implements OnInit{
   getAllQuizes(): void {
     this._QuizzesService.getAllQuizes().subscribe((quizzes) => {
       this.allQuizzes = quizzes;
+      this.paginatedList=quizzes;
       this.totalRecords = quizzes.length;
       this.updatePaginatedData();
     });
   }
   viewFunction(row: any): void {
-    this._Router.navigateByUrl(`/dashboard/instructor/quizzes/view-Quiz/${row._id}`)
+    this._Router.navigateByUrl(`/dashboard/instructor/quizzes/view-quiz/${row._id}`)
   }
   updatePaginatedData(): void {
     const start = this.first;

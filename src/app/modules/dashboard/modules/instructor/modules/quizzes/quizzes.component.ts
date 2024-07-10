@@ -128,16 +128,20 @@ export class QuizzesComponent implements OnInit {
   }
  
   willBeViewed(event:string){
-      this._Router.navigateByUrl(`dashboard/instructor/quizzes/view-Quiz/${event}`)
+      this._Router.navigateByUrl(`/dashboard/instructor/quizzes/view-quiz/${event}`)
   }
   goToBankOfQuestions(){
     this._Router.navigateByUrl('/dashboard/instructor/questions')
   }
   viewFunction(row: any): void {
-    this._Router.navigateByUrl(`/dashboard/instructor/quizzes/view-Quiz/${row._id}`)
+    this._Router.navigateByUrl(`/dashboard/instructor/quizzes/view-quiz/${row._id}`)
   }
 
   goToBankOfQuizTable(){
-    this._Router.navigateByUrl(`/dashboard/instructor/quizzes/allQuizes`)
+    this._Router.navigateByUrl(`/dashboard/instructor/quizzes/all-quizzes`)
+  }
+
+  openResults(){
+    this._Router.navigate(['/dashboard/instructor/results/results'])
   }
 }

@@ -30,23 +30,24 @@
             </app-shared-card>
         </div>
 
-        <div class="p-3 mt-4 main-border rounded-3">
+        <div class="p-3 mt-4 main-border rounded-3 ">
             <h2 class='mb-3 d-flex align-items-center justify-content-between'>
                 <span>
                     Completed Quizzes
                 </span>
                 <span class="resaults">
                     Results
-                    <i class="fa fa-arrow-right ms-2" aria-hidden="true"></i>
+                    <i (click)="openResults()" class="fa fa-arrow-right ms-2 cursor-poiner" aria-hidden="true"></i>
                 </span>
 
             </h2>
             <!--shared table
                this will be edited -->
-            <app-shared-table [tableHeaders]="tableHeaders" [buttons]="buttons" [tableBodyContent]="completedQuizes"
+            
+                 <app-shared-table [tableHeaders]="tableHeaders" [buttons]="buttons" [tableBodyContent]="completedQuizes"
                 [displayHeaders]="displayHeaders"></app-shared-table>
-
-
+       
+           
 
         </div>
     </div>
