@@ -30,6 +30,7 @@ export class SharedCardComponent<T extends { [key: string]: any }> {
   @Output() deleteStudentGroup = new EventEmitter<string>();
 
   @Input() RouterLinkPath: string = '';
+  @Input() isOpen:boolean=true;
 
   getHeaderContent(item: T): string {
     return this.headerKeys.map(key => item[key]).join(' ');

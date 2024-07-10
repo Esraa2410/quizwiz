@@ -39,7 +39,7 @@
             <p class="m-0 fw-bold">
               No. of student’s enrolled: {{ getAdditionalContent(item) }}
             </p>
-            <div
+            <div *ngIf="isOpen"
               class="d-flex gap-2 align-items-center"
               role="button"
               (click)="view.emit(item['_id'])"

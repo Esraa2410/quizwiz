@@ -24,6 +24,7 @@
       </ng-container>
       <ng-container *ngIf="upcomingQuizzes.length > 0">
         <app-shared-card
+        [isOpen]="false"
           [imgSrc]="'../../../../../assets/images/Quiz img.svg'"
           [cardContent]="upcomingQuizzes"
           [headerKeys]="['title']"

@@ -63,6 +63,7 @@ export class AppComponent {
 
     snackBarRef.onAction().subscribe(() => {
       this.isOffline = false;
+      document.location.reload()
     });
   }
 }

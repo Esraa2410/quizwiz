@@ -40,7 +40,7 @@ export class StudentQuizComponent implements AfterViewInit {
   currentQuestionIndex = 0;
   progressValue: number = 0;
   timer: any = 0;
-  totalQuizTime: number = 0;
+  totalQuizTime!: number;
   intervalId: any;
   quizCompleted: boolean = false;
 
@@ -268,19 +268,17 @@ export class StudentQuizComponent implements AfterViewInit {
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
+  
+    let dialogOpened = false;
+  
     this.intervalId = setInterval(() => {
       if (this.totalQuizTime > 0) {
         this.totalQuizTime--;
         this.updateTimerVisuals();
-      } else {
-        setTimeout(() => {
-          if (this.totalQuizTime == 0) {
-            this.openTimesUpDialog('500ms', '500ms');
-          }
-          this.submitQuiz();
-
-        }, 1000);
-
+      } else if (this.totalQuizTime === 0 && !dialogOpened) {
+        this.openTimesUpDialog('500ms', '500ms');
+        console.log(this.totalQuizTime);
+        dialogOpened = true;
       }
     }, 1000);
   }
