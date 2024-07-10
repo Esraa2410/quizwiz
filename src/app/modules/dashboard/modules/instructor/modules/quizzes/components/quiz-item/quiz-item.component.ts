@@ -48,9 +48,6 @@ export class QuizItemComponent implements OnInit {
     this._GroupService.getAllGroups().subscribe({
       next: (res: IGroupsListRes) => {
         this.groupList = res;
-        console.log(res)
-
-        // console.log(res)
       }, error: (err: HttpErrorResponse) => {
       }
     })
@@ -58,7 +55,6 @@ export class QuizItemComponent implements OnInit {
   }
   submit(addNewQuizForm: FormGroup) {
     this.dialogRef.close(addNewQuizForm.value);
-    console.log(addNewQuizForm.value)
   }
 
 }

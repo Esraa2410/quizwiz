@@ -244,8 +244,6 @@ export class NavbarComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      // console.log('recored added');
-      //console.log(result);
       if (result) {
         this.addnewQuiz(result);
       }
@@ -254,7 +252,6 @@ export class NavbarComponent implements OnInit {
   addnewQuiz(newQuizData: IQuizRequest) {
     this._QuizzesService.AddNewQuiz(newQuizData).subscribe({
       next: (res: IQuizResponse) => {
-        // console.log(res);
         this.openCreatedQuizDailog('1000ms', '1000ms', res.data.code);
       },
       error: (error) => {

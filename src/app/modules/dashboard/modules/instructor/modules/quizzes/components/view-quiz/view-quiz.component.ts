@@ -14,59 +14,54 @@ import { UpdateQuizComponent } from '../update-quiz/update-quiz.component';
   templateUrl: './view-quiz.component.html',
   styleUrls: ['./view-quiz.component.scss']
 })
-export class ViewQuizComponent implements OnInit{
- 
-  viewID:string =''
+export class ViewQuizComponent implements OnInit {
+
+  viewID: string = ''
   navigationList: IBreadCrumb[] = [
     { label: 'Quizes', url: '/dashboard/instructor/quizzes' },
     { label: 'View' }
   ]
- 
+
   btnText: string = 'Dashboard';
   btnIcon: string = "";
-  quizData!:IQuizResponseByID;
-  constructor(private _Router:Router ,
-    private _QuizzesService:QuizzesService,
-    private _ActivatedRoute: ActivatedRoute ,
-    
-  private _HelperService:HelperService ,
-  public dialog: MatDialog,){
-
-   
-    console.log(this.viewID)
-
+  quizData!: IQuizResponseByID;
+  constructor(private _Router: Router,
+    private _QuizzesService: QuizzesService,
+    private _ActivatedRoute: ActivatedRoute,
+    private _HelperService: HelperService,
+    public dialog: MatDialog,) {
   }
+  
   ngOnInit(): void {
     this.viewID = this._ActivatedRoute.snapshot.params['id'];
     this.getQuizById();
   }
 
-  GoToDashBoard(){
-   this._Router.navigateByUrl('/dashboard')
+  GoToDashBoard() {
+    this._Router.navigateByUrl('/dashboard')
   }
 
-  getQuizById(){
+  getQuizById() {
     this._QuizzesService.getQuizByID(this.viewID).subscribe({
-      next:(res:IQuizResponseByID)=>{
-        console.log(res);
-        this.quizData= res;
+      next: (res: IQuizResponseByID) => {
+        this.quizData = res;
       },
-      error:()=>{
+      error: () => {
 
-      },complete:()=>{
+      }, complete: () => {
 
       },
     })
 
   }
- 
- 
-   //handle delete here
-   openDeleteDailog(enterAnimationDuration: string, 
+
+
+  //handle delete here
+  openDeleteDailog(enterAnimationDuration: string,
     exitAnimationDuration: string,
-    id: string ,
-  title:string ,
-createdAt:string): void {
+    id: string,
+    title: string,
+    createdAt: string): void {
 
     const dialogRef = this.dialog.open(DeleteQuizComponent, {
       width: '400px',
@@ -76,12 +71,12 @@ createdAt:string): void {
       data: {
         id: id,
         title: title,
-        createdAt:createdAt
-       
+        createdAt: createdAt
+
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      
+
       if (result) {
         this.deleteQuiz(result)
 
@@ -93,13 +88,12 @@ createdAt:string): void {
   deleteQuiz(id: string) {
     this._QuizzesService.removeQuiz(id).subscribe({
       next: (res) => {
-         console.log(res);
       },
       error: (error) => {
-        
+
       },
       complete: () => {
-      
+
         this._HelperService.success('Quiz deleted sucessfully');
         this._Router.navigateByUrl('/dashboard/instructor/quizzes')
       }
@@ -107,10 +101,10 @@ createdAt:string): void {
   }
   //handle update
   //handle delete here
-  openUpdateDailog(enterAnimationDuration: string, 
+  openUpdateDailog(enterAnimationDuration: string,
     exitAnimationDuration: string,
-    id: string ,title:string, description:string
-): void {
+    id: string, title: string, description: string
+  ): void {
 
     const dialogRef = this.dialog.open(UpdateQuizComponent, {
       width: '850px',
@@ -119,33 +113,31 @@ createdAt:string): void {
       exitAnimationDuration,
       data: {
         id: id,
-        title:title,
-        description:description
+        title: title,
+        description: description
 
-       
+
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-    console.log(result)
       if (result) {
 
-        this.updateQuiz(id ,result)
+        this.updateQuiz(id, result)
 
       }
 
 
     });
   }
-  updateQuiz(id: string ,updateData:IUpdateQuiz) {
-    this._QuizzesService.updateQuiz(id ,updateData).subscribe({
+  updateQuiz(id: string, updateData: IUpdateQuiz) {
+    this._QuizzesService.updateQuiz(id, updateData).subscribe({
       next: (res) => {
-         console.log(res);
       },
       error: (error) => {
-        
+
       },
       complete: () => {
-      
+
         this._HelperService.success('Quiz updated sucessfully');
         this._Router.navigateByUrl('/dashboard/instructor/quizzes')
       }

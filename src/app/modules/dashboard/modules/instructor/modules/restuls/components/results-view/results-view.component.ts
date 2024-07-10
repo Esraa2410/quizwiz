@@ -56,7 +56,6 @@ export class ResultsViewComponent implements OnInit {
   ngOnInit(): void {
     this._ResultsService.result$.subscribe((result) => {
       this.quizDetails = result;
-      console.log(result)
       this.quizName=this.quizDetails.quiz.title;
       this.navigationList[1].label=this.quizName;
     });

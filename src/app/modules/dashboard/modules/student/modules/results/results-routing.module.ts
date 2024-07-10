@@ -1,11 +1,12 @@
+import { ResultsVeiwComponent } from './components/results-veiw/results-veiw.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ResultsComponent } from './results.component';
-import { ResultsViewComponent } from '../../../instructor/modules/restuls/components/results-view/results-view.component';
+
 
 const routes: Routes = [
   { path: '', component: ResultsComponent, data: { animation: 'ResultsListPage' } },
-  { path: 'results-view', component: ResultsViewComponent, data: { animation: 'ResultsViewPage' } }
+  { path: 'results-view', component: ResultsVeiwComponent, data: { animation: 'ResultsViewPage' } }
 ];
 
 @NgModule({

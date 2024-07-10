@@ -13,7 +13,7 @@
         <thead>
           <tr>
             <th>Duration</th>
-            <th>Score</th>
+            <th>Questions Number</th>
             <th>Started At</th>
             <th>Finished At </th>
           </tr>
@@ -24,7 +24,7 @@
               {{quizDetails.quiz.duration}} 
             </td>
             <td>
-              {{quizDetails.result.score}}
+              {{quizDetails.quiz.questions_number}}
             </td>
             <td>
               {{quizDetails.result.started_at | date :'short' }}
@@ -35,12 +35,5 @@
           </tr>
         </tbody>
       </table>
-  
-  <!-- <div *ngIf="quizDetails.quiz.">
-    <div class="d-flex justify-content-center align-items-center">
-      <img class="w-50 " src="../../../../../../../../../assets/images/auth/auth-img.png" alt="">
-    </div>
-  
-  </div> -->
     </article> 
   </div> 

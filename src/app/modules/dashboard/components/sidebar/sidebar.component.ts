@@ -24,7 +24,7 @@ export class SidebarComponent implements AfterViewInit {
   dashboardMenu: IList[] = [
     {
       routeName: 'Dashboard',
-      routeLink: '/dashboard',
+      routeLink: '/dashboard/home',
       routeIcon: 'fa-solid fa-home',
       isActive: this.role == Role.instructor
     },
@@ -54,19 +54,19 @@ export class SidebarComponent implements AfterViewInit {
     },
     {
       routeName: 'Results',
-      routeLink: '/dashboard/instructor/results',
+      routeLink: '/dashboard/instructor/results/results',
       routeIcon: 'fa-solid fa-square-poll-horizontal',
       isActive: this.role == Role.instructor
     },
     {
       routeName: 'Dashboard',
-      routeLink: '/dashboard',
+      routeLink: '/dashboard/home',
       routeIcon: 'fa-solid fa-home',
       isActive: this.role == Role.student
     },
     {
       routeName: 'Quizzes',
-      routeLink: '/dashboard/student/quizzes',
+      routeLink: '/dashboard/student/quizzes/quizzes-home',
       routeIcon: 'fa-solid fa-business-time',
       isActive: this.role == Role.student
     },

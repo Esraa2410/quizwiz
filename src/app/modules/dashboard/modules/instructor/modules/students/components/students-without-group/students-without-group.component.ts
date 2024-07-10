@@ -56,7 +56,6 @@ export class StudentsWithoutGroupComponent {
   }
 
   willBeViewed(event: string): any {
-    console.log(event)
     let btnText = 'veiw'
     const dialogRef = this.dialog.open(VeiwDeleteStudentComponent, {
       width: '570px',
@@ -71,7 +70,6 @@ export class StudentsWithoutGroupComponent {
 
 
   willBeDelete(event: string): any {
-    console.log(event);
     let btnText = 'delete'
     const dialogRef = this.dialog.open(VeiwDeleteStudentComponent, {
       width: '570px',

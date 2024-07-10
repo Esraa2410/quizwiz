@@ -15,7 +15,7 @@ import { VeiwDeleteStudentGroupComponent } from '../veiw-delete-student-group/ve
   styleUrls: ['./groups.component.scss'],
 })
 export class GroupsComponent {
-  group_id:string='';
+  group_id: string = '';
   private _GroupsService = inject(GroupsService);
   private _ActivatedRoute = inject(ActivatedRoute);
   private _HelperService = inject(HelperService);
@@ -26,7 +26,7 @@ export class GroupsComponent {
   totalRecords: number = 0;
   rows: number = 10;
   first: number = 0;
-  studentDetails:any;
+  studentDetails: any;
 
   ngOnInit(): void {
     this.onCheckRoute();
@@ -46,7 +46,7 @@ export class GroupsComponent {
   onCheckRoute(): void {
     this._ActivatedRoute.params.subscribe((params: Params) => {
       this.onGetSpecificGroup(params['id']);
-      this.group_id=params['id'];
+      this.group_id = params['id'];
     });
   }
 
@@ -68,7 +68,6 @@ export class GroupsComponent {
   }
 
   willBeViewed(event: string): any {
-    console.log(event)
     let btnText = 'veiw'
     const dialogRef = this.dialog.open(VeiwDeleteStudentComponent, {
       width: '570px',
@@ -101,24 +100,24 @@ export class GroupsComponent {
   openUpdateDailog(
     enterAnimationDuration: string,
     exitAnimationDuration: string,
-    stdId:string,
-    btnText:string
+    stdId: string,
+    btnText: string
   ): void {
     this.dialog.open(VeiwDeleteStudentGroupComponent, {
       width: '550px',
       height: '350px',
       enterAnimationDuration,
       exitAnimationDuration,
-      data:{
-        stdId:stdId,
-        groupId:this.group_id,
-        btnText:btnText
+      data: {
+        stdId: stdId,
+        groupId: this.group_id,
+        btnText: btnText
 
       }
     });
   }
 
-  
+
   willBeDeleteFromGroup(event: string): any {
     let btnText = 'delete'
     const dialogRef = this.dialog.open(VeiwDeleteStudentGroupComponent, {
@@ -126,7 +125,7 @@ export class GroupsComponent {
       height: '350px',
       data: {
         stdId: event,
-        groupId:this.group_id,
+        groupId: this.group_id,
         btnText: btnText
       }
     });
@@ -143,7 +142,7 @@ export class GroupsComponent {
       height: '350px',
       data: {
         stdId: event,
-        groupId:this.group_id,
+        groupId: this.group_id,
         btnText: btnText
       }
     });

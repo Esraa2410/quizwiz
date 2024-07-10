@@ -51,7 +51,6 @@ export class UpdateQuizComponent implements OnInit {
 
   }
   ngOnInit() {
-    console.log(this.data)
     this.editquizForm = this.formBuilder.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
@@ -62,7 +61,6 @@ export class UpdateQuizComponent implements OnInit {
 
     });
     if (this.data.id) {
-      console.log(this.data.id)
       this.getQuizById(this.data.id);
     }
 
@@ -73,16 +71,11 @@ export class UpdateQuizComponent implements OnInit {
   }
   submit(editquizForm: FormGroup) {
     this.dialogRef.close(editquizForm.value);
-    console.log(editquizForm.value)
   }
   getQuizById(id: string) {
     this._QuizzesService.getQuizByID(id).subscribe({
       next: (res: IQuizResponseByID) => {
-        //console.log(res);
         this.quizData = res;
-
-        console.log(this.quizData)
-
       },
       error: () => {
 
@@ -96,9 +89,6 @@ export class UpdateQuizComponent implements OnInit {
     this._GroupService.getAllGroups().subscribe({
       next: (res: IGroupsListRes) => {
         this.groupList = res;
-
-
-        // console.log(res)
       }, error: (err: HttpErrorResponse) => {
       }
     })

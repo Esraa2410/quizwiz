@@ -71,13 +71,6 @@ export class AddStudentGroupComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
   onNoClick(): void {
     this.dialogRef.close();
   }

@@ -277,7 +277,6 @@ export class StudentQuizComponent implements AfterViewInit {
         this.updateTimerVisuals();
       } else if (this.totalQuizTime === 0 && !dialogOpened) {
         this.openTimesUpDialog('500ms', '500ms');
-        console.log(this.totalQuizTime);
         dialogOpened = true;
       }
     }, 1000);

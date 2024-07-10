@@ -92,8 +92,6 @@ export class QuizzesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('recored added');
-      console.log(result);
       if (result) {
         this.addnewQuiz(result);
       }
@@ -102,7 +100,6 @@ export class QuizzesComponent implements OnInit {
   addnewQuiz(newQuizData: IQuizRequest) {
     this._QuizzesService.AddNewQuiz(newQuizData).subscribe({
       next: (res: IQuizResponse) => {
-        console.log(res);
         this.openCreatedQuizDailog('1000ms', '1000ms', res.data.code);
       },
       error: (error) => {
@@ -128,9 +125,6 @@ export class QuizzesComponent implements OnInit {
         code: code
       }
     });
-
-  
-
   }
  
   willBeViewed(event:string){
@@ -140,7 +134,6 @@ export class QuizzesComponent implements OnInit {
     this._Router.navigateByUrl('/dashboard/instructor/questions')
   }
   viewFunction(row: any): void {
-    console.log('View', row);
     this._Router.navigateByUrl(`/dashboard/instructor/quizzes/view-Quiz/${row._id}`)
   }
 

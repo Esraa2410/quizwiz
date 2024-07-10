@@ -14,9 +14,9 @@ import { GroupsService } from '../../services/groups.service';
   styleUrls: ['./group-item.component.scss']
 })
 export class GroupItemComponent {
-  selectedStudents: string[]=[];
+  selectedStudents: string[] = [];
   studentsGroup: IStudent[] = [];
-  studentIDS:string[]=[];
+  studentIDS: string[] = [];
   groupDetails: IGroupDetailsRes = {
     _id: '',
     name: '',
@@ -26,76 +26,57 @@ export class GroupItemComponent {
     max_students: 0
   }
 
-  
-  addEditGroupForm!: FormGroup ;
+
+  addEditGroupForm!: FormGroup;
   //will be edited
- allStudentForAddNewGroup!:any ;
- allStudentForUpdatingGroup:any;
-  constructor(private _GroupsService: GroupsService,private formBuilder: FormBuilder,
+  allStudentForAddNewGroup!: any;
+  allStudentForUpdatingGroup: any;
+  constructor(private _GroupsService: GroupsService, private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<GroupItemComponent>
     , @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-   
-      this.veiwGroup(this.data.id);
-    
- 
+    this.veiwGroup(this.data.id);
     this.selectedStudents = this.studentsGroup.map(student => student.first_name);
-    this.addEditGroupForm= this.formBuilder.group({
+    this.addEditGroupForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       students: [[], [Validators.required]],
     })
-   
-      this.getAllStudentsWithoutGroup();
-      this.getAllStudents();
-    
-
-  
+    this.getAllStudentsWithoutGroup();
+    this.getAllStudents();
   }
 
   veiwGroup(id: string) {
     this._GroupsService.getGroupById(id).subscribe({
       next: (res: IGroupDetailsRes) => {
-         console.log(res);
         this.groupDetails = res;
-       
         this.studentIDS = this.groupDetails.students.map(item => item._id);
-
-        console.log(this.studentIDS)
-       
-
       }, error: (err: HttpErrorResponse) => {
-         //console.log(err)
       }
     })
   }
-  submit(addEditGroupForm:FormGroup) { 
+  submit(addEditGroupForm: FormGroup) {
     this.dialogRef.close(addEditGroupForm.value);
-    console.log(addEditGroupForm.value)
   }
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-//will be edited 
-  getAllStudentsWithoutGroup(){
+  //will be edited 
+  getAllStudentsWithoutGroup() {
     this._GroupsService.getAllStudentsForAddGroup().subscribe({
-      next:(res)=>{
-         console.log(res);
-         this.allStudentForAddNewGroup=res
-         console.log(this.allStudentForAddNewGroup)
+      next: (res) => {
+        this.allStudentForAddNewGroup = res
       }
     });
 
 
-   }
-   getAllStudents(){
-     this._GroupsService.getAllStudents().subscribe({
-      next:(res)=>{
-        console.log(res);
-        this.allStudentForUpdatingGroup=res
-        console.log(this.allStudentForUpdatingGroup)
-     }
-     })
-   }
+  }
+  getAllStudents() {
+    this._GroupsService.getAllStudents().subscribe({
+      next: (res) => {
+        this.allStudentForUpdatingGroup = res
+      }
+    })
+  }
 }

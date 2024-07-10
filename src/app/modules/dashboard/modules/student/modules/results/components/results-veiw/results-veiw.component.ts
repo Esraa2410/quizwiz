@@ -10,7 +10,8 @@ import { ResultsService } from '../../services/results.service';
 })
 export class ResultsVeiwComponent implements OnInit {
   quizName:string='';
-  quizDetails: IResultsRes =   {
+  quizDetails: IResultsRes=
+   {
     quiz: {
       _id: '',
       code: '',
@@ -68,7 +69,6 @@ export class ResultsVeiwComponent implements OnInit {
   ngOnInit(): void {
     this._ResultsService.result$.subscribe((result) => {
       this.quizDetails = result;
-      console.log(result)
       this.quizName=this.quizDetails.quiz.title;
       this.navigationList[1].label=this.quizName;
     });

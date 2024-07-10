@@ -62,10 +62,7 @@ export class VeiwDeleteStudentGroupComponent implements OnInit {
         this._HelperService.success(res.message);
       },
       error: (err: HttpErrorResponse) => {
-        console.log(err);
         this._HelperService.error(err.error.message)
-
-
       }, complete: () => {
         this.onNoClick();
       }

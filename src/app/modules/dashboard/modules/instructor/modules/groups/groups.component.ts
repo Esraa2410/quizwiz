@@ -1,10 +1,4 @@
-import {
-  IGroupDetailsRes,
-  IGroupsListRes,
-  IGroupsListRes2,
-  IStudent,
-  IUpdateOrAddGroup,
-} from './models/groups';
+import { IGroupDetailsRes,IGroupsListRes,IGroupsListRes2,IStudent,IUpdateOrAddGroup} from './models/groups';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GroupsService } from './services/groups.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -61,9 +55,7 @@ export class GroupsComponent implements OnInit {
     this._GroupsService.getAllGroups().subscribe({
       next: (res: IGroupsListRes) => {
         this.groupList = res;
-        console.log(res);
         this.initAnimation();
-        // console.log(res)
       },
       error: (err: HttpErrorResponse) => {},
     });
@@ -105,18 +97,14 @@ export class GroupsComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      // console.log('The update  was closed');
-      //console.log(result);
       if (result) {
         this.editGroup(id, result);
-        // this.toastr.success('your category deleted');
       }
     });
   }
   editGroup(id: string, data: IUpdateOrAddGroup) {
     this._GroupsService.editGroup(id, data).subscribe({
       next: (res) => {
-        // console.log(res)
       },
       error: (error) => {
         this._HelperService.error(error);
@@ -144,8 +132,6 @@ export class GroupsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      // console.log('recored added');
-      //console.log(result);
       if (result) {
         this.addnewGroup(result);
       }
@@ -154,7 +140,6 @@ export class GroupsComponent implements OnInit {
   addnewGroup(addNewGroup: IUpdateOrAddGroup) {
     this._GroupsService.AddNewGreoup(addNewGroup).subscribe({
       next: (res) => {
-        // console.log(res)
       },
       error: (error) => {
         this._HelperService.error(error);
@@ -183,8 +168,6 @@ export class GroupsComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      // console.log('The delete  was closed');
-      //console.log(result);
       if (result) {
         this.deleteGroup(result);
       }
@@ -193,10 +176,9 @@ export class GroupsComponent implements OnInit {
   deleteGroup(id: string) {
     this._GroupsService.deleteGroup(id).subscribe({
       next: (res) => {
-        // console.log(res);
       },
       error: (error) => {
-        //
+        
       },
       complete: () => {
         this.onAllGroups();

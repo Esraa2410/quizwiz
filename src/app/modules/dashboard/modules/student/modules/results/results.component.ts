@@ -48,10 +48,10 @@ export class ResultsComponent  implements OnInit{
     this.quizessResaults()
   }
 
-  viewFunction(row: any): void {
-    console.log('View', row);
-
+  viewFunction(row: any): void { 
+    //
   }
+
   quizessResaults(): void {
     this._ResultsService.getAllResults().subscribe({
       next:(res:IResultsRes[])=>{
@@ -63,8 +63,8 @@ export class ResultsComponent  implements OnInit{
   }
 
   viewResults( row: IResultsRes): void {
-    this._ResultsService.getResultView(row);
-   this._Router.navigate(['/dashboard/student/results/results-view'])
+    this._ResultsService.getResultView(row)
+ this._Router.navigate(['/dashboard/student/results/results-view'])
   }
 
 }

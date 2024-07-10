@@ -15,10 +15,10 @@
     <thead>
       <tr>
         <th>Quiz Title</th>
-        <th>Description</th>
+        <th>Score</th>
         <th>Type</th>
-        <th>Created At</th>
-        <th>Closed At</th>
+        <!-- <th>Started At</th>
+        <th>Finished At</th> -->
         <th>Actions</th>
       </tr>
     </thead>
@@ -28,17 +28,17 @@
           {{key.quiz.title}}
         </td>
         <td>
-          {{key.quiz.description}}
+          {{key.result.score}}
         </td>
         <td>
           {{key.quiz.type}}
         </td>
-        <td>
-          {{key.quiz.closed_at| date :'short' }}
+        <!-- <td>
+          {{key.result.started_at| date :'short' }}
         </td>
         <td>
-          {{key.quiz.createdAt| date :'short' }}
-        </td>
+          {{key.result.finished_at| date :'short' }}
+        </td> -->
         <td>
           <div class="d-flex align-items-center justify-content-center gap-3">
 
