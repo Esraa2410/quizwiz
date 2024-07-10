@@ -21,13 +21,13 @@
 </ng-container>
 
 <ng-container *ngIf="loggedInRole == 'Instructor'">
-  <div class="py-5 px-5">
+  <div class="py-5">
     <div class="row">
       <div class="col-md-6">
         <div class="p-3 main-border rounded-3">
           <app-shared-main-header [headerText]="'Upcoming 5 quizzes'" [navigationLink]="'/dashboard/instructor/quizzes'"
             [navigationVisibility]="true" [navigationText]="'Quizzes directory'"></app-shared-main-header>
-          <app-shared-card [imgSrc]="'../../../../../assets/images/Quiz img.svg'" [cardContent]="upcomingQuizzes"
+          <app-shared-card  [cardContent]="upcomingQuizzes"
             [headerKeys]="['title']" [detailKeys]="['schadule']" [additionalContentKey]="'participants'"
             [wontUseGrid]="true" [useGrid]="false" [mainMenue]="false" [studentsVisibility]="true"
             [RouterLinkPath]="RouterLinkPath" (view)="willBeViewed($event)">
