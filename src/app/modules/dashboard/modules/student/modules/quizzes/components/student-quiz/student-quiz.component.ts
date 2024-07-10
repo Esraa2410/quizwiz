@@ -77,7 +77,7 @@ export class StudentQuizComponent implements AfterViewInit {
     private _HelperService: HelperService,
     private _Router: Router,
     public dialog: MatDialog,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._ActivatedRoute.params.subscribe((params: Params) => {
@@ -273,10 +273,14 @@ export class StudentQuizComponent implements AfterViewInit {
         this.totalQuizTime--;
         this.updateTimerVisuals();
       } else {
-        this.submitQuiz();
-        clearInterval(this.totalQuizTime)
-        //console.log(this.totalQuizTime)
-       this.openTimesUpDialog('500ms','500ms')
+        setTimeout(() => {
+          if (this.totalQuizTime == 0) {
+            this.openTimesUpDialog('500ms', '500ms');
+          }
+          this.submitQuiz();
+
+        }, 1000);
+
       }
     }, 1000);
   }
@@ -307,6 +311,7 @@ export class StudentQuizComponent implements AfterViewInit {
     this.increaseProgressValue();
     this.startTimer();
   }
+
   openTimesUpDialog(
     enterAnimationDuration: string,
     exitAnimationDuration: string,
@@ -317,6 +322,6 @@ export class StudentQuizComponent implements AfterViewInit {
       enterAnimationDuration,
       exitAnimationDuration,
     });
-    dialogRef.afterClosed().subscribe((result: any) => {  });
+    dialogRef.afterClosed().subscribe((result: any) => { });
   }
 }
