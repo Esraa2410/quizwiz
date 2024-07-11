@@ -11,3 +11,7 @@
 <router-outlet></router-outlet>
 
 <div *ngIf="isOffline" class="offline-overlay"></div>
+
+<div [@routeAnimations]="getAnimationData(o)">
+  <router-outlet #o="outlet"></router-outlet>
+</div>

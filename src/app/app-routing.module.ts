@@ -16,6 +16,7 @@ const routes: Routes = [
       import('./modules/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
       ),
+      data: { animation: 'StudentPage' }
   }
 ];
 

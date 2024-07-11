@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ChangeDetectorRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import {
@@ -6,11 +6,13 @@ import {
   MatSnackBarRef,
   SimpleSnackBar,
 } from '@angular/material/snack-bar';
+import { slideInAnimation } from './modules/dashboard/dashboard-routing.animation.module';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  animations: [slideInAnimation],
   providers: [MatSnackBar],
 })
 export class AppComponent {
@@ -22,7 +24,7 @@ export class AppComponent {
   connectionStatus!: string;
   isOffline: boolean = false;
 
-  constructor(private _MatSnackBar: MatSnackBar) {}
+  constructor(private _MatSnackBar: MatSnackBar,private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.onlineEvent = fromEvent(window, 'online');
@@ -65,5 +67,17 @@ export class AppComponent {
       this.isOffline = false;
       document.location.reload()
     });
+  }
+
+  getAnimationData(outlet: RouterOutlet) {
+    return (
+      outlet &&
+      outlet.activatedRouteData &&
+      outlet.activatedRouteData['animation']
+    );
+  }
+
+  ngAfterViewInit(): void {
+    this.cdr.detectChanges();
   }
 }

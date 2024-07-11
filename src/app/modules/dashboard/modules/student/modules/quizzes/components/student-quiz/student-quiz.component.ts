@@ -248,7 +248,6 @@ export class StudentQuizComponent implements AfterViewInit {
         .submitQuiz(quizData, this.quiz.data._id)
         .subscribe({
           next: (res: any) => {
-            this._Router.navigate(['/dashboard/student/quizzes']);
             this._HelperService.success(res.message);
           },
           error: (error: HttpErrorResponse) => {
@@ -258,7 +257,11 @@ export class StudentQuizComponent implements AfterViewInit {
             } else {
               this.quizCompleted = false;
             }
-          },
+          },complete:()=>{
+            this._Router.navigate(['/dashboard/student/quizzes']);
+           
+
+          }
         });
     } else {
     }
