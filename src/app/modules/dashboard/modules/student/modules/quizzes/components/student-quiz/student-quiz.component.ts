@@ -259,6 +259,7 @@ export class StudentQuizComponent implements AfterViewInit {
             }
           },complete:()=>{
             this._Router.navigate(['/dashboard/student/quizzes']);
+            clearInterval(this.intervalId);
            
 
           }
